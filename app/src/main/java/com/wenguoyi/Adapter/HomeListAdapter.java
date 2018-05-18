@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,7 +29,7 @@ import java.util.ArrayList;
  *
  * @author 赵磊
  * @date 2018/5/15
- * 功能描述：
+ * 功能描述：首页商品列表适配器，包括了头部，轮播，和列表
  */
 public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
 
@@ -74,7 +73,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
 
     private boolean isfirst = false;
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
@@ -101,29 +99,20 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 });
                 holder.gv_home_type.setAdapter(new myHomeTypeAdadapter());
                 titleList.add("习近平的八个“治党妙喻”");
-                titleList.add("习近平的八个“治党妙喻”");
-                titleList.add("习近平的八个“治党妙喻”");
-                titleList.add("习近平的八个“治党妙喻”");
-                titleList.add("习近平的八个“治党妙喻”");
+                titleList.add("生态环境保护多重要，听习近平怎么说");
+                titleList.add("军事科研创新的强大引擎，习主席说要这样点燃");
+                titleList.add("习近平谈马克思 | 马克思主义深刻改变中国");
+                titleList.add("王岐山会见中美工商领袖和前高官对话美方代表");
                 holder.tv_content.setTextList(titleList);
                 holder.tv_content.startAutoScroll();
                 isfirst = !isfirst;
             }
         } else {
-            for (int i = 0; i < 4; i++) {
-                View inflate = View.inflate(mContext, R.layout.home_shop_list_list_item_layout, null);
-                //使用Spec定义子控件的位置和比重
-                GridLayout.Spec rowSpec = GridLayout.spec(i / 2, 1f);
-                GridLayout.Spec columnSpec = GridLayout.spec(i % 2, 1f);
-                GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(rowSpec, columnSpec);
-                if (i / 2 == 0) {
-                    layoutParams.bottomMargin = mContext.getResources().getDimensionPixelSize(R.dimen.x2);
+            if (holder.gl_shoplist.getChildCount() == 0) {
+                for (int i = 0; i < 4; i++) {
+                    View inflate = View.inflate(mContext, R.layout.home_shop_list_list_item_layout, null);
+                    holder.gl_shoplist.addView(inflate);
                 }
-                if (i % 2 == 1) {
-                    layoutParams.leftMargin = mContext.getResources().getDimensionPixelSize(R.dimen.x2);
-                    layoutParams.rightMargin = mContext.getResources().getDimensionPixelSize(R.dimen.x2);
-                }
-                holder.gl_shoplist.addView(inflate, layoutParams);
             }
         }
     }
@@ -142,7 +131,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         public EditText et_search;
         public MyGridView gv_home_type;
         public VerticalTextview tv_content;
-        public GridLayout gl_shoplist;
+        public android.support.v7.widget.GridLayout gl_shoplist;
 
         public ViewHolder(View view) {
             super(view);
@@ -153,7 +142,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             this.img_search = (ImageView) rootView.findViewById(R.id.img_search);
             this.et_search = (EditText) rootView.findViewById(R.id.et_search);
             this.gv_home_type = (MyGridView) rootView.findViewById(R.id.gv_home_type);
-            this.gl_shoplist = (GridLayout) rootView.findViewById(R.id.gl_shoplist);
+            this.gl_shoplist = (android.support.v7.widget.GridLayout) rootView.findViewById(R.id.gl_shoplist);
         }
     }
 
@@ -182,12 +171,50 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             SimpleDraweeView SimpleDraweeView = inflate.findViewById(R.id.SimpleDraweeView);
             TextView tv_title = inflate.findViewById(R.id.tv_title);
 
-            if (i == 9) {
-                tv_title.setText("更多");
-            } else {
-                tv_title.setText("分类" + i);
+            switch (i) {
+                case 0:
+                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype1);
+                    tv_title.setText("中西药品");
+                    break;
+                case 1:
+                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype2);
+                    tv_title.setText("男性");
+                    break;
+                case 2:
+                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype3);
+                    tv_title.setText("女性");
+                    break;
+                case 3:
+                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype4);
+                    tv_title.setText("慢性病");
+                    break;
+                case 4:
+                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype5);
+                    tv_title.setText("问医");
+                    break;
+                case 5:
+                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype7);
+                    tv_title.setText("维生素钙");
+                    break;
+                case 6:
+                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype8);
+                    tv_title.setText("滋补保健");
+                    break;
+                case 7:
+                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype9);
+                    tv_title.setText("医疗器械");
+                    break;
+                case 8:
+                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype10);
+                    tv_title.setText("隐形眼睛");
+                    break;
+                case 9:
+                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype6);
+                    tv_title.setText("更多");
+                    break;
+                default:
+                    break;
             }
-
             return inflate;
         }
     }

@@ -2,77 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/bgfff"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y42"
+        android:background="@color/bgtitle"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <com.jude.rollviewpager.RollPagerView
-            android:id="@+id/RollPagerView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y141" />
+        <ImageView
+            android:layout_width="@dimen/x70"
+            android:layout_height="@dimen/x30"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/icon" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x5"
+            android:layout_marginRight="@dimen/x5"
+            android:layout_weight="1"
+            android:background="@drawable/bg_search"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/x5">
 
             <ImageView
-                android:layout_width="@dimen/x40"
-                android:layout_height="@dimen/x30"
+                android:id="@+id/img_search"
+                android:layout_width="@dimen/x15"
+                android:layout_height="@dimen/x15"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x10"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/sousuo" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/et_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/x5"
-                android:layout_weight="1"
-                android:background="@drawable/bg_search"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="@dimen/x5">
-
-                <ImageView
-                    android:id="@+id/img_search"
-                    android:layout_width="@dimen/x15"
-                    android:layout_height="@dimen/x15"
-                    android:layout_centerVertical="true"
-                    android:background="@mipmap/sousuo" />
-
-                <EditText
-                    android:id="@+id/et_search"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/x10"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="请输入商品关键词"
-                    android:paddingLeft="@dimen/x5"
-                    android:textSize="@dimen/x15" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/img_news"
-                android:layout_width="@dimen/x30"
-                android:layout_height="@dimen/x30"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x5"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_marginRight="@dimen/x10"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入商品名称"
+                android:paddingLeft="@dimen/x5"
+                android:textColorHint="@color/text666"
+                android:textSize="@dimen/x15" />
+
         </LinearLayout>
-    </FrameLayout>
+
+        <ImageView
+            android:id="@+id/img_news"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x20"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x5"
+            android:background="@mipmap/newsmore" />
+    </LinearLayout>
+
+    <com.jude.rollviewpager.RollPagerView
+        android:id="@+id/RollPagerView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y141" />
 
     <include layout="@layout/home_itme1_layout"></include>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y4"
+        android:layout_height="@dimen/y6"
         android:background="@color/bgea"></View>
 
     <LinearLayout
@@ -85,7 +81,7 @@
             android:layout_width="@dimen/x20"
             android:layout_height="@dimen/x20"
             android:layout_marginLeft="@dimen/x6"
-            android:background="@mipmap/ic_launcher" />
+            android:background="@mipmap/newsicon" />
 
         <com.wenguoyi.View.VerticalTextview
             android:id="@+id/tv_content"
@@ -98,7 +94,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
+        android:layout_height="@dimen/y6"
         android:background="@color/bgea"></View>
 
 </LinearLayout>

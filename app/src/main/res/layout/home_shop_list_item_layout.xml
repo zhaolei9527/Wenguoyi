@@ -6,40 +6,63 @@
     android:orientation="vertical">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x50"
+        android:layout_height="@dimen/y58"
         android:layout_marginLeft="@dimen/x10"
         android:layout_marginRight="@dimen/x10"
         android:layout_marginTop="@dimen/x5"
-        android:gravity="center"
+        android:background="@color/bgfff"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="@dimen/x25"
-            android:layout_height="@dimen/x25"
-            android:background="@mipmap/ic_launcher" />
+            android:layout_width="@dimen/x160"
+            android:layout_height="@dimen/y58"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/homeshoplisttitlebg" />
 
-        <TextView
-            android:id="@+id/tv_item_title"
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x5"
-            android:text="种类描述"
-            android:textColor="@color/text333"
-            android:textSize="@dimen/x16" />
+            android:layout_centerInParent="true">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="精选医药"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x16" />
 
-    <GridLayout
+            <TextView
+                android:id="@+id/tv_item_title_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_item_title"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/x5"
+                android:text="Select medicine"
+                android:textColor="@color/text999"
+                android:textSize="@dimen/x13" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.GridLayout
         android:id="@+id/gl_shoplist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:useDefaultMargins="true"
         android:layout_gravity="center"
-        android:rowCount="2">
+        android:layout_weight="1"
+        app:columnCount="2"
+        app:rowCount="2">
 
-    </GridLayout>
+    </android.support.v7.widget.GridLayout>
 
 
 </LinearLayout>

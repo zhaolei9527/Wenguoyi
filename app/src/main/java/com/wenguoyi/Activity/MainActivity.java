@@ -58,18 +58,18 @@ public class MainActivity extends BaseActivity {
 
         ((BottomTabBar) findViewById(R.id.BottomTabBar))
                 .initFragmentorViewPager(getSupportFragmentManager())
-                // .setImgSize(getResources().getDimension(R.dimen.x25), getResources().getDimension(R.dimen.x20))
-                .setChangeColor(getResources().getColor(R.color.text666), getResources().getColor(R.color.text666))
+                .setImgSize(getResources().getDimension(R.dimen.x19), getResources().getDimension(R.dimen.y16))
+                .setChangeColor(getResources().getColor(R.color.bgtitle), getResources().getColor(R.color.text666))
                 .addReplaceLayout(R.id.fl_content)
                 .setDividerHeight(3)
                 .isShowDivider(true)
-                .setFontSize(1)
+                .setFontSize(12)
                 .setDividerColor(getResources().getColor(R.color.bgea))
-                .addTabItem("寻药", getResources().getDrawable(R.mipmap.ic_launcher), getResources().getDrawable(R.mipmap.ic_launcher), HomeFragment.class)
-                .addTabItem("问医", getResources().getDrawable(R.mipmap.ic_launcher), getResources().getDrawable(R.mipmap.ic_launcher), WenYiFragment.class)
-                .addTabItem("资讯", getResources().getDrawable(R.mipmap.ic_launcher), getResources().getDrawable(R.mipmap.ic_launcher), NewsFragment.class)
-                .addTabItem("购物车", getResources().getDrawable(R.mipmap.ic_launcher), getResources().getDrawable(R.mipmap.ic_launcher), WenYiFragment.class)
-                .addTabItem("我的", getResources().getDrawable(R.mipmap.ic_launcher), getResources().getDrawable(R.mipmap.ic_launcher), WenYiFragment.class)
+                .addTabItem("寻药", getResources().getDrawable(R.mipmap.xunyao2), getResources().getDrawable(R.mipmap.xunyao1), HomeFragment.class)
+                .addTabItem("问医", getResources().getDrawable(R.mipmap.wenyi2), getResources().getDrawable(R.mipmap.wenyi1), WenYiFragment.class)
+                .addTabItem("资讯", getResources().getDrawable(R.mipmap.zixun2), getResources().getDrawable(R.mipmap.zixun1), NewsFragment.class)
+                .addTabItem("购物车", getResources().getDrawable(R.mipmap.gouwuche2), getResources().getDrawable(R.mipmap.gouwuche1), WenYiFragment.class)
+                .addTabItem("我的", getResources().getDrawable(R.mipmap.me2), getResources().getDrawable(R.mipmap.me1), WenYiFragment.class)
                 .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
                     @Override
                     public void onTabChange(int position, View V) {
