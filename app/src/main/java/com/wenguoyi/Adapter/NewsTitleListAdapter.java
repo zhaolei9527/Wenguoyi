@@ -1,12 +1,12 @@
 package com.wenguoyi.Adapter;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.wenguoyi.Activity.MainActivity;
 import com.wenguoyi.R;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class NewsTitleListAdapter extends RecyclerView.Adapter<NewsTitleListAdapter.ViewHolder> {
 
-    private MainActivity mContext;
+    private Activity mContext;
     private ArrayList<String> datas = new ArrayList();
     private ArrayList<String> titleList = new ArrayList<String>();
 
@@ -28,7 +28,7 @@ public class NewsTitleListAdapter extends RecyclerView.Adapter<NewsTitleListAdap
         return datas;
     }
 
-    public NewsTitleListAdapter(MainActivity context) {
+    public NewsTitleListAdapter(Activity context) {
         this.mContext = context;
     }
 

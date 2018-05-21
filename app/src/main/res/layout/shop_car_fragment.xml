@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgfff"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.wenguoyi.View.WenguoyiRecycleView
+                android:id="@+id/rv_purchaserecord"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clipChildren="false"
+                android:clipToPadding="false"></com.wenguoyi.View.WenguoyiRecycleView>
+
+            <RelativeLayout
+                android:id="@+id/rl_buy"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y39"
+                android:layout_gravity="bottom"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <CheckBox
+                    android:id="@+id/btnIsChoosed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:layout_marginRight="@dimen/x5"
+                    android:background="@drawable/rb_selector"
+                    android:button="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/btnIsChoosed"
+                    android:text="全选"
+                    android:textColor="#666"
+                    android:textSize="@dimen/x13" />
+
+                <TextView
+                    android:id="@+id/shopnow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:background="#FF3064"
+                    android:gravity="center"
+                    android:text="去结算"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/y12" />
+
+                <TextView
+                    android:id="@+id/tv_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/x7"
+                    android:layout_marginTop="@dimen/x8"
+                    android:layout_toLeftOf="@id/shopnow"
+                    android:text="¥0.0"
+                    android:textColor="#f0667f"
+                    android:textSize="@dimen/x13" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_money"
+                    android:layout_marginRight="@dimen/x7"
+                    android:layout_toLeftOf="@id/shopnow"
+                    android:text="不含运费"
+                    android:textColor="#666"
+                    android:textSize="@dimen/x11" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:layout_toLeftOf="@id/tv_money"
+                    android:text="合计："
+                    android:textColor="#666"
+                    android:textSize="@dimen/x13" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_bianji"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y39"
+                android:layout_gravity="bottom"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <CheckBox
+                    android:id="@+id/btnChoosed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:layout_marginRight="@dimen/x5"
+                    android:background="@drawable/rb_selector"
+                    android:button="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/btnChoosed"
+                    android:text="全选"
+                    android:textColor="#666"
+                    android:textSize="@dimen/x13" />
+
+                <Button
+                    android:id="@+id/btn_delete"
+                    android:layout_width="@dimen/x68"
+                    android:layout_height="@dimen/y25"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x7"
+                    android:background="@drawable/btn_delete_selector"
+                    android:gravity="center"
+                    android:text="删除"
+                    android:textColor="@drawable/btn_text_delete_selector"
+                    android:textSize="@dimen/y12" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/layout_empty"></include>
+
+    </FrameLayout>
+
+</LinearLayout>

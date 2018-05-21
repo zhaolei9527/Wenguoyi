@@ -1,5 +1,6 @@
 package com.wenguoyi.Adapter;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.jude.rollviewpager.OnItemClickListener;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
 import com.wenguoyi.Activity.MainActivity;
+import com.wenguoyi.Activity.XunYaoShopTypeActivity;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.DensityUtils;
 import com.wenguoyi.View.MyGridView;
@@ -211,6 +213,12 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 case 9:
                     SimpleDraweeView.setBackgroundResource(R.mipmap.hometype6);
                     tv_title.setText("更多");
+                    ll_type.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mContext.startActivity(new Intent(mContext, XunYaoShopTypeActivity.class));
+                        }
+                    });
                     break;
                 default:
                     break;

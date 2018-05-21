@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bgfff"
+    android:orientation="vertical">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/SimpleDraweeView"
+        android:layout_width="@dimen/x65"
+        android:layout_height="@dimen/x65"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/shopdemo" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/x5"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="种类名称"
+        android:textColor="@color/text333"
+        android:textSize="@dimen/x15" />
+
+</LinearLayout>

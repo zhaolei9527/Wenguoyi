@@ -8,6 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.bugly.Bugly;
+import com.tencent.smtt.sdk.QbSdk;
 import com.wenguoyi.Utils.PausableThreadPoolExecutor;
 
 import java.util.concurrent.PriorityBlockingQueue;
@@ -39,6 +40,7 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         this.context = this;
+        QbSdk.initX5Environment(this, null);
         MultiDex.install(this);
         Bugly.init(getApplicationContext(), "f905a9d3d6", false);
         queues = Volley.newRequestQueue(getApplicationContext());

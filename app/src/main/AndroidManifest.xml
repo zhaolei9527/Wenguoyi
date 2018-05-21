@@ -17,6 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Activity.XunYaoShopTypeActivity"></activity>
+        <activity android:name=".Activity.PriceDetailsActivity"></activity>
+        <activity android:name=".Activity.ShopListActivity"></activity>
+
     </application>
 
 </manifest>

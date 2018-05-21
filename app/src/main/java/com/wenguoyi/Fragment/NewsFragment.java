@@ -34,7 +34,6 @@ public class NewsFragment extends BaseLazyFragment {
     private Context context;
     private SakuraLinearLayoutManager line1;
     private SakuraLinearLayoutManager line2;
-
     private WenguoyiRecycleView rv_news_type_list;
     private WenguoyiRecycleView rv_news_list;
 

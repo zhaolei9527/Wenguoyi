@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * @date 2018/5/15
  * 功能描述：
  */
-public class NewsTypeListAdapter extends RecyclerView.Adapter<NewsTypeListAdapter.ViewHolder> {
+public class ShopTypeListAdapter extends RecyclerView.Adapter<ShopTypeListAdapter.ViewHolder> {
 
     private Activity mContext;
     private ArrayList<String> datas = new ArrayList();
@@ -29,7 +29,7 @@ public class NewsTypeListAdapter extends RecyclerView.Adapter<NewsTypeListAdapte
         return datas;
     }
 
-    public NewsTypeListAdapter(Activity context) {
+    public ShopTypeListAdapter(Activity context) {
         this.mContext = context;
     }
 

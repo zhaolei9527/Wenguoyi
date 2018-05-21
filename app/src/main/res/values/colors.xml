@@ -16,5 +16,6 @@
     <color name="bgddd">#dddddd</color>
     <color name="bgea">#EAEAEA</color>
     <color name="bgtitle">#28B8A1</color>
+    <color name="pressedColor">#F0667F</color>
 
 </resources>
