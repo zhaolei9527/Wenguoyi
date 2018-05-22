@@ -81,7 +81,6 @@ public class WenYiFragment extends BaseLazyFragment {
 
         WenYiListAdapter adapter = new WenYiListAdapter((MainActivity) getActivity());
         rv_wenyilist.setAdapter(adapter);
-
     }
 
     //数据获取

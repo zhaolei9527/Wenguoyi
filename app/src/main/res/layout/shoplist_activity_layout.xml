@@ -73,6 +73,143 @@
             android:background="@mipmap/pricecar" />
     </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y40"
+        android:weightSum="4">
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="综合"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/x16" />
+
+                <ImageView
+                    android:layout_width="@dimen/x13"
+                    android:layout_height="@dimen/x8"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:background="@mipmap/desc2" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y3"
+                android:layout_alignParentBottom="true"
+                android:background="@color/bgtitle"></View>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="销量"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/x16" />
+
+                <ImageView
+                    android:layout_width="@dimen/x13"
+                    android:layout_height="@dimen/x8"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:background="@mipmap/desc" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y3"
+                android:layout_alignParentBottom="true"
+                android:background="@color/bgtitle"
+                android:visibility="gone"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="价格"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/x16" />
+
+                <ImageView
+                    android:layout_width="@dimen/x13"
+                    android:layout_height="@dimen/x8"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:background="@mipmap/desc" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y3"
+                android:layout_alignParentBottom="true"
+                android:background="@color/bgtitle"
+                android:visibility="gone"></View>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="最新上架"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/x16" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y3"
+                android:layout_alignParentBottom="true"
+                android:background="@color/bgtitle"
+                android:visibility="gone"></View>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
     <com.wenguoyi.View.WenguoyiRecycleView
         android:id="@+id/rv_shop_list"
         android:layout_width="match_parent"
