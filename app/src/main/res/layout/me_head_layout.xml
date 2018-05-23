@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:background="@mipmap/metopbg">
+
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x42"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="会员中心"
+                android:textColor="@color/bgfff"
+                android:textSize="@dimen/x16" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y74"
+            android:layout_below="@id/rl_title">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/SimpleDraweeView"
+                android:layout_width="@dimen/x64"
+                android:layout_height="@dimen/x64"
+                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginLeft="@dimen/x8"
+                android:background="@mipmap/demoyisheng"
+                fresco:roundAsCircle="true" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8"
+                android:layout_toRightOf="@id/SimpleDraweeView"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text="问国医"
+                    android:textColor="@color/bgfff"
+                    android:textSize="@dimen/x15" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginTop="@dimen/x5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_userid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ID:6568876657"
+                        android:textColor="@color/bgfff"
+                        android:textSize="@dimen/x15" />
+
+                    <TextView
+                        android:id="@+id/tv_userlv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="等级：B级合伙人"
+                        android:textColor="@color/bgfff"
+                        android:textSize="@dimen/x15" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x8"
+                android:layout_marginTop="@dimen/x8"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="@dimen/x67"
+                    android:layout_height="@dimen/y23"
+                    android:background="@mipmap/shengjibtn"
+                    android:text="升级"
+                    android:textColor="@color/bgfff"
+                    android:textSize="@dimen/x13" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</FrameLayout>

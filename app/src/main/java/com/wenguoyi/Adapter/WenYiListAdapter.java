@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.rollviewpager.OnItemClickListener;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
@@ -103,25 +102,39 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
                     public View getView(int i, View view, ViewGroup viewGroup) {
                         View inflate = View.inflate(mContext, R.layout.wenyi_item_wenyitype_layout, null);
                         TextView tv_wenyitype = inflate.findViewById(R.id.tv_wenyitype);
+                        tv_wenyitype.setText("科室类型" + i);
                         return inflate;
                     }
                 });
-
-
-
-
                 isfirst = !isfirst;
             }
         } else {
-
+            holder.gv_yishenglist.setAdapter(new BaseAdapter() {
+                @Override
+                public int getCount() {
+                    return 9;
+                }
+                @Override
+                public Object getItem(int i) {
+                    return null;
+                }
+                @Override
+                public long getItemId(int i) {
+                    return 0;
+                }
+                @Override
+                public View getView(int i, View view, ViewGroup viewGroup) {
+                    View inflate = View.inflate(mContext, R.layout.wenyi_yisheng_tuijian_list_item_layout, null);
+                    return inflate;
+                }
+            });
         }
     }
 
     @Override
     public int getItemCount() {
-        return 10 + 1;
+        return 2;
     }
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View rootView;
@@ -129,18 +142,7 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
         public LinearLayout ll_wenyitype_more;
         public MyGridView gl_wenyitype;
         public LinearLayout ll_wenyi_more;
-        public SimpleDraweeView SimpleDraweeView1;
-        public TextView tv_name1;
-        public TextView tv_zhicheng1;
-        public TextView tv_keshi1;
-        public SimpleDraweeView SimpleDraweeView2;
-        public TextView tv_name2;
-        public TextView tv_zhicheng2;
-        public TextView tv_keshi2;
-        public SimpleDraweeView SimpleDraweeView3;
-        public TextView tv_name3;
-        public TextView tv_zhicheng3;
-        public TextView tv_keshi3;
+        public MyGridView gv_yishenglist;
 
         public ViewHolder(View view) {
             super(view);
@@ -149,18 +151,8 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
             this.ll_wenyitype_more = (LinearLayout) rootView.findViewById(R.id.ll_wenyitype_more);
             this.gl_wenyitype = (MyGridView) rootView.findViewById(R.id.gl_wenyitype);
             this.ll_wenyi_more = (LinearLayout) rootView.findViewById(R.id.ll_wenyi_more);
-            this.SimpleDraweeView1 = (SimpleDraweeView) rootView.findViewById(R.id.SimpleDraweeView1);
-            this.tv_name1 = (TextView) rootView.findViewById(R.id.tv_name1);
-            this.tv_zhicheng1 = (TextView) rootView.findViewById(R.id.tv_zhicheng1);
-            this.tv_keshi1 = (TextView) rootView.findViewById(R.id.tv_keshi1);
-            this.SimpleDraweeView2 = (SimpleDraweeView) rootView.findViewById(R.id.SimpleDraweeView2);
-            this.tv_name2 = (TextView) rootView.findViewById(R.id.tv_name2);
-            this.tv_zhicheng2 = (TextView) rootView.findViewById(R.id.tv_zhicheng2);
-            this.tv_keshi2 = (TextView) rootView.findViewById(R.id.tv_keshi2);
-            this.SimpleDraweeView3 = (SimpleDraweeView) rootView.findViewById(R.id.SimpleDraweeView3);
-            this.tv_name3 = (TextView) rootView.findViewById(R.id.tv_name3);
-            this.tv_zhicheng3 = (TextView) rootView.findViewById(R.id.tv_zhicheng3);
-            this.tv_keshi3 = (TextView) rootView.findViewById(R.id.tv_keshi3);
+            this.gv_yishenglist = (MyGridView) rootView.findViewById(R.id.gv_yishenglist);
+
         }
     }
 

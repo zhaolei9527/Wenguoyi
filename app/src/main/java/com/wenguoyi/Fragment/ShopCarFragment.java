@@ -3,6 +3,8 @@ package com.wenguoyi.Fragment;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -63,9 +65,9 @@ public class ShopCarFragment extends BaseLazyFragment {
     private RelativeLayout rl_bianji;
     private boolean isbianji = false;
     private CheckBox btnChoosed;
-    private BroadcastReceiver receiver;
     private RelativeLayout ll_empty;
     private LinearLayout ll_content;
+    private BroadcastReceiver receiver;
 
 
     @Override
@@ -126,10 +128,73 @@ public class ShopCarFragment extends BaseLazyFragment {
         if (!dialog.isShowing()) {
             dialog.show();
         }
+
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                boolean choosed = intent.getBooleanExtra("Choosed", false);
+                if (choosed) {
+                    btnIsChoosed.setChecked(true);
+                    btnChoosed.setChecked(true);
+                } else {
+                    btnIsChoosed.setChecked(false);
+                    btnChoosed.setChecked(false);
+                }
+            }
+        };
+
+        mContext.registerReceiver(receiver, new IntentFilter("shopCarChoosedAll"));
+
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mContext.unregisterReceiver(receiver);
     }
 
     public void getData() {
-        suckleCart();
+
+        dialog.dismiss();
+        SuckleCartBean suckleCartBean = new SuckleCartBean();
+        suckleCartBean.setStu(1);
+        SuckleCartBean.ResBean resBean = new SuckleCartBean.ResBean();
+        resBean.setCheck(false);
+        resBean.setGid("1");
+        resBean.setId("1");
+        resBean.setImg("1");
+        resBean.setKucun("50");
+        resBean.setNumber("1");
+        resBean.setPrice("20");
+        resBean.setTitle("云南白药");
+        SuckleCartBean.ResBean resBean1 = new SuckleCartBean.ResBean();
+        resBean1.setCheck(false);
+        resBean1.setGid("1");
+        resBean1.setId("1");
+        resBean1.setImg("1");
+        resBean1.setKucun("50");
+        resBean1.setNumber("1");
+        resBean1.setPrice("30");
+        resBean1.setTitle("云南白药");
+        SuckleCartBean.ResBean resBean2 = new SuckleCartBean.ResBean();
+        resBean2.setCheck(false);
+        resBean2.setGid("1");
+        resBean2.setId("1");
+        resBean2.setImg("1");
+        resBean2.setKucun("50");
+        resBean2.setNumber("1");
+        resBean2.setPrice("40");
+        resBean2.setTitle("云南白药");
+        ArrayList<SuckleCartBean.ResBean> resBeens = new ArrayList<>();
+        resBeens.add(resBean);
+        resBeens.add(resBean1);
+        resBeens.add(resBean2);
+        suckleCartBean.setRes(resBeens);
+        shopCarListAdapter = new ShopCarListAdapter(suckleCartBean.getRes(), context, tv_money);
+        rv_purchaserecord.setAdapter(shopCarListAdapter);
+
+        //suckleCart();
     }
 
     /**

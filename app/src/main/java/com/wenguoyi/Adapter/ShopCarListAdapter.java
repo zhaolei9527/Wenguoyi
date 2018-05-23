@@ -137,6 +137,7 @@ public class ShopCarListAdapter extends RecyclerView.Adapter<ShopCarListAdapter.
                 tvMoney.setText("￥" + String.valueOf(money));
             }
         });
+
         holder.btnIsChoosed.setTag(new Integer(position));//把组件的状态更新为一个合法的状态值
 
         holder.btnIsChoosed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

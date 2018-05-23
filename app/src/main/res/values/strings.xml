@@ -9,4 +9,17 @@
     <string name="Abnormalserver">服务器异常</string>
     <string name="hasError">出错啦</string>
     <string name="gonggao">新闻</string>
+    <string name="huiyuanzhongxin">问国医</string>
+    <string name="dingdan">全部订单</string>
+    <string name="gerenziliao">个人资料</string>
+    <string name="shouhuodizhi">收货地址</string>
+    <string name="wdetuandui">我的团队</string>
+    <string name="wyaotuiguang">我要推广</string>
+    <string name="wyaochongzhi">我的充值</string>
+    <string name="wdeqianbao">我的钱包</string>
+    <string name="wdeguzhi">我的股值</string>
+    <string name="guanyugongsi">关于公司</string>
+    <string name="kefuzhongxin">客服中心</string>
+    <string name="zijianzhuanjia">自荐专家</string>
+    <string name="xitongshezhi">系统设置</string>
 </resources>

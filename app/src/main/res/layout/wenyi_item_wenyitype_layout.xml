@@ -6,9 +6,11 @@
     <TextView
         android:id="@+id/tv_wenyitype"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/y26"
         android:background="@drawable/bg_wenti_type_tv"
         android:gravity="center"
-        android:text="类型1" />
+        android:text="类型1"
+        android:textColor="@color/text333"
+        android:textSize="@dimen/x14" />
 
 </LinearLayout>

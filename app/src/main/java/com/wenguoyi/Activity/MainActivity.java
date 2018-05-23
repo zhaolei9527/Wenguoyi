@@ -12,6 +12,7 @@ import com.mylhyl.acp.AcpOptions;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Fragment.CartFragment;
 import com.wenguoyi.Fragment.HomeFragment;
+import com.wenguoyi.Fragment.MeFragment;
 import com.wenguoyi.Fragment.NewsFragment;
 import com.wenguoyi.Fragment.WenYiFragment;
 import com.wenguoyi.R;
@@ -70,7 +71,7 @@ public class MainActivity extends BaseActivity {
                 .addTabItem("问医", getResources().getDrawable(R.mipmap.wenyi2), getResources().getDrawable(R.mipmap.wenyi1), WenYiFragment.class)
                 .addTabItem("资讯", getResources().getDrawable(R.mipmap.zixun2), getResources().getDrawable(R.mipmap.zixun1), NewsFragment.class)
                 .addTabItem("购物车", getResources().getDrawable(R.mipmap.gouwuche2), getResources().getDrawable(R.mipmap.gouwuche1), CartFragment.class)
-                .addTabItem("我的", getResources().getDrawable(R.mipmap.me2), getResources().getDrawable(R.mipmap.me1), WenYiFragment.class)
+                .addTabItem("我的", getResources().getDrawable(R.mipmap.me2), getResources().getDrawable(R.mipmap.me1), MeFragment.class)
                 .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
                     @Override
                     public void onTabChange(int position, View V) {

@@ -18,7 +18,7 @@
             <ImageView
                 android:layout_width="@dimen/x25"
                 android:layout_height="@dimen/x25"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/keshi" />
 
             <TextView
                 android:layout_width="0dp"
@@ -26,7 +26,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x5"
                 android:layout_weight="1"
-                android:text="种类描述"
+                android:text="按科室找医生"
                 android:textColor="@color/text333"
                 android:textSize="@dimen/x16" />
 
@@ -34,7 +34,7 @@
                 android:id="@+id/ll_wenyitype_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -42,14 +42,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="@dimen/x5"
-                    android:text="更多描述"
+                    android:text="全部科室 ＞"
                     android:textColor="@color/text333"
                     android:textSize="@dimen/x16" />
-
-                <ImageView
-                    android:layout_width="@dimen/x25"
-                    android:layout_height="@dimen/x25"
-                    android:background="@mipmap/ic_launcher" />
 
             </LinearLayout>
 
@@ -59,9 +54,9 @@
             android:id="@+id/gl_wenyitype"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/x10"
-            android:layout_marginTop="@dimen/x10"
-            android:columnWidth="80dp"
+            android:layout_marginBottom="@dimen/x5"
+            android:layout_marginTop="@dimen/x5"
+            android:columnWidth="@dimen/x92"
             android:numColumns="3"
             android:stretchMode="spacingWidthUniform"
             android:verticalSpacing="@dimen/x5"></com.wenguoyi.View.MyGridView>
