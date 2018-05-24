@@ -98,8 +98,8 @@
                     android:textSize="@dimen/x16" />
 
                 <ImageView
-                    android:layout_width="@dimen/x13"
-                    android:layout_height="@dimen/x8"
+                    android:layout_width="@dimen/x11"
+                    android:layout_height="@dimen/x7"
                     android:layout_marginLeft="@dimen/x5"
                     android:background="@mipmap/desc2" />
 
@@ -131,8 +131,8 @@
                     android:textSize="@dimen/x16" />
 
                 <ImageView
-                    android:layout_width="@dimen/x13"
-                    android:layout_height="@dimen/x8"
+                    android:layout_width="@dimen/x11"
+                    android:layout_height="@dimen/x7"
                     android:layout_marginLeft="@dimen/x5"
                     android:background="@mipmap/desc" />
 
@@ -164,8 +164,8 @@
                     android:textSize="@dimen/x16" />
 
                 <ImageView
-                    android:layout_width="@dimen/x13"
-                    android:layout_height="@dimen/x8"
+                    android:layout_width="@dimen/x11"
+                    android:layout_height="@dimen/x7"
                     android:layout_marginLeft="@dimen/x5"
                     android:background="@mipmap/desc" />
 

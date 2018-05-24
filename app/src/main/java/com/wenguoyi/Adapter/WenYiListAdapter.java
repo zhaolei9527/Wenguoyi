@@ -1,5 +1,6 @@
 package com.wenguoyi.Adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.jude.rollviewpager.OnItemClickListener;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
 import com.wenguoyi.Activity.MainActivity;
+import com.wenguoyi.Activity.YiShengListActivity;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.DensityUtils;
 import com.wenguoyi.View.MyGridView;
@@ -108,20 +110,39 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
                 });
                 isfirst = !isfirst;
             }
+
+            holder.ll_wenyitype_more.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mContext.startActivity(new Intent(mContext, YiShengListActivity.class));
+                }
+            });
+
         } else {
+
+            holder.ll_wenyi_more.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mContext.startActivity(new Intent(mContext, YiShengListActivity.class));
+                }
+            });
+
             holder.gv_yishenglist.setAdapter(new BaseAdapter() {
                 @Override
                 public int getCount() {
                     return 9;
                 }
+
                 @Override
                 public Object getItem(int i) {
                     return null;
                 }
+
                 @Override
                 public long getItemId(int i) {
                     return 0;
                 }
+
                 @Override
                 public View getView(int i, View view, ViewGroup viewGroup) {
                     View inflate = View.inflate(mContext, R.layout.wenyi_yisheng_tuijian_list_item_layout, null);

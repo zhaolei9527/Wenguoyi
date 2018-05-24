@@ -9,12 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/x10"
-        android:layout_marginTop="@dimen/x5"
+        android:layout_marginTop="@dimen/x10"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="@dimen/x25"
-            android:layout_height="@dimen/x25"
+            android:layout_width="@dimen/x18"
+            android:layout_height="@dimen/x18"
             android:background="@mipmap/yisheng" />
 
         <TextView
@@ -25,7 +26,7 @@
             android:layout_weight="1"
             android:text="医生推荐"
             android:textColor="@color/text333"
-            android:textSize="@dimen/x16" />
+            android:textSize="@dimen/x14" />
 
         <LinearLayout
             android:id="@+id/ll_wenyi_more"
@@ -40,13 +41,14 @@
                 android:layout_marginRight="@dimen/x5"
                 android:text="全部医生 ＞"
                 android:textColor="@color/text333"
-                android:textSize="@dimen/x16" />
+                android:textSize="@dimen/x14" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <com.wenguoyi.View.MyGridView
+        android:layout_marginTop="@dimen/x10"
         android:id="@+id/gv_yishenglist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

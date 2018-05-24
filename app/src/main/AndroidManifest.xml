@@ -21,6 +21,7 @@
         <activity android:name=".Activity.XunYaoShopTypeActivity"></activity>
         <activity android:name=".Activity.PriceDetailsActivity"></activity>
         <activity android:name=".Activity.ShopListActivity"></activity>
+        <activity android:name=".Activity.YiShengListActivity"></activity>
 
     </application>
 
