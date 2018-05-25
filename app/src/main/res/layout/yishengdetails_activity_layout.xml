@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgfff">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x42"
+                android:background="@color/bgtitle"
+                android:visibility="visible">
+
+                <FrameLayout
+                    android:id="@+id/rl_back"
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/x30"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x10">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@mipmap/fanhui" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="医生详情"
+                    android:textColor="@color/bgfff"
+                    android:textSize="@dimen/x16" />
+
+            </RelativeLayout>
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="@dimen/x81"
+                android:layout_height="@dimen/x81"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/x30"
+                android:background="@mipmap/demoyisheng" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/x15"
+                android:text="尉中民"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x15" />
+
+            <TextView
+                android:id="@+id/tv_zhicheng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/x10"
+                android:text="综合门诊 | 主任医师"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x15" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x5"
+                android:layout_marginTop="@dimen/x15"
+                android:background="@color/bgddd"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x15">
+
+                <View
+                    android:layout_width="@dimen/x5"
+                    android:layout_height="@dimen/y25"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:background="@color/bgtitle"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:text="擅长治疗"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/x17" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginRight="@dimen/x15"
+                android:layout_marginTop="@dimen/x15"
+                android:text="      高血压、心脏病、动脉硬化及肠胃病、肝胆病、心血管及消化系统疾病有丰富的临床经验和疗效，同时善于诊治月经不调、带下病、不孕不育等妇科疾病。多年来对内科疑难杂病有深入研究，临床获得满意效果。"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x13" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x15">
+
+                <View
+                    android:layout_width="@dimen/x5"
+                    android:layout_height="@dimen/y25"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:background="@color/bgtitle"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:text="个人简介"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/x17" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginBottom="@dimen/x15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginRight="@dimen/x15"
+                android:layout_marginTop="@dimen/x15"
+                android:text="      尉中民委员是北京中医药大学的教授、主任医师。全国政协委员、农工民主党中央妇委会委员、首都女教授联谊会常务理事、中国中医药学会养生保健学会委员、北京市中西医结合委员会会员。从事临床40余年，对常见病、多发病有很好疗效。"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/x13" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
