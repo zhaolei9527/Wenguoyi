@@ -83,6 +83,7 @@ dependencies {
     compile files('libs/tbs.jar')
     compile files('libs/httpmime-4.2.5.jar')
     compile 'com.android.support:cardview-v7:24.2.0'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     compile 'com.tencent.bugly:crashreport_upgrade:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
     compile 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
 }

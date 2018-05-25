@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y2"
+        android:background="@mipmap/biankuang" />
+
+    <RelativeLayout
+        android:id="@+id/rl_change_dizhi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_dizhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@mipmap/dizhi" />
+
+
+        <TextView
+            android:id="@+id/tv_check_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x6"
+            android:layout_toRightOf="@id/img_dizhi"
+            android:text="请填写地址"
+            android:textColor="#535353"
+            android:visibility="invisible" />
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x6"
+            android:layout_marginTop="@dimen/x8"
+            android:layout_toRightOf="@id/img_dizhi"
+            android:textColor="#535353" />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/x6"
+            android:layout_marginRight="@dimen/x32"
+            android:layout_marginTop="@dimen/x8"
+            android:textColor="#535353" />
+
+        <TextView
+            android:id="@+id/tv_dizhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_marginBottom="@dimen/x6"
+            android:layout_marginLeft="@dimen/x6"
+            android:layout_marginRight="@dimen/x20"
+            android:layout_marginTop="@dimen/x8"
+            android:layout_toRightOf="@id/img_dizhi"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="#666"
+            android:textSize="@dimen/x11" />
+
+        <TextView
+            android:id="@+id/tv_add_dizhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x9"
+            android:layout_toRightOf="@id/img_dizhi"
+            android:text="请填写地址"
+            android:textColor="#555"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/img_checkaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x9"
+            android:background="@mipmap/you" />
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y2"
+        android:layout_below="@id/rl_change_dizhi"
+        android:background="@mipmap/biankuang" />
+
+</LinearLayout>
