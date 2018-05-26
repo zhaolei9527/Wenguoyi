@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x5"
+            android:paddingLeft="@dimen/x10"
+            android:paddingRight="@dimen/x10">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#535353" />
+
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="#535353" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/x8"
+            android:paddingLeft="@dimen/x10"
+            android:paddingRight="@dimen/x10"
+            android:textColor="#999"
+            android:textSize="@dimen/x11" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/x5"
+            android:background="#ccc"></View>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x5"
+            android:layout_marginTop="@dimen/x5"
+            android:paddingLeft="@dimen/x10"
+            android:paddingRight="@dimen/x10">
+
+            <CheckBox
+                android:id="@+id/btnIsChoosed"
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/x12"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginRight="@dimen/x5"
+                android:background="@drawable/rb_selector"
+                android:button="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_toRightOf="@id/btnIsChoosed"
+                android:text="默认地址"
+                android:textColor="#666"
+                android:textSize="@dimen/x11" />
+
+            <LinearLayout
+                android:id="@+id/ll_delete_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/x14"
+                    android:layout_height="@dimen/x14"
+                    android:background="@mipmap/shanchuaddress" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x4"
+                    android:text="删除"
+                    android:textColor="#666"
+                    android:textSize="@dimen/x11" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_change_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x15"
+                android:layout_toLeftOf="@id/ll_delete_address"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/x14"
+                    android:layout_height="@dimen/x14"
+                    android:background="@mipmap/bianji" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x4"
+                    android:text="编辑"
+                    android:textColor="#666"
+                    android:textSize="@dimen/x11" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x7"
+            android:background="#e7e7e7"></View>
+
+    </LinearLayout>
+
+
+</LinearLayout>

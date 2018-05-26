@@ -23,6 +23,12 @@
         <activity android:name=".Activity.ShopListActivity"></activity>
         <activity android:name=".Activity.YiShengListActivity"></activity>
         <activity android:name=".Activity.YiShengDetailsActivity"></activity>
+        <activity android:name=".Activity.MyMessageActivity"></activity>
+        <activity android:name=".Activity.AddAdressActivity"></activity>
+        <activity android:name=".Activity.AddressActivitry"></activity>
+        <activity android:name=".Activity.ForgetActivity"></activity>
+        <activity android:name=".Activity.GoodPayActivity"></activity>
+        <activity android:name=".Activity.LoginActivity"></activity>
 
     </application>
 

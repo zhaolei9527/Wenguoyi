@@ -19,7 +19,6 @@ import com.wenguoyi.R;
 public class MeFragment extends BaseLazyFragment {
     private Context context;
 
-
     @Override
     protected void initPrepare() {
 

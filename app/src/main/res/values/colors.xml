@@ -18,5 +18,6 @@
     <color name="bgtitle">#28B8A1</color>
     <color name="pressedColor">#F0667F</color>
     <color name="white">#fff</color>
+    <color name="text">#fff</color>
 
 </resources>
