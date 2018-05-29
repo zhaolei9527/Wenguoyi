@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:visibility="gone"
+    android:layout_height="match_parent">
+
+    <com.wenguoyi.View.WenguoyiRecycleView
+        android:id="@+id/re_chongzhijilu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.wenguoyi.View.WenguoyiRecycleView>
+
+
+    <include layout="@layout/layout_empty"></include>
+
+</LinearLayout>

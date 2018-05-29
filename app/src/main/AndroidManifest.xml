@@ -29,6 +29,9 @@
         <activity android:name=".Activity.ForgetActivity"></activity>
         <activity android:name=".Activity.GoodPayActivity"></activity>
         <activity android:name=".Activity.LoginActivity"></activity>
+        <activity android:name=".Activity.MyTuanDuiActivity"></activity>
+        <activity android:name=".Activity.MyChongZhiActivity"></activity>
+        <activity android:name=".Activity.MyQianBaoActivity"></activity>
 
     </application>
 

@@ -2,9 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-
-    android:background="@color/white">
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/x42"
-            android:background="#fbfbfb"
+            android:background="@color/bgtitle"
             android:visibility="visible">
 
             <FrameLayout
@@ -37,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="支付成功"
-                android:textColor="#333333"
+                android:textColor="@color/bgfff"
                 android:textSize="@dimen/x16" />
         </RelativeLayout>
 
