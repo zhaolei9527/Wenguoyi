@@ -32,6 +32,8 @@
         <activity android:name=".Activity.MyTuanDuiActivity"></activity>
         <activity android:name=".Activity.MyChongZhiActivity"></activity>
         <activity android:name=".Activity.MyQianBaoActivity"></activity>
+        <activity android:name=".Activity.MyGuZhiActivity"></activity>
+
 
     </application>
 
