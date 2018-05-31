@@ -234,4 +234,7 @@
 
     </LinearLayout>
 
+
+    <include layout="@layout/price_type_layout"></include>
+
 </FrameLayout>

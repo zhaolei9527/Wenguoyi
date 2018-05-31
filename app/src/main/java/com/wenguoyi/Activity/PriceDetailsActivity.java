@@ -6,6 +6,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -38,6 +39,7 @@ import com.wenguoyi.Utils.PixelUtils;
 import com.wenguoyi.Utils.SpUtil;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
+import com.wenguoyi.View.FlowLayout;
 import com.wenguoyi.Volley.VolleyInterface;
 import com.wenguoyi.Volley.VolleyRequest;
 
@@ -64,7 +66,14 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     private TextView mtvCountCart;
     private ImageView mImgShouCang;
     private GoodsDetailBean goodsDetailBean;
+    private FlowLayout mFlowLayout;
+    private LayoutInflater mInflater;
+
     private String uid;
+
+    private String[] mkeshiVals = new String[]{"全部科室", "妇产科", "儿科 ", "综合门诊",
+            "内科", "外壳", "中医科", "皮肤性病科", "康复医学", "重症医学科", "其他科室"};
+
 
     @Override
     protected void onDestroy() {
@@ -83,6 +92,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void initview() {
+        mFlowLayout = findViewById(R.id.id_flowlayout);
         mRlBack = (FrameLayout) findViewById(R.id.rl_back);
         mImgShouCang = (ImageView) findViewById(R.id.img_shoucang);
         mRlShoppingcart = (RelativeLayout) findViewById(R.id.rl_shoppingcart);
@@ -98,6 +108,27 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             mtvCountCart.setText(countCart);
         }
         uid = (String) SpUtil.get(context, "uid", "");
+
+        mInflater = LayoutInflater.from(this);
+
+        /**
+         * 找到搜索标签的控件
+         */
+        for (int i = 0; i < mkeshiVals.length; i++) {
+            TextView tv = (TextView) mInflater.inflate(
+                    R.layout.label_tv_keshi_layout, mFlowLayout, false);
+            tv.setText(mkeshiVals[i]);
+            final String str = tv.getText().toString();
+            //点击事件
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            mFlowLayout.addView(tv);//添加到父View
+        }
+
     }
 
     @Override

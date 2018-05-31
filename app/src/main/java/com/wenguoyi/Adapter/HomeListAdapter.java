@@ -100,6 +100,8 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                     }
                 });
                 holder.gv_home_type.setAdapter(new myHomeTypeAdadapter());
+
+
                 titleList.add("习近平的八个“治党妙喻”");
                 titleList.add("生态环境保护多重要，听习近平怎么说");
                 titleList.add("军事科研创新的强大引擎，习主席说要这样点燃");
@@ -107,6 +109,8 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 titleList.add("王岐山会见中美工商领袖和前高官对话美方代表");
                 holder.tv_content.setTextList(titleList);
                 holder.tv_content.startAutoScroll();
+
+
                 isfirst = !isfirst;
             }
         } else {
