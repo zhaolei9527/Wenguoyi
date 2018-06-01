@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.wenguoyi.App;
 import com.wenguoyi.Base.BaseActivity;
+import com.wenguoyi.Bean.LoginBean;
 import com.wenguoyi.Bean.WXBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
@@ -111,8 +112,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onResume() {
         super.onResume();
-
-
     }
 
     @Override
@@ -228,17 +227,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         HashMap<String, String> params = new HashMap<>(1);
         params.put("key", UrlUtils.KEY);
         params.put("tel", tel);
-        params.put("openid", openid);
-        params.put("type", type);
-        params.put("password", password);
+        params.put("password", Utils.md5(password));
         Log.e("LoginActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "login/login", "login/login", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
+                dialog.dismiss();
                 String decode = result;
                 Log.e("LoginActivity", decode);
                 try {
-
+                    LoginBean loginBean = new Gson().fromJson(decode, LoginBean.class);
+                    EasyToast.showShort(context, loginBean.getMsg().toString());
+                    if (1 == loginBean.getStatus()) {
+                        SpUtil.putAndApply(context, "uid", loginBean.getUser().getId());
+                        SpUtil.putAndApply(context, "username", loginBean.getUser().getNickname());
+                        SpUtil.putAndApply(context, "password", Utils.md5(password));
+                        SpUtil.putAndApply(context, "tel", loginBean.getUser().getTel());
+                        gotoMain();
+                    } else {
+                        EasyToast.showShort(context, loginBean.getMsg().toString());
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();

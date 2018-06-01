@@ -259,7 +259,7 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                 Log.e("addressDel", result);
                 try {
                     CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
-                    if ("1".equals(String.valueOf(codeBean.getCode()))) {
+                    if ("1".equals(String.valueOf(codeBean.getStatus()))) {
                         EasyToast.showShort(context, "删除成功");
                         if (ll_address_list.getChildCount() == 0) {
                             ll_empty.setVisibility(View.VISIBLE);

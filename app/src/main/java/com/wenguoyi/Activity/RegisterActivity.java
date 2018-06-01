@@ -262,7 +262,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 try {
                     CodeBean codeBean = new Gson().fromJson(decode, CodeBean.class);
                     Toast.makeText(RegisterActivity.this, codeBean.getMsg(), Toast.LENGTH_SHORT).show();
-                    if ("1".equals(String.valueOf(codeBean.getCode()))) {
+                    if ("1".equals(String.valueOf(codeBean.getStatus()))) {
 
                     } else {
                         time = 0;
@@ -355,7 +355,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 Log.e("RegisterActivity", decode);
                 try {
                     CodeBean codeBean = new Gson().fromJson(decode, CodeBean.class);
-                    if (1 == codeBean.getCode()) {
+                    if (1 == codeBean.getStatus()) {
                         Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {

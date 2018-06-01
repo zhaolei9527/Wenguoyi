@@ -10,13 +10,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".Activity.MainActivity"></activity>
+
+        <activity android:name=".Activity.LoginActivity"></activity>
+
+        <activity android:name=".Activity.FlashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Activity.RegisterActivity"></activity>
 
         <activity android:name=".Activity.XunYaoShopTypeActivity"></activity>
         <activity android:name=".Activity.PriceDetailsActivity"></activity>
@@ -28,13 +34,14 @@
         <activity android:name=".Activity.AddressActivitry"></activity>
         <activity android:name=".Activity.ForgetActivity"></activity>
         <activity android:name=".Activity.GoodPayActivity"></activity>
-        <activity android:name=".Activity.LoginActivity"></activity>
         <activity android:name=".Activity.MyTuanDuiActivity"></activity>
         <activity android:name=".Activity.MyChongZhiActivity"></activity>
         <activity android:name=".Activity.MyQianBaoActivity"></activity>
         <activity android:name=".Activity.MyGuZhiActivity"></activity>
         <activity android:name=".Activity.SettingActivity"></activity>
         <activity android:name=".Activity.HuiYuanSJActivity"></activity>
+
+
     </application>
 
 </manifest>

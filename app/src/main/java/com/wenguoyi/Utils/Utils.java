@@ -9,6 +9,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -24,6 +25,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -288,9 +291,9 @@ public class Utils {
     }
 
 
-    public static String Html2Text(String inputString){
+    public static String Html2Text(String inputString) {
         String htmlStr = inputString; //含html标签的字符串
-        String textStr ="";
+        String textStr = "";
         java.util.regex.Pattern p_script;
         java.util.regex.Matcher m_script;
         java.util.regex.Pattern p_style;
@@ -298,7 +301,7 @@ public class Utils {
         java.util.regex.Pattern p_html;
         java.util.regex.Matcher m_html;
 
-        try{
+        try {
             String regEx_script = "<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>"; //定义script的正则表达式{或<script[^>]*?>[\\s\\S]*?<\\/script> }
             String regEx_style = "<[\\s]*?style[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?style[\\s]*?>"; //定义style的正则表达式{或<style[^>]*?>[\\s\\S]*?<\\/style> }
             String regEx_html = "<[^>]+>"; //定义HTML标签的正则表达式
@@ -319,10 +322,35 @@ public class Utils {
             htmlStr = htmlStr.replace("\t", "");
             textStr = htmlStr.trim();
             textStr = htmlStr;
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
         return textStr;//返回文本字符串
     }
+
+
+    public static String md5(String string) {
+        if (TextUtils.isEmpty(string)) {
+            return "";
+        }
+        MessageDigest md5 = null;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+            byte[] bytes = md5.digest(string.getBytes());
+            String result = "";
+            for (byte b : bytes) {
+                String temp = Integer.toHexString(b & 0xff);
+                if (temp.length() == 1) {
+                    temp = "0" + temp;
+                }
+                result += temp;
+            }
+            return result;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 
 }

@@ -1,6 +1,5 @@
 package com.wenguoyi.Activity;
 
-import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +17,6 @@ import com.wenguoyi.App;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.CodeBean;
 import com.wenguoyi.R;
-import com.wenguoyi.Utils.CodeUtils;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
 import com.wenguoyi.Volley.VolleyInterface;
@@ -36,7 +34,6 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
     private ImageView img_user;
     private EditText et_account;
     private ImageView imageView;
-    private ImageView image;
     private ImageView img_yanzheng;
     private EditText et_phonecode;
     private Button btn_getSMScode;
@@ -48,16 +45,11 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
     private TextView tv_login;
     private Timer timer;
     private TimerTask task;
-    private int time = 60;
+    private int time = 100;
     private String account;
-    private String code;
-    private String imgCode;
-
     private String phonecode;
     private String password;
     private String passwordagain;
-    private CodeUtils codeUtils;
-    private Bitmap bitmap;
 
     @Override
     protected void ready() {
@@ -95,7 +87,6 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
         img_user = (ImageView) findViewById(R.id.img_user);
         et_account = (EditText) findViewById(R.id.et_account);
         imageView = (ImageView) findViewById(R.id.imageView);
-        image = (ImageView) findViewById(R.id.image);
         img_yanzheng = (ImageView) findViewById(R.id.img_yanzheng);
         et_phonecode = (EditText) findViewById(R.id.et_phonecode);
         btn_getSMScode = (Button) findViewById(R.id.btn_getSMScode);
@@ -105,10 +96,6 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
         et_passwordagain = (EditText) findViewById(R.id.et_passwordagain);
         btn_ForGet = (Button) findViewById(R.id.btn_ForGet);
         tv_login = (TextView) findViewById(R.id.tv_login);
-        codeUtils = CodeUtils.getInstance();
-        bitmap = codeUtils.createBitmap();
-        code = codeUtils.getCode();
-        image.setImageBitmap(bitmap);
     }
 
     @Override
@@ -124,17 +111,9 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
                     Toast.makeText(this, "请输入正确手机号", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                if (!this.code.equals(imgCode)) {
-                    Toast.makeText(this, "验证码错误", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-
-                if (time == 60) {
+                if (time == 100) {
                     getcaptcha(et_account.getText().toString());
                 }
-
                 break;
             case R.id.btn_ForGet:
                 submit();
@@ -159,14 +138,14 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
                     @Override
                     public void run() {
                         time--;
-                        btn_getSMScode.setText("" + time);
+                        btn_getSMScode.setText(String.valueOf(time));
                         if (time < 0) {
                             if (timer != null) {
                                 timer.cancel();
                             }
-                            btn_getSMScode.setText("获取验证码");
+                            btn_getSMScode.setText("重获验证码");
                             btn_getSMScode.setEnabled(true);
-                            time = 60;
+                            time = 100;
                         }
                     }
                 });
@@ -188,7 +167,7 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
         HashMap<String, String> params = new HashMap<>(2);
         params.put("key", UrlUtils.KEY);
         params.put("tel", phone);
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "login/cmfsend", "login/cmfsend", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "login/pwdcodesend", "login/pwdcodesend", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 String decode = result;
@@ -196,7 +175,7 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
                 try {
                     CodeBean codeBean = new Gson().fromJson(decode, CodeBean.class);
                     Toast.makeText(context, codeBean.getMsg(), Toast.LENGTH_SHORT).show();
-                    if ("1".equals(String.valueOf(codeBean.getCode()))) {
+                    if ("1".equals(String.valueOf(codeBean.getStatus()))) {
 
                     } else {
                         time = 0;
@@ -234,12 +213,6 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
             return;
         }
 
-        if (!this.code.equals(imgCode)) {
-            Toast.makeText(this, "验证码错误", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-
         phonecode = et_phonecode.getText().toString().trim();
         if (TextUtils.isEmpty(phonecode)) {
             Toast.makeText(this, "短信验证码", Toast.LENGTH_SHORT).show();
@@ -274,11 +247,11 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
         HashMap<String, String> params = new HashMap<>(2);
         params.put("key", UrlUtils.KEY);
         params.put("tel", phone);
-        params.put("ecode", code);
-        params.put("password", password);
-        params.put("cfmpwd", password);
+        params.put("phone_code", code);
+        params.put("password", Utils.md5(password));
+        params.put("cfmpwd", Utils.md5(password));
         Log.e("ForgetActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "login/findpwd", "login/findpwd", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "login/password", "login/password", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 time = 0;
@@ -286,7 +259,7 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
                 Log.e("ForgetActivity", decode);
                 try {
                     CodeBean codeBean = new Gson().fromJson(decode, CodeBean.class);
-                    if (1 == codeBean.getCode()) {
+                    if (1 == codeBean.getStatus()) {
                         Toast.makeText(context, "找回成功", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
@@ -321,17 +294,13 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        App.getQueues().cancelAll("login/cmfsend");
-        App.getQueues().cancelAll("login/findpwd");
-        codeUtils = null;
-        code = null;
-        bitmap = null;
+        App.getQueues().cancelAll("login/pwdcodesend");
+        App.getQueues().cancelAll("login/password");
         task = null;
         if (timer != null) {
             timer = null;
         }
         account = null;
-        imgCode = null;
         phonecode = null;
         password = null;
         passwordagain = null;

@@ -108,9 +108,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             mtvCountCart.setText(countCart);
         }
         uid = (String) SpUtil.get(context, "uid", "");
-
         mInflater = LayoutInflater.from(this);
-
         /**
          * 找到搜索标签的控件
          */
@@ -321,7 +319,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                     } else {
                         mImgShouCang.setBackground(getResources().getDrawable(R.mipmap.new_sc2));
                     }
-
                 } else {
                     Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }

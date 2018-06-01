@@ -12,17 +12,17 @@ public class UrlUtils {
     /**
      * url连接头
      */
-    public static final String URL = "http://www.mobilechain.top/";
+    public static final String URL = "http://wgy.fangniuwa.co/";
 
     /**
      * api连接头
      */
-    public static final String BASE_URL = "http://www.mobilechain.top/api.php/";
+    public static final String BASE_URL = "http://wgy.fangniuwa.co/wgy.php/";
 
     /**
      * 接口连接key
      */
-    public static final String KEY = "29067275e60e29544639d4551d953666";
+    public static final String KEY = "dd6573891ec1834ebbc889255f731a02";
 
 
 }

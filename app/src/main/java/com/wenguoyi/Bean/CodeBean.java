@@ -10,19 +10,19 @@ package com.wenguoyi.Bean;
 public class CodeBean {
 
     /**
-     * code : 1
-     * msg : 发送成功
+     * status : 1
+     * msg : 恭喜你，密码找回成功！
      */
 
-    private int code;
+    private int status;
     private String msg;
 
-    public int getCode() {
-        return code;
+    public int getStatus() {
+        return status;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getMsg() {

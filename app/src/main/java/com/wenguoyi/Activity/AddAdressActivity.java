@@ -337,7 +337,7 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
                 Log.e("addressAdd", result);
                 try {
                     CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
-                    if ("1".equals(String.valueOf(codeBean.getCode()))) {
+                    if ("1".equals(String.valueOf(codeBean.getStatus()))) {
                         EasyToast.showShort(context, "添加成功");
                         finish();
                     } else {
@@ -387,7 +387,7 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
                 Log.e("addressAdd", result);
                 try {
                     CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
-                    if ("1".equals(String.valueOf(codeBean.getCode()))) {
+                    if ("1".equals(String.valueOf(codeBean.getStatus()))) {
                         EasyToast.showShort(context, "添加成功");
                         finish();
                     } else {
