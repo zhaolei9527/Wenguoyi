@@ -336,7 +336,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      */
     private void getRegister(String phone, String code, String password, String tel2, String openid, String type) {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("tel", phone);
         params.put("ecode", code);
         params.put("password", password);

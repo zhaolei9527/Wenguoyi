@@ -19,11 +19,10 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/x5"
-            android:background="@mipmap/demoyisheng"
             fresco:roundAsCircle="true" />
 
         <TextView
-            android:id="@+id/tv_name1"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -32,7 +31,6 @@
             android:layout_marginTop="@dimen/x5"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="王艳艳"
             android:textColor="@color/text333"
             android:textSize="@dimen/x16" />
 
@@ -45,7 +43,6 @@
             android:layout_marginRight="@dimen/x5"
             android:layout_marginTop="@dimen/x5"
             android:maxLines="1"
-            android:text="住院医师"
             android:textColor="@color/text666"
             android:textSize="@dimen/x13" />
 
@@ -59,7 +56,6 @@
             android:layout_marginRight="@dimen/x5"
             android:layout_marginTop="@dimen/x5"
             android:maxLines="1"
-            android:text="综合门诊"
             android:textColor="@color/text666"
             android:textSize="@dimen/x13" />
 

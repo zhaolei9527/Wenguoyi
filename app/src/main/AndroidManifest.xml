@@ -40,8 +40,7 @@
         <activity android:name=".Activity.MyGuZhiActivity"></activity>
         <activity android:name=".Activity.SettingActivity"></activity>
         <activity android:name=".Activity.HuiYuanSJActivity"></activity>
-
-
+        <activity android:name=".Activity.NewsDetailsActivity"></activity>
     </application>
 
 </manifest>

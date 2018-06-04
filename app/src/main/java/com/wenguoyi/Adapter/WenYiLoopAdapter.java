@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.LoopPagerAdapter;
-import com.wenguoyi.Bean.HomeBean;
+import com.wenguoyi.Bean.WenYiBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.UrlUtils;
 
@@ -18,17 +18,17 @@ import java.util.List;
  * Created by 赵磊 on 2017/5/25.
  */
 //轮播图
-public class LoopAdapter extends LoopPagerAdapter {
+public class WenYiLoopAdapter extends LoopPagerAdapter {
     //
 
-    private List<HomeBean.LunboBean> lbdatas = new ArrayList();
+    private List<WenYiBean.LunboBean> lbdatas = new ArrayList();
 
-    public LoopAdapter(RollPagerView viewPager) {
+    public WenYiLoopAdapter(RollPagerView viewPager) {
         super(viewPager);
     }
 
 
-    public LoopAdapter(RollPagerView viewPager, List<HomeBean.LunboBean> lbdatas) {
+    public WenYiLoopAdapter(RollPagerView viewPager, List<WenYiBean.LunboBean> lbdatas) {
         super(viewPager);
         this.lbdatas = lbdatas;
     }

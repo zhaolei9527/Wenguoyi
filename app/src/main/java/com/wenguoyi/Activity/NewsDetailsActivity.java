@@ -3,8 +3,6 @@ package com.wenguoyi.Activity;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +20,7 @@ import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 import com.wenguoyi.App;
 import com.wenguoyi.Base.BaseActivity;
+import com.wenguoyi.Bean.NewsDetailsBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.DateUtils;
 import com.wenguoyi.Utils.EasyToast;
@@ -55,7 +54,6 @@ public class NewsDetailsActivity extends BaseActivity {
     TextView tvShow;
     @BindView(forum_context)
     WebView forumContext;
-
     private Dialog dialog;
     private String id;
 
@@ -125,6 +123,7 @@ public class NewsDetailsActivity extends BaseActivity {
 
             }
         });
+        forumContext.loadUrl(UrlUtils.BASE_URL + "danye/news/id/" + id);
 
     }
 
@@ -146,9 +145,9 @@ public class NewsDetailsActivity extends BaseActivity {
     /**
      * 新闻内容获取
      */
-    private void getNews(String id) {
+    private void getNews(final String id) {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("id", id);
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "news/detail", "news/detail", params, new VolleyInterface(context) {
             @Override
@@ -156,8 +155,16 @@ public class NewsDetailsActivity extends BaseActivity {
                 dialog.dismiss();
                 Log.e("NewsDetailsActivity", result);
                 try {
-
-
+                    NewsDetailsBean newsDetailsBean = new Gson().fromJson(result, NewsDetailsBean.class);
+                    if (1 == newsDetailsBean.getStatus()) {
+                        tvTitle.setText(newsDetailsBean.getMsg().getTitle());
+                        tvTime.setText("时间：" + DateUtils.getMillon(Long.parseLong(newsDetailsBean.getMsg().getAddtime())));
+                        tvShow.setText("浏览量：" + newsDetailsBean.getMsg().getNum());
+                    } else {
+                        EasyToast.showShort(context, R.string.hasError);
+                        finish();
+                    }
+                    result = null;
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();

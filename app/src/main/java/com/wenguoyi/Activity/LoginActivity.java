@@ -225,7 +225,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
      */
     private void getLogin(final String tel, final String password, final String openid, final String type) {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("tel", tel);
         params.put("password", Utils.md5(password));
         Log.e("LoginActivity", params.toString());

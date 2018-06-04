@@ -5,21 +5,29 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.wenguoyi.Activity.MainActivity;
 import com.wenguoyi.Adapter.WenYiListAdapter;
 import com.wenguoyi.App;
+import com.wenguoyi.Bean.WenYiBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
+import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
 import com.wenguoyi.View.ProgressView;
 import com.wenguoyi.View.SakuraLinearLayoutManager;
 import com.wenguoyi.View.WenguoyiRecycleView;
+import com.wenguoyi.Volley.VolleyInterface;
+import com.wenguoyi.Volley.VolleyRequest;
 
-import me.fangx.haorefresh.LoadMoreListener;
+import java.util.HashMap;
 
 /**
  * com.wenguoyi.Fragment
@@ -71,27 +79,44 @@ public class WenYiFragment extends BaseLazyFragment {
         progressView.setIndicatorId(ProgressView.BallRotate);
         progressView.setIndicatorColor(getResources().getColor(R.color.colorAccent));
         rv_wenyilist.setFootLoadingView(progressView);
-        rv_wenyilist.setLoadMoreListener(new LoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                p = p + 1;
-                getData();
-            }
-        });
-
-        WenYiListAdapter adapter = new WenYiListAdapter((MainActivity) getActivity());
-        rv_wenyilist.setAdapter(adapter);
     }
 
     //数据获取
     public void getData() {
+        HashMap<String, String> params = new HashMap<>(1);
+        params.put("pwd", UrlUtils.KEY);
+        Log.e("WenYiFragment", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "yisheng/index", "yisheng/index", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("WenYiFragment", result);
+                try {
+                    WenYiBean wenYiBean = new Gson().fromJson(result, WenYiBean.class);
+                    if (1 == wenYiBean.getStatus()) {
+                        WenYiListAdapter adapter = new WenYiListAdapter((MainActivity) getActivity(), wenYiBean);
+                        rv_wenyilist.setAdapter(adapter);
+                    } else {
+                        EasyToast.showShort(context, R.string.hasError);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onMyError(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        App.getQueues().cancelAll("index/index");
+        App.getQueues().cancelAll("yisheng/index");
+        System.gc();
     }
 
 }
