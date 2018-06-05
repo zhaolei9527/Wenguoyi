@@ -62,6 +62,7 @@
                     android:background="@mipmap/keshilist" />
 
                 <TextView
+                    android:id="@+id/tv_keshi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x5"
@@ -86,6 +87,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/tv_zhicheng"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="所有职称"
@@ -108,15 +110,22 @@
                 android:visibility="gone"></View>
         </RelativeLayout>
 
-
     </LinearLayout>
 
-
-    <com.wenguoyi.View.WenguoyiRecycleView
-        android:id="@+id/rv_yisheng_list"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"></com.wenguoyi.View.WenguoyiRecycleView>
+        android:layout_height="match_parent">
+
+        <com.wenguoyi.View.WenguoyiRecycleView
+            android:id="@+id/rv_yisheng_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"></com.wenguoyi.View.WenguoyiRecycleView>
+
+        <include layout="@layout/layout_empty"></include>
+
+    </FrameLayout>
+
 
 </LinearLayout>

@@ -158,7 +158,7 @@ public class NewsDetailsActivity extends BaseActivity {
                     NewsDetailsBean newsDetailsBean = new Gson().fromJson(result, NewsDetailsBean.class);
                     if (1 == newsDetailsBean.getStatus()) {
                         tvTitle.setText(newsDetailsBean.getMsg().getTitle());
-                        tvTime.setText("时间：" + DateUtils.getMillon(Long.parseLong(newsDetailsBean.getMsg().getAddtime())));
+                        tvTime.setText("时间：" + DateUtils.getMillon(Long.parseLong(newsDetailsBean.getMsg().getAddtime())*1000));
                         tvShow.setText("浏览量：" + newsDetailsBean.getMsg().getNum());
                     } else {
                         EasyToast.showShort(context, R.string.hasError);

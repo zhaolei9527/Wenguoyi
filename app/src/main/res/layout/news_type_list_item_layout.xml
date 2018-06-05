@@ -21,6 +21,6 @@
         android:padding="@dimen/x10"
         android:text="种类描述"
         android:textColor="@color/text333"
-        android:textSize="@dimen/x16" />
+        android:textSize="@dimen/x14" />
 
 </LinearLayout>

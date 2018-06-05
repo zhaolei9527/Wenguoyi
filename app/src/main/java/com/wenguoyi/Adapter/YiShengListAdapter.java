@@ -5,10 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.wenguoyi.Bean.YiShengListBean;
 import com.wenguoyi.R;
+import com.wenguoyi.Utils.UrlUtils;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * com.wenguoyi.Adapter
@@ -20,18 +27,18 @@ import java.util.ArrayList;
 public class YiShengListAdapter extends RecyclerView.Adapter<YiShengListAdapter.ViewHolder> {
 
     private Activity mContext;
-    private ArrayList<String> datas = new ArrayList();
-    private ArrayList<String> titleList = new ArrayList<String>();
+    private ArrayList<YiShengListBean.YishengBean> datas = new ArrayList();
 
-    public ArrayList<String> getDatas() {
+    public ArrayList<YiShengListBean.YishengBean> getDatas() {
         return datas;
     }
 
-    public YiShengListAdapter(Activity context) {
+    public YiShengListAdapter(Activity context, List<YiShengListBean.YishengBean> arrayList) {
         this.mContext = context;
+        this.datas.addAll(arrayList);
     }
 
-    public void setDatas(ArrayList<String> datas) {
+    public void setDatas(List<YiShengListBean.YishengBean> datas) {
         this.datas.addAll(datas);
     }
 
@@ -44,18 +51,31 @@ public class YiShengListAdapter extends RecyclerView.Adapter<YiShengListAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.tvContent.setText(datas.get(position).getShanchang());
+        holder.tvName.setText(datas.get(position).getName());
+        holder.tvZhicheng.setText(datas.get(position).getKeshi() + "|" + datas.get(position).getZhicheng());
+        holder.SimpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position).getHead());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return datas.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View rootView;
+        @BindView(R.id.SimpleDraweeView)
+        com.facebook.drawee.view.SimpleDraweeView SimpleDraweeView;
+        @BindView(R.id.tv_name)
+        TextView tvName;
+        @BindView(R.id.tv_zhicheng)
+        TextView tvZhicheng;
+        @BindView(R.id.tv_content)
+        TextView tvContent;
 
         public ViewHolder(View view) {
             super(view);
+            ButterKnife.bind(this, view);
             this.rootView = view;
         }
     }

@@ -13,6 +13,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
 import com.wenguoyi.Activity.MainActivity;
+import com.wenguoyi.Activity.YiShengDetailsActivity;
 import com.wenguoyi.Activity.YiShengListActivity;
 import com.wenguoyi.Bean.WenYiBean;
 import com.wenguoyi.R;
@@ -104,9 +105,19 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
                     @Override
                     public View getView(int i, View view, ViewGroup viewGroup) {
                         View inflate = View.inflate(mContext, R.layout.wenyi_item_wenyitype_layout, null);
-                        TextView tv_wenyitype = inflate.findViewById(R.id.tv_wenyitype);
+                        final TextView tv_wenyitype = inflate.findViewById(R.id.tv_wenyitype);
                         tv_wenyitype.setText(wenYiBean.getKeshi().get(i).getTitle());
-                        tv_wenyitype.setTag(wenYiBean.getKeshi().get(i).getId());
+                        tv_wenyitype.setTag(String.valueOf(wenYiBean.getKeshi().get(i).getId()));
+
+                        inflate.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                mContext.startActivity(new Intent(mContext, YiShengListActivity.class).putExtra("keshi", tv_wenyitype.getText().toString()).putExtra("kid", (String) tv_wenyitype.getTag()));
+
+                            }
+                        });
+
                         return inflate;
                     }
                 });
@@ -146,7 +157,7 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
                 }
 
                 @Override
-                public View getView(int i, View view, ViewGroup viewGroup) {
+                public View getView(final int i, View view, ViewGroup viewGroup) {
                     View inflate = View.inflate(mContext, R.layout.wenyi_yisheng_tuijian_list_item_layout, null);
                     SimpleDraweeView SimpleDraweeView = inflate.findViewById(R.id.SimpleDraweeView);
                     SimpleDraweeView.setImageURI(UrlUtils.URL + wenYiBean.getYisheng().get(i).getHead());
@@ -156,6 +167,15 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
                     tv_keshi.setText(wenYiBean.getYisheng().get(i).getKeshi());
                     TextView tv_zhicheng = inflate.findViewById(R.id.tv_zhicheng);
                     tv_zhicheng.setText(wenYiBean.getYisheng().get(i).getZhicheng());
+
+                    inflate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mContext.startActivity(new Intent(mContext, YiShengDetailsActivity.class).putExtra("id", wenYiBean.getYisheng().get(i).getId()));
+                        }
+                    });
+
+
                     return inflate;
                 }
             });

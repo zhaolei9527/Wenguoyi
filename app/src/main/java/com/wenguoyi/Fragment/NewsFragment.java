@@ -5,20 +5,35 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.wenguoyi.Activity.MainActivity;
 import com.wenguoyi.Adapter.NewsTitleListAdapter;
 import com.wenguoyi.Adapter.NewsTypeListAdapter;
 import com.wenguoyi.App;
+import com.wenguoyi.Bean.BankEvent;
+import com.wenguoyi.Bean.NewsListBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
+import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
 import com.wenguoyi.View.ProgressView;
 import com.wenguoyi.View.SakuraLinearLayoutManager;
 import com.wenguoyi.View.WenguoyiRecycleView;
+import com.wenguoyi.Volley.VolleyInterface;
+import com.wenguoyi.Volley.VolleyRequest;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.HashMap;
 
 import me.fangx.haorefresh.LoadMoreListener;
 
@@ -31,6 +46,9 @@ import me.fangx.haorefresh.LoadMoreListener;
  */
 public class NewsFragment extends BaseLazyFragment {
     private int p = 1;
+    private String cid = "";
+    public static int ischeck = 0;
+
     private Context context;
     private SakuraLinearLayoutManager line1;
     private SakuraLinearLayoutManager line2;
@@ -51,6 +69,7 @@ public class NewsFragment extends BaseLazyFragment {
     protected void initData() {
         if (Utils.isConnected(context)) {
             getData();
+            EventBus.getDefault().register(this);
         } else {
             EasyToast.showShort(context, getResources().getString(R.string.Networkexception));
         }
@@ -91,24 +110,84 @@ public class NewsFragment extends BaseLazyFragment {
                 getData();
             }
         });
-        NewsTypeListAdapter adapter = new NewsTypeListAdapter((MainActivity) getActivity());
-        NewsTitleListAdapter titleAdapter = new NewsTitleListAdapter((MainActivity) getActivity());
-
         rv_news_list.setFootLoadingView(progressView);
-        rv_news_type_list.setAdapter(adapter);
-        rv_news_list.setAdapter(titleAdapter);
+
 
     }
+
 
     //数据获取
     public void getData() {
+        HashMap<String, String> params = new HashMap<>(1);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("page", String.valueOf(p));
+        params.put("cid", cid);
+        Log.e("NewsFragment", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "news/lists", "news/lists", params, new VolleyInterface(context) {
 
+            private NewsTitleListAdapter titleAdapter;
+            private NewsTypeListAdapter adapter;
+
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("NewsFragment", result);
+                try {
+                    NewsListBean newsListBean = new Gson().fromJson(result, NewsListBean.class);
+                    if (1 == newsListBean.getStatus()) {
+                        if (p == 1) {
+                            if (adapter == null) {
+                                adapter = new NewsTypeListAdapter((MainActivity) getActivity(), newsListBean.getNewscate());
+                                rv_news_type_list.setAdapter(adapter);
+                            }
+                            if (titleAdapter == null) {
+                                titleAdapter = new NewsTitleListAdapter((MainActivity) getActivity(), newsListBean.getMsg());
+                            }
+                            rv_news_list.setAdapter(titleAdapter);
+                        } else {
+                            titleAdapter.setDatas(newsListBean.getMsg());
+                        }
+                        rv_news_list.loadMoreComplete();
+
+                        if (0 == newsListBean.getFy()) {
+                            rv_news_list.loadMoreEnd();
+                            rv_news_list.setCanloadMore(false);
+                        } else {
+                            rv_news_list.setCanloadMore(true);
+                        }
+
+                    } else if (2 == newsListBean.getStatus()) {
+                        EasyToast.showShort(context, R.string.notmore);
+                    } else {
+                        EasyToast.showShort(context, R.string.notmore);
+                    }
+                    result = null;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void changeNewsType(BankEvent messageEvent) {
+        p = 1;
+        cid = messageEvent.getMsg();
+        getData();
+    }
+
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        App.getQueues().cancelAll("index/index");
+        EventBus.getDefault().unregister(this);
+        App.getQueues().cancelAll("news/lists");
     }
 
 }

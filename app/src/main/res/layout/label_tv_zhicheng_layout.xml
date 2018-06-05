@@ -13,7 +13,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x15"
         android:text="所有职称"
-        android:textColor="@color/bgtitle"
+        android:textColor="@drawable/wenyi_text_selector"
         android:textSize="@dimen/x15" />
 
     <View

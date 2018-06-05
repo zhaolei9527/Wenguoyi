@@ -8,9 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wenguoyi.Bean.BankEvent;
+import com.wenguoyi.Bean.NewsListBean;
 import com.wenguoyi.R;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.wenguoyi.Fragment.NewsFragment.ischeck;
 
 /**
  * com.wenguoyi.Adapter
@@ -22,18 +29,22 @@ import java.util.ArrayList;
 public class NewsTypeListAdapter extends RecyclerView.Adapter<NewsTypeListAdapter.ViewHolder> {
 
     private Activity mContext;
-    private ArrayList<String> datas = new ArrayList();
-    private ArrayList<String> titleList = new ArrayList<String>();
+    private ArrayList<NewsListBean.NewscateBean> datas = new ArrayList();
 
-    public ArrayList<String> getDatas() {
+    public ArrayList<NewsListBean.NewscateBean> getDatas() {
         return datas;
     }
 
-    public NewsTypeListAdapter(Activity context) {
+    public NewsTypeListAdapter(Activity context, List<NewsListBean.NewscateBean> newsListBean) {
         this.mContext = context;
+        NewsListBean.NewscateBean newscateBean = new NewsListBean.NewscateBean();
+        newscateBean.setCate_name("推荐");
+        newscateBean.setId("");
+        this.datas.add(newscateBean);
+        this.datas.addAll(newsListBean);
     }
 
-    public void setDatas(ArrayList<String> datas) {
+    public void setDatas(ArrayList<NewsListBean.NewscateBean> datas) {
         this.datas.addAll(datas);
     }
 
@@ -46,7 +57,6 @@ public class NewsTypeListAdapter extends RecyclerView.Adapter<NewsTypeListAdapte
 
     private boolean isfirst = false;
 
-    private int ischeck = 0;
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
@@ -54,13 +64,14 @@ public class NewsTypeListAdapter extends RecyclerView.Adapter<NewsTypeListAdapte
             isfirst = !isfirst;
         }
 
+        holder.tv_type_title.setText(datas.get(position).getCate_name());
+
         holder.tv_type_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 ischeck = position;
                 notifyDataSetChanged();
-
+                EventBus.getDefault().post(new BankEvent(datas.get(position).getId()));
             }
         });
 
@@ -74,7 +85,7 @@ public class NewsTypeListAdapter extends RecyclerView.Adapter<NewsTypeListAdapte
 
     @Override
     public int getItemCount() {
-        return 10;
+        return datas.size();
     }
 
 
