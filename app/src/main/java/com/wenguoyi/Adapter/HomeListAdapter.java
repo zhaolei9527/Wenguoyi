@@ -23,6 +23,7 @@ import com.wenguoyi.Activity.XunYaoShopTypeActivity;
 import com.wenguoyi.Bean.HomeBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.DensityUtils;
+import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
 import com.wenguoyi.View.MyGridView;
@@ -193,7 +194,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
 
         @Override
         public int getCount() {
-            return 10;
+            return homeBean.getCate().size() + 1;
         }
 
         @Override
@@ -207,62 +208,30 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(final int i, View view, ViewGroup viewGroup) {
             View inflate = View.inflate(mContext, R.layout.home_gv_item_type_layout, null);
 
             LinearLayout ll_type = inflate.findViewById(R.id.ll_type);
             SimpleDraweeView SimpleDraweeView = inflate.findViewById(R.id.SimpleDraweeView);
             TextView tv_title = inflate.findViewById(R.id.tv_title);
-
-            switch (i) {
-                case 0:
-                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype1);
-                    tv_title.setText("中西药品");
-                    break;
-                case 1:
-                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype2);
-                    tv_title.setText("男性");
-                    break;
-                case 2:
-                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype3);
-                    tv_title.setText("女性");
-                    break;
-                case 3:
-                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype4);
-                    tv_title.setText("慢性病");
-                    break;
-                case 4:
-                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype5);
-                    tv_title.setText("问医");
-                    break;
-                case 5:
-                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype7);
-                    tv_title.setText("维生素钙");
-                    break;
-                case 6:
-                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype8);
-                    tv_title.setText("滋补保健");
-                    break;
-                case 7:
-                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype9);
-                    tv_title.setText("医疗器械");
-                    break;
-                case 8:
-                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype10);
-                    tv_title.setText("隐形眼睛");
-                    break;
-                case 9:
-                    SimpleDraweeView.setBackgroundResource(R.mipmap.hometype6);
-                    tv_title.setText("更多");
-                    ll_type.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            mContext.startActivity(new Intent(mContext, XunYaoShopTypeActivity.class));
-                        }
-                    });
-                    break;
-                default:
-                    break;
+            if (i == homeBean.getCate().size()) {
+                SimpleDraweeView.setBackgroundResource(R.mipmap.hometype6);
+                tv_title.setText("更多");
+                ll_type.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mContext.startActivity(new Intent(mContext, XunYaoShopTypeActivity.class));
+                    }
+                });
+            } else {
+                SimpleDraweeView.setImageURI(UrlUtils.URL + homeBean.getCate().get(i).getImgurl());
+                tv_title.setText(homeBean.getCate().get(i).getTitle());
+                ll_type.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        EasyToast.showShort(mContext, "" + homeBean.getCate().get(i).getId());
+                    }
+                });
             }
             return inflate;
         }

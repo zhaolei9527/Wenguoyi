@@ -10,8 +10,7 @@
         android:id="@+id/SimpleDraweeView"
         android:layout_width="@dimen/x65"
         android:layout_height="@dimen/x65"
-        android:layout_gravity="center_horizontal"
-        android:background="@mipmap/shopdemo" />
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:id="@+id/tv_title"

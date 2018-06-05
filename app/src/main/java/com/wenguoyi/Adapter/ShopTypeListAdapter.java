@@ -8,9 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wenguoyi.Bean.BankEvent;
+import com.wenguoyi.Bean.GoodsFcateBean;
 import com.wenguoyi.R;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.wenguoyi.Activity.XunYaoShopTypeActivity.ischeck;
 
 /**
  * com.wenguoyi.Adapter
@@ -22,18 +29,18 @@ import java.util.ArrayList;
 public class ShopTypeListAdapter extends RecyclerView.Adapter<ShopTypeListAdapter.ViewHolder> {
 
     private Activity mContext;
-    private ArrayList<String> datas = new ArrayList();
-    private ArrayList<String> titleList = new ArrayList<String>();
+    private ArrayList<GoodsFcateBean.MsgBean> datas = new ArrayList();
 
-    public ArrayList<String> getDatas() {
+    public ArrayList<GoodsFcateBean.MsgBean> getDatas() {
         return datas;
     }
 
-    public ShopTypeListAdapter(Activity context) {
+    public ShopTypeListAdapter(Activity context, List<GoodsFcateBean.MsgBean> msgBeanList) {
         this.mContext = context;
+        this.datas.addAll(msgBeanList);
     }
 
-    public void setDatas(ArrayList<String> datas) {
+    public void setDatas(List<GoodsFcateBean.MsgBean> datas) {
         this.datas.addAll(datas);
     }
 
@@ -46,20 +53,20 @@ public class ShopTypeListAdapter extends RecyclerView.Adapter<ShopTypeListAdapte
 
     private boolean isfirst = false;
 
-    private int ischeck = 0;
-
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         if (!isfirst) {
             isfirst = !isfirst;
         }
 
+        holder.tv_type_title.setText(datas.get(position).getTitle());
+
         holder.tv_type_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 ischeck = position;
                 notifyDataSetChanged();
+                EventBus.getDefault().post(new BankEvent(datas.get(position).getId()));
 
             }
         });
@@ -74,9 +81,8 @@ public class ShopTypeListAdapter extends RecyclerView.Adapter<ShopTypeListAdapte
 
     @Override
     public int getItemCount() {
-        return 10;
+        return datas.size();
     }
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View rootView;

@@ -10,10 +10,14 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.wenguoyi.Activity.ShopListActivity;
+import com.wenguoyi.Bean.GoodsScateBean;
 import com.wenguoyi.R;
+import com.wenguoyi.Utils.UrlUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * com.wenguoyi.Adapter
@@ -25,18 +29,18 @@ import java.util.ArrayList;
 public class ShopTitleListListAdapter extends RecyclerView.Adapter<ShopTitleListListAdapter.ViewHolder> {
 
     private Activity mContext;
-    private ArrayList<String> datas = new ArrayList();
-    private ArrayList<String> titleList = new ArrayList<String>();
+    private ArrayList<GoodsScateBean.MsgBean> datas = new ArrayList();
 
-    public ArrayList<String> getDatas() {
+    public ArrayList<GoodsScateBean.MsgBean> getDatas() {
         return datas;
     }
 
-    public ShopTitleListListAdapter(Activity context) {
+    public ShopTitleListListAdapter(Activity context, List<GoodsScateBean.MsgBean> msgBeanList) {
         this.mContext = context;
+        this.datas.addAll(msgBeanList);
     }
 
-    public void setDatas(ArrayList<String> datas) {
+    public void setDatas(ArrayList<GoodsScateBean.MsgBean> datas) {
         this.datas.addAll(datas);
     }
 
@@ -52,7 +56,7 @@ public class ShopTitleListListAdapter extends RecyclerView.Adapter<ShopTitleList
         holder.gl_shoptype.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
-                return 6;
+                return datas.get(position).getTcate().size();
             }
 
             @Override
@@ -68,6 +72,10 @@ public class ShopTitleListListAdapter extends RecyclerView.Adapter<ShopTitleList
             @Override
             public View getView(int i, View view, ViewGroup viewGroup) {
                 View inflate = View.inflate(mContext, R.layout.shop_title_list_item_gv_item_layout, null);
+                SimpleDraweeView SimpleDraweeView = inflate.findViewById(R.id.SimpleDraweeView);
+                TextView tv_title = inflate.findViewById(R.id.tv_title);
+                SimpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position).getTcate().get(i).getImgurl());
+                tv_title.setText(datas.get(position).getTcate().get(i).getTitle());
                 return inflate;
             }
         });
@@ -79,11 +87,13 @@ public class ShopTitleListListAdapter extends RecyclerView.Adapter<ShopTitleList
             }
         });
 
+        holder.tv_type_title.setText(datas.get(position).getTitle());
+
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return datas.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

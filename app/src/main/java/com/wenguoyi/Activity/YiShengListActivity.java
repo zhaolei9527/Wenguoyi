@@ -138,8 +138,12 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
             tvKeshi.setText(keshi);
         }
 
+        if (Utils.isConnected(context)) {
+            getData();
+        } else {
+            EasyToast.showShort(context, getResources().getString(R.string.Networkexception));
+        }
 
-        getData();
     }
 
     @Override

@@ -86,6 +86,7 @@
             android:layout_weight="1">
 
             <LinearLayout
+                android:id="@+id/ll_zonghe"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center">
@@ -98,6 +99,7 @@
                     android:textSize="@dimen/x16" />
 
                 <ImageView
+                    android:id="@+id/img_biao1"
                     android:layout_width="@dimen/x11"
                     android:layout_height="@dimen/x7"
                     android:layout_marginLeft="@dimen/x5"
@@ -106,6 +108,7 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/view1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y3"
                 android:layout_alignParentBottom="true"
@@ -119,6 +122,7 @@
             android:layout_weight="1">
 
             <LinearLayout
+                android:id="@+id/ll_xiaoliang"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center">
@@ -131,6 +135,7 @@
                     android:textSize="@dimen/x16" />
 
                 <ImageView
+                    android:id="@+id/img_biao2"
                     android:layout_width="@dimen/x11"
                     android:layout_height="@dimen/x7"
                     android:layout_marginLeft="@dimen/x5"
@@ -139,6 +144,7 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y3"
                 android:layout_alignParentBottom="true"
@@ -152,8 +158,12 @@
             android:layout_weight="1">
 
             <LinearLayout
+                android:id="@+id/ll_jiage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/view"
                 android:gravity="center">
 
                 <TextView
@@ -164,6 +174,7 @@
                     android:textSize="@dimen/x16" />
 
                 <ImageView
+                    android:id="@+id/img_biao3"
                     android:layout_width="@dimen/x11"
                     android:layout_height="@dimen/x7"
                     android:layout_marginLeft="@dimen/x5"
@@ -172,6 +183,7 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/view3"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y3"
                 android:layout_alignParentBottom="true"
@@ -185,6 +197,7 @@
             android:layout_weight="1">
 
             <LinearLayout
+                android:id="@+id/ll_zuixin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center">
@@ -199,6 +212,7 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/view4"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y3"
                 android:layout_alignParentBottom="true"
@@ -210,11 +224,20 @@
     </LinearLayout>
 
 
-    <com.wenguoyi.View.WenguoyiRecycleView
-        android:id="@+id/rv_shop_list"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"></com.wenguoyi.View.WenguoyiRecycleView>
+        android:layout_height="match_parent">
+
+        <com.wenguoyi.View.WenguoyiRecycleView
+            android:id="@+id/rv_shop_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"></com.wenguoyi.View.WenguoyiRecycleView>
+
+        <include layout="@layout/layout_empty"></include>
+
+    </FrameLayout>
+
 
 </LinearLayout>
