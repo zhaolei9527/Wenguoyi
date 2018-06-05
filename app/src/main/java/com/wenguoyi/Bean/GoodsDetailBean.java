@@ -11,20 +11,27 @@ import java.util.List;
  */
 public class GoodsDetailBean {
 
-
     /**
-     * goods : {"id":"3","title":"心血康2","img":["/Public/uploads/goods/img/2017-10-09/59dac67e86470.jpg","/Public/uploads/goods/img/2017-10-09/59dac6826f158.jpg","/Public/uploads/goods/img/2017-10-09/59dac6854af38.jpg"],"keywords":"心血康2","description":"心血康2心血康2心血康2","content":"&lt;p&gt;心血康2心血康2心血康2&lt;/p&gt;","addtime":"1502708470","sort":"0","price":"33","is_show":"1","kucun":"100","yunfei":"22.00","xiaoliang":"73","type":"1","cang":"0","paytime":null,"paynum":null}
-     * is_cang : 0
-     * pj : {"id":"2","orderid":"15078770237362934","gid":"3","uid":"9","content":"一次就见效，真是好","xing":"5","addtime":"1507877859","stu":"1","hf":null,"admin":null,"hftime":null,"ogid":"19","count":"1","nickname":"靓**神","headimg":"/Public/uploads/headimg/default_img.png"}
-     * code : 310
+     * normname : [{"nid":"9","title":"套餐","term":[{"tid":"19","title":"标准装（1盒）"},{"tid":"20","title":"套餐二（2盒）"}]}]
      * status : 1
+     * goods : {"id":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","is_norm":"1","price":"81.00","price1":"81.00","price2":"80.00","price3":"78.00","price4":"75.00","is_coll":0}
+     * imgs : ["/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","/Public/uploads/goods/2018-05-28/2018_05_28_09_33_57_16797.jpg","/Public/uploads/goods/2018-05-28/2018_05_28_09_34_01_93954.jpg"]
+     * usertype : 1
      */
 
+    private int status;
     private GoodsBean goods;
-    private String is_cang;
-    private PjBean pj;
-    private String code;
-    private String status;
+    private String usertype;
+    private List<NormnameBean> normname;
+    private List<String> imgs;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public GoodsBean getGoods() {
         return goods;
@@ -34,76 +41,52 @@ public class GoodsDetailBean {
         this.goods = goods;
     }
 
-    public String getIs_cang() {
-        return is_cang;
+    public String getUsertype() {
+        return usertype;
     }
 
-    public void setIs_cang(String is_cang) {
-        this.is_cang = is_cang;
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
     }
 
-    public PjBean getPj() {
-        return pj;
+    public List<NormnameBean> getNormname() {
+        return normname;
     }
 
-    public void setPj(PjBean pj) {
-        this.pj = pj;
+    public void setNormname(List<NormnameBean> normname) {
+        this.normname = normname;
     }
 
-    public String getCode() {
-        return code;
+    public List<String> getImgs() {
+        return imgs;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setImgs(List<String> imgs) {
+        this.imgs = imgs;
     }
 
     public static class GoodsBean {
         /**
-         * id : 3
-         * title : 心血康2
-         * img : ["/Public/uploads/goods/img/2017-10-09/59dac67e86470.jpg","/Public/uploads/goods/img/2017-10-09/59dac6826f158.jpg","/Public/uploads/goods/img/2017-10-09/59dac6854af38.jpg"]
-         * keywords : 心血康2
-         * description : 心血康2心血康2心血康2
-         * content : &lt;p&gt;心血康2心血康2心血康2&lt;/p&gt;
-         * addtime : 1502708470
-         * sort : 0
-         * price : 33
-         * is_show : 1
-         * kucun : 100
-         * yunfei : 22.00
-         * xiaoliang : 73
-         * type : 1
-         * cang : 0
-         * paytime : null
-         * paynum : null
+         * id : 19
+         * gname : 善存 多维元素片(29) 60片 centrum 补充维生素及矿物质
+         * is_norm : 1
+         * price : 81.00
+         * price1 : 81.00
+         * price2 : 80.00
+         * price3 : 78.00
+         * price4 : 75.00
+         * is_coll : 0
          */
 
         private String id;
-        private String title;
-        private String keywords;
-        private String description;
-        private String content;
-        private String addtime;
-        private String sort;
+        private String gname;
+        private String is_norm;
         private String price;
-        private String is_show;
-        private String kucun;
-        private String yunfei;
-        private String xiaoliang;
-        private String type;
-        private String cang;
-        private Object paytime;
-        private Object paynum;
-        private List<String> img;
+        private String price1;
+        private String price2;
+        private String price3;
+        private String price4;
+        private int is_coll;
 
         public String getId() {
             return id;
@@ -113,52 +96,20 @@ public class GoodsDetailBean {
             this.id = id;
         }
 
-        public String getTitle() {
-            return title;
+        public String getGname() {
+            return gname;
         }
 
-        public void setTitle(String title) {
-            this.title = title;
+        public void setGname(String gname) {
+            this.gname = gname;
         }
 
-        public String getKeywords() {
-            return keywords;
+        public String getIs_norm() {
+            return is_norm;
         }
 
-        public void setKeywords(String keywords) {
-            this.keywords = keywords;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
-
-        public String getAddtime() {
-            return addtime;
-        }
-
-        public void setAddtime(String addtime) {
-            this.addtime = addtime;
-        }
-
-        public String getSort() {
-            return sort;
-        }
-
-        public void setSort(String sort) {
-            this.sort = sort;
+        public void setIs_norm(String is_norm) {
+            this.is_norm = is_norm;
         }
 
         public String getPrice() {
@@ -169,232 +120,106 @@ public class GoodsDetailBean {
             this.price = price;
         }
 
-        public String getIs_show() {
-            return is_show;
+        public String getPrice1() {
+            return price1;
         }
 
-        public void setIs_show(String is_show) {
-            this.is_show = is_show;
+        public void setPrice1(String price1) {
+            this.price1 = price1;
         }
 
-        public String getKucun() {
-            return kucun;
+        public String getPrice2() {
+            return price2;
         }
 
-        public void setKucun(String kucun) {
-            this.kucun = kucun;
+        public void setPrice2(String price2) {
+            this.price2 = price2;
         }
 
-        public String getYunfei() {
-            return yunfei;
+        public String getPrice3() {
+            return price3;
         }
 
-        public void setYunfei(String yunfei) {
-            this.yunfei = yunfei;
+        public void setPrice3(String price3) {
+            this.price3 = price3;
         }
 
-        public String getXiaoliang() {
-            return xiaoliang;
+        public String getPrice4() {
+            return price4;
         }
 
-        public void setXiaoliang(String xiaoliang) {
-            this.xiaoliang = xiaoliang;
+        public void setPrice4(String price4) {
+            this.price4 = price4;
         }
 
-        public String getType() {
-            return type;
+        public int getIs_coll() {
+            return is_coll;
         }
 
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getCang() {
-            return cang;
-        }
-
-        public void setCang(String cang) {
-            this.cang = cang;
-        }
-
-        public Object getPaytime() {
-            return paytime;
-        }
-
-        public void setPaytime(Object paytime) {
-            this.paytime = paytime;
-        }
-
-        public Object getPaynum() {
-            return paynum;
-        }
-
-        public void setPaynum(Object paynum) {
-            this.paynum = paynum;
-        }
-
-        public List<String> getImg() {
-            return img;
-        }
-
-        public void setImg(List<String> img) {
-            this.img = img;
+        public void setIs_coll(int is_coll) {
+            this.is_coll = is_coll;
         }
     }
 
-    public static class PjBean {
+    public static class NormnameBean {
         /**
-         * id : 2
-         * orderid : 15078770237362934
-         * gid : 3
-         * uid : 9
-         * content : 一次就见效，真是好
-         * xing : 5
-         * addtime : 1507877859
-         * stu : 1
-         * hf : null
-         * admin : null
-         * hftime : null
-         * ogid : 19
-         * count : 1
-         * nickname : 靓**神
-         * headimg : /Public/uploads/headimg/default_img.png
+         * nid : 9
+         * title : 套餐
+         * term : [{"tid":"19","title":"标准装（1盒）"},{"tid":"20","title":"套餐二（2盒）"}]
          */
 
-        private String id;
-        private String orderid;
-        private String gid;
-        private String uid;
-        private String content;
-        private String xing;
-        private String addtime;
-        private String stu;
-        private String hf;
-        private String admin;
-        private String hftime;
-        private String ogid;
-        private String count;
-        private String nickname;
-        private String headimg;
+        private String nid;
+        private String title;
+        private List<TermBean> term;
 
-        public String getId() {
-            return id;
+        public String getNid() {
+            return nid;
         }
 
-        public void setId(String id) {
-            this.id = id;
+        public void setNid(String nid) {
+            this.nid = nid;
         }
 
-        public String getOrderid() {
-            return orderid;
+        public String getTitle() {
+            return title;
         }
 
-        public void setOrderid(String orderid) {
-            this.orderid = orderid;
+        public void setTitle(String title) {
+            this.title = title;
         }
 
-        public String getGid() {
-            return gid;
+        public List<TermBean> getTerm() {
+            return term;
         }
 
-        public void setGid(String gid) {
-            this.gid = gid;
+        public void setTerm(List<TermBean> term) {
+            this.term = term;
         }
 
-        public String getUid() {
-            return uid;
-        }
+        public static class TermBean {
+            /**
+             * tid : 19
+             * title : 标准装（1盒）
+             */
 
-        public void setUid(String uid) {
-            this.uid = uid;
-        }
+            private String tid;
+            private String title;
 
-        public String getContent() {
-            return content;
-        }
+            public String getTid() {
+                return tid;
+            }
 
-        public void setContent(String content) {
-            this.content = content;
-        }
+            public void setTid(String tid) {
+                this.tid = tid;
+            }
 
-        public String getXing() {
-            return xing;
-        }
+            public String getTitle() {
+                return title;
+            }
 
-        public void setXing(String xing) {
-            this.xing = xing;
-        }
-
-        public String getAddtime() {
-            return addtime;
-        }
-
-        public void setAddtime(String addtime) {
-            this.addtime = addtime;
-        }
-
-        public String getStu() {
-            return stu;
-        }
-
-        public void setStu(String stu) {
-            this.stu = stu;
-        }
-
-        public String getHf() {
-            return hf;
-        }
-
-        public void setHf(String hf) {
-            this.hf = hf;
-        }
-
-        public String getAdmin() {
-            return admin;
-        }
-
-        public void setAdmin(String admin) {
-            this.admin = admin;
-        }
-
-        public String getHftime() {
-            return hftime;
-        }
-
-        public void setHftime(String hftime) {
-            this.hftime = hftime;
-        }
-
-        public String getOgid() {
-            return ogid;
-        }
-
-        public void setOgid(String ogid) {
-            this.ogid = ogid;
-        }
-
-        public String getCount() {
-            return count;
-        }
-
-        public void setCount(String count) {
-            this.count = count;
-        }
-
-        public String getNickname() {
-            return nickname;
-        }
-
-        public void setNickname(String nickname) {
-            this.nickname = nickname;
-        }
-
-        public String getHeadimg() {
-            return headimg;
-        }
-
-        public void setHeadimg(String headimg) {
-            this.headimg = headimg;
+            public void setTitle(String title) {
+                this.title = title;
+            }
         }
     }
 }

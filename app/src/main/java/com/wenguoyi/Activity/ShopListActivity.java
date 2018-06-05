@@ -160,7 +160,7 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
                             rvShopList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                    startActivity(new Intent(context, PriceDetailsActivity.class));
+                                    startActivity(new Intent(context, PriceDetailsActivity.class).putExtra("id", shopAdapter.getDatas().get(i).getId()));
                                 }
                             });
                         } else {

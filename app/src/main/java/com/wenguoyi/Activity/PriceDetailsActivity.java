@@ -1,9 +1,8 @@
 package com.wenguoyi.Activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.text.Html;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
-import com.jude.rollviewpager.OnItemClickListener;
 import com.jude.rollviewpager.hintview.IconHintView;
 import com.tencent.smtt.export.external.interfaces.WebResourceError;
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
@@ -27,15 +25,12 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 import com.wenguoyi.Adapter.LoopAdapter;
-import com.wenguoyi.App;
 import com.wenguoyi.Base.BaseActivity;
-import com.wenguoyi.Bean.CountCartBean;
 import com.wenguoyi.Bean.GoodsCangBean;
 import com.wenguoyi.Bean.GoodsDetailBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.DensityUtils;
 import com.wenguoyi.Utils.EasyToast;
-import com.wenguoyi.Utils.PixelUtils;
 import com.wenguoyi.Utils.SpUtil;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
@@ -78,10 +73,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        App.getQueues().cancelAll("goods/detail");
-        App.getQueues().cancelAll("goods/cang");
-        App.getQueues().cancelAll("goods/oncang");
-        App.getQueues().cancelAll("cart/join_cart");
         System.gc();
     }
 
@@ -132,16 +123,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void initListener() {
         RollPagerView.setHintView(new IconHintView(context, R.drawable.shape_selected, R.drawable.shape_noraml, DensityUtils.dp2px(context, getResources().getDimension(R.dimen.x7))));
-        RollPagerView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-
-            }
-        });
         RollPagerView.setPlayDelay(30000);
-//        ViewGroup.LayoutParams layoutParams = RollPagerView.getLayoutParams();
-//        layoutParams.height = (int) (WindowUtil.getScreenWidth(context) * 0.5);
-//        RollPagerView.setLayoutParams(layoutParams);
         mRlBack.setOnClickListener(this);
         mLlShoucang.setOnClickListener(this);
         mTvAddshop.setOnClickListener(this);
@@ -151,6 +133,14 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void initData() {
+
+        String id = getIntent().getStringExtra("id");
+
+        if (TextUtils.isEmpty(id)) {
+            EasyToast.showShort(context, R.string.hasError);
+            finish();
+        }
+
         // 开启 localStorage
         mWb.getSettings().setDomStorageEnabled(true);
         // 设置支持javascript
@@ -191,12 +181,11 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
 
             }
         });
-        //dialog = Utils.showLoadingDialog(context);
-        //dialog.show();
+        dialog = Utils.showLoadingDialog(context);
+        dialog.show();
         RollPagerView.setAdapter(new LoopAdapter(RollPagerView));
-        //mWb.loadUrl("http://www.baidu.com");
-        //goodsDetailCache();
-        //goodsDetail();
+        mWb.loadUrl(UrlUtils.BASE_URL + "danye/goods/id/" + id);
+        goodsDetail();
     }
 
     @Override
@@ -205,7 +194,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             case R.id.shopnow:
                 if (TextUtils.isEmpty(uid)) {
                     EasyToast.showShort(context, "请先登录");
-                    //  startActivity(new Intent(context, LoginActivity.class));
+                    startActivity(new Intent(context, LoginActivity.class));
                     return;
                 }
                 break;
@@ -215,41 +204,33 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             case R.id.ll_shoucang:
                 if (TextUtils.isEmpty(uid)) {
                     EasyToast.showShort(context, "请先登录");
-                    //  startActivity(new Intent(context, LoginActivity.class));
+                    startActivity(new Intent(context, LoginActivity.class));
                     return;
                 }
-                if ("0".equals(String.valueOf(goodsDetailBean.getIs_cang()))) {
+                if ("0".equals(String.valueOf(goodsDetailBean.getGoods().getIs_coll()))) {
                     goodsCang();
                     mImgShouCang.setBackground(getResources().getDrawable(R.mipmap.new_sc2));
                     EasyToast.showShort(context, "收藏成功");
-                    goodsDetailBean.setIs_cang("1");
+                    goodsDetailBean.getGoods().setIs_coll(1);
                 } else {
                     goodsOnCang();
                     mImgShouCang.setBackground(getResources().getDrawable(R.mipmap.new_sc1));
                     EasyToast.showShort(context, "取消收藏");
-                    goodsDetailBean.setIs_cang("0");
+                    goodsDetailBean.getGoods().setIs_coll(0);
                 }
                 break;
             case R.id.tv_addshop:
                 if (TextUtils.isEmpty(uid)) {
                     EasyToast.showShort(context, "请先登录");
-                    // startActivity(new Intent(context, LoginActivity.class));
+                    startActivity(new Intent(context, LoginActivity.class));
                     return;
                 }
-                String kucun = goodsDetailBean.getGoods().getKucun();
-                int kucuni = Integer.parseInt(kucun);
-                if (kucuni > 1) {
-                    goodsDetailBean.getGoods().setKucun(String.valueOf(kucuni - 1));
-                    dialog.show();
-                    cartJoinCart();
-                } else {
-                    EasyToast.showShort(context, "库存不足");
-                }
+                cartJoinCart();
                 break;
             case R.id.rl_shoppingcart:
                 if (TextUtils.isEmpty(uid)) {
                     EasyToast.showShort(context, "请先登录");
-                    //   startActivity(new Intent(context, LoginActivity.class));
+                    startActivity(new Intent(context, LoginActivity.class));
                     return;
                 }
                 // startActivity(new Intent(context, ShopCarActivity.class));
@@ -266,70 +247,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
         if (TextUtils.isEmpty(uid)) {
             return;
         }
-        //countCart();
-    }
-
-    /**
-     * 购物车数量获取
-     */
-    private void countCart() {
-        HashMap<String, String> params = new HashMap<>(1);
-        params.put("key", UrlUtils.KEY);
-        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "cart/count_cart", "cart/count_cart", params, new VolleyInterface(context) {
-            @Override
-            public void onMySuccess(String result) {
-                Log.e("RegisterActivity", result);
-                try {
-                    CountCartBean countCartBean = new Gson().fromJson(result, CountCartBean.class);
-                    if ("1".equals(String.valueOf(countCartBean.getStatus()))) {
-                        mtvCountCart.setText(countCartBean.getRes());
-                    } else {
-                        Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                    }
-                    result = null;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onMyError(VolleyError error) {
-                error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    /**
-     * 产品缓存获取
-     */
-    private void goodsDetailCache() {
-        String goodsDetail = (String) SpUtil.get(context, "goodsDetail" + String.valueOf(getIntent().getStringExtra("id")), "");
-        if (!TextUtils.isEmpty(goodsDetail)) {
-            try {
-                GoodsDetailBean goodsDetailBean = new Gson().fromJson(goodsDetail, GoodsDetailBean.class);
-                if ("310".equals(goodsDetailBean.getCode())) {
-                    mTvTitle.setText(goodsDetailBean.getGoods().getTitle());
-                    mTvPrice.setText("￥" + goodsDetailBean.getGoods().getPrice());
-                    RollPagerView.setAdapter(new LoopAdapter(RollPagerView));
-                    if ("0".equals(String.valueOf(goodsDetailBean.getIs_cang()))) {
-                        mImgShouCang.setBackground(getResources().getDrawable(R.mipmap.new_sc1));
-                    } else {
-                        mImgShouCang.setBackground(getResources().getDrawable(R.mipmap.new_sc2));
-                    }
-                } else {
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                }
-                goodsDetail = null;
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-            }
-        } else {
-
-        }
     }
 
     /**
@@ -337,51 +254,22 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
      */
     private void goodsDetail() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("key", UrlUtils.KEY);
-        params.put("gid", String.valueOf(getIntent().getStringExtra("id")));
+        params.put("pwd", UrlUtils.KEY);
+        params.put("id", String.valueOf(getIntent().getStringExtra("id")));
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/detail", "goods/detail", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/details", "goods/details", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
-                Log.e("RegisterActivity", result);
+                Log.e("PriceDetailsActivity", result);
                 try {
-                    goodsDetailBean = new Gson().fromJson(result, GoodsDetailBean.class);
-                    if ("310".equals(goodsDetailBean.getCode())) {
-                        SpUtil.putAndApply(context, "goodsDetail" + String.valueOf(getIntent().getStringExtra("id")), result);
-                        mTvTitle.setText(goodsDetailBean.getGoods().getTitle());
-                        mTvPrice.setText("￥" + goodsDetailBean.getGoods().getPrice());
-                        RollPagerView.setAdapter(new LoopAdapter(RollPagerView));
-                        Spanned spanned = Html.fromHtml(Utils.decode(goodsDetailBean.getGoods().getContent()));
-                        Utils.inSetWebView(spanned.toString(), mWb, context);
-                        if ("0".equals(String.valueOf(goodsDetailBean.getPj().getCount()))) {
-                        } else {
-                            String addtime = goodsDetailBean.getPj().getAddtime();
-                            String xing = goodsDetailBean.getPj().getXing();
-                            Double i = Double.parseDouble(xing);
-                            for (int i1 = 0; i1 < 5; i1++) {
-                                ImageView imageView = new ImageView(context);
-                                imageView.setPadding(PixelUtils.dip2px(context, 3), 0, 0, 0);
-                                if (i1 < i) {
-                                    imageView.setBackgroundResource(R.mipmap.new_sc2);
-                                } else {
-                                    imageView.setBackgroundResource(R.mipmap.new_sc1);
-                                }
-                            }
-                        }
-                        if ("0".equals(String.valueOf(goodsDetailBean.getIs_cang()))) {
-                            mImgShouCang.setBackground(getResources().getDrawable(R.mipmap.new_sc1));
-                        } else {
-                            mImgShouCang.setBackground(getResources().getDrawable(R.mipmap.new_sc2));
-                        }
-                    } else {
-                        Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                    }
                     dialog.dismiss();
+                    goodsDetailBean = new Gson().fromJson(result, GoodsDetailBean.class);
+
                     result = null;
                 } catch (Exception e) {
                     dialog.dismiss();
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                    EasyToast.showShort(context, R.string.Abnormalserver);
                 }
             }
 
@@ -389,7 +277,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                EasyToast.showShort(context, R.string.Abnormalserver);
             }
         });
     }
@@ -410,7 +298,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                     GoodsCangBean goodsCangBean = new Gson().fromJson(result, GoodsCangBean.class);
                     if ("307".equals(String.valueOf(goodsCangBean.getCode()))) {
                     } else {
-                        goodsDetailBean.setIs_cang("0");
+                        goodsDetailBean.getGoods().setIs_coll(0);
                         mImgShouCang.setBackgroundResource(R.mipmap.new_sc1);
                         EasyToast.showShort(context, "收藏失败");
                     }
@@ -449,7 +337,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                     GoodsCangBean goodsCangBean = new Gson().fromJson(result, GoodsCangBean.class);
                     if ("310".equals(String.valueOf(goodsCangBean.getCode()))) {
                     } else {
-                        goodsDetailBean.setIs_cang("1");
+                        goodsDetailBean.getGoods().setIs_coll(1);
                         mImgShouCang.setBackgroundResource(R.mipmap.new_sc2);
                         EasyToast.showShort(context, "取消失败");
                     }
@@ -488,25 +376,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                 Log.e("RegisterActivity", result);
                 try {
                     GoodsCangBean goodsCangBean = new Gson().fromJson(result, GoodsCangBean.class);
-                    if ("323".equals(String.valueOf(goodsCangBean.getCode()))) {
-                        EasyToast.showShort(context, "已成功加入购物车");
-                        if (!"1".equals(String.valueOf(goodsCangBean.getIs_have()))) {
-                            String s = mtvCountCart.getText().toString();
-                            int i = Integer.parseInt(s);
-                            mtvCountCart.setText(String.valueOf(i + 1));
-                        }
-                    } else if ("327".equals(String.valueOf(goodsCangBean.getCode()))) {
-                        EasyToast.showShort(context, "加入失败，库存不足");
-                        String s = mtvCountCart.getText().toString();
-                        int i = Integer.parseInt(s);
-                        mtvCountCart.setText(String.valueOf(i - 1));
-                    } else {
-                        EasyToast.showShort(context, "加入购物车失败");
-                        String kucun = goodsDetailBean.getGoods().getKucun();
-                        int kucuni = Integer.parseInt(kucun);
-                        goodsDetailBean.getGoods().setKucun(String.valueOf(kucuni + 1));
-                    }
-                    goodsCangBean = null;
                     result = null;
                 } catch (Exception e) {
                     e.printStackTrace();

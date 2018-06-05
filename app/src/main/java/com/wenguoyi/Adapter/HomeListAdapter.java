@@ -14,11 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.jude.rollviewpager.OnItemClickListener;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
 import com.wenguoyi.Activity.MainActivity;
 import com.wenguoyi.Activity.NewsDetailsActivity;
+import com.wenguoyi.Activity.PriceDetailsActivity;
 import com.wenguoyi.Activity.XunYaoShopTypeActivity;
 import com.wenguoyi.Bean.HomeBean;
 import com.wenguoyi.R;
@@ -90,12 +90,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             if (!isfirst) {
                 //轮播图设置
                 holder.Roll_pagerView.setHintView(new IconHintView(mContext, R.drawable.shape_selected, R.drawable.shape_noraml, DensityUtils.dp2px(mContext, mContext.getResources().getDimension(R.dimen.x7))));
-                holder.Roll_pagerView.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-
-                    }
-                });
                 holder.Roll_pagerView.setPlayDelay(3000);
                 holder.Roll_pagerView.setAdapter(new LoopAdapter(holder.Roll_pagerView, homeBean.getLunbo()));
                 //新闻跑马灯设置
@@ -122,13 +116,12 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 isfirst = !isfirst;
             }
         } else {
-
             if (position == 1) {
                 holder.tv_item_title.setText("精品医药");
                 holder.gl_shoplist.removeAllViews();
                 if (holder.gl_shoplist.getChildCount() == 0) {
                     for (int i = 0; i < homeBean.getJingpin().size(); i++) {
-                        View inflate = View.inflate(mContext, R.layout.home_shop_list_list_item_layout, null);
+                        final View inflate = View.inflate(mContext, R.layout.home_shop_list_list_item_layout, null);
                         SimpleDraweeView SimpleDraweeView = inflate.findViewById(R.id.SimpleDraweeView);
                         TextView tv_title = inflate.findViewById(R.id.tv_title);
                         TextView tv_price = inflate.findViewById(R.id.tv_price);
@@ -137,6 +130,13 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                         tv_price.setText("￥" + homeBean.getJingpin().get(i).getPrice());
                         inflate.setTag(homeBean.getJingpin().get(i).getId());
                         holder.gl_shoplist.addView(inflate);
+                        inflate.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                mContext.startActivity(new Intent(mContext, PriceDetailsActivity.class).putExtra("id", (String) inflate.getTag()));
+                            }
+                        });
+
                     }
                 }
             } else {
@@ -144,7 +144,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 holder.gl_shoplist.removeAllViews();
                 if (holder.gl_shoplist.getChildCount() == 0) {
                     for (int i = 0; i < homeBean.getCate().size(); i++) {
-                        View inflate = View.inflate(mContext, R.layout.home_shop_list_list_item_layout, null);
+                        final View inflate = View.inflate(mContext, R.layout.home_shop_list_list_item_layout, null);
                         SimpleDraweeView SimpleDraweeView = inflate.findViewById(R.id.SimpleDraweeView);
                         TextView tv_title = inflate.findViewById(R.id.tv_title);
                         TextView tv_price = inflate.findViewById(R.id.tv_price);
@@ -152,6 +152,13 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                         tv_title.setText(homeBean.getCate().get(position - 2).getGoods().get(i).getGname());
                         tv_price.setText("￥" + homeBean.getCate().get(position - 2).getGoods().get(i).getPrice());
                         inflate.setTag(homeBean.getCate().get(position - 2).getGoods().get(i).getId());
+                        inflate.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                mContext.startActivity(new Intent(mContext, PriceDetailsActivity.class).putExtra("id", (String) inflate.getTag()));
+                            }
+                        });
+
                         holder.gl_shoplist.addView(inflate);
                     }
                 }
