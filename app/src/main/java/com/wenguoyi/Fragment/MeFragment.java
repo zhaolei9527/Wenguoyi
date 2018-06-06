@@ -16,7 +16,9 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.wenguoyi.Activity.AddressActivitry;
 import com.wenguoyi.Activity.HuiYuanSJActivity;
+import com.wenguoyi.Activity.MyMessageActivity;
 import com.wenguoyi.Bean.UserIndexBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
@@ -103,6 +105,8 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     protected void initData() {
 
         btnShengji.setOnClickListener(this);
+        rlGerenziliao.setOnClickListener(this);
+        rlShouhuodizhi.setOnClickListener(this);
 
     }
 
@@ -212,6 +216,12 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         switch (view.getId()) {
             case R.id.btn_shengji:
                 startActivity(new Intent(context, HuiYuanSJActivity.class));
+                break;
+            case R.id.rl_gerenziliao:
+                startActivity(new Intent(context, MyMessageActivity.class));
+                break;
+            case R.id.rl_shouhuodizhi:
+                startActivity(new Intent(context, AddressActivitry.class));
                 break;
             default:
                 break;

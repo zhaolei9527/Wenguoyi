@@ -109,16 +109,17 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
      */
     private void addressIndex() {
         HashMap<String, String> params = new HashMap<>(2);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "address/index", "address/index", params, new VolleyInterface(context) {
+        Log.e("AddressActivitry", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/address", "user/address", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
-                Log.e("RegisterActivity", result);
+                Log.e("AddressActivitry", result);
                 dialog.dismiss();
                 try {
                     final AddressIndexBean addressIndexBean = new Gson().fromJson(result, AddressIndexBean.class);
-                    if ("1".equals(addressIndexBean.getCode().toString())) {
+                    if (1 == addressIndexBean.getCode()) {
                         ll_address_list.removeAllViews();
                         ll_empty.setVisibility(View.GONE);
                         for (int i = 0; i < addressIndexBean.getList().size(); i++) {

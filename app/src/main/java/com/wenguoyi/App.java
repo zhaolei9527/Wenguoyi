@@ -7,6 +7,7 @@ import android.support.multidex.MultiDexApplication;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.hss01248.frescopicker.FrescoIniter;
 import com.mob.MobSDK;
 import com.tencent.bugly.Bugly;
 import com.tencent.smtt.sdk.QbSdk;
@@ -14,6 +15,8 @@ import com.wenguoyi.Utils.PausableThreadPoolExecutor;
 
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
+
+import me.iwf.photopicker.PhotoPickUtils;
 
 
 /**
@@ -48,6 +51,7 @@ public class App extends MultiDexApplication {
         queues = Volley.newRequestQueue(getApplicationContext());
         Fresco.initialize(this);
         pausableThreadPoolExecutor = new PausableThreadPoolExecutor(1, 1, 0L, TimeUnit.SECONDS, new PriorityBlockingQueue<Runnable>());
+        PhotoPickUtils.init(getApplicationContext(),new FrescoIniter());//第二个参数根据具体依赖库而定
     }
 
     public static RequestQueue getQueues() {

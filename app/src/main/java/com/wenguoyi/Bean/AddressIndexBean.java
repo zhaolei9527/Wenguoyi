@@ -18,16 +18,16 @@ public class AddressIndexBean {
      * list : [{"id":"48","name":"Jayme","province":"河北","city":"石家庄","country":"长安区","address":"eee","tel":"17629345001","is_default":"0","uid":"10","add_time":"1491380375","ni_name":"靓帝女神"},{"id":"57","name":"jiaxiangkangjiaxiangkangjiaxiangkangjiaxiangkangjiaxiangkangjiaxiangkangjiaxiangkangjiaxiangkangjiax","province":"山西","city":"太原","country":"小店区","address":"店小店小店小店小店小店小店小店小店小店小店小店","tel":"17629345001","is_default":"0","uid":"10","add_time":"1491380609","ni_name":"靓帝女神"},{"id":"73","name":"贾向康","province":"河南","city":"郑州","country":"中牟县","address":"中牟","tel":"17629345001","is_default":"1","uid":"10","add_time":"1491380321","ni_name":"靓帝女神"}]
      */
 
-    private String code;
+    private int status;
     private String msg;
     private List<ListBean> list;
 
-    public String getCode() {
-        return code;
+    public int getCode() {
+        return status;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCode(int code) {
+        this.status = code;
     }
 
     public String getMsg() {

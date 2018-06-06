@@ -26,17 +26,17 @@ import java.util.List;
 import java.util.Map;
 
 
-
 /**
  * @author 赵磊
  * @date 2017/12/21
  * 功能描述：表单上传文件工具类
  */
-public  class MultipartRequestUpload extends Request<String> {
+public class MultipartRequestUpload extends Request<String> {
 
     private MultipartEntity entity = new MultipartEntity();
     private VolleyInterface listener;
     private List<File> mFileParts;
+    private List<String> mFilePartNames;
     private String mFilePartName;
     private Map<String, String> mParams;
 
@@ -84,11 +84,43 @@ public  class MultipartRequestUpload extends Request<String> {
         buildMultipartEntity();
     }
 
+
+    /**
+     * 多个文件，对应多个key
+     *
+     * @param url          地址
+     * @param filePartName 文件夹名称
+     * @param files        文件
+     * @param params       参数
+     * @param listener     监听
+     */
+    public MultipartRequestUpload(String url, List<String> filePartName, List<File> files,
+                                  Map<String, String> params, VolleyInterface listener) {
+        super(Method.POST, url, listener.errorListener());
+        this.mFilePartNames = filePartName;
+        this.listener = listener;
+        this.mFileParts = files;
+        this.mParams = params;
+        String s = filePartName + "-" + files + "-" + params;
+        Log.e("MultipartRequestUpload", "----:" + s);
+        buildMultipartEntity();
+    }
+
+
     private void buildMultipartEntity() {
-        if (mFileParts != null && mFileParts.size() > 0) {
-            for (int i = 0; i < mFileParts.size(); i++) {
-                Log.e("MultipartRequestUpload", "----:" + mFileParts.get(i).getAbsolutePath());
-                entity.addPart(mFilePartName + i, new FileBody(mFileParts.get(i)));
+        if (mFilePartNames != null && mFilePartNames.size() > 0) {
+            if (mFileParts != null && mFileParts.size() > 0) {
+                for (int i = 0; i < mFileParts.size(); i++) {
+                    Log.e("MultipartRequestUpload", "----:" + mFileParts.get(i).getAbsolutePath());
+                    entity.addPart(mFilePartNames.get(i), new FileBody(mFileParts.get(i)));
+                }
+            }
+        } else {
+            if (mFileParts != null && mFileParts.size() > 0) {
+                for (int i = 0; i < mFileParts.size(); i++) {
+                    Log.e("MultipartRequestUpload", "----:" + mFileParts.get(i).getAbsolutePath());
+                    entity.addPart(mFilePartName + i, new FileBody(mFileParts.get(i)));
+                }
             }
         }
 

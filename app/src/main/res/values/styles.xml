@@ -28,4 +28,8 @@
         <item name="android:windowExitAnimation">@anim/translate_out</item>
     </style>
 
+    <style name="customTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/bgtitle</item>//标题栏背景色
+        <item name="colorPrimaryDark">@color/bgtitle</item>
+    </style>
 </resources>
