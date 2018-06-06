@@ -36,7 +36,6 @@
                 android:layout_height="@dimen/x64"
                 android:layout_marginBottom="@dimen/x10"
                 android:layout_marginLeft="@dimen/x8"
-                android:background="@mipmap/demoyisheng"
                 fresco:roundAsCircle="true" />
 
             <LinearLayout
@@ -66,7 +65,6 @@
                         android:id="@+id/tv_userid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ID:6568876657"
                         android:textColor="@color/bgfff"
                         android:textSize="@dimen/x15" />
 
@@ -74,7 +72,6 @@
                         android:id="@+id/tv_userlv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="等级：B级合伙人"
                         android:textColor="@color/bgfff"
                         android:textSize="@dimen/x15" />
 
@@ -92,6 +89,7 @@
                 android:orientation="vertical">
 
                 <Button
+                    android:id="@+id/btn_shengji"
                     android:layout_width="@dimen/x67"
                     android:layout_height="@dimen/y23"
                     android:background="@mipmap/shengjibtn"

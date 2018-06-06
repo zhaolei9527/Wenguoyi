@@ -41,6 +41,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/tv_dengji"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y47"
             android:layout_marginLeft="@dimen/x10"
@@ -56,23 +57,26 @@
 
 
         <LinearLayout
+            android:id="@+id/ll_A"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y90"
             android:gravity="center_vertical">
 
             <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/SimpleDraweeViewA"
                 android:layout_width="@dimen/x74"
                 android:layout_height="@dimen/x74"
-                android:layout_marginLeft="@dimen/x15"
-                android:background="@mipmap/shopdemo" />
+                android:layout_marginLeft="@dimen/x10" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x5"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_titleA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="A级合伙人"
@@ -81,13 +85,14 @@
 
 
                 <TextView
+                    android:id="@+id/tv_moneyA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="998"
                     android:textColor="#FF3064"
                     android:textSize="@dimen/x15" />
 
                 <TextView
+                    android:id="@+id/tv_contentA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -103,23 +108,26 @@
 
 
         <LinearLayout
+            android:id="@+id/ll_B"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y90"
             android:gravity="center_vertical">
 
             <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/SimpleDraweeViewB"
                 android:layout_width="@dimen/x74"
                 android:layout_height="@dimen/x74"
-                android:layout_marginLeft="@dimen/x15"
-                android:background="@mipmap/shopdemo" />
+                android:layout_marginLeft="@dimen/x10" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x5"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_titleB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="B级合伙人"
@@ -127,13 +135,14 @@
                     android:textSize="@dimen/x15" />
 
                 <TextView
+                    android:id="@+id/tv_moneyB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="688"
                     android:textColor="#FF3064"
                     android:textSize="@dimen/x15" />
 
                 <TextView
+                    android:id="@+id/tv_contentB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -148,23 +157,26 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_C"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y90"
             android:gravity="center_vertical">
 
             <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/SimpleDraweeViewC"
                 android:layout_width="@dimen/x74"
                 android:layout_height="@dimen/x74"
-                android:layout_marginLeft="@dimen/x15"
-                android:background="@mipmap/shopdemo" />
+                android:layout_marginLeft="@dimen/x10" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x5"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_titleC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="C级合伙人"
@@ -172,13 +184,14 @@
                     android:textSize="@dimen/x15" />
 
                 <TextView
+                    android:id="@+id/tv_moneyC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="388"
                     android:textColor="#FF3064"
                     android:textSize="@dimen/x15" />
 
                 <TextView
+                    android:id="@+id/tv_contentC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"

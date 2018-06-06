@@ -49,6 +49,7 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/tv_shengji"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y42"
             android:background="@color/bgtitle"
