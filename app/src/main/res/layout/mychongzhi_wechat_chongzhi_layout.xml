@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lL_c_chongzhi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:visibility="gone"
     android:paddingLeft="@dimen/x15"
-    android:paddingTop="@dimen/x15">
+    android:paddingTop="@dimen/x15"
+    android:visibility="visible">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,6 +25,7 @@
                 android:textSize="@dimen/x14" />
 
             <EditText
+                android:id="@+id/et_chongzhijine"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y40"
                 android:layout_marginTop="@dimen/x10"
@@ -70,12 +72,14 @@
             </RelativeLayout>
 
             <Button
-                android:layout_marginBottom="@dimen/x15"
                 android:layout_width="@dimen/x303"
                 android:layout_height="@dimen/y32"
                 android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/x15"
                 android:layout_marginTop="@dimen/x20"
-                android:text="立即充值" />
+                android:background="@drawable/bg_login"
+                android:text="立即充值"
+                android:textColor="@color/bgfff" />
 
         </LinearLayout>
 

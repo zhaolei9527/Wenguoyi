@@ -59,7 +59,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private String account;
     private String password;
     private String openid = "";
-    private String type = "";
 
     @Override
     protected void ready() {
@@ -108,6 +107,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         finish();
     }
 
+    private String mesg;
 
     @Override
     protected void onResume() {
@@ -144,13 +144,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     public void onComplete(Platform arg0, int arg1, HashMap<String, Object> arg2) {
                         // TODO Auto-generated method stub
                         //输出所有授权信息
-                        String s = arg0.getDb().exportData();
-                        Log.e("LoginActivity", s);
-                        WXBean wxBean = new Gson().fromJson(s, WXBean.class);
+                        dialog.dismiss();
+                        mesg = arg0.getDb().exportData();
+                        Log.e("LoginActivity", mesg);
+                        WXBean wxBean = new Gson().fromJson(mesg, WXBean.class);
                         openid = wxBean.getUnionid();
-                        type = "2";
                         SpUtil.putAndApply(context, "wxopenid", openid);
-                        getLogin("", "", openid, type);
+                        getLogin("", "", openid);
                     }
 
                     @Override
@@ -211,23 +211,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             Toast.makeText(this, "密码长度最小六位", Toast.LENGTH_SHORT).show();
             return;
         }
-
         // TODO validate success, do something
-
         dialog.show();
-
-        getLogin(account, password, openid, type);
-
+        getLogin(account, password, openid);
     }
 
     /**
      * 登录获取
      */
-    private void getLogin(final String tel, final String password, final String openid, final String type) {
+    private void getLogin(final String tel, final String password, final String openid) {
         HashMap<String, String> params = new HashMap<>(1);
         params.put("pwd", UrlUtils.KEY);
         params.put("tel", tel);
         params.put("password", Utils.md5(password));
+        params.put("uuid", openid);
         Log.e("LoginActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "login/login", "login/login", params, new VolleyInterface(context) {
             @Override
@@ -244,6 +241,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         SpUtil.putAndApply(context, "password", Utils.md5(password));
                         SpUtil.putAndApply(context, "tel", loginBean.getUser().getTel());
                         gotoMain();
+                    } else if (2 == loginBean.getStatus()) {
+                        EasyToast.showShort(context, loginBean.getMsg().toString());
+                        startActivity(new Intent(context, RegisterActivity.class).putExtra("msg", mesg));
                     } else {
                         EasyToast.showShort(context, loginBean.getMsg().toString());
                     }

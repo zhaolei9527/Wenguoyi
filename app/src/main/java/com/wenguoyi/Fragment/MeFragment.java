@@ -18,7 +18,10 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.wenguoyi.Activity.AddressActivitry;
 import com.wenguoyi.Activity.HuiYuanSJActivity;
+import com.wenguoyi.Activity.MyChongZhiActivity;
 import com.wenguoyi.Activity.MyMessageActivity;
+import com.wenguoyi.Activity.MyTuanDuiActivity;
+import com.wenguoyi.Activity.TuiGuangActivity;
 import com.wenguoyi.Bean.UserIndexBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
@@ -107,7 +110,9 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         btnShengji.setOnClickListener(this);
         rlGerenziliao.setOnClickListener(this);
         rlShouhuodizhi.setOnClickListener(this);
-
+        rlWdetuandui.setOnClickListener(this);
+        rlWyaotuiguang.setOnClickListener(this);
+        rlWyaochongzhi.setOnClickListener(this);
     }
 
     @Override
@@ -222,6 +227,15 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                 break;
             case R.id.rl_shouhuodizhi:
                 startActivity(new Intent(context, AddressActivitry.class));
+                break;
+            case R.id.rl_wdetuandui:
+                startActivity(new Intent(context, MyTuanDuiActivity.class));
+                break;
+            case R.id.rl_wyaotuiguang:
+                startActivity(new Intent(context, TuiGuangActivity.class));
+                break;
+            case R.id.rl_wyaochongzhi:
+                startActivity(new Intent(context, MyChongZhiActivity.class));
                 break;
             default:
                 break;

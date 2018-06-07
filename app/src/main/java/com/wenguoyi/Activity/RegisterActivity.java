@@ -2,7 +2,6 @@ package com.wenguoyi.Activity;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -12,18 +11,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
-import com.wenguoyi.App;
 import com.wenguoyi.Bean.CodeBean;
 import com.wenguoyi.Bean.WXBean;
 import com.wenguoyi.R;
-import com.wenguoyi.Utils.CodeUtils;
 import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
@@ -34,38 +28,24 @@ import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.wechat.friends.Wechat;
-
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText et_account;
-    private ImageView image;
     private EditText et_phonecode;
     private EditText et_password;
     private EditText et_passwordagain;
-    private String code;
     private Button btn_getSMScode;
     private Button btn_register;
-    private CodeUtils codeUtils;
-    private Bitmap bitmap;
     private Timer timer;
     private TimerTask task;
-    private int time = 60;
+    private int time = 100;
     private Context context;
     private String account;
-    private String imgCode;
     private String phonecode;
     private String password;
     private String passwordagain;
-    private String tuijian;
-    private String openid = "";
-    private String type = "";
     private Dialog dialog;
-    private RelativeLayout rl4;
-    private LinearLayout rl5;
+    private WXBean wxBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +59,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         context = RegisterActivity.this;
         initView();
         initData();
+        String msg = getIntent().getStringExtra("msg");
+
+        if (TextUtils.isEmpty(msg)) {
+            EasyToast.showShort(context, R.string.hasError);
+            finish();
+        } else {
+            wxBean = new Gson().fromJson(msg, WXBean.class);
+        }
     }
 
     @Override
@@ -92,23 +80,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        App.getQueues().cancelAll("login/regsend");
-        App.getQueues().cancelAll("login/xieyi");
-        App.getQueues().cancelAll("login/sheng");
-        App.getQueues().cancelAll("login/regist");
-        codeUtils = null;
-        code = null;
-        bitmap = null;
         task = null;
         if (timer != null) {
             timer = null;
         }
         account = null;
-        imgCode = null;
         phonecode = null;
         password = null;
         passwordagain = null;
-        tuijian = null;
         System.gc();
     }
 
@@ -116,78 +95,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView() {
-        rl4 = (RelativeLayout) findViewById(R.id.rl4);
-        rl5 = (LinearLayout) findViewById(R.id.rl5);
         et_account = (EditText) findViewById(R.id.et_account);
-        image = (ImageView) findViewById(R.id.image);
         et_phonecode = (EditText) findViewById(R.id.et_phonecode);
         et_password = (EditText) findViewById(R.id.et_password);
         et_passwordagain = (EditText) findViewById(R.id.et_passwordagain);
-        codeUtils = CodeUtils.getInstance();
-        bitmap = codeUtils.createBitmap();
-        code = codeUtils.getCode();
-        image.setImageBitmap(bitmap);
         btn_getSMScode = (Button) findViewById(R.id.btn_getSMScode);
         btn_register = (Button) findViewById(R.id.btn_register);
         btn_getSMScode.setOnClickListener(this);
+        btn_register.setOnClickListener(this);
         dialog = Utils.showLoadingDialog(context);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.img_weixin:
-                dialog.show();
-                Platform weChat = ShareSDK.getPlatform(Wechat.NAME);
-//回调信息，可以在这里获取基本的授权返回的信息，但是注意如果做提示和UI操作要传到主线程handler里去执行
-                weChat.setPlatformActionListener(new PlatformActionListener() {
-                    @Override
-                    public void onError(Platform arg0, int arg1, Throwable arg2) {
-                        // TODO Auto-generated method stub
-                        arg2.printStackTrace();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                dialog.dismiss();
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onComplete(Platform arg0, int arg1, HashMap<String, Object> arg2) {
-                        // TODO Auto-generated method stub
-                        //输出所有授权信息
-                        String s = arg0.getDb().exportData();
-                        Log.e("LoginActivity", s);
-                        WXBean wxBean = new Gson().fromJson(s, WXBean.class);
-                        openid = wxBean.getUnionid();
-                        type = "2";
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                rl4.setVisibility(View.GONE);
-                                rl5.setVisibility(View.GONE);
-                                dialog.dismiss();
-                                btn_register.setText("微信授权注册");
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onCancel(Platform arg0, int arg1) {
-                        // TODO Auto-generated method stub
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                dialog.dismiss();
-                                EasyToast.showShort(context, "授权取消");
-                            }
-                        });
-                    }
-                });
-                weChat.showUser(null);//授权并获取用户信息
-                break;
             case R.id.btn_register:
                 submit();
                 break;
@@ -203,13 +124,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     return;
                 }
 
-                if (!this.code.equals(imgCode)) {
-                    Toast.makeText(this, "验证码错误", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-
-                if (time == 60) {
+                if (time == 100) {
                     getcaptcha(et_account.getText().toString());
                 }
                 break;
@@ -232,7 +147,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             timer.cancel();
                             btn_getSMScode.setText("获取验证码");
                             btn_getSMScode.setEnabled(true);
-                            time = 60;
+                            time = 100;
                         }
                     }
                 });
@@ -252,9 +167,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      */
     private void getUserPlace(String phone) {
         HashMap<String, String> params = new HashMap<>(2);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("tel", phone);
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "login/regsend", "login/regsend", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "login/codesend", "login/codesend", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 String decode = result;
@@ -300,11 +215,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        if (!this.code.equals(imgCode)) {
-            Toast.makeText(this, "验证码错误", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         phonecode = et_phonecode.getText().toString().trim();
         if (TextUtils.isEmpty(phonecode)) {
             Toast.makeText(this, "请输入短信验证码", Toast.LENGTH_SHORT).show();
@@ -327,25 +237,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        getRegister(account, phonecode, password, tuijian, openid, type);
+        dialog.show();
+        getRegister(account, phonecode, password);
 
     }
 
     /**
      * 注册id
      */
-    private void getRegister(String phone, String code, String password, String tel2, String openid, String type) {
+    private void getRegister(String phone, String code, String password) {
         HashMap<String, String> params = new HashMap<>(1);
         params.put("pwd", UrlUtils.KEY);
         params.put("tel", phone);
-        params.put("ecode", code);
-        params.put("password", password);
-        params.put("cfmpwd", password);
-        params.put("openid", openid);
-        params.put("type", type);
-        if (!TextUtils.isEmpty(tel2)) {
-            params.put("tel2", tel2);
-        }
+        params.put("phone_code", code);
+        params.put("password", Utils.md5(password));
+        params.put("cfmpwd", Utils.md5(password));
+        params.put("uuid", wxBean.getUnionid());
+        params.put("nickname", wxBean.getNickname());
+        params.put("headimg", wxBean.getIcon());
+        params.put("openid", wxBean.getOpenid());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "login/regist", "login/regist", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {

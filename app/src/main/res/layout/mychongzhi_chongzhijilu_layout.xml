@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_c_chongzhijilu"
     android:layout_width="match_parent"
-    android:visibility="gone"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:visibility="gone">
 
     <com.wenguoyi.View.WenguoyiRecycleView
         android:id="@+id/re_chongzhijilu"

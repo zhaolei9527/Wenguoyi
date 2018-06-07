@@ -28,13 +28,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="me.iwf.photopicker.PhotoPickerActivity"
-            android:theme="@style/customTheme"
-            />
+        <activity
+            android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:theme="@style/customTheme" />
 
-        <activity android:name="me.iwf.photopicker.PhotoPagerActivity"
-            android:theme="@style/customTheme"/>
-
+        <activity
+            android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/customTheme" />
 
 
         <activity android:name=".Activity.RegisterActivity"></activity>
@@ -57,6 +57,7 @@
         <activity android:name=".Activity.HuiYuanSJActivity"></activity>
         <activity android:name=".Activity.HuiYuanSJDetailsActivity"></activity>
         <activity android:name=".Activity.NewsDetailsActivity"></activity>
+        <activity android:name=".Activity.TuiGuangActivity"></activity>
     </application>
 
 </manifest>

@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="支付成功"
+            android:text="我的团队"
             android:textColor="@color/bgfff"
             android:textSize="@dimen/x16" />
     </RelativeLayout>
@@ -49,6 +49,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
@@ -59,6 +60,7 @@
                 android:textSize="@dimen/x15" />
 
             <View
+                android:id="@+id/view1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x1"
                 android:background="@color/bgtitle"></View>
@@ -73,6 +75,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
@@ -83,6 +86,7 @@
                 android:textSize="@dimen/x15" />
 
             <View
+                android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x1"
                 android:background="@color/bgtitle"
@@ -92,10 +96,19 @@
 
     </LinearLayout>
 
-    <com.wenguoyi.View.WenguoyiRecycleView
-        android:id="@+id/re_mytuandui"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.wenguoyi.View.WenguoyiRecycleView>
+        android:layout_height="match_parent">
+
+
+        <com.wenguoyi.View.WenguoyiRecycleView
+            android:id="@+id/re_mytuandui"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.wenguoyi.View.WenguoyiRecycleView>
+
+        <include layout="@layout/layout_empty"></include>
+
+    </FrameLayout>
 
 
 </LinearLayout>

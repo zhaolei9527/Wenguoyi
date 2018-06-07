@@ -145,7 +145,6 @@ public class FlashActivity extends BaseActivity {
                         Toast.makeText(context, "欢迎回来", Toast.LENGTH_SHORT).show();
                         gotoMain();
                     } else {
-                        Toast.makeText(context, loginBean.getMsg(), Toast.LENGTH_SHORT).show();
                         delayGoToLogin();
                     }
                     decode = null;

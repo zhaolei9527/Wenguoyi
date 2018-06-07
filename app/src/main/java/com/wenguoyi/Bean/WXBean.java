@@ -1,5 +1,7 @@
 package com.wenguoyi.Bean;
 
+import java.io.Serializable;
+
 /**
  * sakura.liangdinvshen.Bean
  *
