@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgfff"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -50,10 +52,11 @@
             android:textSize="@dimen/x15" />
 
         <TextView
+            android:id="@+id/tv_yue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/x10"
-            android:text="￥450.00"
+            android:text="￥0.00"
             android:textColor="@color/bgtitle"
             android:textSize="@dimen/x34" />
     </LinearLayout>
@@ -70,12 +73,14 @@
         android:weightSum="3">
 
         <LinearLayout
+            android:id="@+id/ll_wyaotixian"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_wyaotixian"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
@@ -95,12 +100,14 @@
             android:background="@color/bgea"></View>
 
         <LinearLayout
+            android:id="@+id/ll_tixianjilu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_tjilu"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
@@ -120,12 +127,14 @@
             android:background="@color/bgea"></View>
 
         <LinearLayout
+            android:id="@+id/ll_caiwumingxi"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_caiwumingxi"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
@@ -141,9 +150,8 @@
 
     <include layout="@layout/myqianbao_wechat_tixian_layout"></include>
 
-    <include layout="@layout/mychongzhi_chongzhijilu_layout"></include>
+    <include layout="@layout/myqianbao_tixianjilu_layout"></include>
 
     <include layout="@layout/mychongzhi_caiwumingxi_layout"></include>
-
 
 </LinearLayout>

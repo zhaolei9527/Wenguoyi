@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_c_wyaotixian"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -50,14 +51,17 @@
                 android:textSize="@dimen/x14" />
 
             <EditText
+                android:id="@+id/et_tixianmoney"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y40"
                 android:layout_marginTop="@dimen/x10"
                 android:background="@null"
                 android:hint="请输入提现金额"
+                android:inputType="number"
                 android:textSize="@dimen/x18" />
 
             <TextView
+                android:id="@+id/tv_ketixian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x15"
@@ -66,12 +70,15 @@
                 android:textSize="@dimen/x13" />
 
             <Button
+                android:id="@+id/btn_submit"
                 android:layout_width="@dimen/x303"
                 android:layout_height="@dimen/y32"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/x15"
                 android:layout_marginTop="@dimen/x20"
-                android:text="立即提现" />
+                android:background="@drawable/bg_login"
+                android:text="立即提现"
+                android:textColor="@color/bgfff" />
 
         </LinearLayout>
 

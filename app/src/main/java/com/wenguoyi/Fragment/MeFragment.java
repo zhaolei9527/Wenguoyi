@@ -20,6 +20,7 @@ import com.wenguoyi.Activity.AddressActivitry;
 import com.wenguoyi.Activity.HuiYuanSJActivity;
 import com.wenguoyi.Activity.MyChongZhiActivity;
 import com.wenguoyi.Activity.MyMessageActivity;
+import com.wenguoyi.Activity.MyQianBaoActivity;
 import com.wenguoyi.Activity.MyTuanDuiActivity;
 import com.wenguoyi.Activity.TuiGuangActivity;
 import com.wenguoyi.Bean.UserIndexBean;
@@ -113,6 +114,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         rlWdetuandui.setOnClickListener(this);
         rlWyaotuiguang.setOnClickListener(this);
         rlWyaochongzhi.setOnClickListener(this);
+        rlWdeqianbao.setOnClickListener(this);
     }
 
     @Override
@@ -236,6 +238,9 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                 break;
             case R.id.rl_wyaochongzhi:
                 startActivity(new Intent(context, MyChongZhiActivity.class));
+                break;
+            case R.id.rl_wdeqianbao:
+                startActivity(new Intent(context, MyQianBaoActivity.class));
                 break;
             default:
                 break;
