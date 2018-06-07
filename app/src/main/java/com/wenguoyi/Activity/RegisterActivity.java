@@ -47,9 +47,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Dialog dialog;
     private WXBean wxBean;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
