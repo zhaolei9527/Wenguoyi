@@ -11,67 +11,58 @@ import java.util.List;
  */
 public class AddressIndexBean {
 
-
     /**
-     * code : 1
-     * msg : 查询成功,返回数据
-     * list : [{"id":"48","name":"Jayme","province":"河北","city":"石家庄","country":"长安区","address":"eee","tel":"17629345001","is_default":"0","uid":"10","add_time":"1491380375","ni_name":"靓帝女神"},{"id":"57","name":"jiaxiangkangjiaxiangkangjiaxiangkangjiaxiangkangjiaxiangkangjiaxiangkangjiaxiangkangjiaxiangkangjiax","province":"山西","city":"太原","country":"小店区","address":"店小店小店小店小店小店小店小店小店小店小店小店","tel":"17629345001","is_default":"0","uid":"10","add_time":"1491380609","ni_name":"靓帝女神"},{"id":"73","name":"贾向康","province":"河南","city":"郑州","country":"中牟县","address":"中牟","tel":"17629345001","is_default":"1","uid":"10","add_time":"1491380321","ni_name":"靓帝女神"}]
+     * status : 1
+     * msg : [{"id":"4","name":"zl","sheng":"河南省","shi":"郑州市","xian":"中原区","address":"jingsanlu","email":null,"tel":"17629345001","is_default":"1","uid":"6","addtime":"1528333634","key":null}]
      */
 
     private int status;
-    private String msg;
-    private List<ListBean> list;
+    private List<MsgBean> msg;
 
-    public int getCode() {
+    public int getStatus() {
         return status;
     }
 
-    public void setCode(int code) {
-        this.status = code;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public String getMsg() {
+    public List<MsgBean> getMsg() {
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public void setMsg(List<MsgBean> msg) {
         this.msg = msg;
     }
 
-    public List<ListBean> getList() {
-        return list;
-    }
-
-    public void setList(List<ListBean> list) {
-        this.list = list;
-    }
-
-    public static class ListBean {
+    public static class MsgBean {
         /**
-         * id : 48
-         * name : Jayme
-         * province : 河北
-         * city : 石家庄
-         * country : 长安区
-         * address : eee
+         * id : 4
+         * name : zl
+         * sheng : 河南省
+         * shi : 郑州市
+         * xian : 中原区
+         * address : jingsanlu
+         * email : null
          * tel : 17629345001
-         * is_default : 0
-         * uid : 10
-         * add_time : 1491380375
-         * ni_name : 靓帝女神
+         * is_default : 1
+         * uid : 6
+         * addtime : 1528333634
+         * key : null
          */
 
         private String id;
         private String name;
-        private String province;
-        private String city;
-        private String country;
+        private String sheng;
+        private String shi;
+        private String xian;
         private String address;
+        private Object email;
         private String tel;
         private String is_default;
         private String uid;
-        private String add_time;
-        private String ni_name;
+        private String addtime;
+        private Object key;
 
         public String getId() {
             return id;
@@ -89,28 +80,28 @@ public class AddressIndexBean {
             this.name = name;
         }
 
-        public String getProvince() {
-            return province;
+        public String getSheng() {
+            return sheng;
         }
 
-        public void setProvince(String province) {
-            this.province = province;
+        public void setSheng(String sheng) {
+            this.sheng = sheng;
         }
 
-        public String getCity() {
-            return city;
+        public String getShi() {
+            return shi;
         }
 
-        public void setCity(String city) {
-            this.city = city;
+        public void setShi(String shi) {
+            this.shi = shi;
         }
 
-        public String getCountry() {
-            return country;
+        public String getXian() {
+            return xian;
         }
 
-        public void setCountry(String country) {
-            this.country = country;
+        public void setXian(String xian) {
+            this.xian = xian;
         }
 
         public String getAddress() {
@@ -119,6 +110,14 @@ public class AddressIndexBean {
 
         public void setAddress(String address) {
             this.address = address;
+        }
+
+        public Object getEmail() {
+            return email;
+        }
+
+        public void setEmail(Object email) {
+            this.email = email;
         }
 
         public String getTel() {
@@ -145,20 +144,20 @@ public class AddressIndexBean {
             this.uid = uid;
         }
 
-        public String getAdd_time() {
-            return add_time;
+        public String getAddtime() {
+            return addtime;
         }
 
-        public void setAdd_time(String add_time) {
-            this.add_time = add_time;
+        public void setAddtime(String addtime) {
+            this.addtime = addtime;
         }
 
-        public String getNi_name() {
-            return ni_name;
+        public Object getKey() {
+            return key;
         }
 
-        public void setNi_name(String ni_name) {
-            this.ni_name = ni_name;
+        public void setKey(Object key) {
+            this.key = key;
         }
     }
 }

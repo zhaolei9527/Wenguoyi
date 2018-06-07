@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +46,6 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
     private LinearLayout ll_change_address;
     private LinearLayout ll_address_list;
     private Button btn_add_address;
-    private RelativeLayout ll_empty;
     private Dialog dialog;
     private String type;
 
@@ -61,7 +59,6 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
         rl_back = (FrameLayout) findViewById(R.id.rl_back);
         ll_address_list = (LinearLayout) findViewById(R.id.ll_address_list);
         btn_add_address = (Button) findViewById(R.id.btn_add_address);
-        ll_empty = (RelativeLayout) findViewById(R.id.LL_empty);
     }
 
     @Override
@@ -119,26 +116,26 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                 dialog.dismiss();
                 try {
                     final AddressIndexBean addressIndexBean = new Gson().fromJson(result, AddressIndexBean.class);
-                    if (1 == addressIndexBean.getCode()) {
+                    if (1 == addressIndexBean.getStatus()) {
+                        ll_address_list.setVisibility(View.VISIBLE);
                         ll_address_list.removeAllViews();
-                        ll_empty.setVisibility(View.GONE);
-                        for (int i = 0; i < addressIndexBean.getList().size(); i++) {
+                        for (int i = 0; i < addressIndexBean.getMsg().size(); i++) {
                             final View item_address = View.inflate(context, R.layout.item_address_layout, null);
-                            item_address.setTag(addressIndexBean.getList().get(i).getId());
+                            item_address.setTag(addressIndexBean.getMsg().get(i).getId());
                             tv_name = (TextView) item_address.findViewById(R.id.tv_name);
-                            tv_name.setText(addressIndexBean.getList().get(i).getName());
+                            tv_name.setText(addressIndexBean.getMsg().get(i).getName());
                             tv_phone = (TextView) item_address.findViewById(R.id.tv_phone);
-                            tv_phone.setText(addressIndexBean.getList().get(i).getTel());
+                            tv_phone.setText(addressIndexBean.getMsg().get(i).getTel());
                             tv_address = (TextView) item_address.findViewById(R.id.tv_address);
                             StringBuilder stringAddress = new StringBuilder();
-                            stringAddress.append(addressIndexBean.getList().get(i).getProvince());
-                            stringAddress.append(addressIndexBean.getList().get(i).getCity());
-                            stringAddress.append(addressIndexBean.getList().get(i).getCountry());
-                            stringAddress.append(addressIndexBean.getList().get(i).getAddress());
+                            stringAddress.append(addressIndexBean.getMsg().get(i).getSheng());
+                            stringAddress.append(addressIndexBean.getMsg().get(i).getShi());
+                            stringAddress.append(addressIndexBean.getMsg().get(i).getXian());
+                            stringAddress.append(addressIndexBean.getMsg().get(i).getAddress());
                             tv_address.setText(stringAddress.toString());
                             btnIsChoosed = (CheckBox) item_address.findViewById(R.id.btnIsChoosed);
-                            btnIsChoosed.setTag(addressIndexBean.getList().get(i).getId());
-                            if ("1".equals(addressIndexBean.getList().get(i).getIs_default())) {
+                            btnIsChoosed.setTag(addressIndexBean.getMsg().get(i).getId());
+                            if ("1".equals(addressIndexBean.getMsg().get(i).getIs_default())) {
                                 btnIsChoosed.setChecked(true);
                             } else {
                                 btnIsChoosed.setChecked(false);
@@ -191,17 +188,17 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                             ll_change_address.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    for (int i1 = 0; i1 < addressIndexBean.getList().size(); i1++) {
-                                        if (item_address.getTag().equals(addressIndexBean.getList().get(i1).getId())) {
+                                    for (int i1 = 0; i1 < addressIndexBean.getMsg().size(); i1++) {
+                                        if (item_address.getTag().equals(addressIndexBean.getMsg().get(i1).getId())) {
                                             Intent intent = new Intent(context, AddAdressActivity.class);
-                                            intent.putExtra("id", addressIndexBean.getList().get(i1).getId());
-                                            intent.putExtra("name", addressIndexBean.getList().get(i1).getName());
-                                            intent.putExtra("tel", addressIndexBean.getList().get(i1).getTel());
-                                            intent.putExtra("address", addressIndexBean.getList().get(i1).getAddress());
-                                            intent.putExtra("province", addressIndexBean.getList().get(i1).getProvince());
-                                            intent.putExtra("city", addressIndexBean.getList().get(i1).getCity());
-                                            intent.putExtra("country", addressIndexBean.getList().get(i1).getCountry());
-                                            intent.putExtra("IsChoosed", addressIndexBean.getList().get(i1).getIs_default());
+                                            intent.putExtra("id", addressIndexBean.getMsg().get(i1).getId());
+                                            intent.putExtra("name", addressIndexBean.getMsg().get(i1).getName());
+                                            intent.putExtra("tel", addressIndexBean.getMsg().get(i1).getTel());
+                                            intent.putExtra("address", addressIndexBean.getMsg().get(i1).getAddress());
+                                            intent.putExtra("sheng", addressIndexBean.getMsg().get(i1).getSheng());
+                                            intent.putExtra("shi", addressIndexBean.getMsg().get(i1).getShi());
+                                            intent.putExtra("xian", addressIndexBean.getMsg().get(i1).getXian());
+                                            intent.putExtra("IsChoosed", addressIndexBean.getMsg().get(i1).getIs_default());
                                             startActivity(intent);
                                         }
                                     }
@@ -227,7 +224,7 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                             ll_address_list.addView(item_address);
                         }
                     } else {
-                        ll_empty.setVisibility(View.VISIBLE);
+                        ll_address_list.setVisibility(View.GONE);
                     }
                     result = null;
                 } catch (Exception e) {
@@ -251,10 +248,10 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
      */
     private void addressDel(String id) {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("id", id);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "address/del", "address/del", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/addrdel", "user/addrdel", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 Log.e("addressDel", result);
@@ -263,7 +260,7 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                     if ("1".equals(String.valueOf(codeBean.getStatus()))) {
                         EasyToast.showShort(context, "删除成功");
                         if (ll_address_list.getChildCount() == 0) {
-                            ll_empty.setVisibility(View.VISIBLE);
+                            ll_address_list.setVisibility(View.GONE);
                         }
                     }
                     codeBean = null;

@@ -21,6 +21,7 @@ import com.wenguoyi.App;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.CodeBean;
 import com.wenguoyi.Bean.JsonBean;
+import com.wenguoyi.Bean.UserDoaddrBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.GetJsonDataUtil;
@@ -82,9 +83,9 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
     private String name;
     private String phone;
     private String addressContent;
-    private String province;
-    private String city;
-    private String country;
+    private String sheng;
+    private String shi;
+    private String xian;
     private Dialog dialog;
     private String id;
     private String IsChoosed;
@@ -165,16 +166,16 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
                 @Override
                 public void onOptionsSelect(int options1, int options2, int options3, View v) {
                     //返回的分别是三个级别的选中位置
-                    province = options1Items.get(options1).getPickerViewText();
-                    city = options2Items.get(options1).get(options2);
-                    country = options3Items.get(options1).get(options2).get(options3);
+                    sheng = options1Items.get(options1).getPickerViewText();
+                    shi = options2Items.get(options1).get(options2);
+                    xian = options3Items.get(options1).get(options2).get(options3);
                     String tx = options1Items.get(options1).getPickerViewText() +
                             options2Items.get(options1).get(options2) +
                             options3Items.get(options1).get(options2).get(options3);
                     tv_check_address.setText(tx);
                 }
             })
-                    .setTitleBgColor(getResources().getColor(R.color.pressedColor))
+                    .setTitleBgColor(getResources().getColor(R.color.bgtitle))
                     .setCancelColor(getResources().getColor(R.color.text))
                     .setSubmitColor(getResources().getColor(R.color.text))
                     .setTitleText("选择城市")
@@ -219,12 +220,12 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
             et_phone.setText(phone);
             addressContent = getIntent().getStringExtra("address");
             et_addressContent.setText(addressContent);
-            province = getIntent().getStringExtra("province");
-            city = getIntent().getStringExtra("city");
-            country = getIntent().getStringExtra("country");
-            String tx = province +
-                    city +
-                    country;
+            sheng = getIntent().getStringExtra("sheng");
+            shi = getIntent().getStringExtra("shi");
+            xian = getIntent().getStringExtra("xian");
+            String tx = sheng +
+                    shi +
+                    xian;
             tv_check_address.setText(tx);
 
 
@@ -311,33 +312,34 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
      */
     private void addressAdd() {
         HashMap<String, String> params = new HashMap<>(9);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("name", name);
         params.put("tel", phone);
         params.put("address", addressContent);
-        params.put("province", province);
-        params.put("city", city);
-        params.put("country", country);
+        params.put("sheng", sheng);
+        params.put("shi", shi);
+        params.put("xian", xian);
         if (btnIsChoosed.isChecked()) {
             params.put("is_default", "1");
         } else {
             params.put("is_default", "-1");
         }
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "address/add", "address/add", params, new VolleyInterface(context) {
+        Log.e("addressAdd", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/doaddr", "user/doaddr", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 dialog.dismiss();
                 Log.e("addressAdd", result);
                 try {
-                    CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
-                    if ("1".equals(String.valueOf(codeBean.getStatus()))) {
+                    UserDoaddrBean userDoaddrBean = new Gson().fromJson(result, UserDoaddrBean.class);
+                    if ("1".equals(String.valueOf(userDoaddrBean.getStatus()))) {
                         EasyToast.showShort(context, "添加成功");
                         finish();
                     } else {
                         EasyToast.showShort(context, "添加失败");
                     }
-                    codeBean = null;
+                    userDoaddrBean = null;
                     result = null;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -360,21 +362,21 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
      */
     private void addressDoedit() {
         HashMap<String, String> params = new HashMap<>(9);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("id", id);
         params.put("name", name);
         params.put("tel", phone);
         params.put("address", addressContent);
-        params.put("province", province);
-        params.put("city", city);
-        params.put("country", country);
+        params.put("sheng", sheng);
+        params.put("shi", shi);
+        params.put("xian", xian);
         if (btnIsChoosed.isChecked()) {
             params.put("is_default", "1");
         } else {
             params.put("is_default", "-1");
         }
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "address/doedit", "address/doedit", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/doaddr", "user/doaddr", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 dialog.dismiss();
@@ -382,10 +384,10 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
                 try {
                     CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
                     if ("1".equals(String.valueOf(codeBean.getStatus()))) {
-                        EasyToast.showShort(context, "添加成功");
+                        EasyToast.showShort(context, "修改成功");
                         finish();
                     } else {
-                        EasyToast.showShort(context, "添加失败");
+                        EasyToast.showShort(context, "修改失败");
                     }
                     codeBean = null;
                     result = null;

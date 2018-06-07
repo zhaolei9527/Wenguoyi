@@ -66,8 +66,6 @@
 
                     </LinearLayout>
 
-                    <include layout="@layout/layout_empty"></include>
-
                 </FrameLayout>
 
 

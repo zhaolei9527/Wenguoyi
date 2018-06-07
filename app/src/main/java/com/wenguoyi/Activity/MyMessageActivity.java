@@ -97,6 +97,12 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
         llFanmian.setOnClickListener(this);
         llShouchi.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
+        rlBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -180,6 +186,10 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
                             etShenfenzheng.setFocusable(false);
                             etName.setText(userResetinforBean.getMsg().getName());
                             etShenfenzheng.setText(userResetinforBean.getMsg().getCard_no());
+                            SimpleDraweeView1.setImageURI(UrlUtils.URL + userResetinforBean.getMsg().getPic());
+                            SimpleDraweeView2.setImageURI(UrlUtils.URL + userResetinforBean.getMsg().getPic2());
+                            SimpleDraweeView3.setImageURI(UrlUtils.URL + userResetinforBean.getMsg().getPic3());
+
                         }
                     }
                     result = null;
@@ -293,31 +303,33 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
                     return;
                 }
 
-
-                if (TextUtils.isEmpty(pic)) {
-                    EasyToast.showShort(context, "请选择正面照");
-                    return;
-                }
-
-                if (TextUtils.isEmpty(pic2)) {
-                    EasyToast.showShort(context, "请选择反面照");
-                    return;
-                }
-
-                if (TextUtils.isEmpty(pic3)) {
-                    EasyToast.showShort(context, "请选择手持照");
-                    return;
-                }
-
                 List<File> imgfiles = new ArrayList<>();
-                imgfiles.add(new File(pic));
-                imgfiles.add(new File(pic2));
-                imgfiles.add(new File(pic3));
-
                 List<String> imgnames = new ArrayList<>();
-                imgnames.add("pic");
-                imgnames.add("pic2");
-                imgnames.add("pic3");
+
+
+                if (!"重新提交".equals(btnSubmit.getText().toString())) {
+                    if (TextUtils.isEmpty(pic)) {
+                        EasyToast.showShort(context, "请选择正面照");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(pic2)) {
+                        EasyToast.showShort(context, "请选择反面照");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(pic3)) {
+                        EasyToast.showShort(context, "请选择手持照");
+                        return;
+                    }
+                    imgfiles.add(new File(pic));
+                    imgfiles.add(new File(pic2));
+                    imgfiles.add(new File(pic3));
+
+                    imgnames.add("pic");
+                    imgnames.add("pic2");
+                    imgnames.add("pic3");
+                }
 
                 dialog.show();
 
