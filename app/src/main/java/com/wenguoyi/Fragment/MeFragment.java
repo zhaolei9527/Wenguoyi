@@ -17,8 +17,11 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.wenguoyi.Activity.AddressActivitry;
+import com.wenguoyi.Activity.GuanYuGongSiActivity;
 import com.wenguoyi.Activity.HuiYuanSJActivity;
+import com.wenguoyi.Activity.KeFuZhongXinActivity;
 import com.wenguoyi.Activity.MyChongZhiActivity;
+import com.wenguoyi.Activity.MyGuZhiActivity;
 import com.wenguoyi.Activity.MyMessageActivity;
 import com.wenguoyi.Activity.MyQianBaoActivity;
 import com.wenguoyi.Activity.MyTuanDuiActivity;
@@ -107,7 +110,6 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
 
     @Override
     protected void initData() {
-
         btnShengji.setOnClickListener(this);
         rlGerenziliao.setOnClickListener(this);
         rlShouhuodizhi.setOnClickListener(this);
@@ -115,6 +117,9 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         rlWyaotuiguang.setOnClickListener(this);
         rlWyaochongzhi.setOnClickListener(this);
         rlWdeqianbao.setOnClickListener(this);
+        rlWdeguzhi.setOnClickListener(this);
+        rlGuanyugongsi.setOnClickListener(this);
+        rlKefuzhongxin.setOnClickListener(this);
     }
 
     @Override
@@ -241,6 +246,15 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                 break;
             case R.id.rl_wdeqianbao:
                 startActivity(new Intent(context, MyQianBaoActivity.class));
+                break;
+            case R.id.rl_wdeguzhi:
+                startActivity(new Intent(context, MyGuZhiActivity.class));
+                break;
+            case R.id.rl_guanyugongsi:
+                startActivity(new Intent(context, GuanYuGongSiActivity.class));
+                break;
+            case R.id.rl_kefuzhongxin:
+                startActivity(new Intent(context, KeFuZhongXinActivity.class));
                 break;
             default:
                 break;

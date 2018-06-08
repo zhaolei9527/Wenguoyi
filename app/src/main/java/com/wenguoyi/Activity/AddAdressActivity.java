@@ -411,8 +411,7 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        App.getQueues().cancelAll("address/doedit");
-        App.getQueues().cancelAll("address/add");
+        App.getQueues().cancelAll("user/doaddr");
         dialog = null;
         System.gc();
     }

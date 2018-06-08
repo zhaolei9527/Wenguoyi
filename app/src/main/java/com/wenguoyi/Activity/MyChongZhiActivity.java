@@ -1,5 +1,6 @@
 package com.wenguoyi.Activity;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.wenguoyi.Adapter.CaiWuMingXiAdapter;
 import com.wenguoyi.Adapter.ChongZhiJiLuAdapter;
+import com.wenguoyi.App;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.UserCzmxBean;
 import com.wenguoyi.Bean.UserLineBean;
@@ -25,6 +27,7 @@ import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.SpUtil;
 import com.wenguoyi.Utils.UrlUtils;
+import com.wenguoyi.Utils.Utils;
 import com.wenguoyi.View.ProgressView;
 import com.wenguoyi.View.SakuraLinearLayoutManager;
 import com.wenguoyi.View.WenguoyiRecycleView;
@@ -83,6 +86,14 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
 
     private SakuraLinearLayoutManager line;
     private SakuraLinearLayoutManager line2;
+    private Dialog dialog;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 
     @Override
     protected int setthislayout() {
@@ -140,50 +151,17 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void initData() {
-        userJine();
-        userMoney();
-        userCzmx();
-    }
+        if (Utils.isConnected(context)) {
+            dialog = Utils.showLoadingDialog(context);
+            dialog.show();
+            userJine();
+            userMoney();
+            userCzmx();
+        } else {
+            EasyToast.showShort(context, R.string.Networkexception);
+        }
 
-    /**
-     * 余额获取
-     */
-    private void userJine() {
-        HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
-        params.put("type", "1");
-        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        Log.e("MyChongZhiActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/jine", "user/jine", params, new VolleyInterface(context) {
-            @Override
-            public void onMySuccess(String result) {
-                Log.e("MyChongZhiActivity", result);
-                try {
-                    UserLineBean userLineBean = new Gson().fromJson(result, UserLineBean.class);
-                    if (1 == userLineBean.getStatus()) {
-                        tvYue.setText("￥" + userLineBean.getAmount());
-                    } else {
-                        Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onMyError(VolleyError error) {
-                error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 
     @Override
@@ -220,6 +198,42 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
     }
 
     /**
+     * 余额获取
+     */
+    private void userJine() {
+        HashMap<String, String> params = new HashMap<>(1);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("type", "1");
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        Log.e("MyChongZhiActivity", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/jine", "user/jine", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("MyChongZhiActivity", result);
+                try {
+                    dialog.dismiss();
+                    UserLineBean userLineBean = new Gson().fromJson(result, UserLineBean.class);
+                    if (1 == userLineBean.getStatus()) {
+                        tvYue.setText("￥" + userLineBean.getAmount());
+                    } else {
+                        Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                dialog.dismiss();
+                error.printStackTrace();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    /**
      * 充值记录
      */
     private void userMoney() {
@@ -235,6 +249,7 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
             public void onMySuccess(String result) {
                 Log.e("MyChongZhiActivity", result);
                 try {
+                    dialog.dismiss();
                     UserMoneyBean userMoneyBean = new Gson().fromJson(result, UserMoneyBean.class);
                     if (1 == userMoneyBean.getStatus()) {
                         LLEmpty.setVisibility(View.GONE);
@@ -263,6 +278,7 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onMyError(VolleyError error) {
+                dialog.dismiss();
                 error.printStackTrace();
                 Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
@@ -286,6 +302,7 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
             public void onMySuccess(String result) {
                 Log.e("MyChongZhiActivity", result);
                 try {
+                    dialog.dismiss();
                     UserCzmxBean userCzmxBean = new Gson().fromJson(result, UserCzmxBean.class);
                     if (1 == userCzmxBean.getStatus()) {
                         LLEmpty.setVisibility(View.GONE);
@@ -314,11 +331,17 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onMyError(VolleyError error) {
+                dialog.dismiss();
                 error.printStackTrace();
                 Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        App.getQueues().cancelAll("user/jine");
 
+    }
 }

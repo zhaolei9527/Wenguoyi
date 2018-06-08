@@ -151,11 +151,17 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void initData() {
-        dialog = Utils.showLoadingDialog(context);
-        dialog.show();
-        userJine();
-        userTx_record();
-        userTxmx();
+
+        if (Utils.isConnected(context)) {
+            dialog = Utils.showLoadingDialog(context);
+            dialog.show();
+            userJine();
+            userTx_record();
+            userTxmx();
+        } else {
+            EasyToast.showShort(context, R.string.Networkexception);
+        }
+
     }
 
     @Override
@@ -198,7 +204,13 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                     EasyToast.showShort(context, "请输入提现金额");
                     return;
                 }
-                userDotxsq();
+
+                if (Utils.isConnected(context)) {
+                    userDotxsq();
+                } else {
+                    EasyToast.showShort(context, R.string.Networkexception);
+                }
+
                 break;
             default:
 

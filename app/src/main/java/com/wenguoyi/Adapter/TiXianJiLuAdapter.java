@@ -56,7 +56,6 @@ public class TiXianJiLuAdapter extends RecyclerView.Adapter<TiXianJiLuAdapter.Vi
         holder.tvTime.setText(DateUtils.getMillon(Long.parseLong(datas.get(position).getAddtime()) * 1000));
 
         if ("-1".equals(String.valueOf(datas.get(position).getStatus()))) {
-
             holder.tvShuoming.setText("审核中..");
 
         } else if ("1".equals(String.valueOf(datas.get(position).getStatus()))) {

@@ -16,11 +16,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity"></activity>
+        <activity
+            android:name=".Activity.MainActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
-        <activity android:name=".Activity.LoginActivity"></activity>
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
-        <activity android:name=".Activity.FlashActivity">
+        <activity
+            android:name=".Activity.FlashActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,27 +46,95 @@
             android:theme="@style/customTheme" />
 
 
-        <activity android:name=".Activity.RegisterActivity"></activity>
+        <activity
+            android:name=".Activity.RegisterActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
-        <activity android:name=".Activity.XunYaoShopTypeActivity"></activity>
-        <activity android:name=".Activity.PriceDetailsActivity"></activity>
-        <activity android:name=".Activity.ShopListActivity"></activity>
-        <activity android:name=".Activity.YiShengListActivity"></activity>
-        <activity android:name=".Activity.YiShengDetailsActivity"></activity>
-        <activity android:name=".Activity.MyMessageActivity"></activity>
-        <activity android:name=".Activity.AddAdressActivity"></activity>
-        <activity android:name=".Activity.AddressActivitry"></activity>
-        <activity android:name=".Activity.ForgetActivity"></activity>
-        <activity android:name=".Activity.GoodPayActivity"></activity>
-        <activity android:name=".Activity.MyTuanDuiActivity"></activity>
-        <activity android:name=".Activity.MyChongZhiActivity"></activity>
-        <activity android:name=".Activity.MyQianBaoActivity"></activity>
-        <activity android:name=".Activity.MyGuZhiActivity"></activity>
-        <activity android:name=".Activity.SettingActivity"></activity>
-        <activity android:name=".Activity.HuiYuanSJActivity"></activity>
-        <activity android:name=".Activity.HuiYuanSJDetailsActivity"></activity>
-        <activity android:name=".Activity.NewsDetailsActivity"></activity>
-        <activity android:name=".Activity.TuiGuangActivity"></activity>
+        <activity
+            android:name=".Activity.XunYaoShopTypeActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.PriceDetailsActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.ShopListActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.YiShengListActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.YiShengDetailsActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.MyMessageActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.AddAdressActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.AddressActivitry"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.ForgetActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.GoodPayActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.MyTuanDuiActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.MyChongZhiActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.MyQianBaoActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.MyGuZhiActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.SettingActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.HuiYuanSJActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.HuiYuanSJDetailsActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.NewsDetailsActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.TuiGuangActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.GuanYuGongSiActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+        <activity
+            android:name=".Activity.KeFuZhongXinActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
     </application>
 
 </manifest>

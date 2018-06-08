@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
+import com.wenguoyi.App;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.UserUserBean;
 import com.wenguoyi.R;
@@ -170,6 +171,7 @@ public class HuiYuanSJActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
+        App.getQueues().cancelAll("user/user");
         ButterKnife.bind(this);
     }
 }

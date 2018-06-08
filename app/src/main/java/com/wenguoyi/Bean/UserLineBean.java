@@ -14,6 +14,16 @@ public class UserLineBean {
      */
 
     private String amount;
+
+    public String getRenminbi() {
+        return renminbi;
+    }
+
+    public void setRenminbi(String renminbi) {
+        this.renminbi = renminbi;
+    }
+
+    private String renminbi;
     private int status;
 
     public String getAmount() {

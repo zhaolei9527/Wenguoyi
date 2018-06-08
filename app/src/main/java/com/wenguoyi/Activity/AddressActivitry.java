@@ -158,7 +158,8 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                                                 dialog.show();
                                             }
                                         }
-                                        addressQie((String) item_address.getTag());
+                                        //设置默认地址
+                                        //addressQie((String) item_address.getTag());
                                     } else {
                                         EasyToast.showShort(context, "网络未连接");
                                     }
@@ -318,9 +319,8 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        App.getQueues().cancelAll("address/del");
-        App.getQueues().cancelAll("address/index");
-        App.getQueues().cancelAll("address/qie");
+        App.getQueues().cancelAll("user/address");
+        App.getQueues().cancelAll("user/addrdel");
         dialog = null;
         System.gc();
     }

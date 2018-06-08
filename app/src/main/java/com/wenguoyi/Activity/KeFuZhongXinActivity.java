@@ -3,33 +3,20 @@ package com.wenguoyi.Activity;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.VolleyError;
-import com.google.gson.Gson;
 import com.tencent.smtt.export.external.extension.interfaces.IX5WebViewExtension;
 import com.tencent.smtt.export.external.interfaces.WebResourceError;
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
-import com.wenguoyi.App;
 import com.wenguoyi.Base.BaseActivity;
-import com.wenguoyi.Bean.NewsDetailsBean;
 import com.wenguoyi.R;
-import com.wenguoyi.Utils.DateUtils;
-import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
-import com.wenguoyi.Volley.VolleyInterface;
-import com.wenguoyi.Volley.VolleyRequest;
-
-import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,34 +30,20 @@ import static com.wenguoyi.R.id.forum_context;
  * @date 2018/3/31
  * 功能描述：
  */
-public class NewsDetailsActivity extends BaseActivity {
+public class KeFuZhongXinActivity extends BaseActivity {
     @BindView(R.id.rl_back)
     FrameLayout rlBack;
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
-    @BindView(R.id.tv_time)
-    TextView tvTime;
-    @BindView(R.id.tv_show)
-    TextView tvShow;
     @BindView(forum_context)
     WebView forumContext;
     private Dialog dialog;
-    private String id;
 
     @Override
     protected int setthislayout() {
-        return R.layout.newsdetails_activity_layout;
+        return R.layout.gongsidetails_activity_layout;
     }
 
     @Override
     protected void initview() {
-
-        id = getIntent().getStringExtra("id");
-
-        if (TextUtils.isEmpty(id)) {
-            EasyToast.showShort(context, getString(R.string.hasError));
-            finish();
-        }
 
         dialog = Utils.showLoadingDialog(context);
         if (!dialog.isShowing()) {
@@ -123,7 +96,8 @@ public class NewsDetailsActivity extends BaseActivity {
 
             }
         });
-        forumContext.loadUrl(UrlUtils.BASE_URL + "danye/news/id/" + id);
+        //链接：http://域名/wgy.php/danye/index/id/2
+        forumContext.loadUrl(UrlUtils.BASE_URL + "danye/index/id/2");
 
     }
 
@@ -139,51 +113,12 @@ public class NewsDetailsActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        getNews(id);
+
     }
-
-    /**
-     * 新闻内容获取
-     */
-    private void getNews(final String id) {
-        HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
-        params.put("id", id);
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "news/detail", "news/detail", params, new VolleyInterface(context) {
-            @Override
-            public void onMySuccess(String result) {
-                Log.e("NewsDetailsActivity", result);
-                try {
-                    NewsDetailsBean newsDetailsBean = new Gson().fromJson(result, NewsDetailsBean.class);
-                    if (1 == newsDetailsBean.getStatus()) {
-                        tvTitle.setText(newsDetailsBean.getMsg().getTitle());
-                        tvTime.setText("时间：" + DateUtils.getMillon(Long.parseLong(newsDetailsBean.getMsg().getAddtime())*1000));
-                        tvShow.setText("浏览量：" + newsDetailsBean.getMsg().getNum());
-                    } else {
-                        EasyToast.showShort(context, R.string.hasError);
-                        finish();
-                    }
-                    result = null;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onMyError(VolleyError error) {
-                error.printStackTrace();
-                dialog.dismiss();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        App.getQueues().cancelAll("news/detail");
         System.gc();
     }
 
