@@ -24,7 +24,7 @@ import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
-import com.wenguoyi.Adapter.LoopAdapter;
+import com.wenguoyi.Adapter.GoodLoopAdapter;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.GoodsCangBean;
 import com.wenguoyi.Bean.GoodsDetailBean;
@@ -68,6 +68,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
 
     private String[] mkeshiVals = new String[]{"全部科室", "妇产科", "儿科 ", "综合门诊",
             "内科", "外壳", "中医科", "皮肤性病科", "康复医学", "重症医学科", "其他科室"};
+    private TextView tv_otherPrice;
 
 
     @Override
@@ -85,6 +86,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     protected void initview() {
         mFlowLayout = findViewById(R.id.id_flowlayout);
         mRlBack = (FrameLayout) findViewById(R.id.rl_back);
+        tv_otherPrice = (TextView) findViewById(R.id.tv_otherPrice);
         mImgShouCang = (ImageView) findViewById(R.id.img_shoucang);
         mRlShoppingcart = (RelativeLayout) findViewById(R.id.rl_shoppingcart);
         RollPagerView = (com.jude.rollviewpager.RollPagerView) findViewById(R.id.RollPagerView);
@@ -183,7 +185,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
         });
         dialog = Utils.showLoadingDialog(context);
         dialog.show();
-        RollPagerView.setAdapter(new LoopAdapter(RollPagerView));
         mWb.loadUrl(UrlUtils.BASE_URL + "danye/goods/id/" + id);
         goodsDetail();
     }
@@ -264,6 +265,30 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                 try {
                     dialog.dismiss();
                     goodsDetailBean = new Gson().fromJson(result, GoodsDetailBean.class);
+                    RollPagerView.setAdapter(new GoodLoopAdapter(RollPagerView, goodsDetailBean.getImgs()));
+                    mTvTitle.setText(goodsDetailBean.getGoods().getGname());
+                    /**
+                     字段usertype：
+                     1：当前价格为零售价，不显示其他价格
+                     2：当前价格为批发价，在价格下方展示零售价（price1）
+                     3：当前价格为代理价，在价格下方展示零售价（price1）、批发价（price2）
+                     4和5：当前价格为加盟价，在价格下方展示零售价（price1）、批发价（price2）、代理价（price3）
+                     * */
+                    if ("1".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
+                        mTvPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice());
+                    } else if ("2".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
+                        mTvPrice.setText("批发价" + goodsDetailBean.getGoods().getPrice());
+                        tv_otherPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice1());
+                    } else if ("3".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
+                        mTvPrice.setText("代理价" + goodsDetailBean.getGoods().getPrice());
+                        tv_otherPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice1() + "  批发价" + goodsDetailBean.getGoods().getPrice2());
+                    } else if ("4".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
+                        mTvPrice.setText("代理价" + goodsDetailBean.getGoods().getPrice());
+                        tv_otherPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice1() + "  批发价" + goodsDetailBean.getGoods().getPrice2() + "  代理价" + goodsDetailBean.getGoods().getPrice3());
+                    } else if ("5".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
+                        mTvPrice.setText("代理价" + goodsDetailBean.getGoods().getPrice());
+                        tv_otherPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice1() + "  批发价" + goodsDetailBean.getGoods().getPrice2() + "  代理价" + goodsDetailBean.getGoods().getPrice3());
+                    }
 
                     result = null;
                 } catch (Exception e) {
