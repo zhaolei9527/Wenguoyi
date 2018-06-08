@@ -2,13 +2,11 @@ package com.wenguoyi.Adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.LoopPagerAdapter;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.UrlUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
