@@ -129,8 +129,7 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onLoadMore() {
                 cwmxp = cwmxp + 1;
-
-
+                userTxmx();
             }
         });
     }
@@ -173,6 +172,8 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        txjlp = 1;
+        cwmxp = 1;
         switch (view.getId()) {
             case R.id.ll_wyaotixian:
                 tvWyaotixian.setTextColor(getResources().getColor(R.color.bgtitle));
@@ -181,6 +182,7 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                 llCWyaotixian.setVisibility(View.VISIBLE);
                 llCTixianjilu.setVisibility(View.GONE);
                 llCCaiwumingxi.setVisibility(View.GONE);
+                userJine();
                 break;
             case R.id.ll_tixianjilu:
                 tvWyaotixian.setTextColor(getResources().getColor(R.color.text666));
@@ -189,6 +191,7 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                 llCWyaotixian.setVisibility(View.GONE);
                 llCTixianjilu.setVisibility(View.VISIBLE);
                 llCCaiwumingxi.setVisibility(View.GONE);
+                userTx_record();
                 break;
             case R.id.ll_caiwumingxi:
                 tvWyaotixian.setTextColor(getResources().getColor(R.color.text666));
@@ -197,6 +200,7 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                 llCWyaotixian.setVisibility(View.GONE);
                 llCTixianjilu.setVisibility(View.GONE);
                 llCCaiwumingxi.setVisibility(View.VISIBLE);
+                userTxmx();
                 break;
             case R.id.btn_submit:
                 String tixianmoney = etTixianmoney.getText().toString().trim();

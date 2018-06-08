@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:paddingLeft="@dimen/x15"
     android:paddingTop="@dimen/x15"
+    android:background="@color/bgfff"
     android:visibility="visible">
 
     <ScrollView

@@ -3,6 +3,7 @@
     android:id="@+id/ll_c_tixianjilu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bgfff"
     android:visibility="gone">
 
     <com.wenguoyi.View.WenguoyiRecycleView
@@ -12,6 +13,5 @@
 
     </com.wenguoyi.View.WenguoyiRecycleView>
 
-    <include layout="@layout/layout_empty"></include>
 
 </LinearLayout>

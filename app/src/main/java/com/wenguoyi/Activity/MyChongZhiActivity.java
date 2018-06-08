@@ -166,6 +166,8 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
+        czjlp = 1;
+        cwmxp = 1;
         switch (view.getId()) {
             case R.id.ll_chongzhi:
                 tvChongzhi.setTextColor(getResources().getColor(R.color.bgtitle));
@@ -174,6 +176,7 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
                 lLCChongzhi.setVisibility(View.VISIBLE);
                 llCChongzhijilu.setVisibility(View.GONE);
                 llCCaiwumingxi.setVisibility(View.GONE);
+                userJine();
                 break;
             case R.id.ll_chongzhijilu:
                 tvChongzhi.setTextColor(getResources().getColor(R.color.text666));
@@ -182,6 +185,7 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
                 lLCChongzhi.setVisibility(View.GONE);
                 llCChongzhijilu.setVisibility(View.VISIBLE);
                 llCCaiwumingxi.setVisibility(View.GONE);
+                userMoney();
                 break;
             case R.id.ll_caiwumingxi:
                 tvChongzhi.setTextColor(getResources().getColor(R.color.text666));
@@ -190,6 +194,7 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
                 lLCChongzhi.setVisibility(View.GONE);
                 llCChongzhijilu.setVisibility(View.GONE);
                 llCCaiwumingxi.setVisibility(View.VISIBLE);
+                userCzmx();
                 break;
             default:
 
@@ -269,6 +274,7 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
                     } else {
                         if (czjlp == 1) {
                             LLEmpty.setVisibility(View.VISIBLE);
+                            llCChongzhijilu.setVisibility(View.GONE);
                         } else {
                             EasyToast.showShort(context, R.string.notmore);
                         }
@@ -325,6 +331,7 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
                     } else {
                         if (1 == cwmxp) {
                             LLEmpty.setVisibility(View.VISIBLE);
+                            llCCaiwumingxi.setVisibility(View.GONE);
                         } else {
                             EasyToast.showShort(context, R.string.notmore);
                         }

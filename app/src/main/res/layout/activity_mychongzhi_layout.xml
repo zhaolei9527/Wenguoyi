@@ -148,11 +148,18 @@
 
     </LinearLayout>
 
-    <include layout="@layout/mychongzhi_wechat_chongzhi_layout"></include>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <include layout="@layout/mychongzhi_chongzhijilu_layout"></include>
+        <include layout="@layout/layout_empty"></include>
 
-    <include layout="@layout/mychongzhi_caiwumingxi_layout"></include>
+        <include layout="@layout/mychongzhi_wechat_chongzhi_layout"></include>
 
+        <include layout="@layout/mychongzhi_chongzhijilu_layout"></include>
+
+        <include layout="@layout/mychongzhi_caiwumingxi_layout"></include>
+
+    </FrameLayout>
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.RotateAnimation;
@@ -125,6 +126,12 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
                 getData();
             }
         });
+
+        String fcate = getIntent().getStringExtra("fcate");
+        if (!TextUtils.isEmpty(fcate)) {
+            this.fcate = fcate;
+        }
+
     }
 
     private void getData() {
@@ -174,9 +181,9 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
                             rvShopList.setCanloadMore(true);
                         }
                     } else {
-                        if (1==p){
+                        if (1 == p) {
                             LLEmpty.setVisibility(View.VISIBLE);
-                        }else {
+                        } else {
                             EasyToast.showShort(context, R.string.notmore);
                         }
                     }

@@ -168,6 +168,8 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
+        txjlp = 1;
+        cwmxp = 1;
         switch (view.getId()) {
             case R.id.ll_wyaotixian:
                 tvWyaotixian.setTextColor(getResources().getColor(R.color.bgtitle));
@@ -176,22 +178,25 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                 llCWyaotixian.setVisibility(View.VISIBLE);
                 llCTixianjilu.setVisibility(View.GONE);
                 llCCaiwumingxi.setVisibility(View.GONE);
+                userJine();
                 break;
-            case R.id.ll_caiwumingxi:
+            case R.id.ll_tixianjilu:
                 tvWyaotixian.setTextColor(getResources().getColor(R.color.text666));
                 tvTixianjilu.setTextColor(getResources().getColor(R.color.bgtitle));
                 tvCaiwumingxi.setTextColor(getResources().getColor(R.color.text666));
                 llCWyaotixian.setVisibility(View.GONE);
                 llCTixianjilu.setVisibility(View.VISIBLE);
                 llCCaiwumingxi.setVisibility(View.GONE);
+                userTx_record();
                 break;
-            case R.id.ll_tixianjilu:
+            case R.id.ll_caiwumingxi:
                 tvWyaotixian.setTextColor(getResources().getColor(R.color.text666));
                 tvTixianjilu.setTextColor(getResources().getColor(R.color.text666));
                 tvCaiwumingxi.setTextColor(getResources().getColor(R.color.bgtitle));
                 llCWyaotixian.setVisibility(View.GONE);
                 llCTixianjilu.setVisibility(View.GONE);
                 llCCaiwumingxi.setVisibility(View.VISIBLE);
+                userTxmxgz();
                 break;
             case R.id.btn_submit:
                 String tixianmoney = etTixianmoney.getText().toString().trim();
@@ -305,7 +310,6 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                 try {
                     UserTxRecordBean userTxRecordBean = new Gson().fromJson(result, UserTxRecordBean.class);
                     if (1 == userTxRecordBean.getStatus()) {
-                        LLEmpty.setVisibility(View.GONE);
                         if (1 == txjlp) {
                             tiXianJiLuAdapter = new TiXianJiLuAdapter(MyGuZhiActivity.this, userTxRecordBean.getMsg());
                             reTixianjilu.setAdapter(tiXianJiLuAdapter);
@@ -322,6 +326,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                     } else {
                         if (txjlp == 1) {
                             LLEmpty.setVisibility(View.VISIBLE);
+                            llCTixianjilu.setVisibility(View.GONE);
                         } else {
                             EasyToast.showShort(context, R.string.notmore);
                         }
@@ -358,7 +363,6 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                 try {
                     UserCzmxBean userCzmxBean = new Gson().fromJson(result, UserCzmxBean.class);
                     if (1 == userCzmxBean.getStatus()) {
-                        LLEmpty.setVisibility(View.GONE);
                         if (1 == cwmxp) {
                             caiWuMingXiAdapter = new CaiWuMingXiAdapter(MyGuZhiActivity.this, userCzmxBean.getMsg());
                             reCaiwumingxi.setAdapter(caiWuMingXiAdapter);
@@ -375,6 +379,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                     } else {
                         if (cwmxp == 1) {
                             LLEmpty.setVisibility(View.VISIBLE);
+                            llCCaiwumingxi.setVisibility(View.GONE);
                         } else {
                             EasyToast.showShort(context, R.string.notmore);
                         }

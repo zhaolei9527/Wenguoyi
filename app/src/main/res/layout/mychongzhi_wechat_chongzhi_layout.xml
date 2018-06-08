@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="@dimen/x15"
+    android:background="@color/bgfff"
     android:paddingTop="@dimen/x15"
     android:visibility="visible">
 

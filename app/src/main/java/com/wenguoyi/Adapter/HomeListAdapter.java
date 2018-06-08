@@ -19,11 +19,11 @@ import com.jude.rollviewpager.hintview.IconHintView;
 import com.wenguoyi.Activity.MainActivity;
 import com.wenguoyi.Activity.NewsDetailsActivity;
 import com.wenguoyi.Activity.PriceDetailsActivity;
+import com.wenguoyi.Activity.ShopListActivity;
 import com.wenguoyi.Activity.XunYaoShopTypeActivity;
 import com.wenguoyi.Bean.HomeBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.DensityUtils;
-import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
 import com.wenguoyi.View.MyGridView;
@@ -236,7 +236,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 ll_type.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        EasyToast.showShort(mContext, "" + homeBean.getCate().get(i).getId());
+                        mContext.startActivity(new Intent(mContext, ShopListActivity.class).putExtra("fcate", homeBean.getCate().get(i).getId()));
                     }
                 });
             }

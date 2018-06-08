@@ -171,7 +171,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/x15"
                 android:layout_marginTop="@dimen/x15"
-                android:background="@drawable/btn_add_address_selector"
+                android:background="@drawable/bg_login"
                 android:text="提交"
                 android:textColor="#fff"
                 android:textSize="@dimen/x15" />

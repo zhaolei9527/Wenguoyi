@@ -14,7 +14,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.wenguoyi.App;
 import com.wenguoyi.Base.BaseActivity;
-import com.wenguoyi.Bean.StuBean;
+import com.wenguoyi.Bean.CodeBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.SpUtil;
@@ -24,7 +24,6 @@ import com.wenguoyi.Volley.VolleyInterface;
 import com.wenguoyi.Volley.VolleyRequest;
 
 import java.util.HashMap;
-
 
 
 /**
@@ -40,7 +39,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
     private String oldpassword;
     private String newpassword;
     private Dialog dialog;
-    //
+
 
     @Override
     protected int setthislayout() {
@@ -103,7 +102,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
 
         if (Utils.isConnected(context)) {
             dialog = Utils.showLoadingDialog(context);
-            if (!dialog.isShowing()){
+            if (!dialog.isShowing()) {
                 dialog.show();
             }
             changpasswordIndex();
@@ -118,11 +117,12 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
      */
     private void changpasswordIndex() {
         HashMap<String, String> params = new HashMap<>(4);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        params.put("old_password", oldpassword);
-        params.put("new_password", newpassword);
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "changpassword/index", "changpassword/index", params, new VolleyInterface(context) {
+        params.put("password", Utils.md5(oldpassword));
+        params.put("newpwd", Utils.md5(newpassword));
+        params.put("cfmpwd", Utils.md5(newpassword));
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/pwd", "user/pwd", params, new VolleyInterface(context) {
 
             private Intent intent;
 
@@ -131,13 +131,15 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                 dialog.dismiss();
                 Log.e("RegisterActivity", result);
                 try {
-                    StuBean stuBean = new Gson().fromJson(result, StuBean.class);
-                    if ("1".equals(String.valueOf(stuBean.getStu()))) {
+                    CodeBean stuBean = new Gson().fromJson(result, CodeBean.class);
+                    if ("1".equals(String.valueOf(stuBean.getStatus()))) {
                         Toast.makeText(ChangePasswordActivity.this, "密码修改成功", Toast.LENGTH_SHORT).show();
                         SpUtil.clear(context);
                         intent = new Intent(context, LoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
+                    } else {
+                        EasyToast.showShort(context, stuBean.getMsg());
                     }
                     stuBean = null;
                     result = null;
@@ -159,7 +161,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        App.getQueues().cancelAll("changpassword/index");
+        App.getQueues().cancelAll("user/pwd");
         System.gc();
     }
 }
