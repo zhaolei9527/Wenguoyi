@@ -152,8 +152,11 @@ public class MyTuanDuiActivity extends BaseActivity implements View.OnClickListe
                             reMytuandui.setCanloadMore(true);
                         }
                     } else {
-                        LLEmpty.setVisibility(View.VISIBLE);
-                        EasyToast.showShort(context, R.string.notmore);
+                        if (1==p){
+                            LLEmpty.setVisibility(View.VISIBLE);
+                        }else {
+                            EasyToast.showShort(context, R.string.notmore);
+                        }
                     }
                     result = null;
                 } catch (Exception e) {

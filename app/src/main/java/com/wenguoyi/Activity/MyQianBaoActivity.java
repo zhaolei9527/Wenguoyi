@@ -326,8 +326,11 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                             reTixianjilu.setCanloadMore(true);
                         }
                     } else {
-                        LLEmpty.setVisibility(View.VISIBLE);
-                        EasyToast.showShort(context, R.string.notmore);
+                        if (1 == txjlp) {
+                            LLEmpty.setVisibility(View.VISIBLE);
+                        } else {
+                            EasyToast.showShort(context, R.string.notmore);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -376,8 +379,11 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                             reCaiwumingxi.setCanloadMore(true);
                         }
                     } else {
-                        LLEmpty.setVisibility(View.VISIBLE);
-                        EasyToast.showShort(context, R.string.notmore);
+                        if (1 == cwmxp) {
+                            LLEmpty.setVisibility(View.VISIBLE);
+                        } else {
+                            EasyToast.showShort(context, R.string.notmore);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

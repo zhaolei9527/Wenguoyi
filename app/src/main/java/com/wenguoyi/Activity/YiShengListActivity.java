@@ -349,7 +349,11 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                             rv_yisheng_list.setCanloadMore(true);
                         }
                     } else if (2 == yiShengListBean.getStatus()) {
-                        LLEmpty.setVisibility(View.VISIBLE);
+                        if (1 == p) {
+                            LLEmpty.setVisibility(View.VISIBLE);
+                        } else {
+                            EasyToast.showShort(context, R.string.notmore);
+                        }
                     } else {
                         EasyToast.showShort(context, R.string.notmore);
                     }

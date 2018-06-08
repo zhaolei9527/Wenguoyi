@@ -41,8 +41,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.fangx.haorefresh.LoadMoreListener;
 
-import static com.wenguoyi.R.id.re_caiwumingxi;
-
 /**
  * com.wenguoyi.Activity
  *
@@ -80,14 +78,14 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
     LinearLayout llCWyaotixian;
     @BindView(R.id.re_tixianjilu)
     WenguoyiRecycleView reTixianjilu;
-    @BindView(R.id.ll_c_chongzhijilu)
-    LinearLayout llCChongzhijilu;
-    @BindView(re_caiwumingxi)
-    WenguoyiRecycleView reCaiwumingxi;
     @BindView(R.id.LL_empty)
     RelativeLayout LLEmpty;
     @BindView(R.id.ll_c_caiwumingxi)
     LinearLayout llCCaiwumingxi;
+    @BindView(R.id.ll_c_tixianjilu)
+    LinearLayout llCTixianjilu;
+    @BindView(R.id.re_caiwumingxi)
+    WenguoyiRecycleView reCaiwumingxi;
     private int txjlp = 1;
     private int cwmxp = 1;
     private SakuraLinearLayoutManager line;
@@ -155,8 +153,9 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
             dialog.show();
             userJine();
             userTx_record();
+            userTxmxgz();
         } else {
-            EasyToast.showShort(context,R.string.Networkexception);
+            EasyToast.showShort(context, R.string.Networkexception);
         }
     }
 
@@ -175,7 +174,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                 tvTixianjilu.setTextColor(getResources().getColor(R.color.text666));
                 tvCaiwumingxi.setTextColor(getResources().getColor(R.color.text666));
                 llCWyaotixian.setVisibility(View.VISIBLE);
-                llCChongzhijilu.setVisibility(View.GONE);
+                llCTixianjilu.setVisibility(View.GONE);
                 llCCaiwumingxi.setVisibility(View.GONE);
                 break;
             case R.id.ll_caiwumingxi:
@@ -183,7 +182,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                 tvTixianjilu.setTextColor(getResources().getColor(R.color.bgtitle));
                 tvCaiwumingxi.setTextColor(getResources().getColor(R.color.text666));
                 llCWyaotixian.setVisibility(View.GONE);
-                llCChongzhijilu.setVisibility(View.VISIBLE);
+                llCTixianjilu.setVisibility(View.VISIBLE);
                 llCCaiwumingxi.setVisibility(View.GONE);
                 break;
             case R.id.ll_tixianjilu:
@@ -191,7 +190,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                 tvTixianjilu.setTextColor(getResources().getColor(R.color.text666));
                 tvCaiwumingxi.setTextColor(getResources().getColor(R.color.bgtitle));
                 llCWyaotixian.setVisibility(View.GONE);
-                llCChongzhijilu.setVisibility(View.GONE);
+                llCTixianjilu.setVisibility(View.GONE);
                 llCCaiwumingxi.setVisibility(View.VISIBLE);
                 break;
             case R.id.btn_submit:
@@ -258,11 +257,11 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
         params.put("pwd", UrlUtils.KEY);
         params.put("money", etTixianmoney.getText().toString().trim());
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        Log.e("MyQianBaoActivity", params.toString());
+        Log.e("MyGuZhiActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/dotxsqgz", "user/dotxsqgz", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
-                Log.e("MyQianBaoActivity", result);
+                Log.e("MyGuZhiActivity", result);
                 try {
                     dialog.dismiss();
                     CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
@@ -296,12 +295,13 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
         params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("page", String.valueOf(txjlp));
-        Log.e("MyQianBaoActivity", params.toString());
+        Log.e("MyGuZhiActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/tx_recordgz", "user/tx_recordgz", params, new VolleyInterface(context) {
             private TiXianJiLuAdapter tiXianJiLuAdapter;
+
             @Override
             public void onMySuccess(String result) {
-                Log.e("MyQianBaoActivity", result);
+                Log.e("MyGuZhiActivity", result);
                 try {
                     UserTxRecordBean userTxRecordBean = new Gson().fromJson(result, UserTxRecordBean.class);
                     if (1 == userTxRecordBean.getStatus()) {
@@ -320,8 +320,11 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                             reTixianjilu.setCanloadMore(true);
                         }
                     } else {
-                        LLEmpty.setVisibility(View.VISIBLE);
-                        EasyToast.showShort(context, R.string.notmore);
+                        if (txjlp == 1) {
+                            LLEmpty.setVisibility(View.VISIBLE);
+                        } else {
+                            EasyToast.showShort(context, R.string.notmore);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -345,13 +348,13 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
         params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("page", String.valueOf(cwmxp));
-        Log.e("MyQianBaoActivity", params.toString());
+        Log.e("MyGuZhiActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/txmxgz", "user/txmxgz", params, new VolleyInterface(context) {
             private CaiWuMingXiAdapter caiWuMingXiAdapter;
 
             @Override
             public void onMySuccess(String result) {
-                Log.e("MyQianBaoActivity", result);
+                Log.e("MyGuZhiActivity", result);
                 try {
                     UserCzmxBean userCzmxBean = new Gson().fromJson(result, UserCzmxBean.class);
                     if (1 == userCzmxBean.getStatus()) {
@@ -370,8 +373,11 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                             reCaiwumingxi.setCanloadMore(true);
                         }
                     } else {
-                        LLEmpty.setVisibility(View.VISIBLE);
-                        EasyToast.showShort(context, R.string.notmore);
+                        if (cwmxp == 1) {
+                            LLEmpty.setVisibility(View.VISIBLE);
+                        } else {
+                            EasyToast.showShort(context, R.string.notmore);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

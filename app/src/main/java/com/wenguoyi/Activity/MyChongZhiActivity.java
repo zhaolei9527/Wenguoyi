@@ -267,8 +267,11 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
                             reChongzhijilu.setCanloadMore(true);
                         }
                     } else {
-                        LLEmpty.setVisibility(View.VISIBLE);
-                        EasyToast.showShort(context, R.string.notmore);
+                        if (czjlp == 1) {
+                            LLEmpty.setVisibility(View.VISIBLE);
+                        } else {
+                            EasyToast.showShort(context, R.string.notmore);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -320,8 +323,11 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
                             re_caiwumingxi.setCanloadMore(true);
                         }
                     } else {
-                        LLEmpty.setVisibility(View.VISIBLE);
-                        EasyToast.showShort(context, R.string.notmore);
+                        if (1 == cwmxp) {
+                            LLEmpty.setVisibility(View.VISIBLE);
+                        } else {
+                            EasyToast.showShort(context, R.string.notmore);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
