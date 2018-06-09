@@ -15,13 +15,21 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.wenguoyi.View.WenguoyiRecycleView
-                android:id="@+id/rv_purchaserecord"
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:clipChildren="false"
-                android:clipToPadding="false"></com.wenguoyi.View.WenguoyiRecycleView>
+                android:layout_weight="1">
+
+                <com.wenguoyi.View.WenguoyiRecycleView
+                    android:id="@+id/rv_purchaserecord"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></com.wenguoyi.View.WenguoyiRecycleView>
+
+                <include layout="@layout/layout_empty"></include>
+
+            </FrameLayout>
+
 
             <RelativeLayout
                 android:id="@+id/rl_buy"
@@ -57,7 +65,7 @@
                     android:layout_width="@dimen/x100"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
-                    android:background="#FF3064"
+                    android:background="@color/bgtitle"
                     android:gravity="center"
                     android:text="去结算"
                     android:textColor="@android:color/white"
@@ -132,17 +140,16 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/x7"
-                    android:background="@drawable/btn_delete_selector"
+                    android:background="@drawable/bg_login"
                     android:gravity="center"
                     android:text="删除"
-                    android:textColor="@drawable/btn_text_delete_selector"
+                    android:textColor="@color/bgfff"
                     android:textSize="@dimen/y12" />
 
             </RelativeLayout>
 
         </LinearLayout>
 
-        <include layout="@layout/layout_empty"></include>
 
     </FrameLayout>
 

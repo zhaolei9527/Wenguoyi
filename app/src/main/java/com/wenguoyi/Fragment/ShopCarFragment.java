@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +24,10 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.wenguoyi.Activity.PriceDetailsActivity;
 import com.wenguoyi.Adapter.ShopCarListAdapter;
+import com.wenguoyi.Bean.CodeBean;
 import com.wenguoyi.Bean.SuckleCartBean;
-import com.wenguoyi.Bean.SuckleCartDelBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.SpUtil;
@@ -37,10 +39,7 @@ import com.wenguoyi.View.WenguoyiRecycleView;
 import com.wenguoyi.Volley.VolleyInterface;
 import com.wenguoyi.Volley.VolleyRequest;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import me.fangx.haorefresh.LoadMoreListener;
 
 /**
  * com.wenguoyi.Fragment
@@ -68,6 +67,8 @@ public class ShopCarFragment extends BaseLazyFragment {
     private RelativeLayout ll_empty;
     private LinearLayout ll_content;
     private BroadcastReceiver receiver;
+    private BroadcastReceiver broadcastReceiver;
+    private BroadcastReceiver broadcastReceiver2;
 
 
     @Override
@@ -83,6 +84,32 @@ public class ShopCarFragment extends BaseLazyFragment {
     @Override
     protected void initData() {
         getData();
+
+        /**
+         * 编辑
+         * */
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                rl_bianji.setVisibility(View.VISIBLE);
+                rl_buy.setVisibility(View.GONE);
+            }
+        };
+
+        /**
+         * 完成
+         * */
+        broadcastReceiver2 = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                rl_bianji.setVisibility(View.GONE);
+                rl_buy.setVisibility(View.VISIBLE);
+            }
+        };
+
+        context.registerReceiver(this.broadcastReceiver, new IntentFilter("gouwuchebianji"));
+        context.registerReceiver(this.broadcastReceiver2, new IntentFilter("gouwuchebianjiwancheng"));
+
     }
 
     @Override
@@ -116,19 +143,10 @@ public class ShopCarFragment extends BaseLazyFragment {
         TextView textView = new TextView(context);
         textView.setText("-没有更多了-");
         rv_purchaserecord.setFootEndView(textView);
-        rv_purchaserecord.setLoadMoreListener(new LoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                p = p + 1;
-                getData();
-            }
-        });
-
         dialog = Utils.showLoadingDialog(context);
         if (!dialog.isShowing()) {
             dialog.show();
         }
-
         receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -142,8 +160,29 @@ public class ShopCarFragment extends BaseLazyFragment {
                 }
             }
         };
-
         mContext.registerReceiver(receiver, new IntentFilter("shopCarChoosedAll"));
+
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < shopCarListAdapter.getDatas().size(); i++) {
+                    if (shopCarListAdapter.getDatas().get(i).isCheck()) {
+                        if (i == 0) {
+                            stringBuilder.append(shopCarListAdapter.getDatas().get(i).getId());
+                        } else {
+                            stringBuilder.append("," + shopCarListAdapter.getDatas().get(i).getId());
+                        }
+                    }
+                }
+                if (!TextUtils.isEmpty(stringBuilder.toString())) {
+                    dialog.show();
+                    suckleCartDel(stringBuilder.toString());
+                } else {
+                    EasyToast.showShort(context, "请选择商品");
+                }
+            }
+        });
 
     }
 
@@ -152,49 +191,12 @@ public class ShopCarFragment extends BaseLazyFragment {
     public void onDestroy() {
         super.onDestroy();
         mContext.unregisterReceiver(receiver);
+        mContext.unregisterReceiver(broadcastReceiver);
+        mContext.unregisterReceiver(broadcastReceiver2);
     }
 
     public void getData() {
-
-        dialog.dismiss();
-        SuckleCartBean suckleCartBean = new SuckleCartBean();
-        suckleCartBean.setStu(1);
-        SuckleCartBean.ResBean resBean = new SuckleCartBean.ResBean();
-        resBean.setCheck(false);
-        resBean.setGid("1");
-        resBean.setId("1");
-        resBean.setImg("1");
-        resBean.setKucun("50");
-        resBean.setNumber("1");
-        resBean.setPrice("20");
-        resBean.setTitle("云南白药");
-        SuckleCartBean.ResBean resBean1 = new SuckleCartBean.ResBean();
-        resBean1.setCheck(false);
-        resBean1.setGid("1");
-        resBean1.setId("1");
-        resBean1.setImg("1");
-        resBean1.setKucun("50");
-        resBean1.setNumber("1");
-        resBean1.setPrice("30");
-        resBean1.setTitle("云南白药");
-        SuckleCartBean.ResBean resBean2 = new SuckleCartBean.ResBean();
-        resBean2.setCheck(false);
-        resBean2.setGid("1");
-        resBean2.setId("1");
-        resBean2.setImg("1");
-        resBean2.setKucun("50");
-        resBean2.setNumber("1");
-        resBean2.setPrice("40");
-        resBean2.setTitle("云南白药");
-        ArrayList<SuckleCartBean.ResBean> resBeens = new ArrayList<>();
-        resBeens.add(resBean);
-        resBeens.add(resBean1);
-        resBeens.add(resBean2);
-        suckleCartBean.setRes(resBeens);
-        shopCarListAdapter = new ShopCarListAdapter(suckleCartBean.getRes(), context, tv_money);
-        rv_purchaserecord.setAdapter(shopCarListAdapter);
-
-        //suckleCart();
+        suckleCart();
     }
 
     /**
@@ -202,46 +204,38 @@ public class ShopCarFragment extends BaseLazyFragment {
      */
     private void suckleCart() {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        params.put("p", String.valueOf(p));
         Log.e("ShopCarActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "suckle/cart", "suckle/cart", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/read_cart", "goods/read_cart", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 dialog.dismiss();
                 Log.e("ShopCarActivity", result);
                 try {
                     SuckleCartBean suckleCartBean = new Gson().fromJson(result, SuckleCartBean.class);
-                    if ("1".equals(String.valueOf(suckleCartBean.getStu()))) {
-                        ll_content.setVisibility(View.VISIBLE);
+                    if ("1".equals(String.valueOf(suckleCartBean.getStatus()))) {
                         ll_empty.setVisibility(View.GONE);
                         if (rv_purchaserecord != null) {
                             rv_purchaserecord.setEnabled(true);
                             rv_purchaserecord.loadMoreComplete();
                         }
                         if (p == 1) {
-                            shopCarListAdapter = new ShopCarListAdapter(suckleCartBean.getRes(), context, tv_money);
+                            shopCarListAdapter = new ShopCarListAdapter(suckleCartBean.getCart(), context, tv_money);
                             rv_purchaserecord.setAdapter(shopCarListAdapter);
                             rv_purchaserecord.setCanloadMore(false);
                             rv_purchaserecord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    // Intent intent = new Intent(context, PriceDetailsActivity.class);
-                                    // intent.putExtra("id", shopCarListAdapter.getDatas().get(position).getGid());
-                                    //intent.putExtra("CountCart", tv_countCart.getText().toString());
-                                    //startActivity(intent);
+                                    Intent intent = new Intent(context, PriceDetailsActivity.class);
+                                    intent.putExtra("id", shopCarListAdapter.getDatas().get(position).getGid());
+                                    startActivity(intent);
                                 }
                             });
                         } else {
-                            shopCarListAdapter.setDatas((ArrayList<SuckleCartBean.ResBean>) suckleCartBean.getRes());
-                            if (suckleCartBean.getRes().size() < 10) {
-                                rv_purchaserecord.setCanloadMore(false);
-                                rv_purchaserecord.loadMoreEnd();
-                            }
+                            // shopCarListAdapter.setDatas((ArrayList<SuckleCartBean.ResBean>) suckleCartBean.getRes());
                         }
-                    } else if ("0".equals(String.valueOf(suckleCartBean.getStu()))) {
-                        ll_content.setVisibility(View.GONE);
+                    } else {
                         ll_empty.setVisibility(View.VISIBLE);
                     }
                     suckleCartBean = null;
@@ -268,17 +262,17 @@ public class ShopCarFragment extends BaseLazyFragment {
      */
     private void suckleCartDel(String id) {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("id", id);
         Log.e("RegisterActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "suckle/cart_del", "suckle/cart_del", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/cartdel", "goods/cartdel", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 Log.e("RegisterActivity", result);
                 try {
-                    SuckleCartDelBean suckleCartDelBean = new Gson().fromJson(result, SuckleCartDelBean.class);
-                    if ("1".equals(String.valueOf(suckleCartDelBean.getStu()))) {
+                    CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
+                    if ("1".equals(String.valueOf(codeBean.getStatus()))) {
                         EasyToast.showShort(context, "删除成功");
                         suckleCart();
                     } else {

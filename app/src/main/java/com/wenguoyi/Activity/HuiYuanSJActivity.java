@@ -107,7 +107,7 @@ public class HuiYuanSJActivity extends BaseActivity {
      * 会员升级
      */
     private void userUser() {
-        HashMap<String, String> params = new HashMap<>(1);
+        HashMap<String, String> params = new HashMap<>(2);
         params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
         Log.e("HuiYuanSJActivity", params.toString());

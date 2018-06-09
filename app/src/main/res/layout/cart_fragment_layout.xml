@@ -48,12 +48,14 @@
             android:weightSum="2">
 
             <LinearLayout
+                android:id="@+id/ll_gouweuche"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_gouwuche"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
@@ -64,6 +66,7 @@
                     android:textSize="@dimen/x15" />
 
                 <View
+                    android:id="@+id/view1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x1"
                     android:background="@color/bgtitle"></View>
@@ -71,12 +74,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_wdedingdan"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_wdedingdan"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
@@ -87,6 +92,7 @@
                     android:textSize="@dimen/x15" />
 
                 <View
+                    android:id="@+id/view2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x1"
                     android:background="@color/bgtitle"

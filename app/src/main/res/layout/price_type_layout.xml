@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_type_check"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#50000000"
@@ -28,9 +29,48 @@
                 android:clipChildren="false">
 
                 <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/SimpleDraweeView"
                     android:layout_width="@dimen/x98"
-                    android:layout_height="@dimen/x98"
-                    android:background="@mipmap/shopdemo" />
+                    android:layout_height="@dimen/x98" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_type_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:layout_marginTop="@dimen/x5"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="商品名"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/x15" />
+
+                <TextView
+                    android:id="@+id/tv_type_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:layout_marginTop="@dimen/x5"
+                    android:text="￥100"
+                    android:textColor="@color/textred"
+                    android:textSize="@dimen/x15" />
+
+                <TextView
+                    android:id="@+id/tv_kucun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:layout_marginTop="@dimen/x5"
+                    android:text="库存：134"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/x15" />
 
             </LinearLayout>
 
@@ -96,22 +136,11 @@
                 </LinearLayout>
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:layout_marginTop="@dimen/x15"
-                    android:text="产品属性"
-                    android:textColor="@color/text333"
-                    android:textSize="@dimen/x15" />
-
-                <com.wenguoyi.View.FlowLayout
-                    android:id="@+id/id_flowlayout"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:padding="10dp"></com.wenguoyi.View.FlowLayout>
-
+                <LinearLayout
+                    android:id="@+id/ll_typecontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"></LinearLayout>
 
             </LinearLayout>
 
@@ -124,7 +153,7 @@
             android:weightSum="2">
 
             <TextView
-                android:id="@+id/tv_addshop"
+                android:id="@+id/tv_type_addshop"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -135,7 +164,7 @@
                 android:textSize="@dimen/y12" />
 
             <TextView
-                android:id="@+id/shopnow"
+                android:id="@+id/type_shopnow"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

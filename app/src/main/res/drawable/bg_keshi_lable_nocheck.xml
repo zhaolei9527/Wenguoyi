@@ -5,7 +5,7 @@
     android:thickness="@dimen/x1"
     android:useLevel="false">
     <stroke
-        android:width="@dimen/x2"
+        android:width="@dimen/x1"
         android:color="@color/bgea" />
     <corners
         android:bottomLeftRadius="10dp"

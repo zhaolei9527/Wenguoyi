@@ -87,7 +87,7 @@
                 <com.jude.rollviewpager.RollPagerView
                     android:id="@+id/RollPagerView"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y141" />
+                    android:layout_height="@dimen/y230" />
 
                 <TextView
                     android:id="@+id/tv_title"

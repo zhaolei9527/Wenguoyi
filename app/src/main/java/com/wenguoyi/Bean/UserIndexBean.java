@@ -103,7 +103,7 @@ public class UserIndexBean {
         private String headimg;
         private String nickname;
         private String uid;
-        private int money;
+        private String money;
         private String integral;
         private String level;
 
@@ -131,11 +131,11 @@ public class UserIndexBean {
             this.uid = uid;
         }
 
-        public int getMoney() {
+        public String getMoney() {
             return money;
         }
 
-        public void setMoney(int money) {
+        public void setMoney(String money) {
             this.money = money;
         }
 
