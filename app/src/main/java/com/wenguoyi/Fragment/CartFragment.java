@@ -70,6 +70,7 @@ public class CartFragment extends BaseLazyFragment {
                 tvWdedingdan.setTextColor(getResources().getColor(R.color.text333));
                 view1.setVisibility(View.VISIBLE);
                 view2.setVisibility(View.GONE);
+                relaceFrament(0);
             }
         });
 
@@ -80,6 +81,7 @@ public class CartFragment extends BaseLazyFragment {
                 tvWdedingdan.setTextColor(getResources().getColor(R.color.text333));
                 view1.setVisibility(View.GONE);
                 view2.setVisibility(View.VISIBLE);
+                relaceFrament(1);
             }
         });
 
@@ -104,6 +106,7 @@ public class CartFragment extends BaseLazyFragment {
         View view = inflater.inflate(R.layout.cart_fragment_layout, container, false);
         fragmentList = new ArrayList();
         fragmentList.add(ShopCarFragment.class);
+        fragmentList.add(MyOrderFragment.class);
         initView(view);
         return view;
     }

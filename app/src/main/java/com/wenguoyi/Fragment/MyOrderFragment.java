@@ -67,8 +67,6 @@ public class MyOrderFragment extends BaseLazyFragment {
                     context.sendBroadcast(new Intent("OrderContentRefresh").putExtra("stu", "3"));
                 } else if (position == 4) {
                     context.sendBroadcast(new Intent("OrderContentRefresh").putExtra("stu", "4"));
-                } else if (position == 5) {
-                    context.sendBroadcast(new Intent("OrderContentRefresh").putExtra("stu", "-1"));
                 }
             }
 
@@ -92,10 +90,7 @@ public class MyOrderFragment extends BaseLazyFragment {
         titles.add("待付款");
         titles.add("待发货");
         titles.add("待收货");
-        titles.add("待评价");
-        titles.add("已取消");
-
-
+        titles.add("已完成");
         return view;
     }
 

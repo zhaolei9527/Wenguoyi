@@ -24,8 +24,8 @@ public class OrderPageAdapter extends PagerAdapter {
     public OrderPageAdapter(Context context, List pageTitle) {
         this.PageTitle = pageTitle;
         this.context = context;
-        OrderContentFrameLayout orderContentFrameLayout1 = new OrderContentFrameLayout(context, "");
-        orderContentFrameLayout1.setTag("");
+        OrderContentFrameLayout orderContentFrameLayout1 = new OrderContentFrameLayout(context, "0");
+        orderContentFrameLayout1.setTag("0");
         PageS.add(orderContentFrameLayout1);
         OrderContentFrameLayout orderContentFrameLayout2 = new OrderContentFrameLayout(context, "1");
         orderContentFrameLayout2.setTag("1");
@@ -41,12 +41,6 @@ public class OrderPageAdapter extends PagerAdapter {
         PageS.add(orderContentFrameLayout4);
         OrderContentFrameLayout orderContentFrameLayout5 = new OrderContentFrameLayout(context, "4");
         orderContentFrameLayout5.setTag("4");
-
-        PageS.add(orderContentFrameLayout5);
-        OrderContentFrameLayout orderContentFrameLayout6 = new OrderContentFrameLayout(context, "-1");
-        orderContentFrameLayout6.setTag("-1");
-
-        PageS.add(orderContentFrameLayout6);
 
     }
 

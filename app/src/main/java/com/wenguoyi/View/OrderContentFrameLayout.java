@@ -128,15 +128,14 @@ public class OrderContentFrameLayout extends LinearLayout {
      */
     private void orderLists(final String stu) {
         HashMap<String, String> params = new HashMap<>(4);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        params.put("p", String.valueOf(p));
-        params.put("stu", stu);
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/lists", "order/lists", params, new VolleyInterface(context) {
+        params.put("st", stu);
+        Log.e("OrderContentFrameLayout", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/index", "order/index", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
-                Log.e("RegisterActivity", stu);
-                Log.e("RegisterActivity", result);
+                Log.e("OrderContentFrameLayout", result);
                 dialog.dismiss();
                 try {
                     final OrderListsBean orderListsBean = new Gson().fromJson(result, OrderListsBean.class);

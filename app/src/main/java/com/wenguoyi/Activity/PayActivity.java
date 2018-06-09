@@ -187,7 +187,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
      */
     private void orderPay() {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("id", orderid);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         Log.e("RegisterActivity", params.toString());
@@ -238,11 +238,11 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
      */
     private void orderWxpay() {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("id", orderid);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         Log.e("RegisterActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/wxpay", "order/wxpay", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/pay", "order/pay", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 dialog.dismiss();

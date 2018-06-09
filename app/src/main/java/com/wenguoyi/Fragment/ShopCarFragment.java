@@ -24,9 +24,11 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.wenguoyi.Activity.OrderActivity;
 import com.wenguoyi.Activity.PriceDetailsActivity;
 import com.wenguoyi.Adapter.ShopCarListAdapter;
 import com.wenguoyi.Bean.CodeBean;
+import com.wenguoyi.Bean.OrderOrderBean;
 import com.wenguoyi.Bean.SuckleCartBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
@@ -83,7 +85,6 @@ public class ShopCarFragment extends BaseLazyFragment {
 
     @Override
     protected void initData() {
-        getData();
 
         /**
          * 编辑
@@ -106,6 +107,39 @@ public class ShopCarFragment extends BaseLazyFragment {
                 rl_buy.setVisibility(View.VISIBLE);
             }
         };
+
+        /**
+         * 下单
+         * */
+        shopnow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringBuilder id = new StringBuilder();
+                StringBuilder cid = new StringBuilder();
+                StringBuilder amount = new StringBuilder();
+
+                for (int i = 0; i < shopCarListAdapter.getDatas().size(); i++) {
+                    if (shopCarListAdapter.getDatas().get(i).isCheck()) {
+                        if (i == 0) {
+                            id.append(shopCarListAdapter.getDatas().get(i).getGid());
+                            cid.append(shopCarListAdapter.getDatas().get(i).getId());
+                            amount.append(shopCarListAdapter.getDatas().get(i).getNum());
+                        } else {
+                            id.append("," + shopCarListAdapter.getDatas().get(i).getGid());
+                            cid.append("," + shopCarListAdapter.getDatas().get(i).getId());
+                            amount.append("," + shopCarListAdapter.getDatas().get(i).getNum());
+                        }
+                    }
+                }
+
+                if (!TextUtils.isEmpty(id.toString())) {
+                    orderOrder(id.toString(), cid.toString(), amount.toString());
+                } else {
+                    EasyToast.showShort(context, "请选择商品");
+                }
+            }
+        });
+
 
         context.registerReceiver(this.broadcastReceiver, new IntentFilter("gouwuchebianji"));
         context.registerReceiver(this.broadcastReceiver2, new IntentFilter("gouwuchebianjiwancheng"));
@@ -197,6 +231,12 @@ public class ShopCarFragment extends BaseLazyFragment {
 
     public void getData() {
         suckleCart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
     }
 
     /**
@@ -293,5 +333,44 @@ public class ShopCarFragment extends BaseLazyFragment {
         });
     }
 
+    /**
+     * 购物车下单
+     */
+    private void orderOrder(String id, final String cid, final String amount) {
+        HashMap<String, String> params = new HashMap<>(3);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        params.put("id", id);
+        params.put("cid", cid);
+        params.put("amount", amount);
+        Log.e("ShopCarFragment", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/order", "order/order", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("ShopCarFragment", result);
+                try {
+                    OrderOrderBean orderOrderBean = new Gson().fromJson(result, OrderOrderBean.class);
+                    if (1 == orderOrderBean.getStatus()) {
+                        context.startActivity(new Intent(context, OrderActivity.class)
+                                .putExtra("order", result)
+                                .putExtra("cart_id", cid)
+                                .putExtra("amount_list", amount)
+                        );
+                    } else {
+                        Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                    }
+                    result = null;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onMyError(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
