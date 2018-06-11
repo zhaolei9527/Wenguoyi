@@ -4,14 +4,12 @@ import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,13 +20,13 @@ import com.google.gson.Gson;
 import com.wenguoyi.Adapter.MyOrderAdapter;
 import com.wenguoyi.Bean.OrderListsBean;
 import com.wenguoyi.R;
+import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.SpUtil;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
 import com.wenguoyi.Volley.VolleyInterface;
 import com.wenguoyi.Volley.VolleyRequest;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.fangx.haorefresh.LoadMoreListener;
@@ -131,6 +129,7 @@ public class OrderContentFrameLayout extends LinearLayout {
         params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("st", stu);
+        params.put("page", String.valueOf(p));
         Log.e("OrderContentFrameLayout", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/index", "order/index", params, new VolleyInterface(context) {
             @Override
@@ -139,47 +138,26 @@ public class OrderContentFrameLayout extends LinearLayout {
                 dialog.dismiss();
                 try {
                     final OrderListsBean orderListsBean = new Gson().fromJson(result, OrderListsBean.class);
-                    if ("1111".equals(String.valueOf(orderListsBean.getStu()))) {
-                        ll_empty.setVisibility(GONE);
-                        if (p == 1) {
-                            adapter = new MyOrderAdapter(orderListsBean.getRes(), context, OrderContentFrameLayout.this, ll_empty);
+                    if (1 == orderListsBean.getStatus()) {
+                        ll_empty.setVisibility(View.GONE);
+                        if (1 == p) {
+                            adapter = new MyOrderAdapter(context, orderListsBean.getMsg());
                             mRecyclerView.setAdapter(adapter);
-                            mRecyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    if (position != orderListsBean.getRes().size()) {
-                                        context.registerReceiver(receiver, new IntentFilter("OrderContentRefresh"));
-//                                        context.startActivity(new Intent(context, MyOrderDetailsActivity.class)
-//                                                .putExtra("orderid", orderListsBean.getRes().get(position).getId()));
-                                    }
-                                }
-                            });
-                        } else {
-                            adapter.setDatas((ArrayList<OrderListsBean.ResBean>) orderListsBean.getRes());
-                            adapter.notifyDataSetChanged();
-                        }
-
-                        if (orderListsBean.getRes().size() < 10) {
-                            if (mRecyclerView != null) {
-                                mRecyclerView.loadMoreComplete();
-                                mRecyclerView.setCanloadMore(false);
-                                mRecyclerView.loadMoreEnd();
-                            }
                         } else {
                             mRecyclerView.loadMoreComplete();
+                            adapter.setDatas(orderListsBean.getMsg());
+                        }
+                        if (0 == orderListsBean.getFy()) {
+                            mRecyclerView.loadMoreEnd();
+                            mRecyclerView.setCanloadMore(false);
+                        } else {
                             mRecyclerView.setCanloadMore(true);
                         }
-
-                    } else if ("111".equals(String.valueOf(orderListsBean.getStu()))) {
+                    } else {
                         if (1 == p) {
-                            ll_empty.setVisibility(VISIBLE);
+                            ll_empty.setVisibility(View.VISIBLE);
                         } else {
-                            if (mRecyclerView != null) {
-                                mRecyclerView.setEnabled(true);
-                                mRecyclerView.loadMoreComplete();
-                                mRecyclerView.setCanloadMore(false);
-                                mRecyclerView.loadMoreEnd();
-                            }
+                            EasyToast.showShort(context, R.string.notmore);
                         }
                     }
 

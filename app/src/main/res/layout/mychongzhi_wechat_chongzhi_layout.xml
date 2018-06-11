@@ -32,7 +32,7 @@
                 android:layout_marginTop="@dimen/x10"
                 android:background="@null"
                 android:hint="请输入充值金额"
-                android:inputType="numberDecimal"
+                android:inputType="number"
                 android:textSize="@dimen/x18" />
 
             <RelativeLayout
