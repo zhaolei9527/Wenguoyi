@@ -48,13 +48,13 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
     public void onResp(BaseResp resp) {
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
             if (resp.errCode == 0) {
-                EasyToast.showShort(WXPayEntryActivity.this, "支付成功");
+                EasyToast.showLong(WXPayEntryActivity.this, "支付成功");
                 EventBus.getDefault().post(
                         new BankEvent("good", "pay"));
             } else {
                 Log.e(TAG, String.valueOf(resp.errCode));
                 Log.e(TAG, "bad"+String.valueOf(resp.errStr));
-                EasyToast.showShort(WXPayEntryActivity.this, "支付失败，请重试");
+                EasyToast.showLong(WXPayEntryActivity.this, "支付失败，请重试");
                 EventBus.getDefault().post(
                         new BankEvent("bad", "pay"));
             }

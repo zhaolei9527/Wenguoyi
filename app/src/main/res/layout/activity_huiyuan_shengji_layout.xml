@@ -60,7 +60,8 @@
             android:id="@+id/ll_A"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y90"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:visibility="gone">
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/SimpleDraweeViewA"
@@ -97,7 +98,6 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="A级合伙人合伙人模式需要划分的更细。那么现在现在又出现了三级合伙人模式。那么…"
                     android:textColor="@color/text666"
                     android:textSize="@dimen/x15" />
 
@@ -111,7 +111,8 @@
             android:id="@+id/ll_B"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y90"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:visibility="gone">
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/SimpleDraweeViewB"
@@ -147,7 +148,6 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="B级合伙人合伙人模式需要划分的更细。那么现在现在又出现了三级合伙人模式。那么…"
                     android:textColor="@color/text666"
                     android:textSize="@dimen/x15" />
 
@@ -160,7 +160,8 @@
             android:id="@+id/ll_C"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y90"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:visibility="gone">
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/SimpleDraweeViewC"
@@ -196,7 +197,6 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="C级合伙人合伙人模式需要划分的更细。那么现在现在又出现了三级合伙人模式。那么…"
                     android:textColor="@color/text666"
                     android:textSize="@dimen/x15" />
 

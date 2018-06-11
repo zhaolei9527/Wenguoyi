@@ -119,35 +119,43 @@ public class HuiYuanSJActivity extends BaseActivity {
                     final UserUserBean userUserBean = new Gson().fromJson(result, UserUserBean.class);
                     if (1 == userUserBean.getStatus()) {
                         tvDengji.setText("您当前的会员等级：" + userUserBean.getLevel());
-                        SimpleDraweeViewA.setImageURI(UrlUtils.URL + userUserBean.getList().get(0).getImg());
-                        SimpleDraweeViewB.setImageURI(UrlUtils.URL + userUserBean.getList().get(1).getImg());
-                        SimpleDraweeViewC.setImageURI(UrlUtils.URL + userUserBean.getList().get(2).getImg());
-                        tvContentA.setText(userUserBean.getList().get(0).getContent());
-                        tvContentB.setText(userUserBean.getList().get(1).getContent());
-                        tvContentC.setText(userUserBean.getList().get(2).getContent());
-                        tvMoneyA.setText("￥" + userUserBean.getList().get(0).getPrice());
-                        tvMoneyB.setText("￥" + userUserBean.getList().get(1).getPrice());
-                        tvMoneyC.setText("￥" + userUserBean.getList().get(2).getPrice());
-                        llA.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                startActivity(new Intent(context, HuiYuanSJDetailsActivity.class).putExtra("id", userUserBean.getList().get(0).getId()));
-                            }
-                        });
-                        llB.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                startActivity(new Intent(context, HuiYuanSJDetailsActivity.class).putExtra("id", userUserBean.getList().get(1).getId()));
-                            }
-                        });
-                        llC.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                startActivity(new Intent(context, HuiYuanSJDetailsActivity.class).putExtra("id", userUserBean.getList().get(2).getId()));
-                            }
-                        });
 
-
+                        if (userUserBean.getList().size() > 2) {
+                            SimpleDraweeViewC.setImageURI(UrlUtils.URL + userUserBean.getList().get(2).getImg());
+                            tvMoneyC.setText("￥" + userUserBean.getList().get(2).getPrice());
+                            tvContentC.setText(userUserBean.getList().get(2).getContent());
+                            llC.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(context, HuiYuanSJDetailsActivity.class).putExtra("id", userUserBean.getList().get(2).getId()));
+                                }
+                            });
+                            llC.setVisibility(View.VISIBLE);
+                        }
+                        if (userUserBean.getList().size() > 1) {
+                            SimpleDraweeViewB.setImageURI(UrlUtils.URL + userUserBean.getList().get(1).getImg());
+                            tvContentB.setText(userUserBean.getList().get(1).getContent());
+                            tvMoneyB.setText("￥" + userUserBean.getList().get(1).getPrice());
+                            llB.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(context, HuiYuanSJDetailsActivity.class).putExtra("id", userUserBean.getList().get(1).getId()));
+                                }
+                            });
+                            llB.setVisibility(View.VISIBLE);
+                        }
+                        if (userUserBean.getList().size() > 0) {
+                            SimpleDraweeViewA.setImageURI(UrlUtils.URL + userUserBean.getList().get(0).getImg());
+                            tvContentA.setText(userUserBean.getList().get(0).getContent());
+                            tvMoneyA.setText("￥" + userUserBean.getList().get(0).getPrice());
+                            llA.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(context, HuiYuanSJDetailsActivity.class).putExtra("id", userUserBean.getList().get(0).getId()));
+                                }
+                            });
+                            llA.setVisibility(View.VISIBLE);
+                        }
                     } else {
                         EasyToast.showShort(context, R.string.Abnormalserver);
                     }
