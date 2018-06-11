@@ -111,7 +111,7 @@ public class HuiYuanSJActivity extends BaseActivity {
         params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
         Log.e("HuiYuanSJActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/user", "user/user", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/usertype", "user/usertype", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 Log.e("HuiYuanSJActivity", result);

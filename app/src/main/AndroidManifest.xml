@@ -151,7 +151,45 @@
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
-        <activity android:name=".Activity.PayActivity"></activity>
+        <activity
+            android:name=".Activity.OrderBuyActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+
+        <activity
+            android:name=".Activity.PayActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+
+        <activity
+            android:name=".Activity.MyOrderDetailsActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wx82670e4f447fbb75" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wx82670e4f447fbb75" />
+            </intent-filter>
+        </activity>
+
 
     </application>
 

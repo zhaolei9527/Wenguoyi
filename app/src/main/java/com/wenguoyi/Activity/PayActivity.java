@@ -32,7 +32,6 @@ import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.SpUtil;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
-import com.wenguoyi.View.CommomDialog;
 import com.wenguoyi.Volley.VolleyInterface;
 import com.wenguoyi.Volley.VolleyRequest;
 
@@ -52,7 +51,6 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     private ImageView img_weixin;
     private CheckBox Choosedweixin;
     private Button btn_paynow;
-    private TextView tv_money;
     private String orderid;
     private String order;
     private Dialog dialog;
@@ -73,7 +71,9 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                      对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
                      */
                     String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+                    Log.e("PayActivity", resultInfo.toString());
                     String resultStatus = payResult.getResultStatus();
+                    Log.e("PayActivity", resultStatus.toString());
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
@@ -128,7 +128,6 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         img_weixin = (ImageView) findViewById(R.id.img_weixin);
         Choosedweixin = (CheckBox) findViewById(R.id.Choosedweixin);
         btn_paynow = (Button) findViewById(R.id.btn_paynow);
-        tv_money = (TextView) findViewById(R.id.tv_money);
         orderid = getIntent().getStringExtra("orderid");
         order = getIntent().getStringExtra("order");
         if (!TextUtils.isEmpty(order)) {
@@ -198,25 +197,12 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                 Log.e("RegisterActivity", result);
                 try {
                     OrderPay orderPay = new Gson().fromJson(result, OrderPay.class);
-                    if ("1".equals(String.valueOf(orderPay.getCode()))) {
-                        tv_totalmoney.setText("￥" + orderPay.getOrder().getTotalprice());
-                        tv_money.setText("￥" + orderPay.getOrder().getSfmoney());
-                        tv_ordernumber.setText(orderPay.getOrder().getOrderid());
+                    if ("1".equals(String.valueOf(orderPay.getStatus()))) {
+                        tv_totalmoney.setText("￥" + orderPay.getMsg().getMoney());
+                        tv_ordernumber.setText(String.valueOf(orderPay.getMsg().getOrderid()));
                     } else {
-                        new CommomDialog(context, R.style.dialog, orderPay.getMsg(), new CommomDialog.OnCloseListener() {
-                            @Override
-                            public void onClick(Dialog dialog, boolean confirm) {
-                                if (confirm) {
-                                    dialog.dismiss();
-                                    finish();
-                                } else {
-                                    dialog.dismiss();
-                                    finish();
-                                }
-                            }
-                        }).setTitle("提示").show();
+                        Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                     }
-
                     result = null;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -241,23 +227,23 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         params.put("pwd", UrlUtils.KEY);
         params.put("id", orderid);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        Log.e("RegisterActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/pay", "order/pay", params, new VolleyInterface(context) {
+        Log.e("orderWxpay", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/dopay", "order/dopay", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 dialog.dismiss();
-                Log.e("RegisterActivity", result);
+                Log.e("orderWxpay", result);
                 try {
                     OrderWxpayBean orderWxpayBean = new Gson().fromJson(result, OrderWxpayBean.class);
                     if (api != null) {
                         PayReq req = new PayReq();
                         req.appId = Constants.APP_ID;
-                        req.partnerId = orderWxpayBean.getData().getMch_id();
-                        req.prepayId = orderWxpayBean.getData().getPrepay_id();
+                        req.partnerId = orderWxpayBean.getMsg().getMch_id();
+                        req.prepayId = orderWxpayBean.getMsg().getPrepay_id();
                         req.packageValue = "Sign=WXPay";
-                        req.nonceStr = orderWxpayBean.getData().getNonceStr();
-                        req.timeStamp = orderWxpayBean.getData().getTimeStamp();
-                        req.sign = orderWxpayBean.getData().getSign();
+                        req.nonceStr = orderWxpayBean.getMsg().getNonceStr();
+                        req.timeStamp = orderWxpayBean.getMsg().getTimeStamp();
+                        req.sign = "aaaaa";
                         api.sendReq(req);
                     }
                     orderWxpayBean = null;

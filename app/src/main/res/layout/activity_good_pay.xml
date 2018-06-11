@@ -60,7 +60,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/x28"
                 android:text="恭喜您已经支付成功"
-                android:textColor="@color/pressedColor"
+                android:textColor="@color/bgtitle"
                 android:textSize="@dimen/x18" />
 
             <TextView
@@ -85,23 +85,22 @@
                     android:layout_height="@dimen/y30"
                     android:layout_gravity="center"
                     android:layout_marginRight="@dimen/x35"
-                    android:background="@drawable/btn_delete_selector"
+                    android:background="@drawable/bg_login"
                     android:gravity="center"
                     android:text="查看订单"
-                    android:textColor="@drawable/btn_textdelete_selector"
+                    android:textColor="@color/bgfff"
                     android:textSize="@dimen/y12" />
 
                 <Button
                     android:id="@+id/btn_gotomain"
                     android:layout_width="@dimen/x114"
                     android:layout_height="@dimen/y30"
-                    android:background="@drawable/btn_goodpay_selector"
+                    android:background="@drawable/bg_login"
                     android:gravity="center"
                     android:text="返回"
                     android:textColor="#fff"
                     android:textSize="@dimen/y12" />
             </LinearLayout>
-
 
         </LinearLayout>
 
@@ -113,7 +112,6 @@
             android:visibility="gone">
 
             <ImageView
-
                 android:layout_width="@dimen/x50"
                 android:layout_height="@dimen/x50"
                 android:layout_gravity="center_horizontal"
@@ -150,7 +148,7 @@
                     android:layout_width="@dimen/x114"
                     android:layout_height="@dimen/y30"
                     android:layout_marginRight="@dimen/x35"
-                    android:background="@drawable/btn_goodpay_selector"
+                    android:background="@drawable/bg_login"
                     android:gravity="center"
                     android:text="重新支付"
                     android:textColor="#fff"
@@ -161,10 +159,10 @@
                     android:layout_width="@dimen/x114"
                     android:layout_height="@dimen/y30"
                     android:layout_gravity="center"
-                    android:background="@drawable/btn_delete_selector"
+                    android:background="@drawable/bg_login"
                     android:gravity="center"
                     android:text="查看订单"
-                    android:textColor="@drawable/btn_textdelete_selector"
+                    android:textColor="@color/bgfff"
                     android:textSize="@dimen/y12" />
 
 

@@ -55,8 +55,6 @@ public class MyOrderDetailsActivity extends BaseActivity implements View.OnClick
     private TextView tv_alipay;
     private RelativeLayout rl_alipay;
     private Button btn_pay_order;
-    private TextView textView3;
-    private TextView tv_fanjifen;
     private TextView tv_bianhao;
     private TextView tv_order_time;
     private String orderid;
@@ -129,8 +127,6 @@ public class MyOrderDetailsActivity extends BaseActivity implements View.OnClick
         btn_delete_order.setVisibility(View.GONE);
         btn_delete_order_info.setVisibility(View.GONE);
 
-        textView3 = (TextView) findViewById(R.id.textView3);
-        tv_fanjifen = (TextView) findViewById(R.id.tv_fanjifen);
         tv_bianhao = (TextView) findViewById(R.id.tv_bianhao);
         tv_order_time = (TextView) findViewById(R.id.tv_order_time);
         img_checkaddress = (ImageView) findViewById(R.id.img_checkaddress);
@@ -158,14 +154,15 @@ public class MyOrderDetailsActivity extends BaseActivity implements View.OnClick
      */
     private void orderDetail() {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("id", orderid);
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/detail", "order/detail", params, new VolleyInterface(context) {
+        Log.e("MyOrderDetailsActivity", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/billdetail", "order/billdetail", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 dialog.dismiss();
-                Log.e("RegisterActivity", result);
+                Log.e("MyOrderDetailsActivity", result);
                 try {
                     final OrderDetailBean orderDetailBean = new Gson().fromJson(result, OrderDetailBean.class);
                     tv_name.setText(orderDetailBean.getOrder().getName());
@@ -209,11 +206,7 @@ public class MyOrderDetailsActivity extends BaseActivity implements View.OnClick
                         rl_jifen.setVisibility(View.GONE);
                         tv_jifen.setText(orderDetailBean.getOrder().getScore());
                     }
-                    if (TextUtils.isEmpty(orderDetailBean.getOrder().getFh_jifen())) {
-                        tv_fanjifen.setText("0");
-                    } else {
-                        tv_fanjifen.setText(orderDetailBean.getOrder().getFh_jifen());
-                    }
+
                     tv_bianhao.setText("订单编号：" + orderDetailBean.getOrder().getOrderid());
                     tv_order_time.setText("下单时间：" + DateUtils.getMillon(Long.parseLong(orderDetailBean.getOrder().getAddtime()) * 1000));
                     String stu = orderDetailBean.getOrder().getStu();

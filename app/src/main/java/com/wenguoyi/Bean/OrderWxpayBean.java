@@ -1,5 +1,7 @@
 package com.wenguoyi.Bean;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * sakura.liangdinvshen.Bean
  *
@@ -9,45 +11,45 @@ package com.wenguoyi.Bean;
  */
 public class OrderWxpayBean {
 
-
     /**
-     * stu : 1
-     * data : {"appId":"wx0a74ea54b7f465bf","mch_id":"1495164722","nonceStr":"3efdrnwz64n8hosl5rtfaidzsefm8ye8","package":"Sign=WXPay","prepay_id":"wx20171230153434923ebb07330325298796","timeStamp":1514619274,"sign":"CBE5463A84EDC44B666937C754B552E4"}
+     * status : 1
+     * msg : {"appId":"wxe921d2ca987f9c35","mch_id":"1507215981","nonceStr":"3zq22uxr0wlni004ujpcnl7nqa591839","package":"Sign=WXPay","prepay_id":"wx11102015023922af50b250f32408348115","timeStamp":1528683615,"sign":"B37BD76818FF400F9423A7251C434DB7"}
      */
 
-    private int stu;
-    private DataBean data;
+    private int status;
+    private MsgBean msg;
 
-    public int getStu() {
-        return stu;
+    public int getStatus() {
+        return status;
     }
 
-    public void setStu(int stu) {
-        this.stu = stu;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public DataBean getData() {
-        return data;
+    public MsgBean getMsg() {
+        return msg;
     }
 
-    public void setData(DataBean data) {
-        this.data = data;
+    public void setMsg(MsgBean msg) {
+        this.msg = msg;
     }
 
-    public static class DataBean {
+    public static class MsgBean {
         /**
-         * appId : wx0a74ea54b7f465bf
-         * mch_id : 1495164722
-         * nonceStr : 3efdrnwz64n8hosl5rtfaidzsefm8ye8
+         * appId : wxe921d2ca987f9c35
+         * mch_id : 1507215981
+         * nonceStr : 3zq22uxr0wlni004ujpcnl7nqa591839
          * package : Sign=WXPay
-         * prepay_id : wx20171230153434923ebb07330325298796
-         * timeStamp : 1514619274
-         * sign : CBE5463A84EDC44B666937C754B552E4
+         * prepay_id : wx11102015023922af50b250f32408348115
+         * timeStamp : 1528683615
+         * sign : B37BD76818FF400F9423A7251C434DB7
          */
 
         private String appId;
         private String mch_id;
         private String nonceStr;
+        @SerializedName("package")
         private String packageX;
         private String prepay_id;
         private String timeStamp;

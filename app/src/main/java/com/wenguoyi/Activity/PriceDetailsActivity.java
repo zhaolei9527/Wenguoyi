@@ -31,6 +31,7 @@ import com.wenguoyi.Bean.CodeBean;
 import com.wenguoyi.Bean.GoodsCangBean;
 import com.wenguoyi.Bean.GoodsChangePriceBean;
 import com.wenguoyi.Bean.GoodsDetailBean;
+import com.wenguoyi.Bean.OrderBuyBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.DensityUtils;
 import com.wenguoyi.Utils.EasyToast;
@@ -62,8 +63,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     com.jude.rollviewpager.RollPagerView RollPagerView;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.tv_miaoshu)
-    TextView tvMiaoshu;
     @BindView(R.id.tv_price)
     TextView tvPrice;
     @BindView(R.id.wb)
@@ -225,7 +224,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.shopnow:
                 if (TextUtils.isEmpty(uid)) {
                     EasyToast.showShort(context, "请先登录");
@@ -234,6 +232,8 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                 }
                 typeshow = true;
                 llTypeCheck.setVisibility(View.VISIBLE);
+
+
                 break;
             case R.id.rl_back:
                 finish();
@@ -278,17 +278,32 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.type_shopnow:
-
+                if (Utils.isConnected(context)) {
+                    if (typeMap != null) {
+                        if (typeMap.containsValue("!!!")) {
+                            EasyToast.showShort(context, "请选择商品规格");
+                            break;
+                        }
+                    }
+                    dialog.show();
+                    orderBuy();
+                } else {
+                    EasyToast.showShort(context, R.string.Networkexception);
+                }
                 break;
             case R.id.tv_type_addshop:
-                if (typeMap!=null){
-                    if (typeMap.containsValue("!!!")) {
-                        EasyToast.showShort(context, "请选择商品规格");
-                        break;
+                if (Utils.isConnected(context)) {
+                    if (typeMap != null) {
+                        if (typeMap.containsValue("!!!")) {
+                            EasyToast.showShort(context, "请选择商品规格");
+                            break;
+                        }
                     }
+                    dialog.show();
+                    cartJoinCart();
+                } else {
+                    EasyToast.showShort(context, R.string.Networkexception);
                 }
-                dialog.show();
-                cartJoinCart();
                 break;
             default:
                 break;
@@ -339,6 +354,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                      * */
                     if ("1".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
                         tvPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice());
+                        tvOtherPrice.setVisibility(View.GONE);
                     } else if ("2".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
                         tvPrice.setText("批发价" + goodsDetailBean.getGoods().getPrice());
                         tvOtherPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice1());
@@ -584,6 +600,67 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
                 dialog.dismiss();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    /**
+     * 确认订单（立即购买）
+     */
+    private void orderBuy() {
+        final HashMap<String, String> params = new HashMap<>(1);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        params.put("id", String.valueOf(getIntent().getStringExtra("id")));
+        params.put("amount", btnShuliang.getText().toString());
+        if ("1".equals(goodsDetailBean.getGoods().getIs_norm())) {
+            params.put("is_norm", "1");
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i1 = 0; i1 < typeMap.size(); i1++) {
+                if (i1 == 0) {
+                    stringBuilder.append(typeMap.get(String.valueOf(i1)));
+                } else {
+                    stringBuilder.append("|" + typeMap.get(String.valueOf(i1)));
+                }
+            }
+            params.put("normstr", stringBuilder.toString());
+        } else {
+            params.put("is_norm", "-1");
+        }
+        Log.e("PriceDetailsActivity", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/buy", "order/buy", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("PriceDetailsActivity", result);
+                try {
+                    dialog.dismiss();
+                    OrderBuyBean orderBuyBean = new Gson().fromJson(result, OrderBuyBean.class);
+                    if (1 == orderBuyBean.getStatus()) {
+                        context.startActivity(new Intent(context, OrderBuyActivity.class)
+                                .putExtra("order", result)
+                                .putExtra("gid", String.valueOf(getIntent().getStringExtra("id")))
+                                .putExtra("is_norm", params.get("is_norm"))
+                                .putExtra("norm", params.get("normstr"))
+                                .putExtra("amount", params.get("amount"))
+                                .putExtra("val", orderBuyBean.getGoods().getVal())
+                        );
+                        finish();
+                    } else {
+                        EasyToast.showShort(context, R.string.Abnormalserver);
+                    }
+                    result = null;
+                } catch (Exception e) {
+                    dialog.dismiss();
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                dialog.dismiss();
+                error.printStackTrace();
                 Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
