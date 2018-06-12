@@ -89,7 +89,8 @@
                     android:gravity="center"
                     android:text="查看订单"
                     android:textColor="@color/bgfff"
-                    android:textSize="@dimen/y12" />
+                    android:textSize="@dimen/y12"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btn_gotomain"
@@ -147,7 +148,6 @@
                     android:id="@+id/btn_repay"
                     android:layout_width="@dimen/x114"
                     android:layout_height="@dimen/y30"
-                    android:layout_marginRight="@dimen/x35"
                     android:background="@drawable/bg_login"
                     android:gravity="center"
                     android:text="重新支付"
@@ -163,7 +163,8 @@
                     android:gravity="center"
                     android:text="查看订单"
                     android:textColor="@color/bgfff"
-                    android:textSize="@dimen/y12" />
+                    android:textSize="@dimen/y12"
+                    android:visibility="gone" />
 
 
             </LinearLayout>

@@ -122,11 +122,9 @@ public class MyOrderDetailsActivity extends BaseActivity implements View.OnClick
         btn_pay_order = (Button) findViewById(R.id.btn_pay_order);
         btn_delete_order = (Button) findViewById(R.id.btn_delete_order);
         btn_delete_order_info = (Button) findViewById(R.id.btn_delete_order_info);
-
         btn_pay_order.setVisibility(View.GONE);
         btn_delete_order.setVisibility(View.GONE);
         btn_delete_order_info.setVisibility(View.GONE);
-
         tv_bianhao = (TextView) findViewById(R.id.tv_bianhao);
         tv_order_time = (TextView) findViewById(R.id.tv_order_time);
         img_checkaddress = (ImageView) findViewById(R.id.img_checkaddress);
@@ -165,67 +163,41 @@ public class MyOrderDetailsActivity extends BaseActivity implements View.OnClick
                 Log.e("MyOrderDetailsActivity", result);
                 try {
                     final OrderDetailBean orderDetailBean = new Gson().fromJson(result, OrderDetailBean.class);
-                    tv_name.setText(orderDetailBean.getOrder().getName());
-                    tv_phone.setText(orderDetailBean.getOrder().getTel());
-                    tv_dizhi.setText(orderDetailBean.getOrder().getSheng() + orderDetailBean.getOrder().getShi() + orderDetailBean.getOrder().getXian() + orderDetailBean.getOrder().getAddress());
-
-                    if (!TextUtils.isEmpty(orderDetailBean.getOrder().getExp()) && !TextUtils.isEmpty(orderDetailBean.getOrder().getExpnum())) {
-                        tv_order_exp.setText("快递公司：" + orderDetailBean.getOrder().getExp());
-                        tv_order_expnum.setText("快递单号：" + orderDetailBean.getOrder().getExpnum());
+                    tv_name.setText(orderDetailBean.getMsg().getAddressman());
+                    tv_phone.setText(orderDetailBean.getMsg().getAddressmobile());
+                    tv_dizhi.setText(orderDetailBean.getMsg().getAddress());
+                    if (!TextUtils.isEmpty(orderDetailBean.getMsg().getExp()) && !TextUtils.isEmpty(orderDetailBean.getMsg().getExpnum())) {
+                        tv_order_exp.setText("快递公司：" + orderDetailBean.getMsg().getExp());
+                        tv_order_expnum.setText("快递单号：" + orderDetailBean.getMsg().getExpnum());
                     }
-
-                    if (TextUtils.isEmpty(orderDetailBean.getOrder().getTotalprice())) {
+                    if (TextUtils.isEmpty(orderDetailBean.getMsg().getTotalprice())) {
                         tv_brand_price.setText("￥0.00");
                     } else {
-                        tv_brand_price.setText("￥" + orderDetailBean.getOrder().getTotalprice());
+                        tv_brand_price.setText("￥" + orderDetailBean.getMsg().getTotalprice());
                     }
-                    tv_yunfei.setText("￥" + orderDetailBean.getOrder().getYunfei());
-                    if ("1".equals(String.valueOf(orderDetailBean.getGoods().get(0).getType()))) {
-                        double v = Double.parseDouble(orderDetailBean.getOrder().getTotalprice()) + Double.parseDouble(orderDetailBean.getOrder().getYunfei());
-                        tv_price_total.setText("￥" + String.valueOf(v));
+                    tv_yunfei.setText("￥" + orderDetailBean.getMsg().getYunfei());
+                    if (TextUtils.isEmpty(orderDetailBean.getMsg().getTotalprice())) {
+                        tv_price_total.setText("￥0.00");
                     } else {
-                        if (TextUtils.isEmpty(orderDetailBean.getOrder().getTotalprice())) {
-                            tv_price_total.setText("￥0.00");
-                        } else {
-                            tv_price_total.setText("￥" + orderDetailBean.getOrder().getTotalprice());
-                        }
+                        tv_price_total.setText("￥" + orderDetailBean.getMsg().getTotalprice());
                     }
-                    String payment = orderDetailBean.getOrder().getPayment();
-                    if ("1".equals(payment)) {
-                        rl_alipay.setVisibility(View.VISIBLE);
-                        tv_alipay.setText("￥" + orderDetailBean.getOrder().getSfmoney());
-                    } else if ("2".equals(payment)) {
-                        rl_weixinpay.setVisibility(View.VISIBLE);
-                        tv_weixinpay.setText("￥" + orderDetailBean.getOrder().getSfmoney());
-                    }
-                    String paytype = orderDetailBean.getOrder().getPaytype();
-                    if ("1".equals(paytype)) {
-                        rl_yue.setVisibility(View.VISIBLE);
-                        tv_yue.setText("￥" + orderDetailBean.getOrder().getYemoney());
-                    } else if ("2".equals(paytype)) {
-                        rl_jifen.setVisibility(View.GONE);
-                        tv_jifen.setText(orderDetailBean.getOrder().getScore());
-                    }
-
-                    tv_bianhao.setText("订单编号：" + orderDetailBean.getOrder().getOrderid());
-                    tv_order_time.setText("下单时间：" + DateUtils.getMillon(Long.parseLong(orderDetailBean.getOrder().getAddtime()) * 1000));
-                    String stu = orderDetailBean.getOrder().getStu();
-
-                    for (int i = 0; i < orderDetailBean.getGoods().size(); i++) {
+                    tv_bianhao.setText("订单编号：" + orderDetailBean.getMsg().getOrderid());
+                    tv_order_time.setText("下单时间：" + DateUtils.getMillon(Long.parseLong(orderDetailBean.getMsg().getAddtime()) * 1000));
+                    for (int i = 0; i < orderDetailBean.getMsg().getGoods().size(); i++) {
                         final View item_oreder_details_layout = View.inflate(context, R.layout.item_oreder_details_layout, null);
-                        item_oreder_details_layout.setTag(orderDetailBean.getGoods().get(i).getGid());
+                        item_oreder_details_layout.setTag(orderDetailBean.getMsg().getGoods().get(i).getGid());
                         SimpleDraweeView SimpleDraweeView = (com.facebook.drawee.view.SimpleDraweeView) item_oreder_details_layout.findViewById(R.id.SimpleDraweeView);
-                        SimpleDraweeView.setImageURI(UrlUtils.URL + orderDetailBean.getGoods().get(i).getImg());
+                        SimpleDraweeView.setImageURI(UrlUtils.URL + orderDetailBean.getMsg().getGoods().get(i).getImg());
                         final TextView tv_title = (TextView) item_oreder_details_layout.findViewById(R.id.tv_title);
-                        tv_title.setText(orderDetailBean.getGoods().get(i).getTitle());
+                        tv_title.setText(orderDetailBean.getMsg().getGoods().get(i).getGname());
                         TextView tv_classify = (TextView) item_oreder_details_layout.findViewById(R.id.tv_classify);
-                        tv_classify.setText("￥" + orderDetailBean.getGoods().get(i).getPrice());
+                        tv_classify.setText("￥" + orderDetailBean.getMsg().getGoods().get(i).getPrice());
                         TextView tv_size = (TextView) item_oreder_details_layout.findViewById(R.id.tv_size);
-                        tv_size.setText("×" + orderDetailBean.getGoods().get(i).getNumber());
+                        tv_size.setText("×" + orderDetailBean.getMsg().getGoods().get(i).getAmount());
                         TextView tv_type = (TextView) item_oreder_details_layout.findViewById(R.id.tv_type);
-                        final Button btn_isget_order = (Button) item_oreder_details_layout.findViewById(R.id.btn_isget_order);
-                        btn_isget_order.setTag(orderDetailBean.getGoods().get(i).getId());
-                        String type = orderDetailBean.getGoods().get(i).getType();
+                        if (!TextUtils.isEmpty(orderDetailBean.getMsg().getGoods().get(i).getVal())) {
+                            tv_type.setText(orderDetailBean.getMsg().getGoods().get(i).getVal());
+                        }
                         item_oreder_details_layout.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

@@ -23,6 +23,7 @@ import com.wenguoyi.Activity.KeFuZhongXinActivity;
 import com.wenguoyi.Activity.MyChongZhiActivity;
 import com.wenguoyi.Activity.MyGuZhiActivity;
 import com.wenguoyi.Activity.MyMessageActivity;
+import com.wenguoyi.Activity.MyOrderActivity;
 import com.wenguoyi.Activity.MyQianBaoActivity;
 import com.wenguoyi.Activity.MyTuanDuiActivity;
 import com.wenguoyi.Activity.SettingActivity;
@@ -69,6 +70,8 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     TextView tvDaifahuo;
     @BindView(R.id.tv_daishouhuo)
     TextView tvDaishouhuo;
+    @BindView(R.id.ll_myorder)
+    LinearLayout llMyorder;
     @BindView(R.id.rl_dingdan)
     LinearLayout rlDingdan;
     @BindView(R.id.rl_gerenziliao)
@@ -101,6 +104,42 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     private Context context;
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        SimpleDraweeView.setImageURI(String.valueOf(SpUtil.get(context, "Headimg", "")));
+        tvUsername.setText(String.valueOf(SpUtil.get(context, "username", "")));
+        tvUserlv.setText("等级:" + String.valueOf(SpUtil.get(context, "Level", "")));
+        tvYue.setText("￥" + String.valueOf(SpUtil.get(context, "Money", "0")));
+        tvGuzhi.setText(String.valueOf(SpUtil.get(context, "Integral", "0.00")));
+        tvUserid.setText("ID:" + String.valueOf(SpUtil.get(context, "uuid", "")));
+        tvDaizhifu.setText(String.valueOf(SpUtil.get(context, "Dfcount", "0")));
+        tvDaifahuo.setText(String.valueOf(SpUtil.get(context, "Dfhcount", "0")));
+        tvDaishouhuo.setText(String.valueOf(SpUtil.get(context, "Dscount", "0")));
+
+        if (Utils.isConnected(context)) {
+            userIndex();
+        } else {
+            EasyToast.showShort(context, getResources().getString(R.string.Networkexception));
+        }
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @Override
     protected void initPrepare() {
 
     }
@@ -124,6 +163,8 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         rlKefuzhongxin.setOnClickListener(this);
         rlZijianzhuanjia.setOnClickListener(this);
         rlXitongshezhi.setOnClickListener(this);
+        rlDingdan.setOnClickListener(this);
+        llMyorder.setOnClickListener(this);
     }
 
     @Override
@@ -131,42 +172,6 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         context = getActivity();
         View view = inflater.inflate(R.layout.me_frament_layout, container, false);
         return view;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        SimpleDraweeView.setImageURI(String.valueOf(SpUtil.get(context, "Headimg", "")));
-        tvUsername.setText(String.valueOf(SpUtil.get(context, "username", "")));
-        tvUserlv.setText("等级:" + String.valueOf(SpUtil.get(context, "Level", "")));
-        tvYue.setText("￥" + String.valueOf(SpUtil.get(context, "Money", "0")));
-        tvGuzhi.setText(String.valueOf(SpUtil.get(context, "Integral", "0.00")));
-        tvUserid.setText("ID:" + String.valueOf(SpUtil.get(context, "uuid", "")));
-        tvDaizhifu.setText(String.valueOf(SpUtil.get(context, "Dfcount", "0")));
-        tvDaifahuo.setText(String.valueOf(SpUtil.get(context, "Dfhcount", "0")));
-        tvDaishouhuo.setText(String.valueOf(SpUtil.get(context, "Dscount", "0")));
-
-        if (Utils.isConnected(context)) {
-            userIndex();
-        } else {
-            EasyToast.showShort(context, getResources().getString(R.string.Networkexception));
-        }
-
     }
 
     /**
@@ -263,6 +268,10 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                 break;
             case R.id.rl_xitongshezhi:
                 startActivity(new Intent(context, SettingActivity.class));
+                break;
+            case R.id.ll_myorder:
+            case R.id.rl_dingdan:
+                startActivity(new Intent(context, MyOrderActivity.class));
                 break;
             default:
                 break;

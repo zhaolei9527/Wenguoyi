@@ -10,143 +10,124 @@ import java.util.List;
  * 功能描述：
  */
 public class OrderDetailBean {
+
     /**
-     * stu : 1
-     * goods : [{"id":"82","gid":"12","status":"0","price":"12.00","number":"1","type":"1","yfwnum":"0","img":"/Public/uploads/goods/img/2017-10-13/59e05bda67cf0.jpg","title":"出口外贸尾单秋冬羊绒衫女毛衣加厚高领菠萝针织衫打底外套保暖衫","gstatus":"1"}]
-     * order : {"xian":"金水区","shi":"郑州","sheng":"河南","address":"河西大道东1027","tel":"13027607540","paytype":"1","name":"jackma","orderid":"15149632437408096","sfmoney":"0.00","totalprice":"12","yunfei":"0.00","score":"","yemoney":"12","payment":"","fh_jifen":"","addtime":"1514963243","exp":"申通快递","expnum":"14876165615651233","fhbeizhu":"","paybeizhu":"","shtime":"","stu":"3"}
+     * status : 1
+     * msg : {"id":"37","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","orderid":"1528698076735972","totalprice":"0.01","addressman":"zl","addressmobile":"17629345001","status":"3","exp":"中通快递","expnum":"4355345345349","addtime":"1528698076","address":"河南省郑州市中原区123456","shtime":null,"yunfei":"0","paytime":"1528698150","fhtime":"1528764760","goods_totalprice":0.01,"goods":[{"gid":"19","nid":"19","val":"标准装（1盒）","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","price":"0.01","amount":"1"}]}
      */
 
-    private int stu;
-    private OrderBean order;
-    private List<GoodsBean> goods;
+    private int status;
+    private MsgBean msg;
 
-    public int getStu() {
-        return stu;
+    public int getStatus() {
+        return status;
     }
 
-    public void setStu(int stu) {
-        this.stu = stu;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public OrderBean getOrder() {
-        return order;
+    public MsgBean getMsg() {
+        return msg;
     }
 
-    public void setOrder(OrderBean order) {
-        this.order = order;
+    public void setMsg(MsgBean msg) {
+        this.msg = msg;
     }
 
-    public List<GoodsBean> getGoods() {
-        return goods;
-    }
-
-    public void setGoods(List<GoodsBean> goods) {
-        this.goods = goods;
-    }
-
-    public static class OrderBean {
+    public static class MsgBean {
         /**
-         * xian : 金水区
-         * shi : 郑州
-         * sheng : 河南
-         * address : 河西大道东1027
-         * tel : 13027607540
-         * paytype : 1
-         * name : jackma
-         * orderid : 15149632437408096
-         * sfmoney : 0.00
-         * totalprice : 12
-         * yunfei : 0.00
-         * score :
-         * yemoney : 12
-         * payment :
-         * fh_jifen :
-         * addtime : 1514963243
-         * exp : 申通快递
-         * expnum : 14876165615651233
-         * fhbeizhu :
-         * paybeizhu :
-         * shtime :
-         * stu : 3
+         * id : 37
+         * gid : 19
+         * nid : 19
+         * val : 标准装（1盒）
+         * price : 0.01
+         * amount : 1
+         * orderid : 1528698076735972
+         * totalprice : 0.01
+         * addressman : zl
+         * addressmobile : 17629345001
+         * status : 3
+         * exp : 中通快递
+         * expnum : 4355345345349
+         * addtime : 1528698076
+         * address : 河南省郑州市中原区123456
+         * shtime : null
+         * yunfei : 0
+         * paytime : 1528698150
+         * fhtime : 1528764760
+         * goods_totalprice : 0.01
+         * goods : [{"gid":"19","nid":"19","val":"标准装（1盒）","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","price":"0.01","amount":"1"}]
          */
 
-        private String xian;
-        private String shi;
-        private String sheng;
-        private String address;
-        private String tel;
-        private String paytype;
-        private String name;
+        private String id;
+        private String gid;
+        private String nid;
+        private String val;
+        private String price;
+        private String amount;
         private String orderid;
-        private String sfmoney;
         private String totalprice;
-        private String yunfei;
-        private String score;
-        private String yemoney;
-        private String payment;
-        private String fh_jifen;
-        private String addtime;
+        private String addressman;
+        private String addressmobile;
+        private String status;
         private String exp;
         private String expnum;
-        private String fhbeizhu;
-        private String paybeizhu;
-        private String shtime;
-        private String stu;
+        private String addtime;
+        private String address;
+        private Object shtime;
+        private String yunfei;
+        private String paytime;
+        private String fhtime;
+        private double goods_totalprice;
+        private List<GoodsBean> goods;
 
-        public String getXian() {
-            return xian;
+        public String getId() {
+            return id;
         }
 
-        public void setXian(String xian) {
-            this.xian = xian;
+        public void setId(String id) {
+            this.id = id;
         }
 
-        public String getShi() {
-            return shi;
+        public String getGid() {
+            return gid;
         }
 
-        public void setShi(String shi) {
-            this.shi = shi;
+        public void setGid(String gid) {
+            this.gid = gid;
         }
 
-        public String getSheng() {
-            return sheng;
+        public String getNid() {
+            return nid;
         }
 
-        public void setSheng(String sheng) {
-            this.sheng = sheng;
+        public void setNid(String nid) {
+            this.nid = nid;
         }
 
-        public String getAddress() {
-            return address;
+        public String getVal() {
+            return val;
         }
 
-        public void setAddress(String address) {
-            this.address = address;
+        public void setVal(String val) {
+            this.val = val;
         }
 
-        public String getTel() {
-            return tel;
+        public String getPrice() {
+            return price;
         }
 
-        public void setTel(String tel) {
-            this.tel = tel;
+        public void setPrice(String price) {
+            this.price = price;
         }
 
-        public String getPaytype() {
-            return paytype;
+        public String getAmount() {
+            return amount;
         }
 
-        public void setPaytype(String paytype) {
-            this.paytype = paytype;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
+        public void setAmount(String amount) {
+            this.amount = amount;
         }
 
         public String getOrderid() {
@@ -157,14 +138,6 @@ public class OrderDetailBean {
             this.orderid = orderid;
         }
 
-        public String getSfmoney() {
-            return sfmoney;
-        }
-
-        public void setSfmoney(String sfmoney) {
-            this.sfmoney = sfmoney;
-        }
-
         public String getTotalprice() {
             return totalprice;
         }
@@ -173,52 +146,28 @@ public class OrderDetailBean {
             this.totalprice = totalprice;
         }
 
-        public String getYunfei() {
-            return yunfei;
+        public String getAddressman() {
+            return addressman;
         }
 
-        public void setYunfei(String yunfei) {
-            this.yunfei = yunfei;
+        public void setAddressman(String addressman) {
+            this.addressman = addressman;
         }
 
-        public String getScore() {
-            return score;
+        public String getAddressmobile() {
+            return addressmobile;
         }
 
-        public void setScore(String score) {
-            this.score = score;
+        public void setAddressmobile(String addressmobile) {
+            this.addressmobile = addressmobile;
         }
 
-        public String getYemoney() {
-            return yemoney;
+        public String getStatus() {
+            return status;
         }
 
-        public void setYemoney(String yemoney) {
-            this.yemoney = yemoney;
-        }
-
-        public String getPayment() {
-            return payment;
-        }
-
-        public void setPayment(String payment) {
-            this.payment = payment;
-        }
-
-        public String getFh_jifen() {
-            return fh_jifen;
-        }
-
-        public void setFh_jifen(String fh_jifen) {
-            this.fh_jifen = fh_jifen;
-        }
-
-        public String getAddtime() {
-            return addtime;
-        }
-
-        public void setAddtime(String addtime) {
-            this.addtime = addtime;
+        public void setStatus(String status) {
+            this.status = status;
         }
 
         public String getExp() {
@@ -237,176 +186,144 @@ public class OrderDetailBean {
             this.expnum = expnum;
         }
 
-        public String getFhbeizhu() {
-            return fhbeizhu;
+        public String getAddtime() {
+            return addtime;
         }
 
-        public void setFhbeizhu(String fhbeizhu) {
-            this.fhbeizhu = fhbeizhu;
+        public void setAddtime(String addtime) {
+            this.addtime = addtime;
         }
 
-        public String getPaybeizhu() {
-            return paybeizhu;
+        public String getAddress() {
+            return address;
         }
 
-        public void setPaybeizhu(String paybeizhu) {
-            this.paybeizhu = paybeizhu;
+        public void setAddress(String address) {
+            this.address = address;
         }
 
-        public String getShtime() {
+        public Object getShtime() {
             return shtime;
         }
 
-        public void setShtime(String shtime) {
+        public void setShtime(Object shtime) {
             this.shtime = shtime;
         }
 
-        public String getStu() {
-            return stu;
+        public String getYunfei() {
+            return yunfei;
         }
 
-        public void setStu(String stu) {
-            this.stu = stu;
-        }
-    }
-
-    public static class GoodsBean {
-        /**
-         * id : 82
-         * gid : 12
-         * status : 0
-         * price : 12.00
-         * number : 1
-         * type : 1
-         * yfwnum : 0
-         * img : /Public/uploads/goods/img/2017-10-13/59e05bda67cf0.jpg
-         * title : 出口外贸尾单秋冬羊绒衫女毛衣加厚高领菠萝针织衫打底外套保暖衫
-         * gstatus : 1
-         */
-
-        private String id;
-        private String gid;
-        private String status;
-        private String price;
-        private String number;
-        private String type;
-        private String yfwnum;
-        private String img;
-        private String title;
-        private String gstatus;
-
-        public String getThid() {
-            return thid;
+        public void setYunfei(String yunfei) {
+            this.yunfei = yunfei;
         }
 
-        public void setThid(String thid) {
-            this.thid = thid;
+        public String getPaytime() {
+            return paytime;
         }
 
-        private String thid;
-
-
-        public String getId() {
-            return id;
+        public void setPaytime(String paytime) {
+            this.paytime = paytime;
         }
 
-        public void setId(String id) {
-            this.id = id;
+        public String getFhtime() {
+            return fhtime;
         }
 
-        public String getGid() {
-            return gid;
+        public void setFhtime(String fhtime) {
+            this.fhtime = fhtime;
         }
 
-        public void setGid(String gid) {
-            this.gid = gid;
+        public double getGoods_totalprice() {
+            return goods_totalprice;
         }
 
-        public String getStatus() {
-            return status;
+        public void setGoods_totalprice(double goods_totalprice) {
+            this.goods_totalprice = goods_totalprice;
         }
 
-        public void setStatus(String status) {
-            this.status = status;
+        public List<GoodsBean> getGoods() {
+            return goods;
         }
 
-        public String getPrice() {
-            return price;
+        public void setGoods(List<GoodsBean> goods) {
+            this.goods = goods;
         }
 
-        public void setPrice(String price) {
-            this.price = price;
-        }
+        public static class GoodsBean {
+            /**
+             * gid : 19
+             * nid : 19
+             * val : 标准装（1盒）
+             * gname : 善存 多维元素片(29) 60片 centrum 补充维生素及矿物质
+             * img : /Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg
+             * price : 0.01
+             * amount : 1
+             */
 
-        public String getNumber() {
-            return number;
-        }
+            private String gid;
+            private String nid;
+            private String val;
+            private String gname;
+            private String img;
+            private String price;
+            private String amount;
 
-        public void setNumber(String number) {
-            this.number = number;
-        }
+            public String getGid() {
+                return gid;
+            }
 
-        public String getType() {
-            return type;
-        }
+            public void setGid(String gid) {
+                this.gid = gid;
+            }
 
-        public void setType(String type) {
-            this.type = type;
-        }
+            public String getNid() {
+                return nid;
+            }
 
-        public String getYfwnum() {
-            return yfwnum;
-        }
+            public void setNid(String nid) {
+                this.nid = nid;
+            }
 
-        public void setYfwnum(String yfwnum) {
-            this.yfwnum = yfwnum;
-        }
+            public String getVal() {
+                return val;
+            }
 
-        public String getImg() {
-            return img;
-        }
+            public void setVal(String val) {
+                this.val = val;
+            }
 
-        public void setImg(String img) {
-            this.img = img;
-        }
+            public String getGname() {
+                return gname;
+            }
 
-        public String getTitle() {
-            return title;
-        }
+            public void setGname(String gname) {
+                this.gname = gname;
+            }
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
+            public String getImg() {
+                return img;
+            }
 
-        public String getGstatus() {
-            return gstatus;
-        }
+            public void setImg(String img) {
+                this.img = img;
+            }
 
-        public void setGstatus(String gstatus) {
-            this.gstatus = gstatus;
+            public String getPrice() {
+                return price;
+            }
+
+            public void setPrice(String price) {
+                this.price = price;
+            }
+
+            public String getAmount() {
+                return amount;
+            }
+
+            public void setAmount(String amount) {
+                this.amount = amount;
+            }
         }
     }
-
-//
-//    @property (nonatomic, copy) NSString *address;//地址
-//    @property (nonatomic, copy) NSString *addtime;//下单时间
-//    @property (nonatomic, copy) NSString *exp;//快递名称
-//    @property (nonatomic, copy) NSString *expnum;//快递单号
-//    @property (nonatomic, copy) NSString *name;
-//    @property (nonatomic, copy) NSString *orderid;//订单号
-//    @property (nonatomic, copy) NSString *payment;//支付方式1支付宝2微信
-//    @property (nonatomic, copy) NSString *paytype;//余额积分方式1余额2积分
-//    @property (nonatomic, copy) NSString *fh_jifen;//返回积分
-//    @property (nonatomic, copy) NSString *score;//使用积分
-//    @property (nonatomic, copy) NSString *sfmoney;//支付宝/微信实付金额
-//    @property (nonatomic, copy) NSString *sheng;//省
-//    @property (nonatomic, copy) NSString *shi;//市
-//    @property (nonatomic, copy) NSString *tel;//电话
-//    @property (nonatomic, copy) NSString *totalprice;//商品价格
-//    @property (nonatomic, copy) NSString *xian;//县
-//    @property (nonatomic, copy) NSString *yemoney;//余额支付多少
-//    @property (nonatomic, copy) NSString *yunfei;//运费
-//    @property (nonatomic, copy) NSString *stu;//订单状态
-
-
 }

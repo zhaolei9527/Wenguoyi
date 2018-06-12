@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,6 +107,10 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             tv_classify.setText("￥" + datas.get(position).getRes().get(i).getPrice());
             TextView tv_size = (TextView) item_oreder_layout.findViewById(R.id.tv_size);
             tv_size.setText("×" + datas.get(position).getRes().get(i).getAmount());
+            TextView tv_type = (TextView) item_oreder_layout.findViewById(R.id.tv_type);
+            if (!TextUtils.isEmpty(datas.get(position).getVal())) {
+                tv_type.setText(datas.get(position).getVal());
+            }
             holder.ll_oreders.addView(item_oreder_layout);
         }
 
@@ -136,6 +141,17 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
                 }).setTitle("提示").show();
             }
         });
+
+
+        holder.btn_isget_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datas.get(position).setStatus("4");
+                notifyItemChanged(position);
+                orderReceipt(datas.get(position).getId());
+            }
+        });
+
 
     }
 

@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="选择支付方式"
+                android:text="订单支付"
                 android:textColor="@color/bgfff"
                 android:textSize="@dimen/x16" />
 
@@ -129,7 +129,9 @@
                 android:layout_marginRight="@dimen/x15"
                 android:background="@drawable/rb_selector"
                 android:button="@null"
-                android:checked="true" />
+                android:checked="true"
+                android:clickable="false"
+                android:focusable="false" />
         </RelativeLayout>
 
         <Button

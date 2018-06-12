@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.wenguoyi.Activity.MyOrderDetailsActivity;
 import com.wenguoyi.Adapter.MyOrderAdapter;
 import com.wenguoyi.Bean.OrderListsBean;
 import com.wenguoyi.R;
@@ -143,6 +145,12 @@ public class OrderContentFrameLayout extends LinearLayout {
                         if (1 == p) {
                             adapter = new MyOrderAdapter(context, orderListsBean.getMsg());
                             mRecyclerView.setAdapter(adapter);
+                            mRecyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    context.startActivity(new Intent(context, MyOrderDetailsActivity.class).putExtra("orderid", adapter.getDatas().get(i).getId()));
+                                }
+                            });
                         } else {
                             mRecyclerView.loadMoreComplete();
                             adapter.setDatas(orderListsBean.getMsg());
