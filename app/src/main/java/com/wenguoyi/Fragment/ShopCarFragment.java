@@ -120,7 +120,7 @@ public class ShopCarFragment extends BaseLazyFragment {
 
                 for (int i = 0; i < shopCarListAdapter.getDatas().size(); i++) {
                     if (shopCarListAdapter.getDatas().get(i).isCheck()) {
-                        if (i == 0) {
+                        if (id.length()==0) {
                             id.append(shopCarListAdapter.getDatas().get(i).getGid());
                             cid.append(shopCarListAdapter.getDatas().get(i).getId());
                             amount.append(shopCarListAdapter.getDatas().get(i).getNum());
@@ -194,6 +194,7 @@ public class ShopCarFragment extends BaseLazyFragment {
                 }
             }
         };
+
         mContext.registerReceiver(receiver, new IntentFilter("shopCarChoosedAll"));
 
         btn_delete.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +219,41 @@ public class ShopCarFragment extends BaseLazyFragment {
             }
         });
 
+
+        btnChoosed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!btnChoosed.isChecked()) {
+                    for (int i = 0; i < shopCarListAdapter.getDatas().size(); i++) {
+                        shopCarListAdapter.getDatas().get(i).setCheck(false);
+                    }
+                    shopCarListAdapter.notifyDataSetChanged();
+                } else {
+                    for (int i = 0; i < shopCarListAdapter.getDatas().size(); i++) {
+                        shopCarListAdapter.getDatas().get(i).setCheck(true);
+                    }
+                    shopCarListAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        btnIsChoosed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!btnIsChoosed.isChecked()) {
+                    for (int i = 0; i < shopCarListAdapter.getDatas().size(); i++) {
+                        shopCarListAdapter.getDatas().get(i).setCheck(false);
+                    }
+                    shopCarListAdapter.notifyDataSetChanged();
+                } else {
+                    for (int i = 0; i < shopCarListAdapter.getDatas().size(); i++) {
+                        shopCarListAdapter.getDatas().get(i).setCheck(true);
+                    }
+                    shopCarListAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
     }
 
 
@@ -230,6 +266,8 @@ public class ShopCarFragment extends BaseLazyFragment {
     }
 
     public void getData() {
+        btnChoosed.setChecked(false);
+        btnIsChoosed.setChecked(false);
         suckleCart();
     }
 

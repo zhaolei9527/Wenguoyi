@@ -33,8 +33,7 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x8"
-                android:layout_toRightOf="@id/btnIsChoosed"
-                fresco:placeholderImage="@mipmap/shopdemo" />
+                android:layout_toRightOf="@id/btnIsChoosed" />
 
             <TextView
                 android:id="@+id/tv_title"
@@ -46,7 +45,6 @@
                 android:layout_toRightOf="@id/SimpleDraweeView"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="sofy/苏菲安心裤超熟睡裤型量大夜用防漏安心裤L码2片*…"
                 android:textColor="#333333"
                 android:textSize="@dimen/x14" />
 
@@ -61,7 +59,6 @@
                 android:layout_toRightOf="@id/SimpleDraweeView"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="规格：200g"
                 android:textColor="@color/text666"
                 android:textSize="@dimen/x14" />
 
@@ -74,7 +71,6 @@
                 android:layout_marginLeft="@dimen/x5"
                 android:layout_marginTop="@dimen/x22"
                 android:layout_toRightOf="@id/SimpleDraweeView"
-                android:text="¥ 89.90"
                 android:textColor="#F0667F"
                 android:textSize="@dimen/x15" />
 

@@ -211,6 +211,7 @@ public class OrderActivity extends BaseActivity {
         mTvPrice.setText("￥" + orderOrderBean.getGoodstotal());
         mTvTotal.setText("￥" + orderOrderBean.getOrdertotal());
         mTvMoney.setText("￥" + orderOrderBean.getOrdertotal());
+        mTvFreight.setText("￥" + orderOrderBean.getYunfei());
 
         if (1 == orderOrderBean.getAddr()) {
             mTvAddDizhi.setVisibility(View.INVISIBLE);
@@ -265,9 +266,9 @@ public class OrderActivity extends BaseActivity {
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("addr", addressId);
         if (mChoosedBalance.isChecked()) {
-            params.put("syyue", "1");
+            params.put("is_yue", "1");
         } else {
-            params.put("syyue", "0");
+            params.put("is_yue", "0");
         }
         params.put("cart_id", cart_id);
         params.put("amount_list", amount_list);
@@ -282,14 +283,14 @@ public class OrderActivity extends BaseActivity {
                     if (1 == orderYueBean.getStatus()) {
                         EasyToast.showShort(context, orderYueBean.getMsg());
                         if ("1".equals(String.valueOf(orderYueBean.getPay()))) {
-                            finish();
                             startActivity(new Intent(context, GoodPayActivity.class)
                                     .putExtra("orderid", orderYueBean.getOid())
                                     .putExtra("type", "good"));
-                        } else {
                             finish();
+                        } else {
                             startActivity(new Intent(context, PayActivity.class)
                                     .putExtra("orderid", orderYueBean.getOid()));
+                            finish();
                         }
                     } else {
                         Toast.makeText(context, "订单异常", Toast.LENGTH_SHORT).show();

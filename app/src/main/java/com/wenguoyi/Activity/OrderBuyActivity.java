@@ -211,6 +211,7 @@ public class OrderBuyActivity extends BaseActivity {
         mTvPrice.setText("￥" + OrderBuyBean.getGoodstotal());
         mTvTotal.setText("￥" + OrderBuyBean.getOrdertotal());
         mTvMoney.setText("￥" + OrderBuyBean.getOrdertotal());
+        mTvFreight.setText("￥" + OrderBuyBean.getYunfei());
 
         if (1 == OrderBuyBean.getAddr()) {
             mTvAddDizhi.setVisibility(View.INVISIBLE);
@@ -264,7 +265,9 @@ public class OrderBuyActivity extends BaseActivity {
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("addr", addressId);
         params.put("is_norm", getIntent().getStringExtra("is_norm"));
-        params.put("norm", getIntent().getStringExtra("norm"));
+        if (!TextUtils.isEmpty(getIntent().getStringExtra("norm"))) {
+            params.put("norm", getIntent().getStringExtra("norm"));
+        }
         params.put("amount", getIntent().getStringExtra("amount"));
         params.put("val", getIntent().getStringExtra("val"));
         if (mChoosedBalance.isChecked()) {
@@ -283,14 +286,14 @@ public class OrderBuyActivity extends BaseActivity {
                     if (1 == orderYueBean.getStatus()) {
                         EasyToast.showShort(context, orderYueBean.getMsg());
                         if ("1".equals(String.valueOf(orderYueBean.getPay()))) {
-                            finish();
                             startActivity(new Intent(context, GoodPayActivity.class)
                                     .putExtra("orderid", orderYueBean.getOid())
                                     .putExtra("type", "good"));
-                        } else {
                             finish();
+                        } else {
                             startActivity(new Intent(context, PayActivity.class)
                                     .putExtra("orderid", orderYueBean.getOid()));
+                            finish();
                         }
                     } else {
                         Toast.makeText(context, "订单异常", Toast.LENGTH_SHORT).show();

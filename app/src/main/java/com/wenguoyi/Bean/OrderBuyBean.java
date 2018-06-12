@@ -24,7 +24,7 @@ public class OrderBuyBean {
     private GoodsBean goods;
     private double goodstotal;
     private double ordertotal;
-    private int yunfei;
+    private String yunfei;
     private int addr;
     private AddressBean address;
 
@@ -60,11 +60,11 @@ public class OrderBuyBean {
         this.ordertotal = ordertotal;
     }
 
-    public int getYunfei() {
+    public String getYunfei() {
         return yunfei;
     }
 
-    public void setYunfei(int yunfei) {
+    public void setYunfei(String yunfei) {
         this.yunfei = yunfei;
     }
 
@@ -162,7 +162,7 @@ public class OrderBuyBean {
         private String shi;
         private String xian;
         private String address;
-        private Object email;
+        private String email;
         private String tel;
         private String is_default;
         private String uid;
@@ -217,11 +217,11 @@ public class OrderBuyBean {
             this.address = address;
         }
 
-        public Object getEmail() {
+        public String getEmail() {
             return email;
         }
 
-        public void setEmail(Object email) {
+        public void setEmail(String email) {
             this.email = email;
         }
 

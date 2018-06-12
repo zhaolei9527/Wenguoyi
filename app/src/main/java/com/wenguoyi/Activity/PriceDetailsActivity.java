@@ -353,20 +353,20 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                      4和5：当前价格为加盟价，在价格下方展示零售价（price1）、批发价（price2）、代理价（price3）
                      * */
                     if ("1".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice());
+                        tvPrice.setText("零售价：" + goodsDetailBean.getGoods().getPrice());
                         tvOtherPrice.setVisibility(View.GONE);
                     } else if ("2".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("批发价" + goodsDetailBean.getGoods().getPrice());
-                        tvOtherPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice1());
+                        tvPrice.setText("批发价：" + goodsDetailBean.getGoods().getPrice());
+                        tvOtherPrice.setText("零售价：" + goodsDetailBean.getGoods().getPrice1());
                     } else if ("3".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("代理价" + goodsDetailBean.getGoods().getPrice());
-                        tvOtherPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice1() + "  批发价" + goodsDetailBean.getGoods().getPrice2());
+                        tvPrice.setText("代理价：" + goodsDetailBean.getGoods().getPrice());
+                        tvOtherPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice1() + "  批发价：" + goodsDetailBean.getGoods().getPrice2());
                     } else if ("4".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("代理价" + goodsDetailBean.getGoods().getPrice());
-                        tvOtherPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice1() + "  批发价" + goodsDetailBean.getGoods().getPrice2() + "  代理价" + goodsDetailBean.getGoods().getPrice3());
+                        tvPrice.setText("代理价：" + goodsDetailBean.getGoods().getPrice());
+                        tvOtherPrice.setText("零售价：" + goodsDetailBean.getGoods().getPrice1() + "  批发价：" + goodsDetailBean.getGoods().getPrice2() + "  代理价：" + goodsDetailBean.getGoods().getPrice3());
                     } else if ("5".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("代理价" + goodsDetailBean.getGoods().getPrice());
-                        tvOtherPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice1() + "  批发价" + goodsDetailBean.getGoods().getPrice2() + "  代理价" + goodsDetailBean.getGoods().getPrice3());
+                        tvPrice.setText("代理价：" + goodsDetailBean.getGoods().getPrice());
+                        tvOtherPrice.setText("零售价：" + goodsDetailBean.getGoods().getPrice1() + "  批发价：" + goodsDetailBean.getGoods().getPrice2() + "  代理价：" + goodsDetailBean.getGoods().getPrice3());
                     }
 
                     /**

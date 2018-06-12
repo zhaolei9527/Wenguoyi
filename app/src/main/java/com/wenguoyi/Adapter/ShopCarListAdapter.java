@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +60,10 @@ public class ShopCarListAdapter extends RecyclerView.Adapter<ShopCarListAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.tv_guige.setText("规格：" + datas.get(position).getVal());
+
+        if (!TextUtils.isEmpty(datas.get(position).getVal())) {
+            holder.tv_guige.setText("规格：" + datas.get(position).getVal());
+        }
         holder.SimpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position).getImgurl());
         holder.btn_shuliang.setText(datas.get(position).getNum());
         holder.tv_title.setText(datas.get(position).getGname());
