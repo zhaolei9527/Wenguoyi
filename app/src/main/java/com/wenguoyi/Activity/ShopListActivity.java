@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
@@ -15,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -38,6 +40,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.fangx.haorefresh.LoadMoreListener;
 
+import static com.wenguoyi.R.id.et_search;
+
 /**
  * com.wenguoyi.Activity
  *
@@ -51,7 +55,7 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
     FrameLayout rlBack;
     @BindView(R.id.img_search)
     ImageView imgSearch;
-    @BindView(R.id.et_search)
+    @BindView(et_search)
     EditText etSearch;
     @BindView(R.id.img_shopcar)
     ImageView imgShopcar;
@@ -127,10 +131,34 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
             }
         });
 
+        final String[] key = {getIntent().getStringExtra("key")};
+        if (!TextUtils.isEmpty(key[0])) {
+            this.key = key[0];
+            etSearch.setText(key[0]);
+        }
+
         String fcate = getIntent().getStringExtra("fcate");
         if (!TextUtils.isEmpty(fcate)) {
             this.fcate = fcate;
         }
+        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId,
+                                          KeyEvent event) {
+                if ((actionId == 0 || actionId == 3) && event != null) {
+                    //点击搜索要做的操作
+                    String trim = etSearch.getText().toString().trim();
+                    if (TextUtils.isEmpty(trim)) {
+                        EasyToast.showShort(context, "请输入商品名称");
+                        return false;
+                    }
+                    key[0] = trim;
+                    dialog.show();
+                    getData();
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -305,7 +333,7 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
                 getData();
                 break;
             case R.id.img_shopcar:
-                startActivity(new Intent(context,MyShopCarActivity.class));
+                startActivity(new Intent(context, MyShopCarActivity.class));
                 break;
             default:
                 break;

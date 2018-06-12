@@ -1,19 +1,25 @@
 package com.wenguoyi.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.wenguoyi.Activity.MainActivity;
+import com.wenguoyi.Activity.ShopListActivity;
 import com.wenguoyi.Adapter.NewsTitleListAdapter;
 import com.wenguoyi.Adapter.NewsTypeListAdapter;
 import com.wenguoyi.App;
@@ -111,6 +117,26 @@ public class NewsFragment extends BaseLazyFragment {
             }
         });
         rv_news_list.setFootLoadingView(progressView);
+
+        final EditText et_search = view.findViewById(R.id.et_search);
+
+        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId,
+                                          KeyEvent event) {
+                if ((actionId == 0 || actionId == 3) && event != null) {
+                    //点击搜索要做的操作
+                    String trim = et_search.getText().toString().trim();
+                    if (TextUtils.isEmpty(trim)) {
+                        EasyToast.showShort(mContext, "请输入商品名称");
+                        return false;
+                    }
+                    mContext.startActivity(new Intent(mContext, ShopListActivity.class).putExtra("key", trim));
+                }
+                return false;
+            }
+        });
 
 
     }

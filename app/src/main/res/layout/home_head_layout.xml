@@ -47,7 +47,9 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:hint="请输入商品名称"
+                android:imeOptions="actionSearch"
                 android:paddingLeft="@dimen/x5"
+                android:singleLine="true"
                 android:textColorHint="@color/text666"
                 android:textSize="@dimen/x15" />
 

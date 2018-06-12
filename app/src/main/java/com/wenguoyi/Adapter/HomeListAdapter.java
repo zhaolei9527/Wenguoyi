@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,7 @@ import com.wenguoyi.Activity.XunYaoShopTypeActivity;
 import com.wenguoyi.Bean.HomeBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.DensityUtils;
+import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
 import com.wenguoyi.View.MyGridView;
@@ -113,6 +116,24 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 holder.tv_content.setTextList(titleList);
                 holder.tv_content.startAutoScroll();
 
+                holder.et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId,
+                                                  KeyEvent event) {
+                        if ((actionId == 0 || actionId == 3) && event != null) {
+                            //点击搜索要做的操作
+                            String trim = holder.et_search.getText().toString().trim();
+                            if (TextUtils.isEmpty(trim)) {
+                                EasyToast.showShort(mContext, "请输入商品名称");
+                                return false;
+                            }
+                            holder.et_search.setText("");
+                            mContext.startActivity(new Intent(mContext, ShopListActivity.class).putExtra("key", trim));
+                        }
+                        return false;
+                    }
+                });
                 isfirst = !isfirst;
             }
         } else {
@@ -136,7 +157,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                                 mContext.startActivity(new Intent(mContext, PriceDetailsActivity.class).putExtra("id", (String) inflate.getTag()));
                             }
                         });
-
                     }
                 }
             } else {
@@ -158,13 +178,10 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                                 mContext.startActivity(new Intent(mContext, PriceDetailsActivity.class).putExtra("id", (String) inflate.getTag()));
                             }
                         });
-
                         holder.gl_shoplist.addView(inflate);
                     }
                 }
-
             }
-
         }
     }
 
