@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.wenguoyi.Activity.MyShopCarActivity;
 import com.wenguoyi.R;
 
 import java.util.ArrayList;
@@ -48,6 +49,8 @@ public class CartFragment extends BaseLazyFragment {
     View view1;
     @BindView(R.id.view2)
     View view2;
+    @BindView(R.id.rl_back)
+    FrameLayout rlBack;
     private Context context;
     private List<Class> fragmentList;
 
@@ -97,6 +100,20 @@ public class CartFragment extends BaseLazyFragment {
                 }
             }
         });
+
+
+        if (getActivity() instanceof MyShopCarActivity) {
+            rlBack.setVisibility(View.VISIBLE);
+            rlBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().finish();
+                }
+            });
+        } else {
+            rlBack.setVisibility(View.GONE);
+        }
+
 
     }
 

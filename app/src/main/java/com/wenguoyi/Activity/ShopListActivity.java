@@ -53,8 +53,8 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
     ImageView imgSearch;
     @BindView(R.id.et_search)
     EditText etSearch;
-    @BindView(R.id.img_news)
-    ImageView imgNews;
+    @BindView(R.id.img_shopcar)
+    ImageView imgShopcar;
     @BindView(R.id.img_biao1)
     ImageView imgBiao1;
     @BindView(R.id.ll_zonghe)
@@ -209,6 +209,7 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
         llJiage.setOnClickListener(this);
         llXiaoliang.setOnClickListener(this);
         llZuixin.setOnClickListener(this);
+        imgShopcar.setOnClickListener(this);
         rlBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -302,6 +303,9 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
                 order = "t_up";
                 dialog.show();
                 getData();
+                break;
+            case R.id.img_shopcar:
+                startActivity(new Intent(context,MyShopCarActivity.class));
                 break;
             default:
                 break;

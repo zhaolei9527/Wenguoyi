@@ -27,21 +27,22 @@ public class OrderPageAdapter extends PagerAdapter {
         OrderContentFrameLayout orderContentFrameLayout1 = new OrderContentFrameLayout(context, "0");
         orderContentFrameLayout1.setTag("0");
         PageS.add(orderContentFrameLayout1);
+
         OrderContentFrameLayout orderContentFrameLayout2 = new OrderContentFrameLayout(context, "1");
         orderContentFrameLayout2.setTag("1");
-
         PageS.add(orderContentFrameLayout2);
+
         OrderContentFrameLayout orderContentFrameLayout3 = new OrderContentFrameLayout(context, "2");
         orderContentFrameLayout3.setTag("2");
-
         PageS.add(orderContentFrameLayout3);
+
         OrderContentFrameLayout orderContentFrameLayout4 = new OrderContentFrameLayout(context, "3");
         orderContentFrameLayout4.setTag("3");
-
         PageS.add(orderContentFrameLayout4);
+
         OrderContentFrameLayout orderContentFrameLayout5 = new OrderContentFrameLayout(context, "4");
         orderContentFrameLayout5.setTag("4");
-
+        PageS.add(orderContentFrameLayout5);
     }
 
 

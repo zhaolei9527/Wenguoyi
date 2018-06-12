@@ -65,7 +65,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/img_news"
+            android:id="@+id/img_shopcar"
             android:layout_width="@dimen/x20"
             android:layout_height="@dimen/x20"
             android:layout_centerVertical="true"

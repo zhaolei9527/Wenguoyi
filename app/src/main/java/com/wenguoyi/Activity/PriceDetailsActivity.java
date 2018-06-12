@@ -272,7 +272,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                     startActivity(new Intent(context, LoginActivity.class));
                     return;
                 }
-                // startActivity(new Intent(context, ShopCarActivity.class));
+                startActivity(new Intent(context, MyShopCarActivity.class));
                 break;
             case R.id.ll_gohome:
                 finish();

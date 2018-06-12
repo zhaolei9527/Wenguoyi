@@ -167,6 +167,11 @@
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
+            android:name=".Activity.MyShopCarActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+
+        <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
