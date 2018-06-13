@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.wenguoyi.App;
 import com.wenguoyi.Bean.WenYiBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
+import com.wenguoyi.Utils.SpUtil;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
 import com.wenguoyi.View.ProgressView;
@@ -79,6 +81,15 @@ public class WenYiFragment extends BaseLazyFragment {
         progressView.setIndicatorId(ProgressView.BallRotate);
         progressView.setIndicatorColor(getResources().getColor(R.color.colorAccent));
         rv_wenyilist.setFootLoadingView(progressView);
+
+        String WenYiFragment = (String) SpUtil.get(context, "WenYiFragment", "");
+
+        if (!TextUtils.isEmpty(WenYiFragment)) {
+            WenYiBean wenYiBean = new Gson().fromJson(WenYiFragment, WenYiBean.class);
+            WenYiListAdapter adapter = new WenYiListAdapter((MainActivity) getActivity(), wenYiBean);
+            rv_wenyilist.setAdapter(adapter);
+        }
+
     }
 
     //数据获取
@@ -93,6 +104,8 @@ public class WenYiFragment extends BaseLazyFragment {
                 try {
                     WenYiBean wenYiBean = new Gson().fromJson(result, WenYiBean.class);
                     if (1 == wenYiBean.getStatus()) {
+                        SpUtil.putAndApply(context, "WenYiFragment", result);
+
                         WenYiListAdapter adapter = new WenYiListAdapter((MainActivity) getActivity(), wenYiBean);
                         rv_wenyilist.setAdapter(adapter);
                     } else {

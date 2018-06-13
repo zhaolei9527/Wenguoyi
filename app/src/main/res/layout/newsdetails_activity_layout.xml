@@ -55,7 +55,6 @@
                 android:layout_marginLeft="@dimen/x10"
                 android:layout_marginTop="@dimen/x10"
                 android:gravity="center"
-                android:text="title"
                 android:textColor="@color/text000"
                 android:textSize="@dimen/x17" />
 
@@ -69,7 +68,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x10"
-                    android:text="时间"
                     android:textColor="@color/text555" />
 
                 <TextView
@@ -79,7 +77,6 @@
                     android:layout_marginRight="@dimen/x10"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="访问量"
                     android:textColor="@color/text555" />
 
             </LinearLayout>

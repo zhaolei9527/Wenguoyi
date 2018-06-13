@@ -112,7 +112,7 @@
             <View
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y3"
+                android:layout_height="@dimen/x2"
                 android:layout_alignParentBottom="true"
                 android:background="@color/bgtitle"></View>
         </RelativeLayout>
@@ -148,7 +148,7 @@
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y3"
+                android:layout_height="@dimen/x2"
                 android:layout_alignParentBottom="true"
                 android:background="@color/bgtitle"
                 android:visibility="gone"></View>
@@ -186,7 +186,7 @@
             <View
                 android:id="@+id/view3"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y3"
+                android:layout_height="@dimen/x2"
                 android:layout_alignParentBottom="true"
                 android:background="@color/bgtitle"
                 android:visibility="gone"></View>
@@ -215,7 +215,7 @@
             <View
                 android:id="@+id/view4"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y3"
+                android:layout_height="@dimen/x2"
                 android:layout_alignParentBottom="true"
                 android:background="@color/bgtitle"
                 android:visibility="gone"></View>

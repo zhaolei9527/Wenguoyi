@@ -1,26 +1,19 @@
 package com.wenguoyi.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
-import com.wenguoyi.Activity.MyNewsActivity;
-import com.wenguoyi.Activity.ShopListActivity;
 import com.wenguoyi.Adapter.NewsTitleListAdapter;
 import com.wenguoyi.Adapter.NewsTypeListAdapter;
 import com.wenguoyi.App;
@@ -52,7 +45,7 @@ import me.fangx.haorefresh.LoadMoreListener;
  * @date 2018/5/15
  * 功能描述：
  */
-public class NewsFragment extends BaseLazyFragment {
+public class MyNewsFragment extends BaseLazyFragment {
     private int p = 1;
     private String cid = "";
     public static int ischeck = 0;
@@ -86,7 +79,7 @@ public class NewsFragment extends BaseLazyFragment {
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         context = getActivity();
-        View view = inflater.inflate(R.layout.news_fragment_layout, container, false);
+        View view = inflater.inflate(R.layout.activity_news_fragment_layout, container, false);
         initView(view);
         return view;
     }
@@ -120,37 +113,7 @@ public class NewsFragment extends BaseLazyFragment {
         });
         rv_news_list.setFootLoadingView(progressView);
 
-        final EditText et_search = view.findViewById(R.id.et_search);
-
-        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId,
-                                          KeyEvent event) {
-                if ((actionId == 0 || actionId == 3) && event != null) {
-                    //点击搜索要做的操作
-                    String trim = et_search.getText().toString().trim();
-                    if (TextUtils.isEmpty(trim)) {
-                        EasyToast.showShort(mContext, "请输入商品名称");
-                        return false;
-                    }
-                    mContext.startActivity(new Intent(mContext, ShopListActivity.class).putExtra("key", trim));
-                }
-                return false;
-            }
-        });
-
-
-        final ImageView img_news = view.findViewById(R.id.img_news);
-
-        img_news.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(context, MyNewsActivity.class));
-            }
-        });
-
-        String myNewsFragment = (String) SpUtil.get(context, "NewsFragment", "");
+        String myNewsFragment = (String) SpUtil.get(context, "MyNewsFragment", "");
 
         if (!TextUtils.isEmpty(myNewsFragment)) {
             NewsListBean newsListBean = new Gson().fromJson(myNewsFragment, NewsListBean.class);
@@ -159,6 +122,7 @@ public class NewsFragment extends BaseLazyFragment {
             NewsTitleListAdapter titleAdapter = new NewsTitleListAdapter(getActivity(), newsListBean.getMsg());
             rv_news_list.setAdapter(titleAdapter);
         }
+
     }
 
 
@@ -176,11 +140,11 @@ public class NewsFragment extends BaseLazyFragment {
 
             @Override
             public void onMySuccess(String result) {
-                Log.e("NewsFragment", result);
+                Log.e("MyNewsFragment", result);
                 try {
                     NewsListBean newsListBean = new Gson().fromJson(result, NewsListBean.class);
                     if (1 == newsListBean.getStatus()) {
-                        SpUtil.putAndApply(context, "NewsFragment", result);
+                        SpUtil.putAndApply(context, "MyNewsFragment", result);
                         if (p == 1) {
                             if (adapter == null) {
                                 adapter = new NewsTypeListAdapter(getActivity(), newsListBean.getNewscate());

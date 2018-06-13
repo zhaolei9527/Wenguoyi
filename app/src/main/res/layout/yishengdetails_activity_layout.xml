@@ -60,7 +60,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/x15"
-                android:text="尉中民"
                 android:textColor="@color/text333"
                 android:textSize="@dimen/x15" />
 
@@ -70,7 +69,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/x10"
-                android:text="综合门诊 | 主任医师"
                 android:textColor="@color/text333"
                 android:textSize="@dimen/x15" />
 

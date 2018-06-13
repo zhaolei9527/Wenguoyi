@@ -19,6 +19,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
 import com.wenguoyi.Activity.MainActivity;
+import com.wenguoyi.Activity.MyNewsActivity;
 import com.wenguoyi.Activity.NewsDetailsActivity;
 import com.wenguoyi.Activity.PriceDetailsActivity;
 import com.wenguoyi.Activity.ShopListActivity;
@@ -134,6 +135,15 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                         return false;
                     }
                 });
+
+
+                holder.img_news.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mContext.startActivity(new Intent(mContext, MyNewsActivity.class));
+                    }
+                });
+
                 isfirst = !isfirst;
             }
         } else {
@@ -196,6 +206,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         public RollPagerView Roll_pagerView;
         public TextView tv_item_title;
         public ImageView img_search;
+        public ImageView img_news;
         public EditText et_search;
         public MyGridView gv_home_type;
         public VerticalTextview tv_content;
@@ -208,6 +219,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             this.tv_content = (VerticalTextview) rootView.findViewById(R.id.tv_content);
             this.tv_item_title = (TextView) rootView.findViewById(R.id.tv_item_title);
             this.img_search = (ImageView) rootView.findViewById(R.id.img_search);
+            this.img_news = (ImageView) rootView.findViewById(R.id.img_news);
             this.et_search = (EditText) rootView.findViewById(R.id.et_search);
             this.gv_home_type = (MyGridView) rootView.findViewById(R.id.gv_home_type);
             this.gl_shoplist = (android.support.v7.widget.GridLayout) rootView.findViewById(R.id.gl_shoplist);

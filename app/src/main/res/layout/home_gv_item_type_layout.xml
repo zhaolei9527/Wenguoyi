@@ -14,8 +14,7 @@
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/SimpleDraweeView"
             android:layout_width="@dimen/x42"
-            android:layout_height="@dimen/x42"
-            android:background="@mipmap/ic_launcher" />
+            android:layout_height="@dimen/x42" />
 
         <TextView
             android:id="@+id/tv_title"

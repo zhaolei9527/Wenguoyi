@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +81,13 @@ public class HomeFragment extends BaseLazyFragment {
         progressView.setIndicatorId(ProgressView.BallRotate);
         progressView.setIndicatorColor(getResources().getColor(R.color.colorAccent));
         rv_homelist.setFootLoadingView(progressView);
+
+        String homeFragment = (String) SpUtil.get(context, "HomeFragment", "");
+        if (!TextUtils.isEmpty(homeFragment)) {
+            HomeBean homeBean = new Gson().fromJson(homeFragment, HomeBean.class);
+            HomeListAdapter adapter = new HomeListAdapter((MainActivity) getActivity(), homeBean);
+            rv_homelist.setAdapter(adapter);
+        }
     }
 
     //数据获取
@@ -93,9 +101,11 @@ public class HomeFragment extends BaseLazyFragment {
             public void onMySuccess(String result) {
                 Log.e("HomeFragment", result);
                 try {
+                    SpUtil.putAndApply(context, "HomeFragment", result);
                     HomeBean homeBean = new Gson().fromJson(result, HomeBean.class);
-                    HomeListAdapter adapter = new HomeListAdapter((MainActivity) getActivity(),homeBean);
+                    HomeListAdapter adapter = new HomeListAdapter((MainActivity) getActivity(), homeBean);
                     rv_homelist.setAdapter(adapter);
+                    homeBean = null;
                     result = null;
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
 import com.wenguoyi.Activity.MainActivity;
+import com.wenguoyi.Activity.MyNewsActivity;
 import com.wenguoyi.Activity.YiShengDetailsActivity;
 import com.wenguoyi.Activity.YiShengListActivity;
 import com.wenguoyi.Bean.WenYiBean;
@@ -36,7 +38,6 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
     private WenYiBean wenYiBean;
 
     private ArrayList<String> datas = new ArrayList();
-    private ArrayList<String> titleList = new ArrayList<String>();
 
     public ArrayList<String> getDatas() {
         return datas;
@@ -121,6 +122,14 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
                         return inflate;
                     }
                 });
+
+                holder.img_news.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mContext.startActivity(new Intent(mContext, MyNewsActivity.class));
+                    }
+                });
+
                 isfirst = !isfirst;
             }
 
@@ -194,6 +203,8 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
         public MyGridView gl_wenyitype;
         public LinearLayout ll_wenyi_more;
         public MyGridView gv_yishenglist;
+        public ImageView img_news;
+
 
         public ViewHolder(View view) {
             super(view);
@@ -203,7 +214,7 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
             this.gl_wenyitype = (MyGridView) rootView.findViewById(R.id.gl_wenyitype);
             this.ll_wenyi_more = (LinearLayout) rootView.findViewById(R.id.ll_wenyi_more);
             this.gv_yishenglist = (MyGridView) rootView.findViewById(R.id.gv_yishenglist);
-
+            this.img_news = (ImageView) rootView.findViewById(R.id.img_news);
         }
     }
 

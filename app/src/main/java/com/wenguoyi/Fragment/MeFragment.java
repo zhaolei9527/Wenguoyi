@@ -125,6 +125,20 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         tvDaifahuo.setText(String.valueOf(SpUtil.get(context, "Dfhcount", "0")));
         tvDaishouhuo.setText(String.valueOf(SpUtil.get(context, "Dscount", "0")));
 
+
+        if ("0".equals(tvDaizhifu.getText().toString().trim())) {
+            tvDaizhifu.setVisibility(View.GONE);
+        }
+
+        if ("0".equals(tvDaifahuo.getText().toString().trim())) {
+            tvDaifahuo.setVisibility(View.GONE);
+        }
+
+        if ("0".equals(tvDaishouhuo.getText().toString().trim())) {
+            tvDaishouhuo.setVisibility(View.GONE);
+        }
+
+
         if (Utils.isConnected(context)) {
             userIndex();
         } else {

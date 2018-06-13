@@ -41,6 +41,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.fangx.haorefresh.LoadMoreListener;
 
+import static com.wenguoyi.R.id.tv_ketixian;
+
 /**
  * com.wenguoyi.Activity
  *
@@ -70,7 +72,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
     LinearLayout llCaiwumingxi;
     @BindView(R.id.et_tixianmoney)
     EditText etTixianmoney;
-    @BindView(R.id.tv_ketixian)
+    @BindView(tv_ketixian)
     TextView tvKetixian;
     @BindView(R.id.btn_submit)
     Button btnSubmit;
@@ -236,6 +238,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                     if (1 == userLineBean.getStatus()) {
                         tvKeyongguzhi.setText("可用股值:" + userLineBean.getAmount());
                         tvYue.setText("￥" + userLineBean.getRenminbi());
+                        tvKetixian.setText("可提现股值:" + userLineBean.getAmount() + "，折合￥" + userLineBean.getRenminbi());
                     } else {
                         Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                     }
@@ -273,7 +276,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                     if (1 == codeBean.getStatus()) {
                         etTixianmoney.setText("");
                         EasyToast.showShort(context, codeBean.getMsg());
-                    } else if ("-1".equals(String.valueOf(codeBean.getStatus()))) {
+                    } else {
                         EasyToast.showShort(context, codeBean.getMsg());
                     }
                 } catch (Exception e) {
