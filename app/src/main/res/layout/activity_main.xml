@@ -10,11 +10,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
+        <com.wenguoyi.View.CustomViewPager
             android:id="@+id/fl_content"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"></FrameLayout>
+            android:layout_weight="1"></com.wenguoyi.View.CustomViewPager>
 
         <sakura.bottomtabbar.BottomTabBar
             android:id="@+id/BottomTabBar"

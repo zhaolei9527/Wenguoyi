@@ -2,8 +2,9 @@ package com.wenguoyi.Activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Toast;
 
 import com.mylhyl.acp.Acp;
@@ -16,7 +17,9 @@ import com.wenguoyi.Fragment.MeFragment;
 import com.wenguoyi.Fragment.NewsFragment;
 import com.wenguoyi.Fragment.WenYiFragment;
 import com.wenguoyi.R;
+import com.wenguoyi.View.CustomViewPager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sakura.bottomtabbar.BottomTabBar;
@@ -58,29 +61,45 @@ public class MainActivity extends BaseActivity {
                     }
                 });
 
+
+        final ArrayList<Fragment> fragments = new ArrayList<>();
+
+        fragments.add(new HomeFragment());
+        fragments.add(new WenYiFragment());
+        fragments.add(new NewsFragment());
+        fragments.add(new CartFragment());
+        fragments.add(new MeFragment());
+
+        CustomViewPager viewpager = (CustomViewPager) findViewById(R.id.fl_content);
+        viewpager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public int getCount() {
+                return fragments.size();
+            }
+
+            @Override
+            public Fragment getItem(int position) {
+                return fragments.get(position);
+            }
+        });
+
+
+
+
         ((BottomTabBar) findViewById(R.id.BottomTabBar))
-                .initFragmentorViewPager(getSupportFragmentManager())
+                .initFragmentorViewPager(viewpager)
                 .setImgSize(getResources().getDimension(R.dimen.x19), getResources().getDimension(R.dimen.y16))
                 .setChangeColor(getResources().getColor(R.color.bgtitle), getResources().getColor(R.color.text666))
-                .addReplaceLayout(R.id.fl_content)
                 .setDividerHeight(3)
                 .isShowDivider(true)
                 .setFontSize(12)
                 .setDividerColor(getResources().getColor(R.color.bgea))
-                .addTabItem("寻药", getResources().getDrawable(R.mipmap.xunyao2), getResources().getDrawable(R.mipmap.xunyao1), HomeFragment.class)
-                .addTabItem("问医", getResources().getDrawable(R.mipmap.wenyi2), getResources().getDrawable(R.mipmap.wenyi1), WenYiFragment.class)
-                .addTabItem("资讯", getResources().getDrawable(R.mipmap.zixun2), getResources().getDrawable(R.mipmap.zixun1), NewsFragment.class)
-                .addTabItem("购物车", getResources().getDrawable(R.mipmap.gouwuche2), getResources().getDrawable(R.mipmap.gouwuche1), CartFragment.class)
-                .addTabItem("我的", getResources().getDrawable(R.mipmap.me2), getResources().getDrawable(R.mipmap.me1), MeFragment.class)
-                .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
-                    @Override
-                    public void onTabChange(int position, View V) {
-
-                    }
-                })
+                .addTabItem("寻药", getResources().getDrawable(R.mipmap.xunyao2), getResources().getDrawable(R.mipmap.xunyao1))
+                .addTabItem("问医", getResources().getDrawable(R.mipmap.wenyi2), getResources().getDrawable(R.mipmap.wenyi1))
+                .addTabItem("资讯", getResources().getDrawable(R.mipmap.zixun2), getResources().getDrawable(R.mipmap.zixun1))
+                .addTabItem("购物车", getResources().getDrawable(R.mipmap.gouwuche2), getResources().getDrawable(R.mipmap.gouwuche1))
+                .addTabItem("我的", getResources().getDrawable(R.mipmap.me2), getResources().getDrawable(R.mipmap.me1))
                 .commit();
-
-
 
     }
 
