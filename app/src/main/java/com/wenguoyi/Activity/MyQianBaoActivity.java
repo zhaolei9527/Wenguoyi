@@ -150,7 +150,6 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void initData() {
-
         if (Utils.isConnected(context)) {
             dialog = Utils.showLoadingDialog(context);
             dialog.show();
@@ -279,6 +278,8 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                     if (1 == codeBean.getStatus()) {
                         etTixianmoney.setText("");
                         EasyToast.showShort(context, codeBean.getMsg());
+                        dialog.show();
+                        userJine();
                     } else if ("-1".equals(String.valueOf(codeBean.getStatus()))) {
                         EasyToast.showShort(context, codeBean.getMsg());
                     }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wenguoyi.Activity.MyOrderActivity;
 import com.wenguoyi.Adapter.OrderPageAdapter;
 import com.wenguoyi.R;
 import com.wenguoyi.View.PagerSlidingTabStrip;
@@ -47,6 +48,13 @@ public class MyOrderFragment extends BaseLazyFragment {
         if (orderPageAdapter == null) {
             orderPageAdapter = new OrderPageAdapter(context, titles);
             VpNews_context.setAdapter(orderPageAdapter);
+            if ("1".equals(MyOrderActivity.cid)) {
+                VpNews_context.setCurrentItem(1);
+            } else if ("2".equals(MyOrderActivity.cid)) {
+                VpNews_context.setCurrentItem(2);
+            } else if ("3".equals(MyOrderActivity.cid)) {
+                VpNews_context.setCurrentItem(3);
+            }
         }
 
         VpNews_context.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -91,6 +99,9 @@ public class MyOrderFragment extends BaseLazyFragment {
         titles.add("待发货");
         titles.add("待收货");
         titles.add("已完成");
+
+
+
         return view;
     }
 

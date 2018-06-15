@@ -276,6 +276,8 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                     if (1 == codeBean.getStatus()) {
                         etTixianmoney.setText("");
                         EasyToast.showShort(context, codeBean.getMsg());
+                        dialog.show();
+                        userJine();
                     } else {
                         EasyToast.showShort(context, codeBean.getMsg());
                     }

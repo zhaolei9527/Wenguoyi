@@ -106,7 +106,6 @@ public class FlashActivity extends BaseActivity {
         } else {
             if (context != null) {
                 Toast.makeText(context, "网路未连接", Toast.LENGTH_SHORT).show();
-                delayGoToLogin();
             }
         }
     }
@@ -121,7 +120,7 @@ public class FlashActivity extends BaseActivity {
         } else if (!TextUtils.isEmpty(wxopenid)) {
             getLogin("", "", "2", wxopenid);
         } else {
-            delayGoToLogin();
+            gotoMain();
         }
     }
 

@@ -52,7 +52,7 @@ public class CaiWuMingXiAdapter extends RecyclerView.Adapter<CaiWuMingXiAdapter.
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvTitle.setText(datas.get(position).getXiangmu());
-        holder.tvMoney.setText("￥" + datas.get(position).getMoney());
+        holder.tvMoney.setText("数量" + datas.get(position).getMoney());
         holder.tvTime.setText(DateUtils.getMillon(Long.parseLong(datas.get(position).getAddtime()) * 1000));
     }
 

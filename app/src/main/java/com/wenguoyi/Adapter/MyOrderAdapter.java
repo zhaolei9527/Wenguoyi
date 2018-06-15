@@ -25,6 +25,7 @@ import com.wenguoyi.Utils.DateUtils;
 import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.SpUtil;
 import com.wenguoyi.Utils.UrlUtils;
+import com.wenguoyi.Utils.Utils;
 import com.wenguoyi.View.CommomDialog;
 import com.wenguoyi.Volley.VolleyInterface;
 import com.wenguoyi.Volley.VolleyRequest;
@@ -42,6 +43,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
 
     Context mContext;
     private ArrayList<OrderListsBean.MsgBean> datas = new ArrayList();
+    private Dialog dialog;
 
     public ArrayList<OrderListsBean.MsgBean> getDatas() {
         return datas;
@@ -117,9 +119,10 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         holder.btn_pay_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, PayActivity.class)
-                        .putExtra("orderid", datas.get(position).getId())
-                );
+                dialog = Utils.showLoadingDialog(mContext);
+                dialog.show();
+                orderZhifu(datas.get(position).getId());
+
             }
         });
 
@@ -254,4 +257,45 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             }
         });
     }
+
+    /**
+     * 立即支付
+     */
+    private void orderZhifu(String id) {
+        HashMap<String, String> params = new HashMap<>(3);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("uid", String.valueOf(SpUtil.get(mContext, "uid", "")));
+        params.put("id", id);
+        Log.e("MyOrderAdapter", "params:" + params);
+        VolleyRequest.RequestPost(mContext, UrlUtils.BASE_URL + "order/zhifu", "order/zhifu", params, new VolleyInterface(mContext) {
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("MyOrderAdapter", result);
+                try {
+                    dialog.dismiss();
+                    CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
+                    if (1 == codeBean.getStatus()) {
+                        mContext.startActivity(new Intent(mContext, PayActivity.class)
+                                .putExtra("orderid", codeBean.getMsg())
+                        );
+                    } else {
+                        EasyToast.showShort(mContext, codeBean.getMsg());
+                    }
+                    result = null;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(mContext, mContext.getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                dialog.dismiss();
+                error.printStackTrace();
+                Toast.makeText(mContext, mContext.getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 }

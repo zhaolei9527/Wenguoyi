@@ -57,7 +57,7 @@ public class XunYaoShopTypeActivity extends BaseActivity {
 
     @Override
     protected void initview() {
-        rl_back = findViewById(R.id.rl_back);
+        rl_back = (FrameLayout) findViewById(R.id.rl_back);
         rv_shop_type_list_list = (WenguoyiRecycleView) findViewById(R.id.rv_shop_type_list_list);
         rv_shop_list_type_list = (WenguoyiRecycleView) findViewById(R.id.rv_shop_list_type_list);
         line1 = new SakuraLinearLayoutManager(context);

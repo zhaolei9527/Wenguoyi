@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
 
     <LinearLayout
@@ -68,9 +68,11 @@
                 android:layout_marginLeft="@dimen/x5"
                 android:layout_marginRight="@dimen/x5"
                 android:background="@drawable/rb_selector"
-                android:button="@null" />
+                android:button="@null"
+                android:clickable="false" />
 
             <TextView
+                android:id="@+id/tv_morenaddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x5"

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -20,9 +21,6 @@ import java.util.ArrayList;
 
 /**
  * User: 赵磊
- * Date: 2016-07-19
- * Time: 22:45
- *
  */
 public class VerticalTextview extends TextSwitcher implements ViewSwitcher.ViewFactory {
 
@@ -128,6 +126,8 @@ public class VerticalTextview extends TextSwitcher implements ViewSwitcher.ViewF
         t.setPadding(mPadding, mPadding, mPadding, mPadding);
         t.setTextColor(textColor);
         t.setTextSize(mTextSize);
+        t.setSingleLine();
+        t.setEllipsize(TextUtils.TruncateAt.END);
         t.setClickable(true);
         t.setOnClickListener(new OnClickListener() {
             @Override

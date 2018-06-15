@@ -232,6 +232,8 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
                         llZhengmian.setClickable(false);
                         llFanmian.setClickable(false);
                         llShouchi.setClickable(false);
+                        etName.setFocusable(false);
+                        etShenfenzheng.setFocusable(false);
                     } else {
                         EasyToast.showShort(context, userDoInfoBean.getMsg());
                     }

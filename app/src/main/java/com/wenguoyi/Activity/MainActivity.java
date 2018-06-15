@@ -4,7 +4,9 @@ import android.Manifest;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import com.mylhyl.acp.Acp;
@@ -17,6 +19,8 @@ import com.wenguoyi.Fragment.MeFragment;
 import com.wenguoyi.Fragment.NewsFragment;
 import com.wenguoyi.Fragment.WenYiFragment;
 import com.wenguoyi.R;
+import com.wenguoyi.Utils.EasyToast;
+import com.wenguoyi.Utils.SpUtil;
 import com.wenguoyi.View.CustomViewPager;
 
 import java.util.ArrayList;
@@ -83,9 +87,6 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-
-
-
         ((BottomTabBar) findViewById(R.id.BottomTabBar))
                 .initFragmentorViewPager(viewpager)
                 .setImgSize(getResources().getDimension(R.dimen.x19), getResources().getDimension(R.dimen.y16))
@@ -99,6 +100,18 @@ public class MainActivity extends BaseActivity {
                 .addTabItem("资讯", getResources().getDrawable(R.mipmap.zixun2), getResources().getDrawable(R.mipmap.zixun1))
                 .addTabItem("购物车", getResources().getDrawable(R.mipmap.gouwuche2), getResources().getDrawable(R.mipmap.gouwuche1))
                 .addTabItem("我的", getResources().getDrawable(R.mipmap.me2), getResources().getDrawable(R.mipmap.me1))
+                .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
+                    @Override
+                    public void onTabChange(int position, View view) {
+                        if (position == 3 || position == 4) {
+                            if (TextUtils.isEmpty((String) SpUtil.get(MainActivity.this, "uid", ""))) {
+                                EasyToast.showShort(MainActivity.this, "请先登录");
+                                finish();
+                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                            }
+                        }
+                    }
+                })
                 .commit();
 
     }

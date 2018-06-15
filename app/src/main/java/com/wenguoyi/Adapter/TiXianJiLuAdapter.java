@@ -52,7 +52,7 @@ public class TiXianJiLuAdapter extends RecyclerView.Adapter<TiXianJiLuAdapter.Vi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvTitle.setText("提现");
-        holder.tvMoney.setText("￥" + datas.get(position).getMoney());
+        holder.tvMoney.setText("数量" + datas.get(position).getMoney());
         holder.tvTime.setText(DateUtils.getMillon(Long.parseLong(datas.get(position).getAddtime()) * 1000));
 
         if ("-1".equals(String.valueOf(datas.get(position).getStatus()))) {

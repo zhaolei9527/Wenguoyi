@@ -284,6 +284,10 @@ public class ShopCarFragment extends BaseLazyFragment {
     public void getData() {
         btnChoosed.setChecked(false);
         btnIsChoosed.setChecked(false);
+        tv_money.setText("￥0.00");
+        if (TextUtils.isEmpty(String.valueOf(SpUtil.get(context, "uid", "")))) {
+            return;
+        }
         suckleCart();
     }
 

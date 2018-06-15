@@ -41,6 +41,7 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
     private TextView tv_name;
     private TextView tv_phone;
     private TextView tv_address;
+    private TextView tv_morenaddress;
     private CheckBox btnIsChoosed;
     private LinearLayout ll_delete_address;
     private LinearLayout ll_change_address;
@@ -123,6 +124,7 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                             final View item_address = View.inflate(context, R.layout.item_address_layout, null);
                             item_address.setTag(addressIndexBean.getMsg().get(i).getId());
                             tv_name = (TextView) item_address.findViewById(R.id.tv_name);
+                            tv_morenaddress = (TextView) item_address.findViewById(R.id.tv_morenaddress);
                             tv_name.setText(addressIndexBean.getMsg().get(i).getName());
                             tv_phone = (TextView) item_address.findViewById(R.id.tv_phone);
                             tv_phone.setText(addressIndexBean.getMsg().get(i).getTel());
@@ -137,34 +139,38 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                             btnIsChoosed.setTag(addressIndexBean.getMsg().get(i).getId());
                             if ("1".equals(addressIndexBean.getMsg().get(i).getIs_default())) {
                                 btnIsChoosed.setChecked(true);
+                                btnIsChoosed.setVisibility(View.VISIBLE);
+                                tv_morenaddress.setVisibility(View.VISIBLE);
                             } else {
                                 btnIsChoosed.setChecked(false);
+                                btnIsChoosed.setVisibility(View.GONE);
+                                tv_morenaddress.setVisibility(View.GONE);
                             }
 
-                            btnIsChoosed.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    for (int i1 = 0; i1 < ll_address_list.getChildCount(); i1++) {
-                                        CheckBox viewById = (CheckBox) (ll_address_list.getChildAt(i1).findViewById(R.id.btnIsChoosed));
-                                        if (v.getTag().equals(viewById.getTag())) {
-                                            viewById.setChecked(true);
-                                        } else {
-                                            viewById.setChecked(false);
-                                        }
-                                    }
-                                    if (Utils.isConnected(context)) {
-                                        if (dialog != null) {
-                                            if (!dialog.isShowing()) {
-                                                dialog.show();
-                                            }
-                                        }
-                                        //设置默认地址
-                                        //addressQie((String) item_address.getTag());
-                                    } else {
-                                        EasyToast.showShort(context, "网络未连接");
-                                    }
-                                }
-                            });
+//                            btnIsChoosed.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    for (int i1 = 0; i1 < ll_address_list.getChildCount(); i1++) {
+//                                        CheckBox viewById = (CheckBox) (ll_address_list.getChildAt(i1).findViewById(R.id.btnIsChoosed));
+//                                        if (v.getTag().equals(viewById.getTag())) {
+//                                            viewById.setChecked(true);
+//                                        } else {
+//                                            viewById.setChecked(false);
+//                                        }
+//                                    }
+//                                    if (Utils.isConnected(context)) {
+//                                        if (dialog != null) {
+//                                            if (!dialog.isShowing()) {
+//                                                dialog.show();
+//                                            }
+//                                        }
+//                                        //设置默认地址
+//                                        //addressQie((String) item_address.getTag());
+//                                    } else {
+//                                        EasyToast.showShort(context, "网络未连接");
+//                                    }
+//                                }
+//                            });
 
                             ll_delete_address = (LinearLayout) item_address.findViewById(R.id.ll_delete_address);
                             ll_change_address = (LinearLayout) item_address.findViewById(R.id.ll_change_address);
@@ -211,6 +217,9 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                                 item_address.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        TextView tv_name = (TextView) v.findViewById(R.id.tv_name);
+                                        TextView tv_phone = (TextView) v.findViewById(R.id.tv_phone);
+                                        TextView tv_address = (TextView) v.findViewById(R.id.tv_address);
                                         setResult(200, new Intent()
                                                 .putExtra("name", tv_name.getText())
                                                 .putExtra("phone", tv_phone.getText())

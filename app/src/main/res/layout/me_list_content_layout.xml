@@ -14,12 +14,12 @@
 
 
         <LinearLayout
-            android:id="@+id/ll_myorder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="3">
 
             <RelativeLayout
+                android:id="@+id/ll_myorderdai"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/y44"
                 android:layout_weight="1">
@@ -49,6 +49,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/ll_myorderfa"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/y44"
                 android:layout_weight="1">
@@ -78,6 +79,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/ll_myordershou"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/y44"
                 android:layout_weight="1">

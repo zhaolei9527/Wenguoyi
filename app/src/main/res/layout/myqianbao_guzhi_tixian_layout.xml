@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x15"
-                android:text="提现金额"
+                android:text="提现数量"
                 android:textColor="@color/text666"
                 android:textSize="@dimen/x14" />
 
@@ -57,7 +57,7 @@
                 android:layout_height="@dimen/y40"
                 android:layout_marginTop="@dimen/x10"
                 android:background="@null"
-                android:hint="请输入提现金额"
+                android:hint="请输入提现数量"
                 android:inputType="numberDecimal"
                 android:textSize="@dimen/x18" />
 

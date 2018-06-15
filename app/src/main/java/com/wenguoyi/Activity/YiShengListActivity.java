@@ -328,6 +328,14 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                     if (1 == yiShengListBean.getStatus()) {
                         LLEmpty.setVisibility(View.GONE);
                         if (p == 1) {
+                            YiShengListBean.KeshiBean keshiBean = new YiShengListBean.KeshiBean();
+                            keshiBean.setId("");
+                            keshiBean.setTitle("全部科室");
+                            yiShengListBean.getKeshi().add(0,keshiBean);
+                            YiShengListBean.ZhichengBean zhichengBean = new YiShengListBean.ZhichengBean();
+                            zhichengBean.setId("");
+                            zhichengBean.setTitle("全部职称");
+                            yiShengListBean.getZhicheng().add(0,zhichengBean);
                             initKeShiPopupWindow(yiShengListBean.getKeshi());
                             initZhiChengPopupWindow(yiShengListBean.getZhicheng());
                             shopAdapter = new YiShengListAdapter(YiShengListActivity.this, yiShengListBean.getYisheng());

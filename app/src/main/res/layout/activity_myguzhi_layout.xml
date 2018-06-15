@@ -171,7 +171,7 @@
 
         <include layout="@layout/layout_empty"></include>
 
-        <include layout="@layout/myqianbao_wechat_tixian_layout"></include>
+        <include layout="@layout/myqianbao_guzhi_tixian_layout"></include>
 
         <include layout="@layout/myqianbao_tixianjilu_layout"></include>
 

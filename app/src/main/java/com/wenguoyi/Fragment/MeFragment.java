@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,8 +71,6 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     TextView tvDaifahuo;
     @BindView(R.id.tv_daishouhuo)
     TextView tvDaishouhuo;
-    @BindView(R.id.ll_myorder)
-    LinearLayout llMyorder;
     @BindView(R.id.rl_dingdan)
     LinearLayout rlDingdan;
     @BindView(R.id.rl_gerenziliao)
@@ -101,6 +100,12 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     @BindView(R.id.tv_guzhi)
     TextView tvGuzhi;
     Unbinder unbinder;
+    @BindView(R.id.ll_myorderdai)
+    RelativeLayout llMyorderdai;
+    @BindView(R.id.ll_myorderfa)
+    RelativeLayout llMyorderfa;
+    @BindView(R.id.ll_myordershou)
+    RelativeLayout llMyordershou;
     private Context context;
 
     @Override
@@ -128,18 +133,26 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
 
         if ("0".equals(tvDaizhifu.getText().toString().trim())) {
             tvDaizhifu.setVisibility(View.GONE);
+        } else {
+            tvDaizhifu.setVisibility(View.VISIBLE);
         }
 
         if ("0".equals(tvDaifahuo.getText().toString().trim())) {
             tvDaifahuo.setVisibility(View.GONE);
+        } else {
+            tvDaifahuo.setVisibility(View.VISIBLE);
         }
 
         if ("0".equals(tvDaishouhuo.getText().toString().trim())) {
             tvDaishouhuo.setVisibility(View.GONE);
+        } else {
+            tvDaishouhuo.setVisibility(View.VISIBLE);
         }
 
-
         if (Utils.isConnected(context)) {
+            if (TextUtils.isEmpty(String.valueOf(SpUtil.get(context, "uid", "")))) {
+                return;
+            }
             userIndex();
         } else {
             EasyToast.showShort(context, getResources().getString(R.string.Networkexception));
@@ -178,7 +191,9 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         rlZijianzhuanjia.setOnClickListener(this);
         rlXitongshezhi.setOnClickListener(this);
         rlDingdan.setOnClickListener(this);
-        llMyorder.setOnClickListener(this);
+        llMyorderdai.setOnClickListener(this);
+        llMyorderfa.setOnClickListener(this);
+        llMyordershou.setOnClickListener(this);
     }
 
     @Override
@@ -283,7 +298,15 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
             case R.id.rl_xitongshezhi:
                 startActivity(new Intent(context, SettingActivity.class));
                 break;
-            case R.id.ll_myorder:
+            case R.id.ll_myorderdai:
+                startActivity(new Intent(context, MyOrderActivity.class).putExtra("cid", "1"));
+                break;
+            case R.id.ll_myorderfa:
+                startActivity(new Intent(context, MyOrderActivity.class).putExtra("cid", "2"));
+                break;
+            case R.id.ll_myordershou:
+                startActivity(new Intent(context, MyOrderActivity.class).putExtra("cid", "3"));
+                break;
             case R.id.rl_dingdan:
                 startActivity(new Intent(context, MyOrderActivity.class));
                 break;

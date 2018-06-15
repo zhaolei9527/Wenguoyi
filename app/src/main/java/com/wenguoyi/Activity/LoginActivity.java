@@ -275,4 +275,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         password = null;
         System.gc();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        return;
+    }
 }
