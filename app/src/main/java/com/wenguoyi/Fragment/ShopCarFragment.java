@@ -314,6 +314,8 @@ public class ShopCarFragment extends BaseLazyFragment {
                     if ("1".equals(String.valueOf(suckleCartBean.getStatus()))) {
                         SpUtil.putAndApply(context, "ShopCarActivity", result);
                         ll_empty.setVisibility(View.GONE);
+                        rl_buy.setVisibility(View.VISIBLE);
+                        rl_bianji.setVisibility(View.GONE);
                         if (rv_purchaserecord != null) {
                             rv_purchaserecord.setEnabled(true);
                             rv_purchaserecord.loadMoreComplete();
@@ -335,6 +337,9 @@ public class ShopCarFragment extends BaseLazyFragment {
                         }
                     } else {
                         ll_empty.setVisibility(View.VISIBLE);
+                        rl_buy.setVisibility(View.GONE);
+                        rl_bianji.setVisibility(View.GONE);
+                        SpUtil.putAndApply(context, "ShopCarActivity", "");
                     }
                     suckleCartBean = null;
                     result = null;
