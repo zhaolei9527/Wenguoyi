@@ -1,18 +1,27 @@
 package com.wenguoyi.Activity;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
 import com.mylhyl.acp.AcpOptions;
 import com.wenguoyi.Base.BaseActivity;
+import com.wenguoyi.Bean.IndexCartBean;
 import com.wenguoyi.Fragment.CartFragment;
 import com.wenguoyi.Fragment.HomeFragment;
 import com.wenguoyi.Fragment.MeFragment;
@@ -21,26 +30,20 @@ import com.wenguoyi.Fragment.WenYiFragment;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.SpUtil;
+import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.View.CustomViewPager;
+import com.wenguoyi.Volley.VolleyInterface;
+import com.wenguoyi.Volley.VolleyRequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import sakura.bottomtabbar.BottomTabBar;
 
 public class MainActivity extends BaseActivity {
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Intent home = new Intent(Intent.ACTION_MAIN);
-            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            home.addCategory(Intent.CATEGORY_HOME);
-            startActivity(home);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+    private BroadcastReceiver receiver;
 
     @Override
     protected int setthislayout() {
@@ -110,10 +113,70 @@ public class MainActivity extends BaseActivity {
                                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             }
                         }
+
+                        if (!TextUtils.isEmpty((String) SpUtil.get(MainActivity.this, "uid", ""))) {
+                            String Cartnum = (String) SpUtil.get(context, "Cartnum", "");
+                            if (!TextUtils.isEmpty(Cartnum)) {
+                                TextView tv_Cartnum = (TextView) findViewById(R.id.tv_Cartnum);
+                                tv_Cartnum.setText(Cartnum);
+                            }
+                        }
+
                     }
                 })
                 .commit();
 
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                indexCatr();
+            }
+        };
+        registerReceiver(receiver, new IntentFilter("indexCatr"));
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!TextUtils.isEmpty((String) SpUtil.get(MainActivity.this, "uid", ""))) {
+            indexCatr();
+        }
+    }
+
+    /**
+     * 收藏产品
+     */
+    private void indexCatr() {
+        HashMap<String, String> params = new HashMap<>(1);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        Log.e("MainActivity", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "index/cart", "index/cart", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("MainActivity", result);
+                try {
+                    IndexCartBean indexCartBean = new Gson().fromJson(result, IndexCartBean.class);
+                    if (1 == indexCartBean.getStatus()) {
+                        SpUtil.putAndApply(context, "Cartnum", indexCartBean.getCart_num());
+                        TextView tv_Cartnum = (TextView) findViewById(R.id.tv_Cartnum);
+                        tv_Cartnum.setText(String.valueOf(indexCartBean.getCart_num()));
+                    }
+                    indexCartBean = null;
+                    result = null;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -124,5 +187,38 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initData() {
 
+    }
+
+    private boolean mIsExit;
+
+    /**
+     * 双击返回键退出
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mIsExit) {
+                this.finish();
+
+            } else {
+                Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+                mIsExit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mIsExit = false;
+                    }
+                }, 2000);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
     }
 }

@@ -101,7 +101,6 @@ public class HomeFragment extends BaseLazyFragment {
             public void onMySuccess(String result) {
                 Log.e("HomeFragment", result);
                 try {
-                    SpUtil.putAndApply(context, "HomeFragment", result);
                     HomeBean homeBean = new Gson().fromJson(result, HomeBean.class);
                     HomeListAdapter adapter = new HomeListAdapter((MainActivity) getActivity(), homeBean);
                     rv_homelist.setAdapter(adapter);

@@ -29,6 +29,7 @@ import com.wenguoyi.Activity.MyQianBaoActivity;
 import com.wenguoyi.Activity.MyTuanDuiActivity;
 import com.wenguoyi.Activity.SettingActivity;
 import com.wenguoyi.Activity.TuiGuangActivity;
+import com.wenguoyi.Activity.WdeShouCangActivity;
 import com.wenguoyi.Activity.ZiJianZhuanJiaActivity;
 import com.wenguoyi.Bean.UserIndexBean;
 import com.wenguoyi.R;
@@ -81,6 +82,8 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     LinearLayout rlWdetuandui;
     @BindView(R.id.rl_wyaotuiguang)
     LinearLayout rlWyaotuiguang;
+    @BindView(R.id.rl_wdeshoucang)
+    LinearLayout rlWdeshoucang;
     @BindView(R.id.rl_wyaochongzhi)
     LinearLayout rlWyaochongzhi;
     @BindView(R.id.rl_wdeqianbao)
@@ -194,6 +197,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         llMyorderdai.setOnClickListener(this);
         llMyorderfa.setOnClickListener(this);
         llMyordershou.setOnClickListener(this);
+        rlWdeshoucang.setOnClickListener(this);
     }
 
     @Override
@@ -240,7 +244,6 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                         SpUtil.putAndApply(context, "Dfhcount", "" + userIndexBean.getCount().getDfhcount());
                         SpUtil.putAndApply(context, "Dscount", "" + userIndexBean.getCount().getDscount());
                         SpUtil.putAndApply(context, "Cartnum", "" + userIndexBean.getCount().getCart_num());
-
                     } else {
                         EasyToast.showShort(context, R.string.Abnormalserver);
                     }
@@ -309,6 +312,9 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                 break;
             case R.id.rl_dingdan:
                 startActivity(new Intent(context, MyOrderActivity.class));
+                break;
+            case R.id.rl_wdeshoucang:
+                startActivity(new Intent(context, WdeShouCangActivity.class));
                 break;
             default:
                 break;

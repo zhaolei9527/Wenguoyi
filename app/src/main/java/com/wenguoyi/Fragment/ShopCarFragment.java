@@ -284,7 +284,6 @@ public class ShopCarFragment extends BaseLazyFragment {
     public void getData() {
         btnChoosed.setChecked(false);
         btnIsChoosed.setChecked(false);
-        tv_money.setText("￥0.00");
         if (TextUtils.isEmpty(String.valueOf(SpUtil.get(context, "uid", "")))) {
             return;
         }
@@ -311,6 +310,7 @@ public class ShopCarFragment extends BaseLazyFragment {
                 Log.e("ShopCarActivity", result);
                 try {
                     SuckleCartBean suckleCartBean = new Gson().fromJson(result, SuckleCartBean.class);
+                    tv_money.setText("￥0.00");
                     if ("1".equals(String.valueOf(suckleCartBean.getStatus()))) {
                         SpUtil.putAndApply(context, "ShopCarActivity", result);
                         ll_empty.setVisibility(View.GONE);
@@ -375,6 +375,7 @@ public class ShopCarFragment extends BaseLazyFragment {
                     CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
                     if ("1".equals(String.valueOf(codeBean.getStatus()))) {
                         EasyToast.showShort(context, "删除成功");
+                        mContext.sendBroadcast(new Intent("indexCatr"));
                         suckleCart();
                     } else {
                         EasyToast.showShort(context, "删除失败");

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.wenguoyi.Bean.UserMytjBean;
 import com.wenguoyi.R;
+import com.wenguoyi.Utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +54,8 @@ public class MyTuanDuiAdapter extends RecyclerView.Adapter<MyTuanDuiAdapter.View
 
         holder.SimpleDraweeView.setImageURI(datas.get(position).getHeadimg());
         holder.tvName.setText(datas.get(position).getNickname());
-        holder.tvShenfen.setText("会员身份:" + datas.get(position).getLevel_id());
-        holder.tvTime.setText("加入时间:" + Long.parseLong(datas.get(position).getAddtime()) * 1000);
+        holder.tvShenfen.setText("会员身份:" + datas.get(position).getType());
+        holder.tvTime.setText("加入时间:" + DateUtils.getDay(Long.parseLong(datas.get(position).getAddtime()) * 1000));
 
     }
 

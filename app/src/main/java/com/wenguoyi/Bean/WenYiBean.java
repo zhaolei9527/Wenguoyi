@@ -21,7 +21,7 @@ public class WenYiBean {
      */
 
     private int status;
-    private int cart_num;
+    private String cart_num;
     private List<YishengBean> yisheng;
     private List<LunboBean> lunbo;
     private List<KeshiBean> keshi;
@@ -34,11 +34,11 @@ public class WenYiBean {
         this.status = status;
     }
 
-    public int getCart_num() {
+    public String getCart_num() {
         return cart_num;
     }
 
-    public void setCart_num(int cart_num) {
+    public void setCart_num(String cart_num) {
         this.cart_num = cart_num;
     }
 

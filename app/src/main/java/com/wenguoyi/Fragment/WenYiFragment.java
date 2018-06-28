@@ -105,7 +105,6 @@ public class WenYiFragment extends BaseLazyFragment {
                     WenYiBean wenYiBean = new Gson().fromJson(result, WenYiBean.class);
                     if (1 == wenYiBean.getStatus()) {
                         SpUtil.putAndApply(context, "WenYiFragment", result);
-
                         WenYiListAdapter adapter = new WenYiListAdapter((MainActivity) getActivity(), wenYiBean);
                         rv_wenyilist.setAdapter(adapter);
                     } else {

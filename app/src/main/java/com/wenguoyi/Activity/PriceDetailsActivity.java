@@ -28,7 +28,6 @@ import com.tencent.smtt.sdk.WebViewClient;
 import com.wenguoyi.Adapter.GoodLoopAdapter;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.CodeBean;
-import com.wenguoyi.Bean.GoodsCangBean;
 import com.wenguoyi.Bean.GoodsChangePriceBean;
 import com.wenguoyi.Bean.GoodsDetailBean;
 import com.wenguoyi.Bean.OrderBuyBean;
@@ -138,6 +137,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
         llGohome.setOnClickListener(this);
         typeShopnow.setOnClickListener(this);
         tvTypeAddshop.setOnClickListener(this);
+        llTypeCheck.setOnClickListener(this);
 
         btnJia.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,17 +244,17 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                     startActivity(new Intent(context, LoginActivity.class));
                     return;
                 }
-                //  if ("0".equals(String.valueOf(goodsDetailBean.getGoods().getIs_coll()))) {
-                goodsCang();
-                imgShoucang.setBackground(getResources().getDrawable(R.mipmap.new_sc2));
-                EasyToast.showShort(context, "收藏成功");
-                goodsDetailBean.getGoods().setIs_coll(1);
-                //} else {
-                //  goodsOnCang();
-                // imgShoucang.setBackground(getResources().getDrawable(R.mipmap.new_sc1));
-                // EasyToast.showShort(context, "取消收藏");
-                // goodsDetailBean.getGoods().setIs_coll(0);
-                //}
+                if ("0".equals(String.valueOf(goodsDetailBean.getGoods().getIs_coll()))) {
+                    goodsCang();
+                    imgShoucang.setBackground(getResources().getDrawable(R.mipmap.new_sc2));
+                    EasyToast.showShort(context, "收藏成功");
+                    goodsDetailBean.getGoods().setIs_coll(1);
+                } else {
+                    goodsOnCang();
+                    imgShoucang.setBackground(getResources().getDrawable(R.mipmap.new_sc1));
+                    EasyToast.showShort(context, "取消收藏");
+                    goodsDetailBean.getGoods().setIs_coll(0);
+                }
                 break;
             case R.id.tv_addshop:
                 if (TextUtils.isEmpty(uid)) {
@@ -304,6 +304,9 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                 } else {
                     EasyToast.showShort(context, R.string.Networkexception);
                 }
+                break;
+            case R.id.ll_type_check:
+                llTypeCheck.setVisibility(View.GONE);
                 break;
             default:
                 break;
@@ -518,23 +521,24 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
      */
     private void goodsOnCang() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("gid", String.valueOf(getIntent().getStringExtra("id")));
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         Log.e("PriceDetailsActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/nocang", "goods/nocang", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/bucoll", "user/bucoll", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 Log.e("RegisterActivity", result);
                 try {
-                    GoodsCangBean goodsCangBean = new Gson().fromJson(result, GoodsCangBean.class);
-                    if ("310".equals(String.valueOf(goodsCangBean.getCode()))) {
+                    CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
+                    if ("1".equals(String.valueOf(codeBean.getStatus()))) {
+
                     } else {
                         goodsDetailBean.getGoods().setIs_coll(1);
                         imgShoucang.setBackgroundResource(R.mipmap.new_sc2);
                         EasyToast.showShort(context, "取消失败");
                     }
-                    goodsCangBean = null;
+                    codeBean = null;
                     result = null;
                 } catch (Exception e) {
                     dialog.dismiss();
@@ -586,6 +590,10 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                     CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
                     if (1 == codeBean.getStatus()) {
                         llTypeCheck.setVisibility(View.GONE);
+                        String Cartnum = (String) SpUtil.get(context, "Cartnum", "");
+                        int i = Integer.parseInt(Cartnum);
+                        i = i + Integer.parseInt(btnShuliang.getText().toString());
+                        SpUtil.putAndApply(context, "Cartnum", String.valueOf(i));
                     }
                     EasyToast.showShort(context, codeBean.getMsg());
                     codeBean = null;

@@ -51,8 +51,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y1"
-        android:background="#efefef"
-        android:visibility="gone"></View>
+        android:background="#efefef"></View>
 
     <TextView
         android:id="@+id/tv_clear"
@@ -67,8 +66,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y1"
-        android:background="#efefef"
-        android:visibility="gone"></View>
+        android:background="#efefef"></View>
 
 
     <TextView
@@ -84,8 +82,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y1"
-        android:background="#efefef"
-        android:visibility="gone"></View>
+        android:background="#efefef"></View>
 
     <TextView
         android:id="@+id/tv_exit"

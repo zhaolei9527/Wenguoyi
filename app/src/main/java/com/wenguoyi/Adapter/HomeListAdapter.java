@@ -252,7 +252,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             TextView tv_title = inflate.findViewById(R.id.tv_title);
             if (i == homeBean.getCate().size()) {
                 SimpleDraweeView.setBackgroundResource(R.mipmap.hometype6);
-                tv_title.setText("更多");
+                tv_title.setText("全部分类");
                 ll_type.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

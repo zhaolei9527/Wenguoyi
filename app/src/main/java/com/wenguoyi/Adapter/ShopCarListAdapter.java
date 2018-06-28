@@ -89,8 +89,7 @@ public class ShopCarListAdapter extends RecyclerView.Adapter<ShopCarListAdapter.
                         money = money + (Price * i1);
                     }
                 }
-                tvMoney.setText("￥" + String.valueOf(money));
-
+                tvMoney.setText("￥" + String.format("%.2f", money));
             }
         });
         holder.btn_jian.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +111,7 @@ public class ShopCarListAdapter extends RecyclerView.Adapter<ShopCarListAdapter.
                         money = money + (Price * i1);
                     }
                 }
-                tvMoney.setText("￥" + String.valueOf(money));
+                tvMoney.setText("￥" + String.format("%.2f", money));
             }
         });
 
@@ -144,7 +143,7 @@ public class ShopCarListAdapter extends RecyclerView.Adapter<ShopCarListAdapter.
                         money = money + (v * i1);
                     }
                 }
-                tvMoney.setText("￥" + String.valueOf(money));
+                tvMoney.setText("￥" + String.format("%.2f", money));
             }
         });
 

@@ -218,6 +218,42 @@
 
         <View
             android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:background="@color/bgddd"></View>
+
+        <LinearLayout
+            android:id="@+id/rl_wdeshoucang"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y39"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/x18"
+                android:layout_height="@dimen/x18"
+                android:layout_marginLeft="@dimen/x8"
+                android:background="@mipmap/shoucang" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x8"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/wdeshoucang"
+                android:textColor="@color/text444" />
+
+            <ImageView
+                android:layout_width="@dimen/x5"
+                android:layout_height="@dimen/y8"
+                android:layout_marginRight="@dimen/x8"
+                android:background="@mipmap/togo" />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
             android:layout_height="@dimen/x5"
             android:background="@color/bgddd"></View>
 

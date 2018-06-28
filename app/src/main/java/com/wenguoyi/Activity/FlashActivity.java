@@ -114,7 +114,6 @@ public class FlashActivity extends BaseActivity {
         account = (String) SpUtil.get(context, "tel", "");
         password = (String) SpUtil.get(context, "password", "");
         wxopenid = (String) SpUtil.get(context, "wxopenid", "");
-
         if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(password)) {
             getLogin(account, password, "", "");
         } else if (!TextUtils.isEmpty(wxopenid)) {
@@ -129,9 +128,10 @@ public class FlashActivity extends BaseActivity {
      */
     private void getLogin(final String tel, final String password, String type, String openid) {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("key", UrlUtils.KEY);
+        params.put("pwd", UrlUtils.KEY);
         params.put("tel", tel);
         params.put("password", password);
+        params.put("uuid", openid);
         Log.e("LoginActivity", "params:" + params);
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "login/login", "login/login", params, new VolleyInterface(context) {
             @Override

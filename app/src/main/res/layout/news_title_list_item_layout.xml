@@ -3,9 +3,7 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bgea"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/x5">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_type_title"

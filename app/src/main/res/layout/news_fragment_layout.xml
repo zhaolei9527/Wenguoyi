@@ -76,6 +76,10 @@
             android:clipChildren="false"
             android:clipToPadding="false"></com.wenguoyi.View.WenguoyiRecycleView>
 
+        <View
+            android:layout_width="@dimen/x3"
+            android:layout_height="match_parent"
+            android:background="@color/bgea"></View>
 
         <com.wenguoyi.View.WenguoyiRecycleView
             android:id="@+id/rv_news_list"
