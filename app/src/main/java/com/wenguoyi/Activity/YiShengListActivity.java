@@ -2,12 +2,14 @@ package com.wenguoyi.Activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +29,11 @@ import com.wenguoyi.Adapter.YiShengListAdapter;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.YiShengListBean;
 import com.wenguoyi.R;
+import com.wenguoyi.Utils.DensityUtils;
 import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
+import com.wenguoyi.Utils.WindowUtil;
 import com.wenguoyi.View.CommonPopupWindow;
 import com.wenguoyi.View.FlowLayout;
 import com.wenguoyi.View.ProgressView;
@@ -152,14 +156,23 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
         //win.setAnimationStyle(R.style.animTranslate);
         switch (view.getId()) {
             case R.id.ll_keshi:
-                keshiwindow.showAsDropDown(llKeshi, 0, 0);
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N) {
+                    keshiwindow.showAtLocation(llKeshi, Gravity.NO_GRAVITY, 0, WindowUtil.getStatusBarHeight(context) + DensityUtils.dp2px(context, 100));
+                } else {
+                    keshiwindow.showAsDropDown(llKeshi, 0, 0);
+                }
                 lp = getWindow().getAttributes();
                 lp.alpha = 0.3f;
+
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                 getWindow().setAttributes(lp);
                 break;
             case R.id.ll_zhicheng:
-                zhichengwindow.showAsDropDown(llZhicheng, 0, 0);
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N) {
+                    zhichengwindow.showAtLocation(llZhicheng, Gravity.NO_GRAVITY, 0, WindowUtil.getStatusBarHeight(context) + DensityUtils.dp2px(context, 100));
+                } else {
+                    zhichengwindow.showAsDropDown(llZhicheng, 0, 0);
+                }
                 lp = getWindow().getAttributes();
                 lp.alpha = 0.3f;
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
@@ -182,7 +195,7 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int screenHeight = metrics.heightPixels;
         // create popup window
-        keshiwindow = new CommonPopupWindow(this, R.layout.yisheng_keshi_popupwindow_layout, ViewGroup.LayoutParams.MATCH_PARENT, screenHeight) {
+        keshiwindow = new CommonPopupWindow(this, R.layout.yisheng_keshi_popupwindow_layout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT) {
             @Override
             protected void initView() {
                 View view = getContentView();
@@ -237,6 +250,7 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                 });
             }
         };
+
     }
 
     private void initZhiChengPopupWindow(final List<YiShengListBean.ZhichengBean> mzhichengVals) {
@@ -246,7 +260,10 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int screenHeight = metrics.heightPixels;
         // create popup window
-        zhichengwindow = new CommonPopupWindow(this, R.layout.yisheng_zhicheng_popupwindow_layout, ViewGroup.LayoutParams.MATCH_PARENT, screenHeight) {
+        zhichengwindow = new CommonPopupWindow(this,
+                R.layout.yisheng_zhicheng_popupwindow_layout,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT) {
             @Override
             protected void initView() {
                 View view = getContentView();
@@ -301,6 +318,7 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                     }
                 });
             }
+
         };
     }
 
@@ -331,11 +349,11 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                             YiShengListBean.KeshiBean keshiBean = new YiShengListBean.KeshiBean();
                             keshiBean.setId("");
                             keshiBean.setTitle("全部科室");
-                            yiShengListBean.getKeshi().add(0,keshiBean);
+                            yiShengListBean.getKeshi().add(0, keshiBean);
                             YiShengListBean.ZhichengBean zhichengBean = new YiShengListBean.ZhichengBean();
                             zhichengBean.setId("");
                             zhichengBean.setTitle("全部职称");
-                            yiShengListBean.getZhicheng().add(0,zhichengBean);
+                            yiShengListBean.getZhicheng().add(0, zhichengBean);
                             initKeShiPopupWindow(yiShengListBean.getKeshi());
                             initZhiChengPopupWindow(yiShengListBean.getZhicheng());
                             shopAdapter = new YiShengListAdapter(YiShengListActivity.this, yiShengListBean.getYisheng());

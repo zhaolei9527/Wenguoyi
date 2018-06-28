@@ -12,11 +12,12 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
-import com.wenguoyi.Adapter.NewsTitleListAdapter;
+import com.wenguoyi.Adapter.WDeShouCangAdapter;
 import com.wenguoyi.Base.BaseActivity;
-import com.wenguoyi.Bean.NewsListBean;
+import com.wenguoyi.Bean.UserCollectBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.EasyToast;
+import com.wenguoyi.Utils.SpUtil;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.Utils.Utils;
 import com.wenguoyi.View.ProgressView;
@@ -102,36 +103,44 @@ public class WdeShouCangActivity extends BaseActivity {
     public void getData() {
         HashMap<String, String> params = new HashMap<>(1);
         params.put("pwd", UrlUtils.KEY);
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("page", String.valueOf(p));
         Log.e("WdeShouCangActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/collect", "user/collect", params, new VolleyInterface(context) {
-            private NewsTitleListAdapter titleAdapter;
+            private WDeShouCangAdapter wDeShouCangAdapter;
+
             @Override
             public void onMySuccess(String result) {
-                Log.e("WdeShouCangActivity", result);
                 try {
+                    Log.e("WdeShouCangActivity", result);
                     dialog.dismiss();
-                    NewsListBean newsListBean = new Gson().fromJson(result, NewsListBean.class);
-                    if (1 == newsListBean.getStatus()) {
+                    UserCollectBean userCollectBean = new Gson().fromJson(result, UserCollectBean.class);
+                    if (1 == userCollectBean.getStatus()) {
+                        LLEmpty.setVisibility(View.GONE);
                         if (p == 1) {
-                            if (titleAdapter == null) {
-                                titleAdapter = new NewsTitleListAdapter(WdeShouCangActivity.this, newsListBean.getMsg());
+                            if (wDeShouCangAdapter == null) {
+                                wDeShouCangAdapter = new WDeShouCangAdapter(WdeShouCangActivity.this, userCollectBean.getMsg());
                             }
-                            rvShoucangList.setAdapter(titleAdapter);
+                            rvShoucangList.setAdapter(wDeShouCangAdapter);
                         } else {
-                            titleAdapter.setDatas(newsListBean.getMsg());
+                            wDeShouCangAdapter.setDatas(userCollectBean.getMsg());
                         }
                         rvShoucangList.loadMoreComplete();
 
-                        if (0 == newsListBean.getFy()) {
+                        if (0 == userCollectBean.getFy()) {
                             rvShoucangList.loadMoreEnd();
                             rvShoucangList.setCanloadMore(false);
                         } else {
                             rvShoucangList.setCanloadMore(true);
                         }
 
-                    } else if (2 == newsListBean.getStatus()) {
+                    } else if (2 == userCollectBean.getStatus()) {
+                        rvShoucangList.loadMoreEnd();
+                        rvShoucangList.setCanloadMore(false);
                         EasyToast.showShort(context, R.string.notmore);
+                        if (p == 1) {
+                            LLEmpty.setVisibility(View.VISIBLE);
+                        }
                     } else {
                         EasyToast.showShort(context, R.string.notmore);
                     }

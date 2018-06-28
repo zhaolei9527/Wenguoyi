@@ -136,7 +136,6 @@ public class ShopCarListAdapter extends RecyclerView.Adapter<ShopCarListAdapter.
                     holder.btnIsChoosed.getContext().sendBroadcast(new Intent("shopCarChoosedAll").putExtra("Choosed", false));
                 }
 
-
                 double money = 0;
                 for (int i = 0; i < datas.size(); i++) {
                     if (datas.get(i).isCheck()) {
