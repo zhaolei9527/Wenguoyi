@@ -2,10 +2,14 @@ package com.wenguoyi.Adapter;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EdgeEffect;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,11 +19,13 @@ import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
 import com.wenguoyi.Activity.MainActivity;
 import com.wenguoyi.Activity.MyNewsActivity;
+import com.wenguoyi.Activity.ShopListActivity;
 import com.wenguoyi.Activity.YiShengDetailsActivity;
 import com.wenguoyi.Activity.YiShengListActivity;
 import com.wenguoyi.Bean.WenYiBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.DensityUtils;
+import com.wenguoyi.Utils.EasyToast;
 import com.wenguoyi.Utils.UrlUtils;
 import com.wenguoyi.View.MyGridView;
 
@@ -130,6 +136,26 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
                     }
                 });
 
+
+                holder.et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId,
+                                                  KeyEvent event) {
+                        if ((actionId == 0 || actionId == 3) && event != null) {
+                            //点击搜索要做的操作
+                            String trim = holder.et_search.getText().toString().trim();
+                            if (TextUtils.isEmpty(trim)) {
+                                EasyToast.showShort(mContext, "请输入医院名称");
+                                return false;
+                            }
+                            mContext.startActivity(new Intent(mContext, YiShengListActivity.class).putExtra("key", trim));
+                        }
+                        return false;
+                    }
+                });
+
+
                 isfirst = !isfirst;
             }
 
@@ -204,6 +230,7 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
         public LinearLayout ll_wenyi_more;
         public MyGridView gv_yishenglist;
         public ImageView img_news;
+        public EditText et_search;
 
 
         public ViewHolder(View view) {
@@ -215,6 +242,7 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
             this.ll_wenyi_more = (LinearLayout) rootView.findViewById(R.id.ll_wenyi_more);
             this.gv_yishenglist = (MyGridView) rootView.findViewById(R.id.gv_yishenglist);
             this.img_news = (ImageView) rootView.findViewById(R.id.img_news);
+            this.et_search = (EditText) rootView.findViewById(R.id.et_search);
         }
     }
 

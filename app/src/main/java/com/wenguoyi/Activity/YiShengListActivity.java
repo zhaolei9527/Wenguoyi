@@ -83,7 +83,7 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
     private String zid = "";
     private String keshi = "";
     private Dialog dialog;
-
+    private  String key="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +114,7 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                 getData();
             }
         });
+         key = getIntent().getStringExtra("key");
 
     }
 
@@ -220,6 +221,7 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                             keshiwindow.getPopupWindow().dismiss();
                             p = 1;
                             zid = "";
+                            key="";
                             kid = (String) tv.getTag();
                             dialog.show();
                             getData();
@@ -289,6 +291,7 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                             zhichengwindow.getPopupWindow().dismiss();
                             p = 1;
                             kid = "";
+                            key="";
                             zid = (String) tv.getTag();
                             dialog.show();
                             getData();
@@ -330,6 +333,10 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
         }
         if (!TextUtils.isEmpty(zid)) {
             params.put("zid", zid);
+        }
+
+        if (!TextUtils.isEmpty(key)) {
+            params.put("key", key);
         }
         params.put("page", String.valueOf(p));
         Log.e("YiShengListActivity", params.toString());
