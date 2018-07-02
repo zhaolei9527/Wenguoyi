@@ -168,8 +168,6 @@ public class MyNewsFragment extends BaseLazyFragment {
 
                     } else if (2 == newsListBean.getStatus()) {
                         EasyToast.showShort(context, R.string.notmore);
-                    } else {
-                        EasyToast.showShort(context, R.string.notmore);
                     }
                     result = null;
                 } catch (Exception e) {
@@ -188,9 +186,11 @@ public class MyNewsFragment extends BaseLazyFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void changeNewsType(BankEvent messageEvent) {
-        p = 1;
-        cid = messageEvent.getMsg();
-        getData();
+        if ("newstype".equals(messageEvent.getmType())){
+            p = 1;
+            cid = messageEvent.getMsg();
+            getData();
+        }
     }
 
 

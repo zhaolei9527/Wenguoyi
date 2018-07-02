@@ -107,7 +107,7 @@ public class MyTuanDuiActivity extends BaseActivity implements View.OnClickListe
     }
 
 
-    String T = "1";
+    String T = "0";
 
     @Override
     protected void initData() {
@@ -190,7 +190,7 @@ public class MyTuanDuiActivity extends BaseActivity implements View.OnClickListe
                 view2.setVisibility(View.GONE);
                 textView1.setTextColor(getResources().getColor(R.color.bgtitle));
                 textView2.setTextColor(getResources().getColor(R.color.text333));
-                T = "1";
+                T = "0";
                 initData();
                 break;
             case R.id.ll_erceng:
@@ -198,7 +198,7 @@ public class MyTuanDuiActivity extends BaseActivity implements View.OnClickListe
                 view2.setVisibility(View.VISIBLE);
                 textView1.setTextColor(getResources().getColor(R.color.text333));
                 textView2.setTextColor(getResources().getColor(R.color.bgtitle));
-                T = "2";
+                T = "1";
                 initData();
                 break;
             default:

@@ -71,7 +71,7 @@ public class NewsTypeListAdapter extends RecyclerView.Adapter<NewsTypeListAdapte
             public void onClick(View view) {
                 ischeck = position;
                 notifyDataSetChanged();
-                EventBus.getDefault().post(new BankEvent(datas.get(position).getId()));
+                EventBus.getDefault().post(new BankEvent(datas.get(position).getId(), "newstype"));
             }
         });
 

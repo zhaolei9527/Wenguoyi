@@ -83,7 +83,8 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
     private String zid = "";
     private String keshi = "";
     private Dialog dialog;
-    private  String key="";
+    private String key = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +115,7 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                 getData();
             }
         });
-         key = getIntent().getStringExtra("key");
+        key = getIntent().getStringExtra("key");
 
     }
 
@@ -221,7 +222,7 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                             keshiwindow.getPopupWindow().dismiss();
                             p = 1;
                             zid = "";
-                            key="";
+                            key = "";
                             kid = (String) tv.getTag();
                             dialog.show();
                             getData();
@@ -291,7 +292,7 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                             zhichengwindow.getPopupWindow().dismiss();
                             p = 1;
                             kid = "";
-                            key="";
+                            key = "";
                             zid = (String) tv.getTag();
                             dialog.show();
                             getData();
@@ -342,6 +343,7 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
         Log.e("YiShengListActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "yisheng/lists", "yisheng/lists", params, new VolleyInterface(context) {
             private YiShengListAdapter shopAdapter;
+
             @Override
             public void onMySuccess(String result) {
                 Log.e("YiShengListActivity", result);
@@ -381,6 +383,8 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                         }
                     } else if (2 == yiShengListBean.getStatus()) {
                         if (1 == p) {
+                            initKeShiPopupWindow(yiShengListBean.getKeshi());
+                            initZhiChengPopupWindow(yiShengListBean.getZhicheng());
                             LLEmpty.setVisibility(View.VISIBLE);
                         } else {
                             EasyToast.showShort(context, R.string.notmore);

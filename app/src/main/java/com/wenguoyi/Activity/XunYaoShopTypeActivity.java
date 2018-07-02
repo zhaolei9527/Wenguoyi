@@ -80,8 +80,6 @@ public class XunYaoShopTypeActivity extends BaseActivity {
         params.put("cid", cid);
         Log.e("XunYaoShopTypeActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/scate", "goods/scate", params, new VolleyInterface(context) {
-            private ShopTitleListListAdapter titleAdapter;
-            private ShopTypeListAdapter adapter;
 
             @Override
             public void onMySuccess(String result) {
@@ -89,7 +87,7 @@ public class XunYaoShopTypeActivity extends BaseActivity {
                 try {
                     GoodsScateBean goodsScateBean = new Gson().fromJson(result, GoodsScateBean.class);
                     if (1 == goodsScateBean.getStatus()) {
-                        ShopTitleListListAdapter titleAdapter = new ShopTitleListListAdapter(XunYaoShopTypeActivity.this,goodsScateBean.getMsg());
+                        ShopTitleListListAdapter titleAdapter = new ShopTitleListListAdapter(XunYaoShopTypeActivity.this, goodsScateBean.getMsg());
                         rv_shop_list_type_list.setAdapter(titleAdapter);
                     } else {
                         EasyToast.showShort(context, R.string.hasError);
@@ -166,8 +164,10 @@ public class XunYaoShopTypeActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void changeNewsType(BankEvent messageEvent) {
-        cid = messageEvent.getMsg();
-        getData();
+        if ("shoptype".equals(messageEvent.getmType())) {
+            cid = messageEvent.getMsg();
+            getData();
+        }
     }
 
 

@@ -113,13 +113,8 @@ public class MainActivity extends BaseActivity {
                                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             }
                         }
-
                         if (!TextUtils.isEmpty((String) SpUtil.get(MainActivity.this, "uid", ""))) {
-                            String Cartnum = (String) SpUtil.get(context, "Cartnum", "");
-                            if (!TextUtils.isEmpty(Cartnum)) {
-                                TextView tv_Cartnum = (TextView) findViewById(R.id.tv_Cartnum);
-                                tv_Cartnum.setText(Cartnum);
-                            }
+                            indexCatr();
                         }
 
                     }
@@ -145,7 +140,7 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * 收藏产品
+     * 购物车数量
      */
     private void indexCatr() {
         HashMap<String, String> params = new HashMap<>(1);
@@ -161,7 +156,16 @@ public class MainActivity extends BaseActivity {
                     if (1 == indexCartBean.getStatus()) {
                         SpUtil.putAndApply(context, "Cartnum", indexCartBean.getCart_num());
                         TextView tv_Cartnum = (TextView) findViewById(R.id.tv_Cartnum);
-                        tv_Cartnum.setText(String.valueOf(indexCartBean.getCart_num()));
+                        if (!TextUtils.isEmpty(indexCartBean.getCart_num())) {
+                            if (!"0".equals(indexCartBean.getCart_num())) {
+                                tv_Cartnum.setVisibility(View.VISIBLE);
+                                tv_Cartnum.setText(indexCartBean.getCart_num());
+                            } else {
+                                tv_Cartnum.setVisibility(View.GONE);
+                            }
+                        } else {
+                            tv_Cartnum.setVisibility(View.GONE);
+                        }
                     }
                     indexCartBean = null;
                     result = null;

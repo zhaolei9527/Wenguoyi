@@ -66,8 +66,7 @@ public class ShopTypeListAdapter extends RecyclerView.Adapter<ShopTypeListAdapte
             public void onClick(View view) {
                 ischeck = position;
                 notifyDataSetChanged();
-                EventBus.getDefault().post(new BankEvent(datas.get(position).getId()));
-
+                EventBus.getDefault().post(new BankEvent(datas.get(position).getId(),"shoptype"));
             }
         });
 
