@@ -107,6 +107,9 @@ public class YiShengDetailsActivity extends BaseActivity {
                         EasyToast.showShort(context, R.string.hasError);
                     }
 
+
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
