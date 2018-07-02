@@ -55,6 +55,7 @@ public class YiShengListAdapter extends RecyclerView.Adapter<YiShengListAdapter.
         holder.tvName.setText(datas.get(position).getName());
         holder.tvZhicheng.setText(datas.get(position).getKeshi() + "|" + datas.get(position).getZhicheng());
         holder.SimpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position).getHead());
+        holder.tvYiyuan.setText(datas.get(position).getYiyuan());
     }
 
     @Override
@@ -72,6 +73,8 @@ public class YiShengListAdapter extends RecyclerView.Adapter<YiShengListAdapter.
         TextView tvZhicheng;
         @BindView(R.id.tv_content)
         TextView tvContent;
+        @BindView(R.id.tv_yiyuan)
+        TextView tvYiyuan;
 
         public ViewHolder(View view) {
             super(view);

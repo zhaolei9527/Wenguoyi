@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EdgeEffect;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,7 +18,6 @@ import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
 import com.wenguoyi.Activity.MainActivity;
 import com.wenguoyi.Activity.MyNewsActivity;
-import com.wenguoyi.Activity.ShopListActivity;
 import com.wenguoyi.Activity.YiShengDetailsActivity;
 import com.wenguoyi.Activity.YiShengListActivity;
 import com.wenguoyi.Bean.WenYiBean;
@@ -149,6 +147,7 @@ public class WenYiListAdapter extends RecyclerView.Adapter<WenYiListAdapter.View
                                 EasyToast.showShort(mContext, "请输入医院名称");
                                 return false;
                             }
+                            holder.et_search.setText("");
                             mContext.startActivity(new Intent(mContext, YiShengListActivity.class).putExtra("key", trim));
                         }
                         return false;

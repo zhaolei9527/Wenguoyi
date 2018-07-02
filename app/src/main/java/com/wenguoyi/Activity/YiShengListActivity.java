@@ -341,9 +341,7 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
         params.put("page", String.valueOf(p));
         Log.e("YiShengListActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "yisheng/lists", "yisheng/lists", params, new VolleyInterface(context) {
-
             private YiShengListAdapter shopAdapter;
-
             @Override
             public void onMySuccess(String result) {
                 Log.e("YiShengListActivity", result);

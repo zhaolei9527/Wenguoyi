@@ -45,6 +45,8 @@ public class YiShengDetailsActivity extends BaseActivity {
     TextView tvShanchang;
     @BindView(R.id.tv_jianjie)
     TextView tvJianjie;
+    @BindView(R.id.tv_yiyuan)
+    TextView tvYiyuan;
     private String id;
 
     @Override
@@ -100,6 +102,7 @@ public class YiShengDetailsActivity extends BaseActivity {
                         tvName.setText(yiShengDetailsBean.getMsg().getName());
                         tvJianjie.setText("      " + yiShengDetailsBean.getMsg().getInfo());
                         tvShanchang.setText("      " + yiShengDetailsBean.getMsg().getShanchang());
+                        tvYiyuan.setText(yiShengDetailsBean.getMsg().getYiyuan());
                     } else {
                         EasyToast.showShort(context, R.string.hasError);
                     }
