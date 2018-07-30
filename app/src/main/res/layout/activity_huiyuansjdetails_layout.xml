@@ -4,61 +4,71 @@
     android:layout_height="match_parent"
     android:background="@color/bgfff">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x42"
-            android:background="@color/bgtitle"
-            android:visibility="visible">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/rl_back"
-                android:layout_width="@dimen/x30"
-                android:layout_height="@dimen/x30"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x10">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x42"
+                android:background="@color/bgtitle"
+                android:visibility="visible">
 
-                <ImageView
+                <FrameLayout
+                    android:id="@+id/rl_back"
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/x30"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x10">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@mipmap/fanhui" />
+
+                </FrameLayout>
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:background="@mipmap/fanhui" />
+                    android:layout_centerInParent="true"
+                    android:text="会员升级"
+                    android:textColor="@color/bgfff"
+                    android:textSize="@dimen/x16" />
 
-            </FrameLayout>
+            </RelativeLayout>
+
+            <com.tencent.smtt.sdk.WebView
+                android:id="@+id/forum_context"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/x5"
+                android:layout_weight="1" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="会员升级"
+                android:id="@+id/tv_shengji"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y42"
+                android:background="@color/bgtitle"
+                android:gravity="center"
+                android:text="立即升级"
                 android:textColor="@color/bgfff"
-                android:textSize="@dimen/x16" />
+                android:textSize="@dimen/x15" />
 
-        </RelativeLayout>
 
-        <com.tencent.smtt.sdk.WebView
-            android:id="@+id/forum_context"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/x5"
-            android:layout_weight="1" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_shengji"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y42"
-            android:background="@color/bgtitle"
-            android:gravity="center"
-            android:text="立即升级"
-            android:textColor="@color/bgfff"
-            android:textSize="@dimen/x15" />
+        <include layout="@layout/sjxuanze_layout"></include>
 
-    </LinearLayout>
+
+    </FrameLayout>
 
 
 </LinearLayout>

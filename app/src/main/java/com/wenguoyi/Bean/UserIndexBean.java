@@ -9,11 +9,10 @@ package com.wenguoyi.Bean;
  */
 public class UserIndexBean {
 
-
     /**
      * status : 1
-     * count : {"dfcount":"0","dfhcount":"0","dscount":"0","cart_num":"0"}
-     * user : {"headimg":"http://thirdwx.qlogo.cn/mmopen/8NziaiaYPIAK0C5w4WuicXwXZxOusWzfYBjHEkYXEWAORIf8ETYiaich1DK2G1AJMhlnIu9jVmfjwPQdHhqYHpvMu78aB8jKQzKtn/132","nickname":"Sakura","uid":"","money":0,"integral":"0.00","level":"D级合伙人"}
+     * count : {"dfcount":"0","dfhcount":"13","dscount":"0","cart_num":"1"}
+     * user : {"headimg":"http://thirdwx.qlogo.cn/mmopen/8NziaiaYPIAK0C5w4WuicXwXZxOusWzfYBjHEkYXEWAORIf8ETYiaich1DK2G1AJMhlnIu9jVmfjwPQdHhqYHpvMu78aB8jKQzKtn/132","nickname":"Sakura","rugujin":"0.00","uid":"8189953757","money":28.02,"integral":"96.00","level":"C级会员"}
      */
 
     private int status;
@@ -47,9 +46,9 @@ public class UserIndexBean {
     public static class CountBean {
         /**
          * dfcount : 0
-         * dfhcount : 0
+         * dfhcount : 13
          * dscount : 0
-         * cart_num : 0
+         * cart_num : 1
          */
 
         private String dfcount;
@@ -94,16 +93,18 @@ public class UserIndexBean {
         /**
          * headimg : http://thirdwx.qlogo.cn/mmopen/8NziaiaYPIAK0C5w4WuicXwXZxOusWzfYBjHEkYXEWAORIf8ETYiaich1DK2G1AJMhlnIu9jVmfjwPQdHhqYHpvMu78aB8jKQzKtn/132
          * nickname : Sakura
-         * uid :
-         * money : 0
-         * integral : 0.00
-         * level : D级合伙人
+         * rugujin : 0.00
+         * uid : 8189953757
+         * money : 28.02
+         * integral : 96.00
+         * level : C级会员
          */
 
         private String headimg;
         private String nickname;
+        private String rugujin;
         private String uid;
-        private String money;
+        private double money;
         private String integral;
         private String level;
 
@@ -123,6 +124,14 @@ public class UserIndexBean {
             this.nickname = nickname;
         }
 
+        public String getRugujin() {
+            return rugujin;
+        }
+
+        public void setRugujin(String rugujin) {
+            this.rugujin = rugujin;
+        }
+
         public String getUid() {
             return uid;
         }
@@ -131,11 +140,11 @@ public class UserIndexBean {
             this.uid = uid;
         }
 
-        public String getMoney() {
+        public double getMoney() {
             return money;
         }
 
-        public void setMoney(String money) {
+        public void setMoney(double money) {
             this.money = money;
         }
 

@@ -1,5 +1,6 @@
 package me.iwf.photopicker.utils;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -62,17 +64,26 @@ public class ImageCaptureManager {
     Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     // Ensure that there's a camera activity to handle the intent
     if (takePictureIntent.resolveActivity(mContext.getPackageManager()) != null) {
-      // Create the File where the photo should go
+
+      int currentapiVersion = android.os.Build.VERSION.SDK_INT;
       File photoFile = createImageFile();
-      // Continue only if the File was successfully created
-      if (photoFile != null) {
-        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-            Uri.fromFile(photoFile));
+      if (currentapiVersion < 24) {
+        // Create the File where the photo should go
+        // Continue only if the File was successfully created
+        if (photoFile != null) {
+          takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                  Uri.fromFile(photoFile));
+        }
+      } else {
+        //兼容android7.0 使用共享文件的形式
+        ContentValues contentValues = new ContentValues(1);
+        contentValues.put(MediaStore.Images.Media.DATA, photoFile.getAbsolutePath());
+        Uri uri = mContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
       }
     }
     return takePictureIntent;
   }
-
 
   public void galleryAddPic() {
     Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);

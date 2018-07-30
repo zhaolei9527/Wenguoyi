@@ -23,7 +23,7 @@ import com.wenguoyi.Activity.HuiYuanSJActivity;
 import com.wenguoyi.Activity.KeFuZhongXinActivity;
 import com.wenguoyi.Activity.MyChongZhiActivity;
 import com.wenguoyi.Activity.MyGuZhiActivity;
-import com.wenguoyi.Activity.MyMessageActivity;
+import com.wenguoyi.Activity.MyMessageActivity2;
 import com.wenguoyi.Activity.MyOrderActivity;
 import com.wenguoyi.Activity.MyQianBaoActivity;
 import com.wenguoyi.Activity.MyTuanDuiActivity;
@@ -109,6 +109,8 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     RelativeLayout llMyorderfa;
     @BindView(R.id.ll_myordershou)
     RelativeLayout llMyordershou;
+    @BindView(R.id.tv_rugujin)
+    TextView tvRugujin;
     private Context context;
 
     @Override
@@ -176,7 +178,6 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
 
     @Override
     protected void onInvisible() {
-
     }
 
     @Override
@@ -220,6 +221,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
             public void onMySuccess(String result) {
                 Log.e("MeFragment", result);
                 try {
+
                     UserIndexBean userIndexBean = new Gson().fromJson(result, UserIndexBean.class);
 
                     if (1 == userIndexBean.getStatus()) {
@@ -233,6 +235,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                         tvDaizhifu.setText(userIndexBean.getCount().getDfcount());
                         tvDaifahuo.setText(userIndexBean.getCount().getDfhcount());
                         tvDaishouhuo.setText(userIndexBean.getCount().getDscount());
+                        tvRugujin.setText("入股金：￥" + userIndexBean.getUser().getRugujin());
 
                         SpUtil.putAndApply(context, "Headimg", "" + userIndexBean.getUser().getHeadimg());
                         SpUtil.putAndApply(context, "username", "" + userIndexBean.getUser().getNickname());
@@ -244,6 +247,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                         SpUtil.putAndApply(context, "Dfhcount", "" + userIndexBean.getCount().getDfhcount());
                         SpUtil.putAndApply(context, "Dscount", "" + userIndexBean.getCount().getDscount());
                         SpUtil.putAndApply(context, "Cartnum", "" + userIndexBean.getCount().getCart_num());
+
                     } else {
                         EasyToast.showShort(context, R.string.Abnormalserver);
                     }
@@ -269,7 +273,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                 startActivity(new Intent(context, HuiYuanSJActivity.class));
                 break;
             case R.id.rl_gerenziliao:
-                startActivity(new Intent(context, MyMessageActivity.class));
+                startActivity(new Intent(context, MyMessageActivity2.class));
                 break;
             case R.id.rl_shouhuodizhi:
                 startActivity(new Intent(context, AddressActivitry.class));

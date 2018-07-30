@@ -103,13 +103,10 @@ public class DateUtils {
 
     /**
      * 格式到秒
-     *
      * @return time -> yyyy-MM-dd-HH-mm-ss
      */
     public static String getMillon(long time) {
-
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time);
-
     }
 
     /**

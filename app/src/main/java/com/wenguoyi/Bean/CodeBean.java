@@ -16,6 +16,8 @@ public class CodeBean {
 
     private int status;
     private String msg;
+    private String url;
+
 
     public int getStatus() {
         return status;
@@ -32,4 +34,14 @@ public class CodeBean {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
 }

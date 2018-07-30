@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity {
                 return fragments.get(position);
             }
         });
-
+        ((BottomTabBar) findViewById(R.id.BottomTabBar)).setPadding(0, 0, 0, 0);
         ((BottomTabBar) findViewById(R.id.BottomTabBar))
                 .initFragmentorViewPager(viewpager)
                 .setImgSize(getResources().getDimension(R.dimen.x19), getResources().getDimension(R.dimen.y16))

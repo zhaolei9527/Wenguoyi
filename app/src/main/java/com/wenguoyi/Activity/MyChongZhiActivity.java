@@ -263,7 +263,7 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
                     } else {
                         CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
                         EasyToast.showShort(context, codeBean.getMsg());
-                        startActivity(new Intent(context, MyMessageActivity.class));
+                        startActivity(new Intent(context, MyMessageActivity2.class));
                     }
 
                 } catch (Exception e) {

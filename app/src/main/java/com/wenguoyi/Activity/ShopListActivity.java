@@ -141,6 +141,12 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
         if (!TextUtils.isEmpty(fcate)) {
             this.fcate = fcate;
         }
+
+        String tcate = getIntent().getStringExtra("tcate");
+        if (!TextUtils.isEmpty(tcate)) {
+            this.tcate = tcate;
+        }
+
         etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId,

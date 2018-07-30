@@ -27,7 +27,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y74"
+            android:layout_height="@dimen/y84"
             android:layout_below="@id/rl_title">
 
             <com.facebook.drawee.view.SimpleDraweeView
@@ -72,6 +72,14 @@
                         android:id="@+id/tv_userlv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/bgfff"
+                        android:textSize="@dimen/x15" />
+
+                    <TextView
+                        android:id="@+id/tv_rugujin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
                         android:textColor="@color/bgfff"
                         android:textSize="@dimen/x15" />
 

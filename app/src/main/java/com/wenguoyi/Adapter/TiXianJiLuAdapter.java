@@ -2,6 +2,7 @@ package com.wenguoyi.Adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +34,18 @@ public class TiXianJiLuAdapter extends RecyclerView.Adapter<TiXianJiLuAdapter.Vi
         return datas;
     }
 
+    private String type;
+
+
     public TiXianJiLuAdapter(Activity context, List<UserTxRecordBean.MsgBean> msgBeanList) {
         this.mContext = context;
         this.datas.addAll(msgBeanList);
+    }
+
+    public TiXianJiLuAdapter(Activity context, List<UserTxRecordBean.MsgBean> msgBeanList, String type) {
+        this.mContext = context;
+        this.datas.addAll(msgBeanList);
+        this.type = type;
     }
 
     public void setDatas(List<UserTxRecordBean.MsgBean> datas) {
@@ -51,7 +61,13 @@ public class TiXianJiLuAdapter extends RecyclerView.Adapter<TiXianJiLuAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.tvTitle.setText("提现");
+
+        if (TextUtils.isEmpty(type)){
+            holder.tvTitle.setText("提现");
+        }else {
+            holder.tvTitle.setText("转出");
+        }
+
         holder.tvMoney.setText("数量" + datas.get(position).getMoney());
         holder.tvTime.setText(DateUtils.getMillon(Long.parseLong(datas.get(position).getAddtime()) * 1000));
 

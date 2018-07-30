@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_dismiss"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#a1919090"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_dismiss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="@dimen/x5"
+            android:text="关闭"
+            android:textColor="@color/text000"
+            android:textSize="@dimen/x15" />
+
+        <TextView
+            android:id="@+id/tv_xiaofei"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x15"
+            android:layout_marginTop="@dimen/x10"
+            android:background="@drawable/bg_shengji_check"
+            android:gravity="center"
+            android:padding="@dimen/x10"
+            android:text="存入金额￥0.00（只能消费）"
+            android:textColor="@color/bgtitle" />
+
+        <TextView
+            android:id="@+id/tv_dingqi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x15"
+            android:layout_marginTop="@dimen/x10"
+            android:background="@drawable/bg_shengji_nomore"
+            android:gravity="center"
+            android:padding="@dimen/x10"
+            android:text="存入金额￥0.00（定期分红）" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginTop="@dimen/x10"
+            android:background="@color/bgddd"></View>
+
+        <TextView
+            android:id="@+id/tv_xuzhifu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:padding="@dimen/x5"
+            android:text="需要支付金额  ￥0.00" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="@dimen/x150"
+            android:layout_height="@dimen/y30"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/x15"
+            android:layout_marginTop="@dimen/x15"
+            android:background="@drawable/bg_login"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>

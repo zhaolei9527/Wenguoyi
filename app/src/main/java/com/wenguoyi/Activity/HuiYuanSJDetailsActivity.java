@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.tencent.smtt.sdk.WebViewClient;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.BankEvent;
 import com.wenguoyi.Bean.CodeBean;
+import com.wenguoyi.Bean.UserDetailBean;
 import com.wenguoyi.Bean.UserShengJiBean;
 import com.wenguoyi.R;
 import com.wenguoyi.Utils.Constants;
@@ -58,8 +61,22 @@ public class HuiYuanSJDetailsActivity extends BaseActivity {
     WebView forumContext;
     @BindView(R.id.tv_shengji)
     TextView tvShengji;
+    @BindView(R.id.tv_dismiss)
+    TextView tvDismiss;
+    @BindView(R.id.tv_xiaofei)
+    TextView tvXiaofei;
+    @BindView(R.id.tv_dingqi)
+    TextView tvDingqi;
+    @BindView(R.id.btn_submit)
+    Button btnSubmit;
+    @BindView(R.id.ll_dismiss)
+    LinearLayout llDismiss;
+    @BindView(R.id.tv_xuzhifu)
+    TextView tvXuzhifu;
     private Dialog dialog;
     private String id;
+    private UserDetailBean userDetailBean;
+    private String fs = "1";
 
     @Override
     protected int setthislayout() {
@@ -71,18 +88,18 @@ public class HuiYuanSJDetailsActivity extends BaseActivity {
 
         id = getIntent().getStringExtra("id");
 
-
-
         if (TextUtils.isEmpty(id)) {
             EasyToast.showShort(context, getString(R.string.hasError));
             finish();
         }
 
-
         dialog = Utils.showLoadingDialog(context);
         if (!dialog.isShowing()) {
             dialog.show();
         }
+
+        UserDetail();
+
 
         //注册EventBus
         if (!EventBus.getDefault().isRegistered(HuiYuanSJDetailsActivity.this)) {
@@ -136,7 +153,9 @@ public class HuiYuanSJDetailsActivity extends BaseActivity {
 
             }
         });
+
         forumContext.loadUrl(UrlUtils.BASE_URL + "/danye/type/id/" + id);
+
     }
 
     @Override
@@ -151,10 +170,52 @@ public class HuiYuanSJDetailsActivity extends BaseActivity {
         tvShengji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                llDismiss.setVisibility(View.VISIBLE);
+            }
+        });
+
+        tvXiaofei.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvXiaofei.setBackground(getResources().getDrawable(R.drawable.bg_shengji_check));
+                tvDingqi.setBackground(getResources().getDrawable(R.drawable.bg_shengji_nomore));
+                tvXuzhifu.setText("需要支付金额：￥" + userDetailBean.getMsg().getPrice());
+                fs = "1";
+            }
+        });
+
+        tvDingqi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvXiaofei.setBackground(getResources().getDrawable(R.drawable.bg_shengji_nomore));
+                tvDingqi.setBackground(getResources().getDrawable(R.drawable.bg_shengji_check));
+                tvXuzhifu.setText("需要支付金额：￥" + userDetailBean.getMsg().getRugujin());
+                fs = "2";
+            }
+        });
+
+        tvDismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llDismiss.setVisibility(View.GONE);
+            }
+        });
+
+        llDismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llDismiss.setVisibility(View.GONE);
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 dialog.show();
                 userShengji();
             }
         });
+
 
     }
 
@@ -165,6 +226,7 @@ public class HuiYuanSJDetailsActivity extends BaseActivity {
         HashMap<String, String> params = new HashMap<>(1);
         params.put("pwd", UrlUtils.KEY);
         params.put("id", id);
+        params.put("fs", fs);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         Log.e("HuiYuanSJDetails", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/shengji", "user/shengji", params, new VolleyInterface(context) {
@@ -191,7 +253,7 @@ public class HuiYuanSJDetailsActivity extends BaseActivity {
                     } else {
                         CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
                         EasyToast.showShort(context, codeBean.getMsg());
-                        startActivity(new Intent(context, MyMessageActivity.class));
+                        startActivity(new Intent(context, MyMessageActivity2.class));
                     }
 
                 } catch (Exception e) {
@@ -209,6 +271,40 @@ public class HuiYuanSJDetailsActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 会员升级支付
+     */
+    private void UserDetail() {
+        HashMap<String, String> params = new HashMap<>(1);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("id", id);
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        Log.e("HuiYuanSJDetails", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/user_detail", "user/user_detail", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("HuiYuanSJDetails", result);
+                try {
+                    userDetailBean = new Gson().fromJson(result, UserDetailBean.class);
+                    if (1 == userDetailBean.getStatus()) {
+                        tvXiaofei.setText("存入金额￥" + userDetailBean.getMsg().getPrice() + "（只能消费）");
+                        tvDingqi.setText("存入入股金￥" + userDetailBean.getMsg().getRugujin() + "(定期分红)");
+                        tvXuzhifu.setText("需要支付金额：￥" + userDetailBean.getMsg().getPrice());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                dialog.dismiss();
+                error.printStackTrace();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     @Override
     protected void initData() {

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.wenguoyi.Adapter.CaiWuMingXiAdapter;
 import com.wenguoyi.Adapter.TiXianJiLuAdapter;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.CodeBean;
+import com.wenguoyi.Bean.IsTxBean;
 import com.wenguoyi.Bean.UserCzmxBean;
 import com.wenguoyi.Bean.UserLineBean;
 import com.wenguoyi.Bean.UserTxRecordBean;
@@ -40,8 +42,6 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.fangx.haorefresh.LoadMoreListener;
-
-import static com.wenguoyi.R.id.re_caiwumingxi;
 
 /**
  * com.wenguoyi.Activity
@@ -74,8 +74,6 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
     WenguoyiRecycleView reTixianjilu;
     @BindView(R.id.ll_c_tixianjilu)
     LinearLayout llCTixianjilu;
-    @BindView(re_caiwumingxi)
-    WenguoyiRecycleView reCaiwumingxi;
     @BindView(R.id.LL_empty)
     RelativeLayout LLEmpty;
     @BindView(R.id.ll_c_caiwumingxi)
@@ -86,6 +84,12 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
     TextView tvYue;
     @BindView(R.id.btn_submit)
     Button btnSubmit;
+    @BindView(R.id.img)
+    ImageView img;
+    @BindView(R.id.tv_ketixianTime)
+    TextView tvKetixianTime;
+    @BindView(R.id.re_caiwumingxi)
+    WenguoyiRecycleView reCaiwumingxi;
 
     private SakuraLinearLayoutManager line;
     private SakuraLinearLayoutManager line2;
@@ -132,6 +136,7 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                 userTxmx();
             }
         });
+
     }
 
     @Override
@@ -153,6 +158,7 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
         if (Utils.isConnected(context)) {
             dialog = Utils.showLoadingDialog(context);
             dialog.show();
+            useristx();
             userJine();
             userTx_record();
             userTxmx();
@@ -239,9 +245,48 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                     UserLineBean userLineBean = new Gson().fromJson(result, UserLineBean.class);
                     if (1 == userLineBean.getStatus()) {
                         tvYue.setText("￥" + userLineBean.getAmount());
-                        tvKetixian.setText("可提现金额：" + userLineBean.getAmount());
                     } else {
                         Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                dialog.dismiss();
+                error.printStackTrace();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    /**
+     * 提现时间
+     */
+    private void useristx() {
+        HashMap<String, String> params = new HashMap<>(1);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        Log.e("MyQianBaoActivity", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/is_tx", "user/is_tx", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("MyQianBaoActivity", result);
+                try {
+                    IsTxBean isTxBean = new Gson().fromJson(result, IsTxBean.class);
+                    if (1 == isTxBean.getStatus()) {
+                        tvKetixian.setText("最低提现金额 2 元，提现手续费率：" + isTxBean.getSxf() + "%");
+                        tvKetixianTime.setText("可提现时间：" + isTxBean.getStime() + "--" + isTxBean.getEtime());
+                        if (1 == isTxBean.getIs_tx()) {
+                            btnSubmit.setEnabled(true);
+                        } else {
+                            btnSubmit.setText("暂不可提现");
+                            btnSubmit.setEnabled(false);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

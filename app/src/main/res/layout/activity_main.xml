@@ -25,12 +25,13 @@
             <sakura.bottomtabbar.BottomTabBar
                 android:id="@+id/BottomTabBar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y40"></sakura.bottomtabbar.BottomTabBar>
+                android:layout_height="@dimen/y35"
+                android:layout_gravity="bottom"></sakura.bottomtabbar.BottomTabBar>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y40"
+                android:layout_height="@dimen/y35"
                 android:clipChildren="false"
                 android:weightSum="4">
 

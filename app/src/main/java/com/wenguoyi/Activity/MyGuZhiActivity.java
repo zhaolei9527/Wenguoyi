@@ -21,6 +21,7 @@ import com.wenguoyi.Adapter.CaiWuMingXiAdapter;
 import com.wenguoyi.Adapter.TiXianJiLuAdapter;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.CodeBean;
+import com.wenguoyi.Bean.IsTxBean;
 import com.wenguoyi.Bean.UserCzmxBean;
 import com.wenguoyi.Bean.UserLineBean;
 import com.wenguoyi.Bean.UserTxRecordBean;
@@ -88,6 +89,8 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
     LinearLayout llCTixianjilu;
     @BindView(R.id.re_caiwumingxi)
     WenguoyiRecycleView reCaiwumingxi;
+    @BindView(R.id.tv_ketixianTime)
+    TextView tvKetixianTime;
     private int txjlp = 1;
     private int cwmxp = 1;
     private SakuraLinearLayoutManager line;
@@ -153,6 +156,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
         if (Utils.isConnected(context)) {
             dialog = Utils.showLoadingDialog(context);
             dialog.show();
+            userIsZhuan();
             userJine();
             userTx_record();
             userTxmxgz();
@@ -238,7 +242,6 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                     if (1 == userLineBean.getStatus()) {
                         tvKeyongguzhi.setText("可用股值:" + userLineBean.getAmount());
                         tvYue.setText("￥" + userLineBean.getRenminbi());
-                        tvKetixian.setText("可提现股值:" + userLineBean.getAmount() + "，折合￥" + userLineBean.getRenminbi());
                     } else {
                         Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                     }
@@ -256,6 +259,46 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
             }
         });
     }
+
+    /**
+     * 提现时间
+     */
+    private void userIsZhuan() {
+        HashMap<String, String> params = new HashMap<>(1);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        Log.e("MyQianBaoActivity", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/is_zhuan", "user/is_zhuan", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("MyQianBaoActivity", result);
+                try {
+                    IsTxBean isTxBean = new Gson().fromJson(result, IsTxBean.class);
+                    if (1 == isTxBean.getStatus()) {
+                        tvKetixian.setText("最少转出 1 股，每股约合1.20元：");
+                        tvKetixianTime.setText("可转出时间：" + isTxBean.getStime() + "--" + isTxBean.getEtime());
+                        if (1 == isTxBean.getIs_tx()) {
+                            btnSubmit.setEnabled(true);
+                        } else {
+                            btnSubmit.setText("暂不可转出");
+                            btnSubmit.setEnabled(false);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                dialog.dismiss();
+                error.printStackTrace();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     /**
      * 我要提现
@@ -316,7 +359,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                     UserTxRecordBean userTxRecordBean = new Gson().fromJson(result, UserTxRecordBean.class);
                     if (1 == userTxRecordBean.getStatus()) {
                         if (1 == txjlp) {
-                            tiXianJiLuAdapter = new TiXianJiLuAdapter(MyGuZhiActivity.this, userTxRecordBean.getMsg());
+                            tiXianJiLuAdapter = new TiXianJiLuAdapter(MyGuZhiActivity.this, userTxRecordBean.getMsg(), "1");
                             reTixianjilu.setAdapter(tiXianJiLuAdapter);
                         } else {
                             reTixianjilu.loadMoreComplete();

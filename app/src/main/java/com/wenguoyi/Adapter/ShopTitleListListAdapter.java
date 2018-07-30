@@ -53,6 +53,7 @@ public class ShopTitleListListAdapter extends RecyclerView.Adapter<ShopTitleList
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+
         holder.gl_shoptype.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -83,7 +84,7 @@ public class ShopTitleListListAdapter extends RecyclerView.Adapter<ShopTitleList
         holder.gl_shoptype.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                mContext.startActivity(new Intent(mContext, ShopListActivity.class));
+                mContext.startActivity(new Intent(mContext, ShopListActivity.class).putExtra("tcate", datas.get(position).getId()));
             }
         });
 

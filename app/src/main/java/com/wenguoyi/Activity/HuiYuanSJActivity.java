@@ -36,6 +36,7 @@ import butterknife.ButterKnife;
  * 功能描述：
  */
 public class HuiYuanSJActivity extends BaseActivity {
+
     @BindView(R.id.rl_back)
     FrameLayout rlBack;
     @BindView(R.id.tv_dengji)
@@ -70,6 +71,16 @@ public class HuiYuanSJActivity extends BaseActivity {
     LinearLayout llB;
     @BindView(R.id.ll_C)
     LinearLayout llC;
+    @BindView(R.id.tv_titleSSS)
+    TextView tvTitleSSS;
+    @BindView(R.id.tv_moneySSS)
+    TextView tvMoneySSS;
+    @BindView(R.id.tv_contentSSS)
+    TextView tvContentSSS;
+    @BindView(R.id.ll_SSS)
+    LinearLayout llSSS;
+    @BindView(R.id.SimpleDraweeViewSSS)
+    SimpleDraweeView SimpleDraweeViewSSS;
 
     @Override
     protected int setthislayout() {
@@ -102,7 +113,6 @@ public class HuiYuanSJActivity extends BaseActivity {
         }
     }
 
-
     /**
      * 会员升级
      */
@@ -120,6 +130,19 @@ public class HuiYuanSJActivity extends BaseActivity {
                     if (1 == userUserBean.getStatus()) {
                         tvDengji.setText("您当前的会员等级：" + userUserBean.getLevel());
 
+                        if (userUserBean.getList().size() > 3) {
+                            SimpleDraweeViewSSS.setImageURI(UrlUtils.URL + userUserBean.getList().get(3).getImg());
+                            tvMoneySSS.setText("￥" + userUserBean.getList().get(3).getPrice());
+                            tvContentSSS.setText(userUserBean.getList().get(3).getContent());
+                            llSSS.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(context, HuiYuanSJDetailsActivity.class).putExtra("id", userUserBean.getList().get(3).getId()));
+                                }
+                            });
+                            llSSS.setVisibility(View.VISIBLE);
+                        }
+
                         if (userUserBean.getList().size() > 2) {
                             SimpleDraweeViewC.setImageURI(UrlUtils.URL + userUserBean.getList().get(2).getImg());
                             tvMoneyC.setText("￥" + userUserBean.getList().get(2).getPrice());
@@ -132,6 +155,7 @@ public class HuiYuanSJActivity extends BaseActivity {
                             });
                             llC.setVisibility(View.VISIBLE);
                         }
+
                         if (userUserBean.getList().size() > 1) {
                             SimpleDraweeViewB.setImageURI(UrlUtils.URL + userUserBean.getList().get(1).getImg());
                             tvContentB.setText(userUserBean.getList().get(1).getContent());
@@ -144,6 +168,7 @@ public class HuiYuanSJActivity extends BaseActivity {
                             });
                             llB.setVisibility(View.VISIBLE);
                         }
+
                         if (userUserBean.getList().size() > 0) {
                             SimpleDraweeViewA.setImageURI(UrlUtils.URL + userUserBean.getList().get(0).getImg());
                             tvContentA.setText(userUserBean.getList().get(0).getContent());
@@ -156,6 +181,7 @@ public class HuiYuanSJActivity extends BaseActivity {
                             });
                             llA.setVisibility(View.VISIBLE);
                         }
+
                     } else {
                         EasyToast.showShort(context, R.string.Abnormalserver);
                     }

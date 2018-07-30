@@ -6,7 +6,19 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/SimpleDraweeView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/y35" />
+
+    <TextView
+        android:id="@+id/tv_share"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y35"
+        android:layout_gravity="center_horizontal|bottom"
+        android:background="@color/bgtitle"
+        android:gravity="center"
+        android:text="分享给好友"
+        android:textColor="@color/white"
+        android:textSize="@dimen/x15" />
 
     <RelativeLayout
         android:layout_width="match_parent"

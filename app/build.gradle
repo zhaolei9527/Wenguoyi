@@ -23,15 +23,16 @@ android {
         applicationId "com.wenguoyi"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 6
-        versionName "1.6+"
+        versionCode 10
+        versionName "1.10+"
         multiDexEnabled true
         useLibrary 'org.apache.http.legacy'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             //设置支持的SO库架构
-            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'//,'x86', 'x86_64'
         }
+
     }
     buildTypes {
         release {
@@ -53,6 +54,10 @@ MobSDK {
         //平台配置信息
         devInfo {
             Wechat {
+                appId "wx82670e4f447fbb75"
+                appSecret "3e1787cb5b430f96af9bf637634c97d7"
+            }
+            WechatMoments {
                 appId "wx82670e4f447fbb75"
                 appSecret "3e1787cb5b430f96af9bf637634c97d7"
             }

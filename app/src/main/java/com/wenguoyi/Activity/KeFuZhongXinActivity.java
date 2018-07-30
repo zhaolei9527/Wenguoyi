@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tencent.smtt.export.external.extension.interfaces.IX5WebViewExtension;
@@ -35,6 +36,8 @@ public class KeFuZhongXinActivity extends BaseActivity {
     FrameLayout rlBack;
     @BindView(forum_context)
     WebView forumContext;
+    @BindView(R.id.tv_Title)
+    TextView tvTitle;
     private Dialog dialog;
 
     @Override
@@ -96,9 +99,9 @@ public class KeFuZhongXinActivity extends BaseActivity {
 
             }
         });
+        tvTitle.setText("客服中心");
         //链接：http://域名/wgy.php/danye/index/id/2
         forumContext.loadUrl(UrlUtils.BASE_URL + "danye/index/id/2");
-
     }
 
     @Override
