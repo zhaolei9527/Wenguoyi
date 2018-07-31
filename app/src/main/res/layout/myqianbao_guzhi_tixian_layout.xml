@@ -18,36 +18,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/x10"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="提现账户"
-                    android:textColor="@color/text333"
-                    android:textSize="@dimen/x15" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:text="微信零钱"
-                    android:textColor="@color/bgtitle"
-                    android:textSize="@dimen/x15" />
-
-            </LinearLayout>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x15"
-                android:text="提现数量"
+                android:text="转出数量"
                 android:textColor="@color/text666"
                 android:textSize="@dimen/x14" />
 
@@ -57,7 +32,7 @@
                 android:layout_height="@dimen/y40"
                 android:layout_marginTop="@dimen/x10"
                 android:background="@null"
-                android:hint="请输入提现数量"
+                android:hint="请输入转出数量"
                 android:inputType="numberDecimal"
                 android:textSize="@dimen/x18" />
 
@@ -66,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x15"
-                android:text="可提现金额：￥0.00"
+                android:text="可转出金额：￥0.00"
                 android:textColor="@color/text666"
                 android:textSize="@dimen/x13" />
 
@@ -75,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x15"
-                android:text="可提现时间："
+                android:text="可转出时间："
                 android:textColor="@color/text666"
                 android:textSize="@dimen/x13" />
 
@@ -87,7 +62,7 @@
                 android:layout_marginBottom="@dimen/x15"
                 android:layout_marginTop="@dimen/x20"
                 android:background="@drawable/bg_login"
-                android:text="立即提现"
+                android:text="立即转出"
                 android:textColor="@color/bgfff" />
 
         </LinearLayout>

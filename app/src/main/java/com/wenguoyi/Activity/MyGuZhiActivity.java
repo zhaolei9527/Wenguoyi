@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.wenguoyi.Adapter.CaiWuMingXiAdapter;
+import com.wenguoyi.Adapter.GUZHITiXianJiLuAdapter;
 import com.wenguoyi.Adapter.TiXianJiLuAdapter;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.CodeBean;
@@ -350,7 +351,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
         params.put("page", String.valueOf(txjlp));
         Log.e("MyGuZhiActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/tx_recordgz", "user/tx_recordgz", params, new VolleyInterface(context) {
-            private TiXianJiLuAdapter tiXianJiLuAdapter;
+            private GUZHITiXianJiLuAdapter tiXianJiLuAdapter;
 
             @Override
             public void onMySuccess(String result) {
@@ -359,7 +360,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                     UserTxRecordBean userTxRecordBean = new Gson().fromJson(result, UserTxRecordBean.class);
                     if (1 == userTxRecordBean.getStatus()) {
                         if (1 == txjlp) {
-                            tiXianJiLuAdapter = new TiXianJiLuAdapter(MyGuZhiActivity.this, userTxRecordBean.getMsg(), "1");
+                            tiXianJiLuAdapter = new GUZHITiXianJiLuAdapter(MyGuZhiActivity.this, userTxRecordBean.getMsg(), "1");
                             reTixianjilu.setAdapter(tiXianJiLuAdapter);
                         } else {
                             reTixianjilu.loadMoreComplete();

@@ -52,12 +52,22 @@ public class UserTxRecordBean {
          * money : 1.00
          * addtime : 1528365693
          * status : -1
+         * renminbi
          */
 
         private String id;
         private String money;
         private String addtime;
         private String status;
+        private String renminbi;
+
+        public String getRenminbi() {
+            return renminbi;
+        }
+
+        public void setRenminbi(String renminbi) {
+            this.renminbi = renminbi;
+        }
 
         public String getId() {
             return id;
