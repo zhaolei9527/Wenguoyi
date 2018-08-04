@@ -129,7 +129,6 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         tvUsername.setText(String.valueOf(SpUtil.get(context, "username", "")));
         tvUserlv.setText("等级:" + String.valueOf(SpUtil.get(context, "Level", "")));
         tvYue.setText("￥" + String.valueOf(SpUtil.get(context, "Money", "0")));
-        tvGuzhi.setText(String.valueOf(SpUtil.get(context, "Integral", "0.00")));
         tvUserid.setText("ID:" + String.valueOf(SpUtil.get(context, "uuid", "")));
         tvDaizhifu.setText(String.valueOf(SpUtil.get(context, "Dfcount", "0")));
         tvDaifahuo.setText(String.valueOf(SpUtil.get(context, "Dfhcount", "0")));
@@ -230,7 +229,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                         tvUsername.setText(userIndexBean.getUser().getNickname());
                         tvUserlv.setText("等级:" + userIndexBean.getUser().getLevel());
                         tvYue.setText("￥" + userIndexBean.getUser().getMoney());
-                        tvGuzhi.setText(userIndexBean.getUser().getIntegral());
+                        tvGuzhi.setText("￥"+userIndexBean.getUser().getRugujin());
                         tvUserid.setText("ID:" + userIndexBean.getUser().getUid());
                         tvDaizhifu.setText(userIndexBean.getCount().getDfcount());
                         tvDaifahuo.setText(userIndexBean.getCount().getDfhcount());

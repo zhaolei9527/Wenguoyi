@@ -12,7 +12,7 @@ android {
         }
     }
 
-    lintOptions{
+    lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
@@ -23,14 +23,14 @@ android {
         applicationId "com.wenguoyi"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 10
-        versionName "1.10+"
+        versionCode 15
+        versionName "1.15+"
         multiDexEnabled true
         useLibrary 'org.apache.http.legacy'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             //设置支持的SO库架构
-            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a','x86', 'x86_64'
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'//,'x86', 'x86_64'
         }
 
     }

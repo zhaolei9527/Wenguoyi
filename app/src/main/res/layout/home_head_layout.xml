@@ -16,8 +16,10 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="@dimen/x50"
-            android:layout_height="@dimen/x30"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_marginRight="@dimen/x5"
+            android:layout_width="@dimen/x45"
+            android:layout_height="@dimen/x40"
             android:layout_centerVertical="true"
             android:background="@mipmap/icon" />
 
