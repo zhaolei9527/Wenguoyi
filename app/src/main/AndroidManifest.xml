@@ -109,7 +109,7 @@
             android:name=".Activity.MyMessageActivity2"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
 
         <activity
             android:name=".Activity.AddAdressActivity"
