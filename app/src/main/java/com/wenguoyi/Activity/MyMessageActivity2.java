@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.UserDoInfoBean;
@@ -35,6 +37,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.iwf.photopicker.PhotoPickUtils;
 
 /**
  * com.wenguoyi.Activity
@@ -70,8 +73,30 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
     EditText etAddress;
     @BindView(R.id.btn_submit)
     Button btnSubmit;
+    @BindView(R.id.SimpleDraweeView1)
+    SimpleDraweeView SimpleDraweeView1;
+    @BindView(R.id.rl_zhengmian)
+    RelativeLayout rlZhengmian;
+    @BindView(R.id.ll_zhengmian)
+    LinearLayout llZhengmian;
+    @BindView(R.id.SimpleDraweeView2)
+    SimpleDraweeView SimpleDraweeView2;
+    @BindView(R.id.rl_fanmian)
+    RelativeLayout rlFanmian;
+    @BindView(R.id.ll_fanmian)
+    LinearLayout llFanmian;
+    @BindView(R.id.SimpleDraweeView3)
+    SimpleDraweeView SimpleDraweeView3;
+    @BindView(R.id.rl_shouchi)
+    RelativeLayout rlShouchi;
+    @BindView(R.id.ll_shouchi)
+    LinearLayout llShouchi;
+    @BindView(R.id.et_yinhang_name)
+    EditText etYinhangName;
     private Dialog dialog;
-
+    private String pic = "";
+    private String pic2 = "";
+    private String pic3 = "";
     private ArrayList<String> sexs = new ArrayList<>();
 
     private String issexs;
@@ -106,7 +131,6 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
         }
     }
 
-
     @Override
     protected int setthislayout() {
         return R.layout.activity_mymessage2_layout;
@@ -121,6 +145,9 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
 
     @Override
     protected void initListener() {
+        llZhengmian.setOnClickListener(this);
+        llFanmian.setOnClickListener(this);
+        llShouchi.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
         rlBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +175,7 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
         } else {
             EasyToast.showShort(context, R.string.Networkexception);
         }
+
     }
 
     /**
@@ -163,6 +191,7 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
             public void onMySuccess(String result) {
                 Log.e("MyMessageActivity", result);
                 try {
+
                     dialog.dismiss();
                     UserResetinforBean userResetinforBean = new Gson().fromJson(result, UserResetinforBean.class);
                     if (1 == userResetinforBean.getStatus()) {
@@ -184,6 +213,9 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
                             etYinhang.setText(userResetinforBean.getMsg().getBank());
                             etYinhangzhanghao.setText(userResetinforBean.getMsg().getBno());
                             etYouxiang.setText(userResetinforBean.getMsg().getEmail());
+                            SimpleDraweeView1.setImageURI(UrlUtils.URL + userResetinforBean.getMsg().getPic());
+                            SimpleDraweeView2.setImageURI(UrlUtils.URL + userResetinforBean.getMsg().getPic2());
+                            SimpleDraweeView3.setImageURI(UrlUtils.URL + userResetinforBean.getMsg().getPic3());
                         }
                     }
                     result = null;
@@ -261,6 +293,15 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.ll_zhengmian:
+                PhotoPickUtils.startPick().setShowCamera(true).setShowGif(false).setPhotoCount(1).start(MyMessageActivity2.this, 1);
+                break;
+            case R.id.ll_fanmian:
+                PhotoPickUtils.startPick().setShowCamera(true).setShowGif(false).setPhotoCount(1).start(MyMessageActivity2.this, 2);
+                break;
+            case R.id.ll_shouchi:
+                PhotoPickUtils.startPick().setShowCamera(true).setShowGif(false).setPhotoCount(1).start(MyMessageActivity2.this, 3);
+                break;
             case R.id.btn_submit:
 
                 String Name = etName.getText().toString().trim();
@@ -351,6 +392,30 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
 
                 List<File> imgfiles = new ArrayList<>();
                 List<String> imgnames = new ArrayList<>();
+
+                if (TextUtils.isEmpty(pic)) {
+                    EasyToast.showShort(context, "请选择正面照");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(pic2)) {
+                    EasyToast.showShort(context, "请选择反面照");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(pic3)) {
+                    EasyToast.showShort(context, "请选择手持照");
+                    return;
+                }
+
+                imgfiles.add(new File(pic));
+                imgfiles.add(new File(pic2));
+                imgfiles.add(new File(pic3));
+
+                imgnames.add("pic");
+                imgnames.add("pic2");
+                imgnames.add("pic3");
+
                 dialog.show();
                 userDoinfo(imgnames, imgfiles);
                 break;

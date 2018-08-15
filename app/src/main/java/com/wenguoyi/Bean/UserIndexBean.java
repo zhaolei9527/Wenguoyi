@@ -1,5 +1,12 @@
 package com.wenguoyi.Bean;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * com.wenguoyi.Bean
  *
@@ -9,15 +16,24 @@ package com.wenguoyi.Bean;
  */
 public class UserIndexBean {
 
+
     /**
      * status : 1
      * count : {"dfcount":"0","dfhcount":"13","dscount":"0","cart_num":"1"}
-     * user : {"headimg":"http://thirdwx.qlogo.cn/mmopen/8NziaiaYPIAK0C5w4WuicXwXZxOusWzfYBjHEkYXEWAORIf8ETYiaich1DK2G1AJMhlnIu9jVmfjwPQdHhqYHpvMu78aB8jKQzKtn/132","nickname":"Sakura","rugujin":"0.00","uid":"8189953757","money":28.02,"integral":"96.00","level":"C级会员"}
+     * user : {"headimg":"http://thirdwx.qlogo.cn/mmopen/8NziaiaYPIAK0C5w4WuicXwXZxOusWzfYBjHEkYXEWAORIf8ETYiaich1DK2G1AJMhlnIu9jVmfjwPQdHhqYHpvMu78aB8jKQzKtn/132","nickname":"Sakura","rugujin":"0.00","uid":"8189953757","money":"0.40","qianbao":"27.62","integral":"96.00","level":"C级会员"}
      */
 
     private int status;
     private CountBean count;
     private UserBean user;
+
+    public static List<UserIndexBean> arrayUserIndexBeanFromData(String str) {
+
+        Type listType = new TypeToken<ArrayList<UserIndexBean>>() {
+        }.getType();
+
+        return new Gson().fromJson(str, listType);
+    }
 
     public int getStatus() {
         return status;
@@ -55,6 +71,14 @@ public class UserIndexBean {
         private String dfhcount;
         private String dscount;
         private String cart_num;
+
+        public static List<CountBean> arrayCountBeanFromData(String str) {
+
+            Type listType = new TypeToken<ArrayList<CountBean>>() {
+            }.getType();
+
+            return new Gson().fromJson(str, listType);
+        }
 
         public String getDfcount() {
             return dfcount;
@@ -95,7 +119,8 @@ public class UserIndexBean {
          * nickname : Sakura
          * rugujin : 0.00
          * uid : 8189953757
-         * money : 28.02
+         * money : 0.40
+         * qianbao : 27.62
          * integral : 96.00
          * level : C级会员
          */
@@ -104,9 +129,18 @@ public class UserIndexBean {
         private String nickname;
         private String rugujin;
         private String uid;
-        private double money;
+        private String money;
+        private String qianbao;
         private String integral;
         private String level;
+
+        public static List<UserBean> arrayUserBeanFromData(String str) {
+
+            Type listType = new TypeToken<ArrayList<UserBean>>() {
+            }.getType();
+
+            return new Gson().fromJson(str, listType);
+        }
 
         public String getHeadimg() {
             return headimg;
@@ -140,12 +174,20 @@ public class UserIndexBean {
             this.uid = uid;
         }
 
-        public double getMoney() {
+        public String getMoney() {
             return money;
         }
 
-        public void setMoney(double money) {
+        public void setMoney(String money) {
             this.money = money;
+        }
+
+        public String getQianbao() {
+            return qianbao;
+        }
+
+        public void setQianbao(String qianbao) {
+            this.qianbao = qianbao;
         }
 
         public String getIntegral() {
