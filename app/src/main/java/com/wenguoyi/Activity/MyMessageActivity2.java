@@ -259,6 +259,7 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
         params.put("email", etYouxiang.getText().toString().trim());
         params.put("bank", etYinhang.getText().toString().trim());
         params.put("bno", etYinhangzhanghao.getText().toString().trim());
+        params.put("bname", etYinhangName.getText().toString().trim());
         params.put("address", etAddress.getText().toString().trim());
         params.put("card_no", etShenfenzheng.getText().toString().trim());
 
@@ -322,6 +323,9 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
 
                 String yinHangZhangHao = etYinhangzhanghao.getText().toString().trim();
 
+                String yinHangName = etYinhangName.getText().toString().trim();
+
+
                 String address = etAddress.getText().toString().trim();
 
                 if (TextUtils.isEmpty(Name)) {
@@ -379,6 +383,12 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
                     EasyToast.showShort(context, "请输入您的开户银行");
                     return;
                 }
+
+                if (TextUtils.isEmpty(yinHangName)) {
+                    EasyToast.showShort(context, "请输入您的开户名称");
+                    return;
+                }
+
 
                 if (TextUtils.isEmpty(yinHangZhangHao)) {
                     EasyToast.showShort(context, "请输入您的银行帐号");
