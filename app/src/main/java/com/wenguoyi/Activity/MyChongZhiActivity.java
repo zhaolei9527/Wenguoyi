@@ -245,7 +245,7 @@ public class MyChongZhiActivity extends BaseActivity implements View.OnClickList
                 Log.e("MyChongZhiActivity", result);
                 try {
                     dialog.dismiss();
-                    if (result.contains("wx82670e4f447fbb75")) {
+                    if (result.contains("wx90ea24410608f881")) {
                         UserShengJiBean userShengJiBean = new Gson().fromJson(result, UserShengJiBean.class);
                         IWXAPI api = WXAPIFactory.createWXAPI(context, Constants.APP_ID, false);
                         api.registerApp(Constants.APP_ID);

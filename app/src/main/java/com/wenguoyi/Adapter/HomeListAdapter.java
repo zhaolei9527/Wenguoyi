@@ -170,27 +170,35 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                     }
                 }
             } else {
-                holder.tv_item_title.setText(homeBean.getCate().get(position - 2).getTitle());
-                holder.gl_shoplist.removeAllViews();
-                if (holder.gl_shoplist.getChildCount() == 0) {
-                    for (int i = 0; i < homeBean.getCate().size(); i++) {
-                        final View inflate = View.inflate(mContext, R.layout.home_shop_list_list_item_layout, null);
-                        SimpleDraweeView SimpleDraweeView = inflate.findViewById(R.id.SimpleDraweeView);
-                        TextView tv_title = inflate.findViewById(R.id.tv_title);
-                        TextView tv_price = inflate.findViewById(R.id.tv_price);
-                        SimpleDraweeView.setImageURI(UrlUtils.URL + homeBean.getCate().get(position - 2).getGoods().get(i).getImgurl());
-                        tv_title.setText(homeBean.getCate().get(position - 2).getGoods().get(i).getGname());
-                        tv_price.setText("￥" + homeBean.getCate().get(position - 2).getGoods().get(i).getPrice());
-                        inflate.setTag(homeBean.getCate().get(position - 2).getGoods().get(i).getId());
-                        inflate.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                mContext.startActivity(new Intent(mContext, PriceDetailsActivity.class).putExtra("id", (String) inflate.getTag()));
-                            }
-                        });
-                        holder.gl_shoplist.addView(inflate);
+
+                try {
+                    holder.tv_item_title.setText(homeBean.getCate().get(position - 2).getTitle());
+                    holder.gl_shoplist.removeAllViews();
+                    if (holder.gl_shoplist.getChildCount() == 0) {
+                        for (int i = 0; i < homeBean.getCate().size(); i++) {
+                            final View inflate = View.inflate(mContext, R.layout.home_shop_list_list_item_layout, null);
+                            SimpleDraweeView SimpleDraweeView = inflate.findViewById(R.id.SimpleDraweeView);
+                            TextView tv_title = inflate.findViewById(R.id.tv_title);
+                            TextView tv_price = inflate.findViewById(R.id.tv_price);
+                            SimpleDraweeView.setImageURI(UrlUtils.URL + homeBean.getCate().get(position - 2).getGoods().get(i).getImgurl());
+                            tv_title.setText(homeBean.getCate().get(position - 2).getGoods().get(i).getGname());
+                            tv_price.setText("￥" + homeBean.getCate().get(position - 2).getGoods().get(i).getPrice());
+                            inflate.setTag(homeBean.getCate().get(position - 2).getGoods().get(i).getId());
+                            inflate.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    mContext.startActivity(new Intent(mContext, PriceDetailsActivity.class).putExtra("id", (String) inflate.getTag()));
+                                }
+                            });
+                            holder.gl_shoplist.addView(inflate);
+                        }
                     }
+
+                }catch (Exception E){
+                    E.printStackTrace();
                 }
+
+
             }
         }
     }

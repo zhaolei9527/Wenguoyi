@@ -23,8 +23,8 @@ android {
         applicationId "com.wenguoyi"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 18
-        versionName "1.18+"
+        versionCode 20
+        versionName "1.20+"
         multiDexEnabled true
         useLibrary 'org.apache.http.legacy'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -54,12 +54,12 @@ MobSDK {
         //平台配置信息
         devInfo {
             Wechat {
-                appId "wx82670e4f447fbb75"
-                appSecret "3e1787cb5b430f96af9bf637634c97d7"
+                appId "wx90ea24410608f881"
+                appSecret "fe55afd2d213f97fbcc87b3888a73998"
             }
             WechatMoments {
-                appId "wx82670e4f447fbb75"
-                appSecret "3e1787cb5b430f96af9bf637634c97d7"
+                appId "wx90ea24410608f881"
+                appSecret "fe55afd2d213f97fbcc87b3888a73998"
             }
         }
     }
