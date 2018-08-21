@@ -452,7 +452,7 @@
                 android:layout_marginLeft="@dimen/x8"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="我的分红股"
+                android:text="我的分红股金"
                 android:textColor="@color/text444" />
 
 
@@ -461,8 +461,8 @@
                 android:id="@+id/tv_rugujin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/bgfff"
+                android:text="￥0.0"
+                android:textColor="#FF9326"
                 android:textSize="@dimen/x15"
                 android:visibility="visible" />
 

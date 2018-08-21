@@ -90,7 +90,7 @@ public class XunYaoShopTypeActivity extends BaseActivity {
                         ShopTitleListListAdapter titleAdapter = new ShopTitleListListAdapter(XunYaoShopTypeActivity.this, goodsScateBean.getMsg());
                         rv_shop_list_type_list.setAdapter(titleAdapter);
                     } else {
-                        EasyToast.showShort(context, R.string.hasError);
+
                     }
                     result = null;
                 } catch (Exception e) {

@@ -234,7 +234,13 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                         tvDaizhifu.setText(userIndexBean.getCount().getDfcount());
                         tvDaifahuo.setText(userIndexBean.getCount().getDfhcount());
                         tvDaishouhuo.setText(userIndexBean.getCount().getDscount());
-                        tvRugujin.setText("￥" + userIndexBean.getUser().getRugujin());
+
+                        if (TextUtils.isEmpty(userIndexBean.getUser().getRugujin())) {
+                            tvRugujin.setText("￥0.0");
+                        } else {
+                            tvRugujin.setText("￥" + userIndexBean.getUser().getRugujin());
+                        }
+
 
                         SpUtil.putAndApply(context, "Headimg", "" + userIndexBean.getUser().getHeadimg());
                         SpUtil.putAndApply(context, "username", "" + userIndexBean.getUser().getNickname());
