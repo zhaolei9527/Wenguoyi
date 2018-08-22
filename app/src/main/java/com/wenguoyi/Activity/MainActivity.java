@@ -2,6 +2,7 @@ package com.wenguoyi.Activity;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -59,7 +60,15 @@ public class MainActivity extends BaseActivity {
                 new AcpListener() {
                     @Override
                     public void onGranted() {
-
+                        try {
+                            // 从API11开始android推荐使用android.content.ClipboardManager
+                            // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
+                            ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                            // 将文本内容放到系统剪贴板里。
+                            cm.setText("支付宝发红包啦！人人可领，天天可领！长按复制此消息，打开支付宝领红包！VavJvm63sZ");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
