@@ -142,6 +142,7 @@ public class MyNewsFragment extends BaseLazyFragment {
             public void onMySuccess(String result) {
                 Log.e("MyNewsFragment", result);
                 try {
+                    rv_news_list.loadMoreComplete();
                     NewsListBean newsListBean = new Gson().fromJson(result, NewsListBean.class);
                     if (1 == newsListBean.getStatus()) {
                         SpUtil.putAndApply(context, "MyNewsFragment", result);
@@ -157,7 +158,6 @@ public class MyNewsFragment extends BaseLazyFragment {
                         } else {
                             titleAdapter.setDatas(newsListBean.getMsg());
                         }
-                        rv_news_list.loadMoreComplete();
 
                         if (0 == newsListBean.getFy()) {
                             rv_news_list.loadMoreEnd();
@@ -186,7 +186,7 @@ public class MyNewsFragment extends BaseLazyFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void changeNewsType(BankEvent messageEvent) {
-        if ("newstype".equals(messageEvent.getmType())){
+        if ("newstype".equals(messageEvent.getmType())) {
             p = 1;
             cid = messageEvent.getMsg();
             getData();

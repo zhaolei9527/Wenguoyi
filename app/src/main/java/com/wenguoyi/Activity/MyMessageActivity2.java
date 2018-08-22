@@ -1,7 +1,11 @@
 package com.wenguoyi.Activity;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -101,6 +105,49 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
 
     private String issexs;
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        PhotoPickUtils.onActivityResult(requestCode, resultCode, data, new PhotoPickUtils.PickHandler() {
+            @Override
+            public void onPickSuccess(ArrayList<String> photos, int requestCode) {
+                final Bitmap mbitmap = BitmapFactory.decodeFile(photos.get(0));
+                switch (requestCode) {
+                    case 1:
+                        pic = photos.get(0);
+                        SimpleDraweeView1.setBackground(new BitmapDrawable(mbitmap));
+                        break;
+                    case 2:
+                        pic2 = photos.get(0);
+                        SimpleDraweeView2.setBackground(new BitmapDrawable(mbitmap));
+                        break;
+                    case 3:
+                        pic3 = photos.get(0);
+                        SimpleDraweeView3.setBackground(new BitmapDrawable(mbitmap));
+                        break;
+                    default:
+                        break;
+                }
+                Log.e("MyMessageActivity", photos.get(0));
+            }
+
+            @Override
+            public void onPreviewBack(ArrayList<String> photos, int requestCode) {
+                Log.e("MyMessageActivity", photos.get(0));
+            }
+
+            @Override
+            public void onPickFail(String error, int requestCode) {
+                EasyToast.showShort(context, error);
+            }
+
+            @Override
+            public void onPickCancle(int requestCode) {
+                EasyToast.showShort(context, "取消选择");
+            }
+
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

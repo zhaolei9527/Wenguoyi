@@ -179,6 +179,7 @@ public class NewsFragment extends BaseLazyFragment {
                 Log.e("NewsFragment", result);
                 try {
                     NewsListBean newsListBean = new Gson().fromJson(result, NewsListBean.class);
+                    rv_news_list.loadMoreComplete();
                     if (1 == newsListBean.getStatus()) {
                         SpUtil.putAndApply(context, "NewsFragment", result);
                         if (p == 1) {
@@ -193,7 +194,6 @@ public class NewsFragment extends BaseLazyFragment {
                         } else {
                             titleAdapter.setDatas(newsListBean.getMsg());
                         }
-                        rv_news_list.loadMoreComplete();
 
                         if (0 == newsListBean.getFy()) {
                             rv_news_list.loadMoreEnd();
