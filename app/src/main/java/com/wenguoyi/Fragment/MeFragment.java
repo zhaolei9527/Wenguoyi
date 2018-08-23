@@ -102,6 +102,8 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     TextView tvYue;
     @BindView(R.id.tv_guzhi)
     TextView tvGuzhi;
+    @BindView(R.id.tv_zenggu)
+    TextView tvZenggu;
     Unbinder unbinder;
     @BindView(R.id.ll_myorderdai)
     RelativeLayout llMyorderdai;
@@ -241,6 +243,11 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                             tvRugujin.setText("￥" + userIndexBean.getUser().getRugujin());
                         }
 
+                        if (TextUtils.isEmpty(userIndexBean.getUser().getIntegral())) {
+                            tvZenggu.setText("￥0.0");
+                        } else {
+                            tvZenggu.setText("￥" + userIndexBean.getUser().getIntegral());
+                        }
 
                         SpUtil.putAndApply(context, "Headimg", "" + userIndexBean.getUser().getHeadimg());
                         SpUtil.putAndApply(context, "username", "" + userIndexBean.getUser().getNickname());

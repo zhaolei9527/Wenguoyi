@@ -420,6 +420,18 @@
                 android:text="@string/wdeguzhi"
                 android:textColor="@color/text444" />
 
+
+            <TextView
+                android:layout_marginRight="@dimen/x8"
+                android:id="@+id/tv_zenggu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥0.0"
+                android:textColor="#FF9326"
+                android:textSize="@dimen/x15"
+                android:visibility="visible" />
+
+
             <ImageView
                 android:layout_width="@dimen/x5"
                 android:layout_height="@dimen/y8"
@@ -451,7 +463,7 @@
                 android:layout_marginLeft="@dimen/x8"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="我的分红股金"
+                android:text="分红股金"
                 android:textColor="@color/text444" />
 
 
@@ -465,6 +477,12 @@
                 android:textSize="@dimen/x15"
                 android:visibility="visible" />
 
+            <ImageView
+                android:visibility="invisible"
+                android:layout_width="@dimen/x5"
+                android:layout_height="@dimen/y8"
+                android:layout_marginRight="@dimen/x8"
+                android:background="@mipmap/togo" />
 
         </LinearLayout>
         <View
