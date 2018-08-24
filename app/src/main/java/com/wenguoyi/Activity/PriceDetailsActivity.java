@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.jude.rollviewpager.hintview.IconHintView;
+import com.tencent.smtt.export.external.extension.interfaces.IX5WebViewExtension;
 import com.tencent.smtt.export.external.interfaces.WebResourceError;
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.sdk.WebSettings;
@@ -65,7 +66,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     @BindView(R.id.tv_price)
     TextView tvPrice;
     @BindView(R.id.wb)
-    WebView wb;
+    WebView forumContext;
     @BindView(R.id.ll_gohome)
     LinearLayout llGohome;
     @BindView(R.id.img_shoucang)
@@ -107,6 +108,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     private GoodsDetailBean goodsDetailBean;
     private LayoutInflater mInflater;
     private HashMap<String, String> typeMap;
+    private String id;
 
     @Override
     protected void onDestroy() {
@@ -164,23 +166,34 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void initData() {
 
-        String id = getIntent().getStringExtra("id");
+
+        id = getIntent().getStringExtra("id");
 
         if (TextUtils.isEmpty(id)) {
-            EasyToast.showShort(context, R.string.hasError);
+            EasyToast.showShort(context, getString(R.string.hasError));
             finish();
         }
 
+        dialog = Utils.showLoadingDialog(context);
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+        IX5WebViewExtension ix5 = forumContext.getX5WebViewExtension();
+        if (null != ix5) {
+            ix5.setScrollBarFadingEnabled(false);
+        }
         // 开启 localStorage
-        wb.getSettings().setDomStorageEnabled(true);
+        forumContext.getSettings().setDomStorageEnabled(true);
         // 设置支持javascript
-        wb.getSettings().setJavaScriptEnabled(true);
+        forumContext.getSettings().setJavaScriptEnabled(true);
         // 启动缓存
-        wb.getSettings().setAppCacheEnabled(true);
+        forumContext.getSettings().setAppCacheEnabled(true);
         // 设置缓存模式
-        wb.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        //使用自定义的WebViewClient
-        wb.setWebViewClient(new WebViewClient() {
+        forumContext.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        // 启动缓存
+        forumContext.getSettings().setAppCacheEnabled(true);
+        forumContext.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        forumContext.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -191,6 +204,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             public void onPageFinished(WebView webView, String s) {
                 super.onPageFinished(webView, s);
                 // forumContext.loadUrl("javascript:(" + readJS() + ")()");
+                dialog.dismiss();
                 int w = View.MeasureSpec.makeMeasureSpec(0,
                         View.MeasureSpec.UNSPECIFIED);
                 int h = View.MeasureSpec.makeMeasureSpec(0,
@@ -211,9 +225,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
 
             }
         });
-        dialog = Utils.showLoadingDialog(context);
-        dialog.show();
-        wb.loadUrl(UrlUtils.BASE_URL + "danye/goods/id/" + id);
+        forumContext.loadUrl(UrlUtils.BASE_URL + "danye/goods/id/" + id);
         goodsDetail();
     }
 
