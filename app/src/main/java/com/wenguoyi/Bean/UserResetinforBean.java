@@ -1,5 +1,12 @@
 package com.wenguoyi.Bean;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * com.wenguoyi.Bean
  *
@@ -11,11 +18,19 @@ public class UserResetinforBean {
 
     /**
      * status : 1
-     * msg : {"name":"韩磊","tel":"17629345001","card_no":"412726199807103758","xueli":null,"sex":"1","zhiye":null,"email":null,"bank":null,"bno":null,"address":null,"pic":"/Public/uploads/tupian/2018-06-06/152827349035940.jpg","pic2":"/Public/uploads/tupian/2018-06-06/152827349059042.jpg","pic3":"/Public/uploads/tupian/2018-06-06/152827349096600.jpg","is_rz":"1","cause":"不通过不通过不通过不通过不通过不通过不通过不通过不通过不通过不通过不通过不通过不通过不通过"}
+     * msg : {"name":"郑州","tel":"17629345001","card_no":"412726199807103758","xueli":"博士","sex":"1","zhiye":"人事","email":"975976959@qq.com","bank":"付邮费贵","bname":"复古风","bno":"14696578","address":"f\u2006y\u2006fu\u2006fhh","pic":"/Public/uploads/tupian/2018-08-27/153533039838726.jpeg","pic2":"/Public/uploads/tupian/2018-08-27/153533040369261.jpeg","pic3":"/Public/uploads/tupian/2018-08-27/153533041010464.jpeg","is_rz":"0","cause":null}
      */
 
     private int status;
     private MsgBean msg;
+
+    public static List<UserResetinforBean> arrayUserResetinforBeanFromData(String str) {
+
+        Type listType = new TypeToken<ArrayList<UserResetinforBean>>() {
+        }.getType();
+
+        return new Gson().fromJson(str, listType);
+    }
 
     public int getStatus() {
         return status;
@@ -35,21 +50,22 @@ public class UserResetinforBean {
 
     public static class MsgBean {
         /**
-         * name : 韩磊
+         * name : 郑州
          * tel : 17629345001
          * card_no : 412726199807103758
-         * xueli : null
+         * xueli : 博士
          * sex : 1
-         * zhiye : null
-         * email : null
-         * bank : null
-         * bno : null
-         * address : null
-         * pic : /Public/uploads/tupian/2018-06-06/152827349035940.jpg
-         * pic2 : /Public/uploads/tupian/2018-06-06/152827349059042.jpg
-         * pic3 : /Public/uploads/tupian/2018-06-06/152827349096600.jpg
-         * is_rz : 1
-         * cause : 不通过不通过不通过不通过不通过不通过不通过不通过不通过不通过不通过不通过不通过不通过不通过
+         * zhiye : 人事
+         * email : 975976959@qq.com
+         * bank : 付邮费贵
+         * bname : 复古风
+         * bno : 14696578
+         * address : f y fu fhh
+         * pic : /Public/uploads/tupian/2018-08-27/153533039838726.jpeg
+         * pic2 : /Public/uploads/tupian/2018-08-27/153533040369261.jpeg
+         * pic3 : /Public/uploads/tupian/2018-08-27/153533041010464.jpeg
+         * is_rz : 0
+         * cause : null
          */
 
         private String name;
@@ -60,6 +76,7 @@ public class UserResetinforBean {
         private String zhiye;
         private String email;
         private String bank;
+        private String bname;
         private String bno;
         private String address;
         private String pic;
@@ -67,6 +84,14 @@ public class UserResetinforBean {
         private String pic3;
         private String is_rz;
         private String cause;
+
+        public static List<MsgBean> arrayMsgBeanFromData(String str) {
+
+            Type listType = new TypeToken<ArrayList<MsgBean>>() {
+            }.getType();
+
+            return new Gson().fromJson(str, listType);
+        }
 
         public String getName() {
             return name;
@@ -130,6 +155,14 @@ public class UserResetinforBean {
 
         public void setBank(String bank) {
             this.bank = bank;
+        }
+
+        public String getBname() {
+            return bname;
+        }
+
+        public void setBname(String bname) {
+            this.bname = bname;
         }
 
         public String getBno() {

@@ -213,6 +213,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                 webView.measure(w, h);
             }
 
+
             @Override
             public void onPageStarted(WebView webView, String s, Bitmap bitmap) {
                 super.onPageStarted(webView, s, bitmap);

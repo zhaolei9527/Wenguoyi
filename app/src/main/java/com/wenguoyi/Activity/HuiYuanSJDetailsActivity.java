@@ -287,7 +287,7 @@ public class HuiYuanSJDetailsActivity extends BaseActivity {
                     userDetailBean = new Gson().fromJson(result, UserDetailBean.class);
                     if (1 == userDetailBean.getStatus()) {
                         tvXiaofei.setText("存入充值款￥" + userDetailBean.getMsg().getPrice() + "（只能消费）");
-                        tvDingqi.setText("入股金￥" + userDetailBean.getMsg().getRugujin() + "(定期分红)");
+                        tvDingqi.setText("投入分红股￥" + userDetailBean.getMsg().getRugujin() + "(定期分红)");
                         tvXuzhifu.setText("需要支付金额：￥" + userDetailBean.getMsg().getPrice());
                     }
                 } catch (Exception e) {

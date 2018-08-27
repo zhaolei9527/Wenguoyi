@@ -148,6 +148,7 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
 
         });
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -240,30 +241,31 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
                 try {
 
                     dialog.dismiss();
+
                     UserResetinforBean userResetinforBean = new Gson().fromJson(result, UserResetinforBean.class);
+
                     if (1 == userResetinforBean.getStatus()) {
-                        if ("0".equals(userResetinforBean.getMsg().getIs_rz())) {
-                        } else if ("1".equals(userResetinforBean.getMsg().getIs_rz())) {
-                            btnSubmit.setVisibility(View.VISIBLE);
 
-                            if ("1".equals(userResetinforBean.getMsg().getSex())) {
-                                tvSex.setText("男");
-                            } else {
-                                tvSex.setText("女");
-                            }
+                        btnSubmit.setVisibility(View.VISIBLE);
 
-                            etZhiye.setText(userResetinforBean.getMsg().getZhiye());
-                            etName.setText(userResetinforBean.getMsg().getName());
-                            etShenfenzheng.setText(userResetinforBean.getMsg().getCard_no());
-                            etAddress.setText(userResetinforBean.getMsg().getAddress());
-                            etXueli.setText(userResetinforBean.getMsg().getXueli());
-                            etYinhang.setText(userResetinforBean.getMsg().getBank());
-                            etYinhangzhanghao.setText(userResetinforBean.getMsg().getBno());
-                            etYouxiang.setText(userResetinforBean.getMsg().getEmail());
-                            SimpleDraweeView1.setImageURI(UrlUtils.URL + userResetinforBean.getMsg().getPic());
-                            SimpleDraweeView2.setImageURI(UrlUtils.URL + userResetinforBean.getMsg().getPic2());
-                            SimpleDraweeView3.setImageURI(UrlUtils.URL + userResetinforBean.getMsg().getPic3());
+                        if ("1".equals(userResetinforBean.getMsg().getSex())) {
+                            tvSex.setText("男");
+                        } else {
+                            tvSex.setText("女");
                         }
+
+                        etZhiye.setText(userResetinforBean.getMsg().getZhiye());
+                        etName.setText(userResetinforBean.getMsg().getName());
+                        etShenfenzheng.setText(userResetinforBean.getMsg().getCard_no());
+                        etAddress.setText(userResetinforBean.getMsg().getAddress());
+                        etXueli.setText(userResetinforBean.getMsg().getXueli());
+                        etYinhang.setText(userResetinforBean.getMsg().getBank());
+                        etYinhangzhanghao.setText(userResetinforBean.getMsg().getBno());
+                        etYouxiang.setText(userResetinforBean.getMsg().getEmail());
+                        etYinhangName.setText(userResetinforBean.getMsg().getBname());
+                        SimpleDraweeView1.setImageURI(UrlUtils.URL + userResetinforBean.getMsg().getPic());
+                        SimpleDraweeView2.setImageURI(UrlUtils.URL + userResetinforBean.getMsg().getPic2());
+                        SimpleDraweeView3.setImageURI(UrlUtils.URL + userResetinforBean.getMsg().getPic3());
                     }
                     result = null;
                 } catch (Exception e) {

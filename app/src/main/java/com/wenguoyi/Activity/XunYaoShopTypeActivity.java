@@ -49,6 +49,7 @@ public class XunYaoShopTypeActivity extends BaseActivity {
     private WenguoyiRecycleView rv_shop_type_list_list;
     private WenguoyiRecycleView rv_shop_list_type_list;
     private FrameLayout rl_back;
+    private ShopTitleListListAdapter titleAdapter;
 
     @Override
     protected int setthislayout() {
@@ -87,10 +88,13 @@ public class XunYaoShopTypeActivity extends BaseActivity {
                 try {
                     GoodsScateBean goodsScateBean = new Gson().fromJson(result, GoodsScateBean.class);
                     if (1 == goodsScateBean.getStatus()) {
-                        ShopTitleListListAdapter titleAdapter = new ShopTitleListListAdapter(XunYaoShopTypeActivity.this, goodsScateBean.getMsg());
+                        titleAdapter = new ShopTitleListListAdapter(XunYaoShopTypeActivity.this, goodsScateBean.getMsg());
                         rv_shop_list_type_list.setAdapter(titleAdapter);
                     } else {
-
+                        if (titleAdapter != null) {
+                            titleAdapter.getDatas().clear();
+                            titleAdapter.notifyDataSetChanged();
+                        }
                     }
                     result = null;
                 } catch (Exception e) {
