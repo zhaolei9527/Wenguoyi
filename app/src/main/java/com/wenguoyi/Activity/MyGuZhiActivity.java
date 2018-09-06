@@ -19,7 +19,6 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.wenguoyi.Adapter.CaiWuMingXiAdapter;
 import com.wenguoyi.Adapter.GUZHITiXianJiLuAdapter;
-import com.wenguoyi.Adapter.TiXianJiLuAdapter;
 import com.wenguoyi.Base.BaseActivity;
 import com.wenguoyi.Bean.CodeBean;
 import com.wenguoyi.Bean.IsTxBean;
@@ -136,6 +135,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                 userTxmxgz();
             }
         });
+        tvWyaotixian.setText("赠股转入钱包");
     }
 
     @Override
@@ -276,7 +276,7 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                 try {
                     IsTxBean isTxBean = new Gson().fromJson(result, IsTxBean.class);
                     if (1 == isTxBean.getStatus()) {
-                        tvKetixian.setText("最少转出 1 股，每股约合1.20元：");
+                        tvKetixian.setText("最少转出 1 股，每股约合"+isTxBean.getRate()+"元：");
                         tvKetixianTime.setText("可转出时间：" + isTxBean.getStime() + "--" + isTxBean.getEtime());
                         if (1 == isTxBean.getIs_tx()) {
                             btnSubmit.setEnabled(true);

@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="我的股值"
+            android:text="我的赠股"
             android:textColor="@color/bgfff"
             android:textSize="@dimen/x16" />
     </RelativeLayout>

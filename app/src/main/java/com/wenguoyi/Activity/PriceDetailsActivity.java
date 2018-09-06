@@ -356,11 +356,10 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                     tvTypeTitle.setText(goodsDetailBean.getGoods().getGname());
                     tvTypeMoney.setText(goodsDetailBean.getGoods().getPrice());
                     SimpleDraweeView.setImageURI(UrlUtils.URL + goodsDetailBean.getImgs().get(0));
-
+                    tvKucun.setText("库存:" + goodsDetailBean.getGoods().getNums());
                     if (1 == goodsDetailBean.getGoods().getIs_coll()) {
                         imgShoucang.setBackground(getResources().getDrawable(R.mipmap.new_sc2));
                     }
-
                     /**
                      字段usertype：
                      1：当前价格为零售价，不显示其他价格
@@ -375,13 +374,13 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                         tvPrice.setText("批发价：" + goodsDetailBean.getGoods().getPrice());
                         tvOtherPrice.setText("零售价：" + goodsDetailBean.getGoods().getPrice1());
                     } else if ("3".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("代理价：" + goodsDetailBean.getGoods().getPrice());
+                        tvPrice.setText("加盟价：" + goodsDetailBean.getGoods().getPrice());
                         tvOtherPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice1() + "  批发价：" + goodsDetailBean.getGoods().getPrice2());
                     } else if ("4".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("代理价：" + goodsDetailBean.getGoods().getPrice());
+                        tvPrice.setText("加盟价：" + goodsDetailBean.getGoods().getPrice());
                         tvOtherPrice.setText("零售价：" + goodsDetailBean.getGoods().getPrice1() + "  批发价：" + goodsDetailBean.getGoods().getPrice2() + "  代理价：" + goodsDetailBean.getGoods().getPrice3());
                     } else if ("5".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("代理价：" + goodsDetailBean.getGoods().getPrice());
+                        tvPrice.setText("加盟价：" + goodsDetailBean.getGoods().getPrice());
                         tvOtherPrice.setText("零售价：" + goodsDetailBean.getGoods().getPrice1() + "  批发价：" + goodsDetailBean.getGoods().getPrice2() + "  代理价：" + goodsDetailBean.getGoods().getPrice3());
                     }
 

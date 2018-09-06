@@ -22,6 +22,16 @@ public class IsTxBean {
     private String sxf;
     private String stime;
     private String etime;
+    private String rate;
+
+    public String getRate() {
+        return rate;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
+
 
     public int getIs_tx() {
         return is_tx;

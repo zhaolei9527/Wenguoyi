@@ -80,6 +80,16 @@ public class GoodsDetailBean {
 
         private String id;
         private String gname;
+
+        public String getNums() {
+            return nums;
+        }
+
+        public void setNums(String nums) {
+            this.nums = nums;
+        }
+
+        private String nums;
         private String is_norm;
         private String price;
         private String price1;
