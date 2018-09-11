@@ -150,6 +150,12 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             if (position == 1) {
                 holder.tv_item_title.setText("精品医药");
                 holder.gl_shoplist.removeAllViews();
+                holder.tv_item_more.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mContext.startActivity(new Intent(mContext, XunYaoShopTypeActivity.class));
+                    }
+                });
                 if (holder.gl_shoplist.getChildCount() == 0) {
                     for (int i = 0; i < homeBean.getJingpin().size(); i++) {
                         final View inflate = View.inflate(mContext, R.layout.home_shop_list_list_item_layout, null);
@@ -172,6 +178,12 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             } else {
 
                 try {
+                    holder.tv_item_more.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mContext.startActivity(new Intent(mContext, ShopListActivity.class).putExtra("fcate", homeBean.getCate().get(position-2).getId()));
+                        }
+                    });
                     holder.tv_item_title.setText(homeBean.getCate().get(position - 2).getTitle());
                     holder.gl_shoplist.removeAllViews();
                     if (holder.gl_shoplist.getChildCount() == 0) {
@@ -213,6 +225,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         public View rootView;
         public RollPagerView Roll_pagerView;
         public TextView tv_item_title;
+        public TextView tv_item_more;
         public ImageView img_search;
         public ImageView img_news;
         public EditText et_search;
@@ -226,6 +239,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             this.Roll_pagerView = (RollPagerView) rootView.findViewById(R.id.RollPagerView);
             this.tv_content = (VerticalTextview) rootView.findViewById(R.id.tv_content);
             this.tv_item_title = (TextView) rootView.findViewById(R.id.tv_item_title);
+            this.tv_item_more = (TextView) rootView.findViewById(R.id.tv_item_title_more);
             this.img_search = (ImageView) rootView.findViewById(R.id.img_search);
             this.img_news = (ImageView) rootView.findViewById(R.id.img_news);
             this.et_search = (EditText) rootView.findViewById(R.id.et_search);

@@ -64,4 +64,15 @@
     </android.support.v7.widget.GridLayout>
 
 
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/tv_item_title_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/x10"
+        android:text="查看更多"
+        android:textColor="@color/text999"
+        android:textSize="@dimen/x13" />
+
 </LinearLayout>
