@@ -342,6 +342,7 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
             }
         });
     }
+    private TiXianJiLuAdapter tiXianJiLuAdapter;
 
     /**
      * 我的钱包-提现记录
@@ -353,7 +354,6 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
         params.put("page", String.valueOf(txjlp));
         Log.e("MyQianBaoActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/tx_record", "user/tx_record", params, new VolleyInterface(context) {
-            private TiXianJiLuAdapter tiXianJiLuAdapter;
 
             @Override
             public void onMySuccess(String result) {
@@ -395,6 +395,7 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
             }
         });
     }
+    private CaiWuMingXiAdapter caiWuMingXiAdapter;
 
     /**
      * 我的充值-财务明细
@@ -406,7 +407,6 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
         params.put("page", String.valueOf(cwmxp));
         Log.e("MyQianBaoActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/txmx", "user/txmx", params, new VolleyInterface(context) {
-            private CaiWuMingXiAdapter caiWuMingXiAdapter;
 
             @Override
             public void onMySuccess(String result) {

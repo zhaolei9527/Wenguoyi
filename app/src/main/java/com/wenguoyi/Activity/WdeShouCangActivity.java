@@ -98,6 +98,7 @@ public class WdeShouCangActivity extends BaseActivity {
         }
 
     }
+    private WDeShouCangAdapter wDeShouCangAdapter;
 
     //数据获取
     public void getData() {
@@ -107,7 +108,6 @@ public class WdeShouCangActivity extends BaseActivity {
         params.put("page", String.valueOf(p));
         Log.e("WdeShouCangActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/collect", "user/collect", params, new VolleyInterface(context) {
-            private WDeShouCangAdapter wDeShouCangAdapter;
 
             @Override
             public void onMySuccess(String result) {

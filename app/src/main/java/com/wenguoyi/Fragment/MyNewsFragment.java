@@ -125,7 +125,8 @@ public class MyNewsFragment extends BaseLazyFragment {
 
     }
 
-
+    private NewsTitleListAdapter titleAdapter;
+    private NewsTypeListAdapter adapter;
     //数据获取
     public void getData() {
         HashMap<String, String> params = new HashMap<>(1);
@@ -135,8 +136,7 @@ public class MyNewsFragment extends BaseLazyFragment {
         Log.e("NewsFragment", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "news/lists", "news/lists", params, new VolleyInterface(context) {
 
-            private NewsTitleListAdapter titleAdapter;
-            private NewsTypeListAdapter adapter;
+
 
             @Override
             public void onMySuccess(String result) {

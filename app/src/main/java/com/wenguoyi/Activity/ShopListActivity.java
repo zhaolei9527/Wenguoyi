@@ -167,6 +167,7 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
         });
 
     }
+    private ShopListAdapter shopAdapter;
 
     private void getData() {
         HashMap<String, String> params = new HashMap<>(1);
@@ -185,7 +186,6 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
         params.put("page", String.valueOf(p));
         Log.e("ShopListActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/lists", "goods/lists", params, new VolleyInterface(context) {
-            private ShopListAdapter shopAdapter;
 
             @Override
             public void onMySuccess(String result) {

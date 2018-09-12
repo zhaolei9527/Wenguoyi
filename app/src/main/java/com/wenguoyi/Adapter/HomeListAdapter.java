@@ -153,7 +153,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 holder.tv_item_more.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mContext.startActivity(new Intent(mContext, XunYaoShopTypeActivity.class));
+                        mContext.startActivity(new Intent(mContext, ShopListActivity.class).putExtra("fcate", ""));
                     }
                 });
                 if (holder.gl_shoplist.getChildCount() == 0) {

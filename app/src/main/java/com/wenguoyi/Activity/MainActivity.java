@@ -47,6 +47,20 @@ public class MainActivity extends BaseActivity {
     private BroadcastReceiver receiver;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (!TextUtils.isEmpty((String) SpUtil.get(MainActivity.this, "uid", ""))) {
+            indexCatr();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
+
+    @Override
     protected int setthislayout() {
         return R.layout.activity_main;
     }
@@ -54,7 +68,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initview() {
         Acp.getInstance(this).request(new AcpOptions.Builder()
-                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                , Manifest.permission.READ_EXTERNAL_STORAGE
+                                , Manifest.permission.CAMERA)
                         .setDeniedMessage(getString(R.string.requstPerminssions))
                         .build(),
                 new AcpListener() {
@@ -76,16 +92,12 @@ public class MainActivity extends BaseActivity {
                         Toast.makeText(MainActivity.this, R.string.Thepermissionapplicationisrejected, Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
         final ArrayList<Fragment> fragments = new ArrayList<>();
-
         fragments.add(new HomeFragment());
         fragments.add(new WenYiFragment());
         fragments.add(new NewsFragment());
         fragments.add(new CartFragment());
         fragments.add(new MeFragment());
-
         CustomViewPager viewpager = (CustomViewPager) findViewById(R.id.fl_content);
         viewpager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -129,7 +141,6 @@ public class MainActivity extends BaseActivity {
                     }
                 })
                 .commit();
-
         receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -137,15 +148,6 @@ public class MainActivity extends BaseActivity {
             }
         };
         registerReceiver(receiver, new IntentFilter("indexCatr"));
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (!TextUtils.isEmpty((String) SpUtil.get(MainActivity.this, "uid", ""))) {
-            indexCatr();
-        }
     }
 
     /**
@@ -229,9 +231,4 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(receiver);
-    }
 }

@@ -120,6 +120,7 @@ public class MyTuanDuiActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    private MyTuanDuiAdapter myTuanDuiAdapter;
 
     private void getData(String t) {
         HashMap<String, String> params = new HashMap<>(1);
@@ -129,7 +130,6 @@ public class MyTuanDuiActivity extends BaseActivity implements View.OnClickListe
         params.put("t", t);
         Log.e("MyTuanDuiActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "user/mytj", "user/mytj", params, new VolleyInterface(context) {
-            private MyTuanDuiAdapter myTuanDuiAdapter;
             @Override
             public void onMySuccess(String result) {
                 Log.e("MyTuanDuiActivity", result);

@@ -160,7 +160,8 @@ public class NewsFragment extends BaseLazyFragment {
             rv_news_list.setAdapter(titleAdapter);
         }
     }
-
+    private NewsTitleListAdapter titleAdapter;
+    private NewsTypeListAdapter adapter;
 
     //数据获取
     public void getData() {
@@ -170,8 +171,7 @@ public class NewsFragment extends BaseLazyFragment {
         params.put("cid", cid);
         Log.e("NewsFragment", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "news/lists", "news/lists", params, new VolleyInterface(context) {
-            private NewsTitleListAdapter titleAdapter;
-            private NewsTypeListAdapter adapter;
+
             @Override
             public void onMySuccess(String result) {
                 Log.e("NewsFragment", result);

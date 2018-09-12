@@ -101,7 +101,6 @@ public class NewsDetailsActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView webView, String s) {
                 super.onPageFinished(webView, s);
-                // forumContext.loadUrl("javascript:(" + readJS() + ")()");
                 dialog.dismiss();
                 int w = View.MeasureSpec.makeMeasureSpec(0,
                         View.MeasureSpec.UNSPECIFIED);
@@ -157,7 +156,7 @@ public class NewsDetailsActivity extends BaseActivity {
                     NewsDetailsBean newsDetailsBean = new Gson().fromJson(result, NewsDetailsBean.class);
                     if (1 == newsDetailsBean.getStatus()) {
                         tvTitle.setText(newsDetailsBean.getMsg().getTitle());
-                        tvTime.setText("时间：" + DateUtils.getMillon(Long.parseLong(newsDetailsBean.getMsg().getAddtime())*1000));
+                        tvTime.setText("时间：" + DateUtils.getMillon(Long.parseLong(newsDetailsBean.getMsg().getAddtime()) * 1000));
                         tvShow.setText("浏览量：" + newsDetailsBean.getMsg().getNum());
                     } else {
                         EasyToast.showShort(context, R.string.hasError);
@@ -169,7 +168,6 @@ public class NewsDetailsActivity extends BaseActivity {
                     Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
