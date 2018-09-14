@@ -125,7 +125,6 @@ public class WDeShouCangAdapter extends RecyclerView.Adapter<WDeShouCangAdapter.
                     result = null;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(mContext, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -133,7 +132,6 @@ public class WDeShouCangAdapter extends RecyclerView.Adapter<WDeShouCangAdapter.
             public void onMyError(VolleyError error) {
                 LoadingDialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(mContext, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

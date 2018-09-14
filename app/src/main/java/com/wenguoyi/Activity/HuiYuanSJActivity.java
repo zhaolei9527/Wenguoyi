@@ -183,19 +183,16 @@ public class HuiYuanSJActivity extends BaseActivity {
                         }
 
                     } else {
-                        EasyToast.showShort(context, R.string.Abnormalserver);
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

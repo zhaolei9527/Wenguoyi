@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -160,6 +159,7 @@ public class NewsFragment extends BaseLazyFragment {
             rv_news_list.setAdapter(titleAdapter);
         }
     }
+
     private NewsTitleListAdapter titleAdapter;
     private NewsTypeListAdapter adapter;
 
@@ -186,9 +186,8 @@ public class NewsFragment extends BaseLazyFragment {
                                 adapter = new NewsTypeListAdapter(getActivity(), newsListBean.getNewscate());
                                 rv_news_type_list.setAdapter(adapter);
                             }
-                            if (titleAdapter == null) {
-                                titleAdapter = new NewsTitleListAdapter(getActivity(), newsListBean.getMsg());
-                            }
+                            rv_news_list.removeAllViews();
+                            titleAdapter = new NewsTitleListAdapter(getActivity(), newsListBean.getMsg());
                             rv_news_list.setAdapter(titleAdapter);
                         } else {
                             titleAdapter.setDatas(newsListBean.getMsg());
@@ -207,21 +206,19 @@ public class NewsFragment extends BaseLazyFragment {
                     result = null;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void changeNewsType(BankEvent messageEvent) {
-        if ("newstype".equals(messageEvent.getmType())){
+        if ("newstype".equals(messageEvent.getmType())) {
             p = 1;
             cid = messageEvent.getMsg();
             getData();

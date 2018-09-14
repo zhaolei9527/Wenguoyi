@@ -201,12 +201,10 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                         tv_totalmoney.setText("￥" + orderPay.getMsg().getMoney());
                         tv_ordernumber.setText(String.valueOf(orderPay.getMsg().getOrderid()));
                     } else {
-                        Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                     }
                     result = null;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -214,7 +212,6 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -250,7 +247,6 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                     result = null;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -258,7 +254,6 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

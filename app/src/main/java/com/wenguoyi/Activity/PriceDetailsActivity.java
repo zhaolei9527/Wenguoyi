@@ -446,7 +446,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                 } catch (Exception e) {
                     dialog.dismiss();
                     e.printStackTrace();
-                    EasyToast.showShort(context, R.string.Abnormalserver);
                 }
             }
 
@@ -454,7 +453,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                EasyToast.showShort(context, R.string.Abnormalserver);
             }
         });
     }
@@ -483,7 +481,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                 } catch (Exception e) {
                     dialog.dismiss();
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -491,7 +488,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -515,7 +511,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                 } catch (Exception e) {
                     dialog.dismiss();
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -523,7 +518,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -555,7 +549,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                 } catch (Exception e) {
                     dialog.dismiss();
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -563,7 +556,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -612,7 +604,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                     result = null;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -620,7 +611,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
                 dialog.dismiss();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -667,13 +657,11 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                         );
                         finish();
                     } else {
-                        EasyToast.showShort(context, R.string.Abnormalserver);
                     }
                     result = null;
                 } catch (Exception e) {
                     dialog.dismiss();
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -681,7 +669,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

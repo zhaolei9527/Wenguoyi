@@ -10,7 +10,6 @@ import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -240,7 +239,6 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                 } catch (Exception e) {
                     dialog.dismiss();
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -248,7 +246,6 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
                 dialog.dismiss();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -277,14 +274,12 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                     result = null;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -312,7 +307,6 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                 } catch (Exception e) {
                     dialog.dismiss();
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -320,7 +314,6 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

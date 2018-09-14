@@ -395,7 +395,6 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
                 } catch (Exception e) {
                     dialog.dismiss();
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -403,7 +402,6 @@ public class YiShengListActivity extends BaseActivity implements View.OnClickLis
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

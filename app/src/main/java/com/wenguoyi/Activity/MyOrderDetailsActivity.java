@@ -212,7 +212,6 @@ public class MyOrderDetailsActivity extends BaseActivity implements View.OnClick
                     result = null;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -220,7 +219,6 @@ public class MyOrderDetailsActivity extends BaseActivity implements View.OnClick
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

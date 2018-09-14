@@ -244,11 +244,9 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                         tvKeyongguzhi.setText("可用股值:" + userLineBean.getAmount());
                         tvYue.setText("￥" + userLineBean.getRenminbi());
                     } else {
-                        Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -256,7 +254,6 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -287,7 +284,6 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -295,7 +291,6 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -327,7 +322,6 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -335,7 +329,6 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -382,14 +375,12 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(MyGuZhiActivity.this, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -435,14 +426,12 @@ public class MyGuZhiActivity extends BaseActivity implements View.OnClickListene
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(MyGuZhiActivity.this, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

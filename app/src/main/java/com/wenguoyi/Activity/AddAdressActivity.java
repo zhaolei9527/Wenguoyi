@@ -344,7 +344,6 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
                 } catch (Exception e) {
                     e.printStackTrace();
                     dialog.dismiss();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -352,7 +351,6 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
                 dialog.dismiss();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -394,7 +392,6 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
                 } catch (Exception e) {
                     e.printStackTrace();
                     dialog.dismiss();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -402,7 +399,6 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
                 dialog.dismiss();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -270,7 +270,6 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
                     result = null;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -278,7 +277,6 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -326,14 +324,12 @@ public class MyMessageActivity2 extends BaseActivity implements View.OnClickList
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    EasyToast.showShort(context, getString(R.string.Abnormalserver));
                 }
             }
 
             @Override
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
-                EasyToast.showShort(context, getString(R.string.Abnormalserver));
                 error.printStackTrace();
             }
         });

@@ -187,7 +187,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 } catch (Exception e) {
                     e.printStackTrace();
                     time = 0;
-                    Toast.makeText(RegisterActivity.this, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -195,7 +194,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
                 time = 0;
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -275,7 +273,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     codeBean = null;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(RegisterActivity.this, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -284,7 +281,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 dialog.dismiss();
                 time = 0;
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

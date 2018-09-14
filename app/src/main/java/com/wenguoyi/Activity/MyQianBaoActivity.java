@@ -246,11 +246,9 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                     if (1 == userLineBean.getStatus()) {
                         tvYue.setText("￥" + userLineBean.getAmount());
                     } else {
-                        Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -258,7 +256,6 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -290,7 +287,6 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -298,7 +294,6 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -330,7 +325,6 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -338,7 +332,6 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -384,14 +377,12 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(MyQianBaoActivity.this, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -437,14 +428,12 @@ public class MyQianBaoActivity extends BaseActivity implements View.OnClickListe
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(MyQianBaoActivity.this, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

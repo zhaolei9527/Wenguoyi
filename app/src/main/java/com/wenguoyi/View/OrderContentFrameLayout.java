@@ -172,7 +172,6 @@ public class OrderContentFrameLayout extends LinearLayout {
                 } catch (Exception e) {
                     dialog.dismiss();
                     e.printStackTrace();
-                    Toast.makeText(context, context.getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -180,7 +179,6 @@ public class OrderContentFrameLayout extends LinearLayout {
             public void onMyError(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(context, context.getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

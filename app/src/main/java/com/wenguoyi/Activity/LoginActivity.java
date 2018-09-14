@@ -249,7 +249,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -257,7 +256,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
                 dialog.dismiss();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -84,7 +84,7 @@ public class ShopTitleListListAdapter extends RecyclerView.Adapter<ShopTitleList
         holder.gl_shoptype.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                mContext.startActivity(new Intent(mContext, ShopListActivity.class).putExtra("tcate", datas.get(position).getId()));
+                mContext.startActivity(new Intent(mContext, ShopListActivity.class).putExtra("tcate",datas.get(position).getTcate().get(i).getId()));
             }
         });
 
